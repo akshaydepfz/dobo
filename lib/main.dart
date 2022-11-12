@@ -1,5 +1,5 @@
-import 'package:dobo/view/login/screens/login_screen.dart';
 import 'package:dobo/view/login/services/login_provider.dart';
+import 'package:dobo/view/onBoarding/screens/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
           textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
           primarySwatch: Colors.cyan,
         ),
-        home: LoginScreen(),
+        home: const OnBoardingScreen(),
       ),
     );
   }

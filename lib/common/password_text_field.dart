@@ -41,6 +41,7 @@ class PasswordTextField extends StatelessWidget {
               obscureText: obscure,
               decoration: InputDecoration(
                   hintText: hintText,
+                  hintStyle: const TextStyle(fontSize: 14),
                   border: InputBorder.none,
                   suffix: GestureDetector(
                     onTap: onObscureClicked,

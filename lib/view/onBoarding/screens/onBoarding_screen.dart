@@ -1,5 +1,7 @@
 import 'package:dobo/common/primary_button.dart';
+import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/model/core/style/app_colors.dart';
+import 'package:dobo/view/login/screens/login_screen.dart';
 import 'package:dobo/view/onBoarding/services/onboarding_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -86,12 +88,20 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             ),
             PrimaryButton(
                 onTap: () {
-                  if (_pageIndex == 2) {}
+                  if (_pageIndex == 2) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LoginScreen()),
+                    );
+                  }
                   _controller.nextPage(
                       duration: const Duration(milliseconds: 400),
                       curve: Curves.easeIn);
                 },
                 label: 'Next'),
+            GlobalVariabels.vertical15,
+            GlobalVariabels.vertical15,
           ],
         ),
       ),

@@ -14,7 +14,7 @@ class PrimaryButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-        height: height * .07,
+        height: 50,
         width: width,
         decoration: BoxDecoration(
           color: AppColor.primary,
@@ -31,7 +31,7 @@ class PrimaryButton extends StatelessWidget {
           child: Text(
             label,
             style: const TextStyle(
-                color: Colors.white, fontSize: 18, fontWeight: FontWeight.w500),
+                color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500),
           ),
         ),
       ),

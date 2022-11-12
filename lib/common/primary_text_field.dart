@@ -35,6 +35,7 @@ class PrimaryTextField extends StatelessWidget {
               onChanged: onChanged,
               style: const TextStyle(color: AppColor.black),
               decoration: InputDecoration(
+                hintStyle: const TextStyle(fontSize: 14),
                 hintText: hintText,
                 border: InputBorder.none,
               ),

@@ -18,92 +18,94 @@ class LoginScreen extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SafeArea(
-        child: Center(
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 20,
-              ),
-              SizedBox(
-                width: width * .60,
-                child: const Text(
-                  'Welcome back to Doctor app,',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.w500,
-                      color: AppColor.primary),
+        child: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 20,
                 ),
-              ),
-              SizedBox(
-                height: height * .17,
-              ),
-              const Text(
-                'Sign in to continue!',
-                style: TextStyle(color: AppColor.grey4, fontSize: 16),
-              ),
-              GlobalVariabels.vertical15,
-              PrimaryTextField(
-                width: width,
-                hintText: 'Enter Your mail',
-                icon: AppIcons.person,
-                onChanged: (String value) {},
-              ),
-              PasswordTextField(
-                obscure: loginProvider.obsureText,
-                width: width,
-                hintText: 'Enter Your Password',
-                icon: AppIcons.lock,
-                onChanged: (String value) {},
-                onObscureClicked: () {
-                  loginProvider.onObscureClicked();
-                },
-              ),
-              Align(
-                alignment: Alignment.topRight,
-                child: TextButton(
-                  onPressed: () {},
+                SizedBox(
+                  width: width * .60,
                   child: const Text(
-                    'Forgot password?',
+                    'Welcome back to Doctor app,',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: 26,
+                        fontWeight: FontWeight.w500,
+                        color: AppColor.primary),
                   ),
                 ),
-              ),
-              PrimaryButton(onTap: () {}, label: 'Sign In'),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(children: const [
-                  Expanded(
-                      child: Divider(
-                    color: AppColor.grey2,
-                  )),
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text('Or'),
+                SizedBox(
+                  height: height * .17,
+                ),
+                const Text(
+                  'Sign in to continue!',
+                  style: TextStyle(color: AppColor.grey4, fontSize: 16),
+                ),
+                GlobalVariabels.vertical15,
+                PrimaryTextField(
+                  width: width,
+                  hintText: 'Enter Your mail',
+                  icon: AppIcons.person,
+                  onChanged: (String value) {},
+                ),
+                PasswordTextField(
+                  obscure: loginProvider.obsureText,
+                  width: width,
+                  hintText: 'Enter Your Password',
+                  icon: AppIcons.lock,
+                  onChanged: (String value) {},
+                  onObscureClicked: () {
+                    loginProvider.onObscureClicked();
+                  },
+                ),
+                Align(
+                  alignment: Alignment.topRight,
+                  child: TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      'Forgot password?',
+                    ),
                   ),
-                  Expanded(
-                      child: Divider(
-                    color: AppColor.grey2,
-                  )),
-                ]),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SocialMediaCard(icon: AppIcons.facebook, onTap: () {}),
-                  SocialMediaCard(icon: AppIcons.google, onTap: () {}),
-                  SocialMediaCard(icon: AppIcons.apple, onTap: () {}),
-                ],
-              ),
-              GlobalVariabels.vertical15,
-              GlobalVariabels.vertical15,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text('Dont have an account?'),
-                  TextButton(onPressed: () {}, child: const Text('Sign up'))
-                ],
-              )
-            ],
+                ),
+                PrimaryButton(onTap: () {}, label: 'Sign In'),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Row(children: const [
+                    Expanded(
+                        child: Divider(
+                      color: AppColor.grey2,
+                    )),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text('Or'),
+                    ),
+                    Expanded(
+                        child: Divider(
+                      color: AppColor.grey2,
+                    )),
+                  ]),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SocialMediaCard(icon: AppIcons.facebook, onTap: () {}),
+                    SocialMediaCard(icon: AppIcons.google, onTap: () {}),
+                    SocialMediaCard(icon: AppIcons.apple, onTap: () {}),
+                  ],
+                ),
+                GlobalVariabels.vertical15,
+                GlobalVariabels.vertical15,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text('Dont have an account?'),
+                    TextButton(onPressed: () {}, child: const Text('Sign up'))
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),
