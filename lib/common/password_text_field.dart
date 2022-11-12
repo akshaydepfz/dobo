@@ -23,7 +23,7 @@ class PasswordTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(10),
+      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 8.0),
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5.0),
       width: width,
       decoration: BoxDecoration(

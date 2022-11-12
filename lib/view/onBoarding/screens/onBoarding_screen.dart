@@ -1,3 +1,4 @@
+import 'package:dobo/common/primary_button.dart';
 import 'package:dobo/model/core/style/app_colors.dart';
 import 'package:dobo/view/onBoarding/services/onboarding_content.dart';
 import 'package:flutter/material.dart';
@@ -83,39 +84,14 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             SizedBox(
               height: height * .05,
             ),
-            GestureDetector(
-              onTap: () {
-                if (_pageIndex == 2) {}
-                _controller.nextPage(
-                    duration: const Duration(milliseconds: 400),
-                    curve: Curves.easeIn);
-              },
-              child: Container(
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                height: height * .07,
-                width: width,
-                decoration: BoxDecoration(
-                    color: AppColor.primary,
-                    borderRadius: BorderRadius.circular(8.0),
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppColor.primary.withOpacity(0.4),
-                        offset: const Offset(0, 4),
-                        blurRadius: 08,
-                      )
-                    ]),
-                child: const Center(
-                  child: Text(
-                    'Next',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ),
-              ),
-            ),
+            PrimaryButton(
+                onTap: () {
+                  if (_pageIndex == 2) {}
+                  _controller.nextPage(
+                      duration: const Duration(milliseconds: 400),
+                      curve: Curves.easeIn);
+                },
+                label: 'Next'),
           ],
         ),
       ),

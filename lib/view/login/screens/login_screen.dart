@@ -1,4 +1,5 @@
 import 'package:dobo/common/password_text_field.dart';
+import 'package:dobo/common/primary_button.dart';
 import 'package:dobo/common/primary_text_field.dart';
 import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/model/core/assets/app_icons.dart';
@@ -35,7 +36,7 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: height * .20,
+                height: height * .17,
               ),
               const Text(
                 'Sign in to continue!',
@@ -57,9 +58,84 @@ class LoginScreen extends StatelessWidget {
                 onObscureClicked: () {
                   loginProvider.onObscureClicked();
                 },
+              ),
+              Align(
+                alignment: Alignment.topRight,
+                child: TextButton(
+                  onPressed: () {},
+                  child: const Text(
+                    'Forgot password?',
+                  ),
+                ),
+              ),
+              PrimaryButton(onTap: () {}, label: 'Sign In'),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(children: const [
+                  Expanded(
+                      child: Divider(
+                    color: AppColor.grey2,
+                  )),
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text('Or'),
+                  ),
+                  Expanded(
+                      child: Divider(
+                    color: AppColor.grey2,
+                  )),
+                ]),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SocialMediaCard(icon: AppIcons.facebook, onTap: () {}),
+                  SocialMediaCard(icon: AppIcons.google, onTap: () {}),
+                  SocialMediaCard(icon: AppIcons.apple, onTap: () {}),
+                ],
+              ),
+              GlobalVariabels.vertical15,
+              GlobalVariabels.vertical15,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('Dont have an account?'),
+                  TextButton(onPressed: () {}, child: const Text('Sign up'))
+                ],
               )
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class SocialMediaCard extends StatelessWidget {
+  const SocialMediaCard({
+    Key? key,
+    required this.icon,
+    required this.onTap,
+  }) : super(key: key);
+  final String icon;
+  final Function() onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 12),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+              width: 1,
+              color: AppColor.grey2,
+            )),
+        height: 60,
+        width: 60,
+        child: Center(
+          child: SizedBox(height: 25, child: Image.asset(icon)),
         ),
       ),
     );
