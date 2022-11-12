@@ -4,12 +4,13 @@ import 'package:dobo/common/primary_text_field.dart';
 import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/model/core/assets/app_icons.dart';
 import 'package:dobo/model/core/style/app_colors.dart';
-import 'package:dobo/view/login/services/login_provider.dart';
+import 'package:dobo/view/signin/services/login_provider.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class SignInScreen extends StatelessWidget {
+  const SignInScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
