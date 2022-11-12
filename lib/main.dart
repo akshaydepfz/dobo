@@ -1,5 +1,5 @@
 import 'package:dobo/view/signin/screens/signin_screen.dart';
-import 'package:dobo/view/signin/services/login_provider.dart';
+import 'package:dobo/view/signin/services/signin_provider.dart';
 import 'package:dobo/view/signup/screens/signup_screen.dart';
 import 'package:dobo/view/signup/services/signup_service.dart';
 
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => LoginProvider()),
+        ChangeNotifierProvider(create: (_) => SigninProvider()),
         ChangeNotifierProvider(create: (_) => SignUpService()),
       ],
       child: MaterialApp(

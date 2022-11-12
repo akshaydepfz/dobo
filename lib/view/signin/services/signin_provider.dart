@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class LoginProvider extends ChangeNotifier {
+class SigninProvider extends ChangeNotifier {
   bool _obsureText = false;
   bool get obsureText => _obsureText;
 
