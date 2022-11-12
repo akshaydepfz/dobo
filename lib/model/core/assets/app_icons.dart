@@ -1,0 +1,7 @@
+class AppIcons {
+  static const String mail = 'assets/icons/mail.png';
+  static const String person = 'assets/icons/person.png';
+  static const String visible = 'assets/icons/visible.png';
+  static const String visibleOff = 'assets/icons/visible_off.png';
+  static const String lock = 'assets/icons/lock.png';
+}
