@@ -11,7 +11,9 @@ class LandingScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            Expanded(child: PageView()),
+            Expanded(
+              child: PageView(),
+            ),
           ],
         ),
       ),

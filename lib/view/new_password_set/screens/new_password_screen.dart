@@ -1,12 +1,9 @@
 import 'package:dobo/common/primary_appbar.dart';
 import 'package:dobo/common/primary_button.dart';
 import 'package:dobo/common/primary_text_field.dart';
-import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/model/core/assets/app_icons.dart';
 import 'package:dobo/model/core/style/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class NewPasswordSet extends StatelessWidget {
   const NewPasswordSet({super.key});

@@ -14,9 +14,9 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _signinProvider = Provider.of<SignUpService>(context);
+    final signinProvider = Provider.of<SignUpService>(context);
     final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -74,9 +74,9 @@ class SignUpScreen extends StatelessWidget {
                           Radius.circular(5.0),
                         ),
                       ),
-                      value: _signinProvider.acceptTc,
+                      value: signinProvider.acceptTc,
                       onChanged: (inputValue) {
-                        _signinProvider.checkBoxClick();
+                        signinProvider.checkBoxClick();
                       },
                     ),
                     const Text('I accept all the terms and conditions')
