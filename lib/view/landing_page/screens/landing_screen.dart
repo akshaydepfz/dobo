@@ -1,5 +1,6 @@
 import 'package:dobo/model/core/assets/app_icons.dart';
 import 'package:dobo/model/core/style/app_colors.dart';
+import 'package:dobo/view/category/screens/category_screens.dart';
 import 'package:flutter/material.dart';
 
 class LandingScreen extends StatelessWidget {
@@ -8,15 +9,7 @@ class LandingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: PageView(),
-            ),
-          ],
-        ),
-      ),
+      body: CategoryScreen(),
       bottomNavigationBar: Container(
         padding: const EdgeInsets.all(15),
         height: 100,
