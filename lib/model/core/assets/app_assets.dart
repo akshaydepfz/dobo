@@ -5,4 +5,5 @@ class AppAssets {
   static const String shield = 'assets/images/shield.svg';
   static const String locationShield = 'assets/images/location_sheild.svg';
   static const String avatar = 'assets/images/avatar.png';
+  static const String health = 'assets/images/health.png';
 }
