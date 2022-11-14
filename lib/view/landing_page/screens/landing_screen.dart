@@ -1,81 +1,57 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:dobo/model/core/assets/app_icons.dart';
-import 'package:dobo/model/core/style/app_colors.dart';
 import 'package:dobo/view/category/screens/category_screens.dart';
+import 'package:dobo/view/landing_page/services/bottom_nav_service.dart';
+import 'package:dobo/view/landing_page/widgets/bttom_nav_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LandingScreen extends StatelessWidget {
-  const LandingScreen({super.key});
+  LandingScreen({super.key});
+  List<Map> tabBarItems = [
+    {
+      'title': 'Home',
+      'icon': AppIcons.home,
+    },
+    {
+      'title': 'Category',
+      'icon': AppIcons.category,
+    },
+    {
+      'title': 'favorites',
+      'icon': AppIcons.favorite,
+    },
+    {
+      'title': 'Profile',
+      'icon': AppIcons.person,
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
+    final bottomNavProvider = Provider.of<BottomNavService>(context);
     return Scaffold(
-      body: CategoryScreen(),
+      body: const CategoryScreen(),
       bottomNavigationBar: Container(
         padding: const EdgeInsets.all(15),
         height: 100,
         color: Colors.white,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: const [
-            BottomNavItem(
-              icon: AppIcons.home,
-              title: 'Home',
-              isSelected: false,
+          children: List.generate(
+            tabBarItems.length,
+            (i) => BottomNavItem(
+              icon: tabBarItems[i]['icon'],
+              title: tabBarItems[i]['title'],
+              isSelected: bottomNavProvider.selectedIndex == i,
+              onTap: () {
+                bottomNavProvider.onTabClicked(i);
+              },
             ),
-            BottomNavItem(
-              icon: AppIcons.category,
-              title: 'Category',
-              isSelected: false,
-            ),
-            BottomNavItem(
-              icon: AppIcons.favorite,
-              title: 'favorites',
-              isSelected: true,
-            ),
-            BottomNavItem(
-              icon: AppIcons.person,
-              title: 'Profile',
-              isSelected: false,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class BottomNavItem extends StatelessWidget {
-  const BottomNavItem({
-    Key? key,
-    required this.icon,
-    required this.title,
-    required this.isSelected,
-  }) : super(key: key);
-  final String icon;
-  final String title;
-  final bool isSelected;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          height: 25,
-          child: Image.asset(
-            icon,
-            color: isSelected ? AppColor.primary : AppColor.grey3,
           ),
         ),
-        const SizedBox(
-          height: 3,
-        ),
-        Text(
-          title,
-          style: TextStyle(
-              fontSize: 14,
-              color: isSelected ? AppColor.primary : AppColor.grey3),
-        )
-      ],
+      ),
     );
   }
 }
