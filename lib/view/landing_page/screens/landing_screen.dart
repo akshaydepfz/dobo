@@ -2,6 +2,7 @@
 
 import 'package:dobo/model/core/assets/app_icons.dart';
 import 'package:dobo/view/category/screens/category_screens.dart';
+import 'package:dobo/view/home/screens/home_screen.dart';
 import 'package:dobo/view/landing_page/services/bottom_nav_service.dart';
 import 'package:dobo/view/landing_page/widgets/bttom_nav_bar.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class LandingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final bottomNavProvider = Provider.of<BottomNavService>(context);
     return Scaffold(
-      body: const CategoryScreen(),
+      body: const HomeScreen(),
       bottomNavigationBar: Container(
         padding: const EdgeInsets.all(15),
         height: 100,
