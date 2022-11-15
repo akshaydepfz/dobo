@@ -16,32 +16,4 @@ For help getting started with Flutter development, view the
 samples, guidance on mobile development, and a full API reference.
 
 
-this is the route
-
-class Router {
-  static Route<dynamic> generateRoute(RouteSettings settings) {
-    switch (settings.name) {
-      case '/':
-        return MaterialPageRoute(
-          builder: (_) => const HomePage(),
-        );
-      case '/addProduct':
-        return MaterialPageRoute(
-          builder: (_) => const AddressScreen(),
-        );
-      case '/productDetails':
-        return MaterialPageRoute(
-          builder: (_) => const AddressScreen(),
-        );
-      default:
-        return MaterialPageRoute(
-          builder: (_) => Scaffold(
-            body: Center(
-              child: Text('No route defined for ${settings.name}'),
-            ),
-          ),
-        );
-    }
-  }
-}
 
