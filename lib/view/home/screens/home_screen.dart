@@ -136,6 +136,7 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
                 ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: 4,
                   shrinkWrap: true,
                   itemBuilder: (context, i) {
@@ -146,14 +147,27 @@ class HomeScreen extends StatelessWidget {
                       height: 120,
                       width: width,
                       child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           SizedBox(
                             width: 100,
                             child: Image.asset(AppAssets.health),
                           ),
                           Column(
-                            children: [],
-                          )
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: const [
+                                  Text('The Family Care'),
+                                ],
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                              height: 20,
+                              child: Image.asset(AppIcons.favOutline),)
                         ],
                       ),
                     );
