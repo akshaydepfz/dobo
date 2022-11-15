@@ -14,4 +14,5 @@ class AppIcons {
   static const String bell = 'assets/icons/bell.png';
   static const String search = 'assets/icons/search.png';
   static const String favOutline = 'assets/icons/fav_outline.png';
+  static const String star = 'assets/icons/star.png';
 }

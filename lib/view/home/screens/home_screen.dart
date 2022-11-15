@@ -78,7 +78,7 @@ class HomeScreen extends StatelessWidget {
                               border: InputBorder.none,
                               hintText: 'Search'),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -150,24 +150,56 @@ class HomeScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          SizedBox(
-                            width: 100,
-                            child: Image.asset(AppAssets.health),
-                          ),
-                          Column(
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: const [
-                                  Text('The Family Care'),
+                              SizedBox(
+                                width: 100,
+                                child: Image.asset(AppAssets.health),
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    'The Family Care',
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  const Text(
+                                    'Health care clinic',
+                                    style: TextStyle(
+                                      color: AppColor.primary,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                      height: 10, width: 170, child: Divider()),
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        width: 20,
+                                        height: 20,
+                                        child: Image.asset(AppIcons.star),
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      const Text(
+                                        '4.6  (3,362 reviews)',
+                                        style: TextStyle(color: AppColor.grey3),
+                                      )
+                                    ],
+                                  )
                                 ],
                               ),
                             ],
                           ),
                           SizedBox(
-                              height: 20,
-                              child: Image.asset(AppIcons.favOutline),)
+                            height: 20,
+                            child: Image.asset(AppIcons.favOutline),
+                          )
                         ],
                       ),
                     );
