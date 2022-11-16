@@ -20,6 +20,10 @@ class LandingScreen extends StatelessWidget {
       'icon': AppIcons.category,
     },
     {
+      'title': 'Booking',
+      'icon': AppIcons.calendar,
+    },
+    {
       'title': 'favorites',
       'icon': AppIcons.favorite,
     },

@@ -119,22 +119,7 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      'Popular Clinics',
-                      style: TextStyle(color: Colors.black, fontSize: 16),
-                    ),
-                    TextButton(
-                      onPressed: () {},
-                      child: const Text(
-                        'See All',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ),
-                  ],
-                ),
+                TitleCard(title: 'Popular Clinics', onTap: () {}),
                 ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: 4,
@@ -172,8 +157,12 @@ class HomeScreen extends StatelessWidget {
                                       color: AppColor.primary,
                                     ),
                                   ),
-                                  const SizedBox(
-                                      height: 10, width: 170, child: Divider()),
+                                  Expanded(
+                                    child: SizedBox(
+                                        height: 10,
+                                        width: width / 2,
+                                        child: const Divider()),
+                                  ),
                                   Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -191,7 +180,7 @@ class HomeScreen extends StatelessWidget {
                                         style: TextStyle(color: AppColor.grey3),
                                       )
                                     ],
-                                  )
+                                  ),
                                 ],
                               ),
                             ],
@@ -204,12 +193,83 @@ class HomeScreen extends StatelessWidget {
                       ),
                     );
                   },
+                ),
+                TitleCard(title: 'Specialist Doctors', onTap: () {}),
+                SizedBox(
+                  height: 170,
+                  child: ListView.builder(
+                      itemCount: 4,
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, i) {
+                        return Container(
+                          margin: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          width: 157,
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: 100,
+                                width: width,
+                                child: Image.asset(
+                                  AppAssets.doctor,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              const Text(
+                                'Dr. Rubayet Sakib',
+                                style: TextStyle(),
+                              ),
+                              const Text(
+                                'Dental Specialist',
+                                style: TextStyle(color: AppColor.primary),
+                              )
+                            ],
+                          ),
+                        );
+                      }),
                 )
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class TitleCard extends StatelessWidget {
+  const TitleCard({
+    Key? key,
+    required this.title,
+    required this.onTap,
+  }) : super(key: key);
+  final String title;
+  final Function() onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          style: const TextStyle(color: Colors.black, fontSize: 16),
+        ),
+        TextButton(
+          onPressed: onTap,
+          child: const Text(
+            'See All',
+            style: TextStyle(fontSize: 16),
+          ),
+        ),
+      ],
     );
   }
 }

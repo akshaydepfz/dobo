@@ -1,5 +1,6 @@
 import 'package:dobo/model/core/style/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class BottomNavItem extends StatelessWidget {
   const BottomNavItem({
@@ -21,10 +22,10 @@ class BottomNavItem extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(
-            height: 25,
-            child: Image.asset(
-              icon,
+            height: 30,
+            child: SvgPicture.asset(
               color: isSelected ? AppColor.primary : AppColor.grey3,
+              icon,
             ),
           ),
           const SizedBox(
