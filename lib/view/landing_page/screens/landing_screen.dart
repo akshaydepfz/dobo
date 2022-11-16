@@ -2,6 +2,7 @@
 
 import 'package:dobo/model/core/assets/app_icons.dart';
 import 'package:dobo/view/category/screens/category_screens.dart';
+import 'package:dobo/view/favorite/screens/favorite_screen.dart';
 import 'package:dobo/view/home/screens/home_screen.dart';
 import 'package:dobo/view/landing_page/services/bottom_nav_service.dart';
 import 'package:dobo/view/landing_page/widgets/bttom_nav_bar.dart';
@@ -37,7 +38,7 @@ class LandingScreen extends StatelessWidget {
     const HomeScreen(),
     const CategoryScreen(),
     const HomeScreen(),
-    const CategoryScreen(),
+    const FavoriteScreen(),
     const CategoryScreen(),
   ];
 

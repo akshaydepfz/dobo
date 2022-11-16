@@ -2,6 +2,7 @@ import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/model/core/assets/app_assets.dart';
 import 'package:dobo/model/core/assets/app_icons.dart';
 import 'package:dobo/model/core/style/app_colors.dart';
+import 'package:dobo/view/home/widgets/clinics_card.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -10,7 +11,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -125,73 +126,11 @@ class HomeScreen extends StatelessWidget {
                   itemCount: 4,
                   shrinkWrap: true,
                   itemBuilder: (context, i) {
-                    return Container(
-                      color: Colors.white,
-                      padding: const EdgeInsets.all(10),
-                      margin: const EdgeInsets.all(10),
-                      height: 120,
-                      width: width,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                width: 100,
-                                child: Image.asset(AppAssets.health),
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                    'The Family Care',
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  const Text(
-                                    'Health care clinic',
-                                    style: TextStyle(
-                                      color: AppColor.primary,
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: SizedBox(
-                                        height: 10,
-                                        width: width / 2,
-                                        child: const Divider()),
-                                  ),
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      SizedBox(
-                                        width: 20,
-                                        height: 20,
-                                        child: Image.asset(AppIcons.star),
-                                      ),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      const Text(
-                                        '4.6  (3,362 reviews)',
-                                        style: TextStyle(color: AppColor.grey3),
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 20,
-                            child: Image.asset(AppIcons.favOutline),
-                          )
-                        ],
-                      ),
-                    );
+                    return ClinicsCard(
+                        width: width,
+                        name: 'The Family Care',
+                        category: 'Health care clinic',
+                        image: AppAssets.health);
                   },
                 ),
                 TitleCard(title: 'Specialist Doctors', onTap: () {}),
