@@ -33,11 +33,19 @@ class LandingScreen extends StatelessWidget {
     },
   ];
 
+  List<Widget> pages = [
+    const HomeScreen(),
+    const CategoryScreen(),
+    const HomeScreen(),
+    const CategoryScreen(),
+    const CategoryScreen(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     final bottomNavProvider = Provider.of<BottomNavService>(context);
     return Scaffold(
-      body: const HomeScreen(),
+      body: pages[bottomNavProvider.selectedIndex],
       bottomNavigationBar: Container(
         padding: const EdgeInsets.all(15),
         height: 100,
