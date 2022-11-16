@@ -1,8 +1,6 @@
 import 'package:dobo/view/category/services/category_service.dart';
-import 'package:dobo/view/favorite/screens/favorite_screen.dart';
-import 'package:dobo/view/landing_page/screens/landing_screen.dart';
+import 'package:dobo/view/clinic_view/screens/clinic_view_.screen.dart';
 import 'package:dobo/view/landing_page/services/bottom_nav_service.dart';
-import 'package:dobo/view/profile/screens/profile_screen.dart';
 import 'package:dobo/view/signin/services/signin_provider.dart';
 import 'package:dobo/view/signup/services/signup_service.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +39,7 @@ class MyApp extends StatelessWidget {
           textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
           primarySwatch: Colors.cyan,
         ),
-        home: ProfileScreen(),
+        home: const ClinicViewScreen(),
       ),
     );
   }

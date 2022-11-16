@@ -2,8 +2,8 @@ import 'package:dobo/model/core/assets/app_icons.dart';
 import 'package:dobo/model/core/style/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class ClinicsCard extends StatelessWidget {
-  const ClinicsCard({
+class DoctorCard extends StatelessWidget {
+  const DoctorCard({
     Key? key,
     required this.width,
     required this.name,
@@ -49,10 +49,10 @@ class ClinicsCard extends StatelessWidget {
                       color: AppColor.primary,
                     ),
                   ),
-                  Expanded(
-                    child: SizedBox(
-                        height: 10, width: width / 2, child: const Divider()),
-                  ),
+                  // Expanded(
+                  //   child: SizedBox(
+                  //       height: 10, width: width / 2, child: const Divider()),
+                  // ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

@@ -6,6 +6,7 @@ import 'package:dobo/view/favorite/screens/favorite_screen.dart';
 import 'package:dobo/view/home/screens/home_screen.dart';
 import 'package:dobo/view/landing_page/services/bottom_nav_service.dart';
 import 'package:dobo/view/landing_page/widgets/bttom_nav_bar.dart';
+import 'package:dobo/view/profile/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -39,7 +40,7 @@ class LandingScreen extends StatelessWidget {
     const CategoryScreen(),
     const HomeScreen(),
     const FavoriteScreen(),
-    const CategoryScreen(),
+    const ProfileScreen(),
   ];
 
   @override

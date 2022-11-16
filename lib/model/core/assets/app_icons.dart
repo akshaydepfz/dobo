@@ -13,7 +13,12 @@ class AppIcons {
   static const String bell = 'assets/icons/bell.png';
   static const String search = 'assets/icons/search.png';
   static const String favOutline = 'assets/icons/fav_outline.png';
-  static const String star = 'assets/icons/star.png';
+  static const String star = 'assets/icons/star.svg';
   static const String calendar = 'assets/icons/calendar.svg';
   static const String category = 'assets/icons/category.svg';
+  static const String hospital = 'assets/icons/hospital.svg';
+  static const String location = 'assets/icons/location.svg';
+  static const String time = 'assets/icons/time.svg';
+  static const String group = 'assets/icons/group.svg';
+  static const String chat = 'assets/icons/chat.svg';
 }
