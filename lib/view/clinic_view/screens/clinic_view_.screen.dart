@@ -3,7 +3,6 @@ import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/model/core/assets/app_assets.dart';
 import 'package:dobo/model/core/assets/app_icons.dart';
 import 'package:dobo/model/core/style/app_colors.dart';
-import 'package:dobo/view/clinic_view/widgets/doctor_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
