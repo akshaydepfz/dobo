@@ -44,7 +44,7 @@ class CategoryScreen extends StatelessWidget {
                         offset: const Offset(4.0, 4.0),
                         blurRadius: 10,
                         spreadRadius: 0,
-                      )
+                      ),
                     ],
                   ),
                   child: Padding(
