@@ -1,5 +1,6 @@
 import 'package:dobo/view/category/services/category_service.dart';
 import 'package:dobo/view/landing_page/services/bottom_nav_service.dart';
+import 'package:dobo/view/location_select/screens/location_select_screen.dart';
 import 'package:dobo/view/notification/screens/notification_screen.dart';
 import 'package:dobo/view/signin/services/signin_provider.dart';
 import 'package:dobo/view/signup/services/signup_service.dart';
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
                 GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
             primarySwatch: Colors.cyan,
           ),
-          home: const NotificationScreen()),
+          home: const LocationSelectScreen()),
     );
   }
 }
