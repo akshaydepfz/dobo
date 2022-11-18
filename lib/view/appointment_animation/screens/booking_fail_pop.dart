@@ -11,38 +11,40 @@ class BookingFailPop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     final height = MediaQuery.of(context).size.height;
+    final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: Column(
-        children: [
-          Center(
-            child: Padding(
-              padding: EdgeInsets.only(top: height*.12,bottom: height*.05),
-              child: SizedBox(
-              height: height * .20,
-              child: SvgPicture.asset(AppAssets.bookingFail)),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Center(
+              child: Padding(
+                padding:
+                    EdgeInsets.only(top: height * .12, bottom: height * .05),
+                child: SizedBox(
+                    height: height * .20,
+                    child: SvgPicture.asset(AppAssets.bookingFail)),
+              ),
             ),
-          ),
-          const Text(
-          'Oops, Failed!',
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        ), 
-        const Padding(
-          padding:  EdgeInsets.symmetric(vertical: 20),
-          child:  Text(
-            'Appointment failed. Please check\n your internet connection then\n try again.',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 15,
-              color: AppColor.grey4,
+            const Text(
+              'Oops, Failed!',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-          ),
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 20),
+              child: Text(
+                'Appointment failed. Please check\n your internet connection then\n try again.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 15,
+                  color: AppColor.grey4,
+                ),
+              ),
+            ),
+            const Spacer(),
+            PrimaryButton(onTap: () {}, label: 'Try Again'),
+            SecondaryButton(onTap: () {}, label: 'Cancel'),
+          ],
         ),
-        const Spacer(),
-        PrimaryButton(onTap: (){}, label:'Try Again'),
-        SecondaryButton(onTap: (){}, label:'Cancel'),
-        GlobalVariabels.vertical15,       
-       ],
       ),
     );
   }

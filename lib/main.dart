@@ -1,4 +1,6 @@
-import 'package:dobo/view/booking/screens/date_slot_select.dart';
+import 'package:dobo/view/appointment/screens/date_slot_select.dart';
+import 'package:dobo/view/appointment_animation/screens/bookind_success_pop.dart';
+import 'package:dobo/view/appointment_animation/screens/booking_fail_pop.dart';
 import 'package:dobo/view/category/screens/category_view.dart';
 import 'package:dobo/view/category/services/category_service.dart';
 import 'package:dobo/view/landing_page/services/bottom_nav_service.dart';
@@ -43,7 +45,7 @@ class MyApp extends StatelessWidget {
                 GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
             primarySwatch: Colors.cyan,
           ),
-          home: const CategoryViewScreen()),
+          home: const BookingFailPop()),
     );
   }
 }

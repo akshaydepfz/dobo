@@ -2,7 +2,7 @@ import 'package:dobo/common/primary_appbar.dart';
 import 'package:dobo/common/primary_button.dart';
 import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/model/core/style/app_colors.dart';
-import 'package:dobo/view/booking/widgets/named_text_field.dart';
+import 'package:dobo/view/appointment/widgets/named_text_field.dart';
 import 'package:flutter/material.dart';
 
 class PatientDetailsScreen extends StatelessWidget {
