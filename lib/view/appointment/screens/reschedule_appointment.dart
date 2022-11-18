@@ -1,4 +1,5 @@
 import 'package:dobo/common/primary_appbar.dart';
+import 'package:dobo/common/primary_button.dart';
 import 'package:dobo/view/appointment/services/reshedule_radio_button.dart';
 import 'package:dobo/view/appointment/widgets/radio_reason_tile.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,8 @@ class RescheduleAppointment extends StatelessWidget {
                   );
                 },
               ),
-            )
+            ),
+            PrimaryButton(onTap: () {}, label: 'Next')
           ],
         ),
       ),
