@@ -1,4 +1,5 @@
 import 'package:dobo/view/booking/screens/date_slot_select.dart';
+import 'package:dobo/view/category/screens/category_view.dart';
 import 'package:dobo/view/category/services/category_service.dart';
 import 'package:dobo/view/landing_page/services/bottom_nav_service.dart';
 import 'package:dobo/view/location_select/screens/location_select_screen.dart';
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
                 GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
             primarySwatch: Colors.cyan,
           ),
-          home: const DateSelectingScreen()),
+          home: const CategoryViewScreen()),
     );
   }
 }
