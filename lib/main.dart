@@ -41,14 +41,14 @@ class MyApp extends StatelessWidget {
         )
       ],
       child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
-          primarySwatch: Colors.cyan,
-        ),
-        home:SessionEndPop()
-      ),
+          debugShowCheckedModeBanner: false,
+          title: 'DOBO',
+          theme: ThemeData(
+            textTheme:
+                GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
+            primarySwatch: Colors.cyan,
+          ),
+          home: SessionEndPop()),
     );
   }
 }
