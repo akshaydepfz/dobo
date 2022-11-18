@@ -47,5 +47,5 @@ class BookingSuccessPop extends StatelessWidget {
         ),
       ),
     );
-  }
+  } 
 }
