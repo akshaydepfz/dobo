@@ -3,10 +3,7 @@ import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/model/core/assets/app_assets.dart';
 import 'package:dobo/model/core/assets/app_icons.dart';
 import 'package:dobo/model/core/style/app_colors.dart';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/svg.dart';
 
 class CategoryViewScreen extends StatelessWidget {
