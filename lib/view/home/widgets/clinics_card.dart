@@ -1,6 +1,7 @@
 import 'package:dobo/model/core/assets/app_icons.dart';
 import 'package:dobo/model/core/style/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class ClinicsCard extends StatelessWidget {
   const ClinicsCard({
@@ -59,7 +60,7 @@ class ClinicsCard extends StatelessWidget {
                       SizedBox(
                         width: 20,
                         height: 20,
-                        child: Image.asset(AppIcons.star),
+                        child: SvgPicture.asset(AppIcons.star),
                       ),
                       const SizedBox(
                         width: 10,
