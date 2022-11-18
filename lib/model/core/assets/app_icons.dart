@@ -22,4 +22,6 @@ class AppIcons {
   static const String group = 'assets/icons/group.svg';
   static const String chat = 'assets/icons/chat.svg';
   static const String medal = 'assets/icons/medal.svg';
+  static const String done = 'assets/icons/done.svg';
+  static const String alert = 'assets/icons/alert.svg';
 }
