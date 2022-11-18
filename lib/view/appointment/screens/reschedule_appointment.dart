@@ -39,7 +39,10 @@ class RescheduleAppointment extends StatelessWidget {
                 },
               ),
             ),
-            PrimaryButton(onTap: () {}, label: 'Next')
+            PrimaryButton(
+              onTap: () {},
+              label: 'Next',
+            )
           ],
         ),
       ),
