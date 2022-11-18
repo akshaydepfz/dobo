@@ -1,13 +1,5 @@
-import 'package:dobo/view/account_create_pop/screens/account_created.dart';
-import 'package:dobo/view/appointment_animation/screens/bookind_success_pop.dart';
-import 'package:dobo/view/appointment_animation/screens/booking_fail_pop.dart';
-import 'package:dobo/view/booking_animation/screens/appointment_cancel_pop.dart';
-import 'package:dobo/view/booking_animation/screens/reschedule_pop.dart';
 import 'package:dobo/view/category/services/category_service.dart';
-import 'package:dobo/view/clinic_view/screens/clinic_view_.screen.dart';
-import 'package:dobo/view/landing_page/screens/landing_screen.dart';
 import 'package:dobo/view/landing_page/services/bottom_nav_service.dart';
-import 'package:dobo/view/review_animation/screen/review_pop.dart';
 import 'package:dobo/view/review_animation/screen/session_end_pop.dart';
 import 'package:dobo/view/signin/services/signin_provider.dart';
 import 'package:dobo/view/signup/services/signup_service.dart';
