@@ -1,4 +1,5 @@
 import 'package:dobo/view/category/services/category_service.dart';
+import 'package:dobo/view/doctor_view/screens/doctor_view.dart';
 import 'package:dobo/view/landing_page/services/bottom_nav_service.dart';
 import 'package:dobo/view/review_animation/screen/session_end_pop.dart';
 import 'package:dobo/view/signin/services/signin_provider.dart';
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
                 GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
             primarySwatch: Colors.cyan,
           ),
-          home: SessionEndPop()),
+          home: const DoctorViewScreen()),
     );
   }
 }
