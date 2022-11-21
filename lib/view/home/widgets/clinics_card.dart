@@ -9,13 +9,14 @@ class ClinicsCard extends StatelessWidget {
     required this.width,
     required this.name,
     required this.category,
-    required this.image,
+    required this.image, required this.onTap,
   }) : super(key: key);
 
   final double width;
   final String name;
   final String category;
   final String image;
+  final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -29,51 +30,54 @@ class ClinicsCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                width: 100,
-                child: Image.asset(image),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    name,
-                    style: const TextStyle(
-                        fontSize: 15, fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    category,
-                    style: const TextStyle(
-                      color: AppColor.primary,
+          GestureDetector(
+            onTap: onTap,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: 100,
+                  child: Image.asset(image),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      name,
+                      style: const TextStyle(
+                          fontSize: 15, fontWeight: FontWeight.bold),
                     ),
-                  ),
-                  Expanded(
-                    child: SizedBox(
-                        height: 10, width: width / 2, child: const Divider()),
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: SvgPicture.asset(AppIcons.star),
+                    Text(
+                      category,
+                      style: const TextStyle(
+                        color: AppColor.primary,
                       ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      const Text(
-                        '4.6  (3,362 reviews)',
-                        style: TextStyle(color: AppColor.grey3),
-                      )
-                    ],
-                  ),
-                ],
-              ),
-            ],
+                    ),
+                    Expanded(
+                      child: SizedBox(
+                          height: 10, width: width / 2, child: const Divider()),
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: SvgPicture.asset(AppIcons.star),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        const Text(
+                          '4.6  (3,362 reviews)',
+                          style: TextStyle(color: AppColor.grey3),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
           SizedBox(
             height: 20,

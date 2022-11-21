@@ -30,10 +30,12 @@ class FavoriteScreen extends StatelessWidget {
                     shrinkWrap: true,
                     itemBuilder: (context, i) {
                       return ClinicsCard(
-                          width: width,
-                          name: 'The Family Care',
-                          category: 'Health care clinic',
-                          image: AppAssets.health);
+                        width: width,
+                        name: 'The Family Care',
+                        category: 'Health care clinic',
+                        image: AppAssets.health,
+                        onTap: () {},
+                      );
                     })
               ],
             ),

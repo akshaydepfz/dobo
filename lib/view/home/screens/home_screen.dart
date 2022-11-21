@@ -127,10 +127,14 @@ class HomeScreen extends StatelessWidget {
                   shrinkWrap: true,
                   itemBuilder: (context, i) {
                     return ClinicsCard(
-                        width: width,
-                        name: 'The Family Care',
-                        category: 'Health care clinic',
-                        image: AppAssets.health);
+                      width: width,
+                      name: 'The Family Care',
+                      category: 'Health care clinic',
+                      image: AppAssets.health,
+                      onTap: () {
+                        Navigator.pushNamed(context, '/clinicview');
+                      },
+                    );
                   },
                 ),
                 TitleCard(title: 'Specialist Doctors', onTap: () {}),
