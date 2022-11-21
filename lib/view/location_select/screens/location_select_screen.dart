@@ -14,7 +14,7 @@ class LocationSelectScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Column(
-          children: [],
+          children: const [],
         ),
       ),
       bottomNavigationBar: Container(

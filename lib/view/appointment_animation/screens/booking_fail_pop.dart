@@ -1,6 +1,5 @@
 import 'package:dobo/common/primary_button.dart';
 import 'package:dobo/common/secondary_button.dart';
-import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/model/core/assets/app_assets.dart';
 import 'package:dobo/model/core/style/app_colors.dart';
 import 'package:flutter/material.dart';

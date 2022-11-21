@@ -1,5 +1,4 @@
 import 'package:dobo/common/primary_button.dart';
-import 'package:dobo/common/secondary_button.dart';
 import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/model/core/assets/app_assets.dart';
 import 'package:dobo/model/core/style/app_colors.dart';
@@ -17,33 +16,33 @@ class AppointmentCancelPop extends StatelessWidget {
         children: [
           Center(
             child: Padding(
-              padding: EdgeInsets.only(top: height*.12,bottom: height*.05),
+              padding: EdgeInsets.only(top: height * .12, bottom: height * .05),
               child: SizedBox(
-              height: height * .20,
-              child: SvgPicture.asset(AppAssets.donePop)),
+                  height: height * .20,
+                  child: SvgPicture.asset(AppAssets.donePop)),
             ),
           ),
           const Text(
-          'Cancel Appointment\nSuccess!',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        ), 
-        const Padding(
-          padding:  EdgeInsets.symmetric(vertical: 20),
-          child:  Text(
-            'We are very sad that you have\ncanceled your appointment. We will\nalways improve our service to satisfy\nyou in the next appointment.',
+            'Cancel Appointment\nSuccess!',
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 15,
-              color: AppColor.grey4,
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 20),
+            child: Text(
+              'We are very sad that you have\ncanceled your appointment. We will\nalways improve our service to satisfy\nyou in the next appointment.',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 15,
+                color: AppColor.grey4,
+              ),
             ),
           ),
-        ),
-        const Spacer(),
-        PrimaryButton(onTap: (){}, label:'Done'),
-        // SecondaryButton(onTap: (){}, label:'Cancel'),
-        GlobalVariabels.vertical15,       
-       ],
+          const Spacer(),
+          PrimaryButton(onTap: () {}, label: 'Done'),
+          // SecondaryButton(onTap: (){}, label:'Cancel'),
+          GlobalVariabels.vertical15,
+        ],
       ),
     );
   }

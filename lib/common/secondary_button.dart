@@ -16,21 +16,16 @@ class SecondaryButton extends StatelessWidget {
         height: 50,
         width: width,
         decoration: BoxDecoration(
-          color: Color(0xffCFF6F3),
+          color: const Color(0xffCFF6F3),
           borderRadius: BorderRadius.circular(8.0),
-          // boxShadow: [
-          //   BoxShadow(
-          //     color: AppColor.primary.withOpacity(0.4),
-          //     offset: const Offset(0, 4),
-          //     blurRadius: 08,
-          //   )
-          // ],
         ),
         child: Center(
           child: Text(
             label,
             style: const TextStyle(
-                color: AppColor.primary, fontSize: 16, fontWeight: FontWeight.w500),
+                color: AppColor.primary,
+                fontSize: 16,
+                fontWeight: FontWeight.w500),
           ),
         ),
       ),

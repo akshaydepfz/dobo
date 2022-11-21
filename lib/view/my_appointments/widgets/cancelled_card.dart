@@ -1,7 +1,6 @@
 import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/model/core/assets/app_assets.dart';
 import 'package:dobo/model/core/style/app_colors.dart';
-import 'package:dobo/view/my_appointments/screens/my_appointments_screen.dart';
 import 'package:flutter/material.dart';
 
 class CancelldCard extends StatelessWidget {

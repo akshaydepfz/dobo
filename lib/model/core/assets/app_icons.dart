@@ -26,5 +26,5 @@ class AppIcons {
   static const String alert = 'assets/icons/alert.svg';
   static const String edit = 'assets/icons/edit.svg';
   static const String call = 'assets/icons/call.svg';
-  
+  static const String camara = 'assets/icons/camara.svg';
 }
