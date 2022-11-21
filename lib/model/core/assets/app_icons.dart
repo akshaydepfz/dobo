@@ -24,4 +24,7 @@ class AppIcons {
   static const String medal = 'assets/icons/medal.svg';
   static const String done = 'assets/icons/done.svg';
   static const String alert = 'assets/icons/alert.svg';
+  static const String edit = 'assets/icons/edit.svg';
+  static const String call = 'assets/icons/call.svg';
+  
 }
