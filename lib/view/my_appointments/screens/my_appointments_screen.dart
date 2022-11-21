@@ -1,5 +1,6 @@
 import 'package:dobo/model/core/assets/app_icons.dart';
 import 'package:dobo/model/core/style/app_colors.dart';
+import 'package:dobo/view/my_appointments/widgets/cancelled_card.dart';
 import 'package:dobo/view/my_appointments/widgets/completed_card.dart';
 import 'package:dobo/view/my_appointments/widgets/upcoming_card.dart';
 import 'package:flutter/material.dart';
@@ -70,7 +71,12 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen>
                       itemBuilder: (context, i) {
                         return const CompletedCard();
                       }),
-                  const Text('data'),
+                  ListView.builder(
+                      itemCount: 10,
+                      shrinkWrap: true,
+                      itemBuilder: (context, i) {
+                        return const CancelldCard();
+                      }),
                 ],
               ),
             )
