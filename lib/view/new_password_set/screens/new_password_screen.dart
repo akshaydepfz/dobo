@@ -3,6 +3,7 @@ import 'package:dobo/common/primary_button.dart';
 import 'package:dobo/common/primary_text_field.dart';
 import 'package:dobo/model/core/assets/app_icons.dart';
 import 'package:dobo/model/core/style/app_colors.dart';
+import 'package:dobo/router/app_route_constants.dart';
 import 'package:flutter/material.dart';
 
 class NewPasswordSet extends StatelessWidget {
@@ -40,7 +41,9 @@ class NewPasswordSet extends StatelessWidget {
               icon: AppIcons.mail,
               onChanged: (value) {},
             ),
-            PrimaryButton(onTap: () {}, label: 'Save')
+            PrimaryButton(onTap: () {
+              Navigator.pushNamed(context,RouteConstants.signInScreen);
+            }, label: 'Save')
           ],
         ),
       ),

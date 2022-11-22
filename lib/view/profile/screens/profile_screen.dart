@@ -1,6 +1,7 @@
 import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/model/core/assets/app_assets.dart';
 import 'package:dobo/model/core/style/app_colors.dart';
+import 'package:dobo/router/app_route_constants.dart';
 import 'package:dobo/view/profile/widgets/profile_tile.dart';
 import 'package:flutter/material.dart';
 
@@ -60,7 +61,9 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   GlobalVariabels.vertical10,
                   GlobalVariabels.vertical10,
-                  ProfileTile(title: 'Edit Profile', onTap: () {}),
+                  ProfileTile(title: 'Edit Profile', onTap: () {
+                    Navigator.pushNamed(context,RouteConstants.editProfile);
+                  }),
                   ProfileTile(title: 'Notifications', onTap: () {}),
                   ProfileTile(title: 'Change Password', onTap: () {}),
                   ProfileTile(title: 'Privacy Settings', onTap: () {}),

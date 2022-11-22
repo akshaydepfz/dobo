@@ -1,9 +1,9 @@
 import 'package:dobo/common/primary_button.dart';
 import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/model/core/style/app_colors.dart';
+import 'package:dobo/router/app_route_constants.dart';
 
 import 'package:dobo/view/onBoarding/services/onboarding_content.dart';
-import 'package:dobo/view/signin/screens/signin_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -90,11 +90,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             PrimaryButton(
                 onTap: () {
                   if (_pageIndex == 2) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const SignInScreen()),
-                    );
+                    Navigator.pushNamed(context,RouteConstants.signInScreen);
                   }
                   _controller.nextPage(
                       duration: const Duration(milliseconds: 400),

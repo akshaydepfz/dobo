@@ -3,6 +3,7 @@ import 'package:dobo/common/primary_text_field.dart';
 import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/model/core/assets/app_icons.dart';
 import 'package:dobo/model/core/style/app_colors.dart';
+import 'package:dobo/router/app_route_constants.dart';
 import 'package:dobo/view/signin/screens/signin_screen.dart';
 import 'package:dobo/view/signup/services/signup_service.dart';
 import 'package:flutter/material.dart';
@@ -83,7 +84,9 @@ class SignUpScreen extends StatelessWidget {
                   ],
                 ),
                 GlobalVariabels.vertical15,
-                PrimaryButton(onTap: () {}, label: 'Sign Up'),
+                PrimaryButton(onTap: () {
+                  Navigator.pushNamed(context,RouteConstants.accountCreatePop);
+                }, label: 'Sign Up'),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Row(children: const [
@@ -113,8 +116,10 @@ class SignUpScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('Dont have an account?'),
-                    TextButton(onPressed: () {}, child: const Text('Sign up'))
+                    const Text('Already have an account?'),
+                    TextButton(onPressed: () {
+                       Navigator.pushNamed(context,RouteConstants.signInScreen);
+                    }, child: const Text('Sign In'))
                   ],
                 )
               ],

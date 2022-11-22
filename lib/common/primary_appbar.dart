@@ -17,10 +17,15 @@ class PrimaryAppbar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SizedBox(
-            height: 20,
-            child: Image.asset(
-              AppIcons.arrowBack,
+          GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: SizedBox(
+              height: 20,
+              child: Image.asset(
+                AppIcons.arrowBack,
+              ),
             ),
           ),
           Text(

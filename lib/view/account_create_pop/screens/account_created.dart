@@ -2,6 +2,7 @@ import 'package:dobo/common/primary_button.dart';
 import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/model/core/assets/app_assets.dart';
 import 'package:dobo/model/core/style/app_colors.dart';
+import 'package:dobo/router/app_route_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -42,7 +43,9 @@ class AccountCreatedPop extends StatelessWidget {
               ],
             ),
           ),
-          PrimaryButton(onTap: () {}, label: 'Done'),
+          PrimaryButton(onTap: () {
+            Navigator.pushNamed(context,RouteConstants.enableLocation);
+          }, label: 'Done'),
           GlobalVariabels.vertical15,
         ],
       )),

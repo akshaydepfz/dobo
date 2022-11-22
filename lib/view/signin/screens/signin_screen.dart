@@ -4,7 +4,9 @@ import 'package:dobo/common/primary_text_field.dart';
 import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/model/core/assets/app_icons.dart';
 import 'package:dobo/model/core/style/app_colors.dart';
+import 'package:dobo/router/app_route_constants.dart';
 import 'package:dobo/view/signin/services/signin_provider.dart';
+import 'package:dobo/view/signup/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -63,13 +65,17 @@ class SignInScreen extends StatelessWidget {
                 Align(
                   alignment: Alignment.topRight,
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context,RouteConstants.forgotScreen);
+                    },
                     child: const Text(
                       'Forgot password?',
                     ),
                   ),
                 ),
-                PrimaryButton(onTap: () {}, label: 'Sign In'),
+                PrimaryButton(onTap: () {
+                  Navigator.pushNamed(context,RouteConstants.landingScreen);
+                }, label: 'Sign In'),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Row(children: const [
@@ -101,7 +107,9 @@ class SignInScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text('Dont have an account?'),
-                    TextButton(onPressed: () {}, child: const Text('Sign up'))
+                    TextButton(onPressed: () {
+                     Navigator.pushNamed(context,RouteConstants.signUpScreen);
+                    }, child: const Text('Sign up'))
                   ],
                 )
               ],

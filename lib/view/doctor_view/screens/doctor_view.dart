@@ -4,6 +4,7 @@ import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/model/core/assets/app_assets.dart';
 import 'package:dobo/model/core/assets/app_icons.dart';
 import 'package:dobo/model/core/style/app_colors.dart';
+import 'package:dobo/router/app_route_constants.dart';
 import 'package:dobo/view/clinic_view/screens/clinic_view_.screen.dart';
 import 'package:flutter/material.dart';
 
@@ -90,7 +91,9 @@ class DoctorViewScreen extends StatelessWidget {
                 ],
               ),
             ),
-            PrimaryButton(onTap: () {}, label: 'Book Appointment')
+            PrimaryButton(onTap: () {
+              Navigator.pushNamed(context,RouteConstants.dateSelectScreen);
+            }, label: 'Book Appointment')
           ],
         ),
       ),

@@ -71,7 +71,9 @@ class ProfileEditScreen extends StatelessWidget {
                 ),
               ),
             ),
-            PrimaryButton(onTap: () {}, label: 'Save Changes')
+            PrimaryButton(onTap: () {
+              Navigator.pop(context);
+            }, label: 'Save Changes')
           ],
         ),
       ),

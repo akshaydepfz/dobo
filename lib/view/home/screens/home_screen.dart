@@ -2,7 +2,10 @@ import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/model/core/assets/app_assets.dart';
 import 'package:dobo/model/core/assets/app_icons.dart';
 import 'package:dobo/model/core/style/app_colors.dart';
+import 'package:dobo/router/app_route_constants.dart';
+import 'package:dobo/view/clinic_view/screens/clinic_view_.screen.dart';
 import 'package:dobo/view/home/widgets/clinics_card.dart';
+import 'package:dobo/view/location_select/screens/location_select_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -24,32 +27,42 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      children: const [
-                        SizedBox(
+                      children:  [
+                        const SizedBox(
                           height: 50,
                           width: 50,
                           child: CircleAvatar(
                             backgroundImage: AssetImage(AppAssets.avatar),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
-                        Text(
+                        const Text(
                           'Malappuram...',
                           style: TextStyle(fontSize: 16),
                         ),
-                        Icon(
-                          Icons.expand_more_outlined,
-                          size: 30,
-                          color: AppColor.grey3,
+                        GestureDetector(
+                          onTap: (){
+                           Navigator.pushNamed(context,RouteConstants.locationSelect);
+                          },
+                          child:const Icon(
+                            Icons.expand_more_outlined,
+                            size: 30,
+                            color: AppColor.grey3,
+                          ),
                         )
                       ],
                     ),
-                    SizedBox(
-                      height: 30,
-                      width: 30,
-                      child: Image.asset(AppIcons.bell),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context,RouteConstants.notificationScreen);
+                      },
+                      child: SizedBox(
+                        height: 30,
+                        width: 30,
+                        child: Image.asset(AppIcons.bell),
+                      ),
                     ),
                   ],
                 ),
@@ -132,7 +145,8 @@ class HomeScreen extends StatelessWidget {
                       category: 'Health care clinic',
                       image: AppAssets.health,
                       onTap: () {
-                        Navigator.pushNamed(context, '/clinicview');
+                        Navigator.pushNamed(context,RouteConstants.clinicViewScreen);
+                        // Navigator.push(context,MaterialPageRoute(builder:(context) =>ClinicViewScreen()));
                       },
                     );
                   },

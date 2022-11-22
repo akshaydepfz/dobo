@@ -3,6 +3,7 @@ import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/model/core/assets/app_assets.dart';
 import 'package:dobo/model/core/assets/app_icons.dart';
 import 'package:dobo/model/core/style/app_colors.dart';
+import 'package:dobo/router/app_route_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -115,77 +116,82 @@ class ClinicViewScreen extends StatelessWidget {
                         itemCount: 3,
                         shrinkWrap: true,
                         itemBuilder: (context, i) {
-                          return Container(
-                            margin: const EdgeInsets.symmetric(vertical: 10),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            height: 100,
-                            child: Row(
-                              children: [
-                                ClipRRect(
-                                  borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(8),
-                                    bottomLeft: Radius.circular(8),
-                                  ),
-                                  child: SizedBox(
-                                    width: 100,
-                                    height: 100,
-                                    child: Image.asset(
-                                      AppAssets.doctor,
-                                      fit: BoxFit.cover,
+                          return GestureDetector(
+                            onTap: (){
+                              Navigator.pushNamed(context,RouteConstants.doctorViewScreen);
+                            },
+                            child: Container(
+                              margin: const EdgeInsets.symmetric(vertical: 10),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              height: 100,
+                              child: Row(
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(8),
+                                      bottomLeft: Radius.circular(8),
+                                    ),
+                                    child: SizedBox(
+                                      width: 100,
+                                      height: 100,
+                                      child: Image.asset(
+                                        AppAssets.doctor,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                GlobalVariabels.horizontal10,
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 8.0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      const Text(
-                                        'Dr. Rubayet Sakib',
-                                        style: TextStyle(
-                                          fontSize: 16,
+                                  GlobalVariabels.horizontal10,
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.symmetric(vertical: 8.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Text(
+                                          'Dr. Rubayet Sakib',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                          ),
                                         ),
-                                      ),
-                                      const Text(
-                                        'Dental Specialist',
-                                        style:
-                                            TextStyle(color: AppColor.primary),
-                                      ),
-                                      Expanded(
-                                        child: SizedBox(
-                                            width: width / 1.8,
-                                            child: const Divider()),
-                                      ),
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          SizedBox(
-                                            width: 20,
-                                            height: 20,
-                                            child:
-                                                SvgPicture.asset(AppIcons.star),
-                                          ),
-                                          const SizedBox(
-                                            width: 10,
-                                          ),
-                                          const Text(
-                                            '4.6  (3,362 reviews)',
-                                            style: TextStyle(
-                                                color: AppColor.grey3),
-                                          )
-                                        ],
-                                      ),
-                                    ],
+                                        const Text(
+                                          'Dental Specialist',
+                                          style:
+                                              TextStyle(color: AppColor.primary),
+                                        ),
+                                        Expanded(
+                                          child: SizedBox(
+                                              width: width / 1.8,
+                                              child: const Divider()),
+                                        ),
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
+                                              width: 20,
+                                              height: 20,
+                                              child:
+                                                  SvgPicture.asset(AppIcons.star),
+                                            ),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            const Text(
+                                              '4.6  (3,362 reviews)',
+                                              style: TextStyle(
+                                                  color: AppColor.grey3),
+                                            )
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           );
                         })
