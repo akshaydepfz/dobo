@@ -25,6 +25,8 @@ import 'package:dobo/view/notification/screens/notification_screen.dart';
 import 'package:dobo/view/onBoarding/screens/on_boarding_screen.dart';
 import 'package:dobo/view/profile/screens/profile_edit.dart';
 import 'package:dobo/view/profile/screens/profile_screen.dart';
+import 'package:dobo/view/review/screens/review_screen.dart';
+import 'package:dobo/view/review_animation/screen/review_pop.dart';
 import 'package:dobo/view/review_animation/screen/session_end_pop.dart';
 import 'package:dobo/view/signin/screens/signin_screen.dart';
 import 'package:dobo/view/signup/screens/signup_screen.dart';
@@ -85,15 +87,16 @@ class AppRoute{
         return MaterialPageRoute(builder:(context) =>const AppointmentCancelPop());
       case RouteConstants.sessionEndPop:
         return MaterialPageRoute(builder:(context) =>const SessionEndPop());
-      case RouteConstants.profileScreen:
-        return MaterialPageRoute(builder:(context) =>const ProfileScreen());
       case RouteConstants.editProfile:
         return MaterialPageRoute(builder:(context) =>ProfileEditScreen());      
       case RouteConstants.notificationScreen:
         return MaterialPageRoute(builder:(context) =>const NotificationScreen()); 
       case RouteConstants.locationSelect:
         return MaterialPageRoute(builder:(context) =>const LocationSelectScreen());
-
+      case RouteConstants.reviewScreen:
+        return MaterialPageRoute(builder:(context) =>const ReviewScreen());
+      case RouteConstants.reviewPop:
+        return MaterialPageRoute(builder:(context) =>const ReviewPop());  
 
       default:return MaterialPageRoute<MaterialPageRoute>
        (builder: (context) =>  const OnBoardingScreen());

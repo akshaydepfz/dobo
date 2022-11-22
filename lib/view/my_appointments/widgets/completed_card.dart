@@ -97,7 +97,9 @@ class CompletedCard extends StatelessWidget {
                     textColor: Colors.white,
                     label: 'Leave a review',
                     buttonColor: AppColor.primary,
-                    onTap: () {}),
+                    onTap: () {
+                      Navigator.pushNamed(context,RouteConstants.reviewScreen);
+                    }),
               ],
             )
           ],

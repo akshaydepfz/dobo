@@ -29,5 +29,7 @@ class RouteConstants{
   static const String appointmentRescedulePop = '/appointRescedulePop';
   static const String appointmentcancelPop = '/appointCancelPop';
   static const String sessionEndPop = '/sessionEndPop';
+  static const String reviewPop = '/reviewPop';
   static const String editProfile = '/editProfile';
+  static const String reviewScreen = '/reviewScreen';
 }

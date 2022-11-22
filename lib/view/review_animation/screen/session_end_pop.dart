@@ -2,6 +2,7 @@ import 'package:dobo/common/primary_button.dart';
 import 'package:dobo/common/secondary_button.dart';
 import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/model/core/assets/app_assets.dart';
+import 'package:dobo/router/app_route_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -65,7 +66,9 @@ class SessionEndPop extends StatelessWidget {
             ),
             const Divider(),
             const Spacer(),
-            PrimaryButton(onTap: () {}, label: 'Leave a Review'),
+            PrimaryButton(onTap: () {
+              Navigator.pushNamed(context,RouteConstants.reviewScreen);
+            }, label: 'Leave a Review'),
             SecondaryButton(onTap: () {}, label: 'Back to Home'),
             GlobalVariabels.vertical15,
           ],
