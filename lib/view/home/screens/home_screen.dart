@@ -159,35 +159,40 @@ class HomeScreen extends StatelessWidget {
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, i) {
-                        return Container(
-                          margin: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          width: 157,
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                height: 100,
-                                width: width,
-                                child: Image.asset(
-                                  AppAssets.doctor,
-                                  fit: BoxFit.cover,
+                        return GestureDetector(
+                          onTap: (){
+                            Navigator.pushNamed(context,RouteConstants.doctorViewScreen);
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            width: 157,
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: 100,
+                                  width: width,
+                                  child: Image.asset(
+                                    AppAssets.doctor,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              const Text(
-                                'Dr. Rubayet Sakib',
-                                style: TextStyle(),
-                              ),
-                              const Text(
-                                'Dental Specialist',
-                                style: TextStyle(color: AppColor.primary),
-                              )
-                            ],
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                const Text(
+                                  'Dr. Rubayet Sakib',
+                                  style: TextStyle(),
+                                ),
+                                const Text(
+                                  'Dental Specialist',
+                                  style: TextStyle(color: AppColor.primary),
+                                )
+                              ],
+                            ),
                           ),
                         );
                       }),
