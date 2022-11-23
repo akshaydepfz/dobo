@@ -69,7 +69,9 @@ class SessionEndPop extends StatelessWidget {
             PrimaryButton(onTap: () {
               Navigator.pushNamed(context,RouteConstants.reviewScreen);
             }, label: 'Leave a Review'),
-            SecondaryButton(onTap: () {}, label: 'Back to Home'),
+            SecondaryButton(onTap: () {
+              Navigator.pop(context);
+            }, label: 'Back'),
             GlobalVariabels.vertical15,
           ],
         ),

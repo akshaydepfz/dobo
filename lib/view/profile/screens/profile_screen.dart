@@ -61,11 +61,15 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   GlobalVariabels.vertical10,
                   GlobalVariabels.vertical10,
+                  ProfileTile(title: 'Articles', onTap: () {
+                    Navigator.pushNamed(context,RouteConstants.articleScreen);
+                  }),
                   ProfileTile(title: 'Edit Profile', onTap: () {
                     Navigator.pushNamed(context,RouteConstants.editProfile);
                   }),
-                  ProfileTile(title: 'Notifications', onTap: () {}),
-                  ProfileTile(title: 'Change Password', onTap: () {}),
+                  ProfileTile(title: 'Change Password', onTap: () {
+                    Navigator.pushNamed(context,RouteConstants.changePassword);
+                  }),
                   ProfileTile(title: 'Privacy Settings', onTap: () {}),
                   ProfileTile(title: 'Help Center', onTap: () {}),
                   ProfileTile(title: 'Contact Us', onTap: () {}),

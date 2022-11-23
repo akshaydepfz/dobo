@@ -40,8 +40,12 @@ class BookingFailPop extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            PrimaryButton(onTap: () {}, label: 'Try Again'),
-            SecondaryButton(onTap: () {}, label: 'Cancel'),
+            PrimaryButton(onTap: () {
+              Navigator.pop(context);
+            }, label: 'Try Again'),
+            SecondaryButton(onTap: () {
+              Navigator.pop(context);
+            }, label: 'Cancel'),
           ],
         ),
       ),

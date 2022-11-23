@@ -14,6 +14,7 @@ class RouteConstants{
   static const String favouriteScreen = '/favouriteScreen';
   static const String profileScreen = '/profileScreen';
 
+  static const String categoryview = '/categoryview';
   static const String locationSelect = '/locationSelect';
   static const String notificationScreen = '/notifScreen';
   static const String clinicViewScreen = '/clinicView';
@@ -32,4 +33,7 @@ class RouteConstants{
   static const String reviewPop = '/reviewPop';
   static const String editProfile = '/editProfile';
   static const String reviewScreen = '/reviewScreen';
+  static const String articleScreen = '/articleScreen';
+  static const String articleViewScreen = '/articleViewScreen';
+  static const String changePassword = '/changePassword';
 }

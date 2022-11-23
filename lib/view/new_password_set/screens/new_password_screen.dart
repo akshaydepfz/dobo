@@ -42,7 +42,7 @@ class NewPasswordSet extends StatelessWidget {
               onChanged: (value) {},
             ),
             PrimaryButton(onTap: () {
-              Navigator.pushNamed(context,RouteConstants.signInScreen);
+              Navigator.pop(context);
             }, label: 'Save')
           ],
         ),

@@ -6,8 +6,8 @@ import 'package:dobo/model/core/style/app_colors.dart';
 import 'package:dobo/router/app_route_constants.dart';
 import 'package:flutter/material.dart';
 
-class ForgotPasswordScreen extends StatelessWidget {
-  const ForgotPasswordScreen({super.key});
+class ChangePasswordScreen extends StatelessWidget {
+  const ChangePasswordScreen({super.key});
   
 
   @override
@@ -19,7 +19,7 @@ class ForgotPasswordScreen extends StatelessWidget {
         child: Column(
           children: [
             const PrimaryAppbar(
-              title: 'Forgot password',
+              title: 'Change password',
             ),
             const Padding(
               padding: EdgeInsets.all(15.0),

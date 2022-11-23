@@ -39,8 +39,9 @@ class AppointmentCancelPop extends StatelessWidget {
             ),
           ),
           const Spacer(),
-          PrimaryButton(onTap: () {}, label: 'Done'),
-          // SecondaryButton(onTap: (){}, label:'Cancel'),
+          PrimaryButton(onTap: () {
+            Navigator.pop(context);
+          }, label: 'Done'),
           GlobalVariabels.vertical15,
         ],
       ),

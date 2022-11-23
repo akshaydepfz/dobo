@@ -28,11 +28,16 @@ class HomeScreen extends StatelessWidget {
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children:  [
-                        const SizedBox(
-                          height: 50,
-                          width: 50,
-                          child: CircleAvatar(
-                            backgroundImage: AssetImage(AppAssets.avatar),
+                        GestureDetector(
+                          onTap: (){
+                            Navigator.pushNamed(context,RouteConstants.profileScreen);
+                          },
+                          child: const SizedBox(
+                            height: 50,
+                            width: 50,
+                            child: CircleAvatar(
+                              backgroundImage: AssetImage(AppAssets.avatar),
+                            ),
                           ),
                         ),
                         const SizedBox(

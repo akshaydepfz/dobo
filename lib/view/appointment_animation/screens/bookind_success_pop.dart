@@ -41,7 +41,9 @@ class BookingSuccessPop extends StatelessWidget {
             ),
             const Spacer(),
             PrimaryButton(onTap: () {}, label: 'View Appointment'),
-            SecondaryButton(onTap: () {}, label: 'Cancel'),
+            SecondaryButton(onTap: () {
+              Navigator.pop(context);
+            }, label: 'Cancel'),
           ],
         ),
       ),

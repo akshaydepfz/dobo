@@ -64,7 +64,7 @@ class CancellAppointment extends StatelessWidget {
             ),
             PrimaryButton(
               onTap: () {
-                Navigator.pushNamed(context,RouteConstants.appointmentcancelPop);
+                Navigator.pushReplacementNamed(context,RouteConstants.appointmentcancelPop);
               },
               label: 'Next',
             )

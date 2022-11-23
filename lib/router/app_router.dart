@@ -7,9 +7,12 @@ import 'package:dobo/view/appointment/screens/reschedule_appointment.dart';
 import 'package:dobo/view/appointment/screens/review_summery.dart';
 import 'package:dobo/view/appointment_animation/screens/bookind_success_pop.dart';
 import 'package:dobo/view/appointment_animation/screens/booking_fail_pop.dart';
+import 'package:dobo/view/article/screens/article_screen.dart';
+import 'package:dobo/view/article/screens/article_view_screen.dart';
 import 'package:dobo/view/booking_animation/screens/appointment_cancel_pop.dart';
 import 'package:dobo/view/booking_animation/screens/reschedule_pop.dart';
 import 'package:dobo/view/category/screens/category_screens.dart';
+import 'package:dobo/view/category/screens/category_view.dart';
 import 'package:dobo/view/clinic_view/screens/clinic_view_.screen.dart';
 import 'package:dobo/view/doctor_view/screens/doctor_view.dart';
 import 'package:dobo/view/enable_location/screens/enable_location_screen.dart';
@@ -20,6 +23,7 @@ import 'package:dobo/view/landing_page/screens/landing_screen.dart';
 import 'package:dobo/view/location_select/screens/location_select_screen.dart';
 import 'package:dobo/view/my_appointments/screens/appointment_view.dart';
 import 'package:dobo/view/my_appointments/screens/my_appointments_screen.dart';
+import 'package:dobo/view/new_password_set/screens/change_password_screen.dart';
 import 'package:dobo/view/new_password_set/screens/new_password_screen.dart';
 import 'package:dobo/view/notification/screens/notification_screen.dart';
 import 'package:dobo/view/onBoarding/screens/on_boarding_screen.dart';
@@ -63,6 +67,8 @@ class AppRoute{
 
       case RouteConstants.clinicViewScreen:
         return MaterialPageRoute(builder:(context) =>const ClinicViewScreen());
+      case RouteConstants.categoryview:
+        return MaterialPageRoute(builder:(context) =>const CategoryViewScreen());  
       case RouteConstants.doctorViewScreen:
         return MaterialPageRoute(builder:(context) =>const DoctorViewScreen());
       case RouteConstants.dateSelectScreen:
@@ -96,7 +102,16 @@ class AppRoute{
       case RouteConstants.reviewScreen:
         return MaterialPageRoute(builder:(context) =>const ReviewScreen());
       case RouteConstants.reviewPop:
-        return MaterialPageRoute(builder:(context) =>const ReviewPop());  
+        return MaterialPageRoute(builder:(context) =>const ReviewPop()); 
+      case RouteConstants.articleScreen:
+        return MaterialPageRoute(builder:(context) =>const ArticleScreen());
+      case RouteConstants.articleViewScreen:
+        return MaterialPageRoute(builder:(context) =>const ArticleViewScreen()); 
+      case RouteConstants.changePassword:
+        return MaterialPageRoute(builder:(context) =>const ChangePasswordScreen()); 
+
+
+
 
       default:return MaterialPageRoute<MaterialPageRoute>
        (builder: (context) =>  const OnBoardingScreen());

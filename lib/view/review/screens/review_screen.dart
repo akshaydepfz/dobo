@@ -73,7 +73,7 @@ class ReviewScreen extends StatelessWidget {
                  const SizedBox(height: 20,),
                  PrimaryButton(
                   onTap: (){
-                    Navigator.pushNamed(context,RouteConstants.reviewPop);
+                    Navigator.pushReplacementNamed(context,RouteConstants.reviewPop);
                   }, 
                   label:'Submit'),
                  SecondaryButton(
