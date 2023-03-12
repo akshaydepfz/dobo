@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dobo/model/core/style/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +10,7 @@ class PrimaryTextField extends StatelessWidget {
     required this.hintText,
     required this.icon,
     required this.onChanged,
+    required this.emailcontroller,
   }) : super(key: key);
 
   final double width;
@@ -15,6 +18,7 @@ class PrimaryTextField extends StatelessWidget {
 
   final String icon;
   final Function(String s) onChanged;
+  final TextEditingController emailcontroller;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +36,7 @@ class PrimaryTextField extends StatelessWidget {
           ),
           Expanded(
             child: TextField(
+              controller: emailcontroller,
               onChanged: onChanged,
               style: const TextStyle(color: AppColor.black),
               decoration: InputDecoration(

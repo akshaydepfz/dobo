@@ -4,10 +4,33 @@ import 'package:dobo/model/core/assets/app_icons.dart';
 import 'package:dobo/model/core/style/app_colors.dart';
 import 'package:dobo/view/home/widgets/clinics_card.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class HomeScreen extends StatelessWidget {
+import '../../../controller/clinc_list_controller/clinicList.dart';
+import '../../../model/models/clincList.dart';
+import '../../../repository/clincList.dart';
+
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    //   final auth = Provider.of<clincService>(context, listen: false);
+    // });
+    var controller = Provider.of<clincService>(context, listen: false);
+    controller.doctorlist;
+
+    super.initState();
+  }
+
+  // late List<ClinicList> dl = [];
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -120,23 +143,75 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                TitleCard(title: 'Popular Clinics', onTap: () {}),
-                ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 4,
-                  shrinkWrap: true,
-                  itemBuilder: (context, i) {
-                    return ClinicsCard(
-                      width: width,
-                      name: 'The Family Care',
-                      category: 'Health care clinic',
-                      image: AppAssets.health,
-                      onTap: () {
-                        Navigator.pushNamed(context, '/clinicview');
-                      },
-                    );
-                  },
+                GlobalVariabels.vertical10,
+                Container(
+                  padding: const EdgeInsets.all(15),
+                  height: 100,
+                  width: width,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: AppColor.grey1),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "Dr. Rubayet Sakib",
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: AppColor.grey4,
+                            fontWeight: FontWeight.w500),
+                      ),
+                      GlobalVariabels.vertical10,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: const [
+                              SizedBox(
+                                width: 6,
+                              ),
+                              Icon(
+                                Icons.timer,
+                                color: AppColor.grey3,
+                              ),
+                              GlobalVariabels.horizontal10,
+                              Text(
+                                "Today 8:30 pm",
+                                style: TextStyle(color: AppColor.grey3),
+                              )
+                            ],
+                          ),
+                          const Text(
+                            "16/20",
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                color: AppColor.grey4),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
                 ),
+                TitleCard(title: 'Popular Clinics', onTap: () {}),
+                Consumer<clincService>(builder: (context, data, _) {
+                  return ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: data.doctorlist.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, i) {
+                      return ClinicsCard(
+                        width: width,
+                        name: data.doctorlist[i].clinicName,
+                        category: data.doctorlist[i].city,
+                        image: AppAssets.health,
+                        onTap: () {
+                          Navigator.pushNamed(context, '/clinicview');
+                        },
+                      );
+                    },
+                  );
+                }),
                 TitleCard(title: 'Specialist Doctors', onTap: () {}),
                 SizedBox(
                   height: 170,

@@ -10,6 +10,7 @@ class ForgotPasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final forgotPassword = TextEditingController();
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -30,10 +31,12 @@ class ForgotPasswordScreen extends StatelessWidget {
               height: height * .10,
             ),
             PrimaryTextField(
-                width: width,
-                hintText: 'Enter your registered mail',
-                icon: AppIcons.mail,
-                onChanged: (value) {}),
+              width: width,
+              hintText: 'Enter your registered mail',
+              icon: AppIcons.mail,
+              onChanged: (value) {},
+              emailcontroller: forgotPassword,
+            ),
             PrimaryButton(onTap: () {}, label: 'Send')
           ],
         ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SigninProvider extends ChangeNotifier {
-  bool _obsureText = false;
+  bool _obsureText = true;
   bool get obsureText => _obsureText;
 
   void onObscureClicked() {

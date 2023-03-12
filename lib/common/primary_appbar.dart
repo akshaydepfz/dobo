@@ -19,8 +19,11 @@ class PrimaryAppbar extends StatelessWidget {
         children: [
           SizedBox(
             height: 20,
-            child: Image.asset(
-              AppIcons.arrowBack,
+            child: InkWell(
+              onTap: () {},
+              child: Image.asset(
+                AppIcons.arrowBack,
+              ),
             ),
           ),
           Text(

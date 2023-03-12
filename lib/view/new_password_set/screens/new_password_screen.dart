@@ -10,6 +10,8 @@ class NewPasswordSet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final newpassword = TextEditingController();
+    final confirmpassword = TextEditingController();
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -33,12 +35,14 @@ class NewPasswordSet extends StatelessWidget {
               hintText: 'Enter new password',
               icon: AppIcons.mail,
               onChanged: (value) {},
+              emailcontroller: newpassword,
             ),
             PrimaryTextField(
               width: width,
               hintText: 'Confirm your password',
               icon: AppIcons.mail,
               onChanged: (value) {},
+              emailcontroller: confirmpassword,
             ),
             PrimaryButton(onTap: () {}, label: 'Save')
           ],

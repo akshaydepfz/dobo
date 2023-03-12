@@ -1,18 +1,27 @@
+import 'dart:convert';
+
 import 'package:dobo/common/password_text_field.dart';
 import 'package:dobo/common/primary_button.dart';
 import 'package:dobo/common/primary_text_field.dart';
 import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/model/core/assets/app_icons.dart';
 import 'package:dobo/model/core/style/app_colors.dart';
+import 'package:dobo/view/forgot_password/screens/forgot_password_screen.dart';
 import 'package:dobo/view/signin/services/signin_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
+
+import '../../home/screens/home_screen.dart';
+import '../services/login.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final passwordcontroller = TextEditingController();
+    final gmailcontroller = TextEditingController();
     final loginProvider = Provider.of<SigninProvider>(context);
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
@@ -47,8 +56,9 @@ class SignInScreen extends StatelessWidget {
                 PrimaryTextField(
                   width: width,
                   hintText: 'Enter Your mail',
-                  icon: AppIcons.person,
+                  icon: AppIcons.mail,
                   onChanged: (String value) {},
+                  emailcontroller: gmailcontroller,
                 ),
                 PasswordTextField(
                   obscure: loginProvider.obsureText,
@@ -59,17 +69,25 @@ class SignInScreen extends StatelessWidget {
                   onObscureClicked: () {
                     loginProvider.onObscureClicked();
                   },
+                  passwordController: passwordcontroller,
                 ),
                 Align(
                   alignment: Alignment.topRight,
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => ForgotPasswordScreen()));
+                    },
                     child: const Text(
                       'Forgot password?',
                     ),
                   ),
                 ),
-                PrimaryButton(onTap: () {}, label: 'Sign In'),
+                PrimaryButton(
+                    onTap: () {
+                      login(passwordcontroller, gmailcontroller, context);
+                    },
+                    label: 'Sign In'),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Row(children: const [

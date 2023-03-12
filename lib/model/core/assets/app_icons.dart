@@ -27,4 +27,6 @@ class AppIcons {
   static const String edit = 'assets/icons/edit.svg';
   static const String call = 'assets/icons/call.svg';
   static const String camara = 'assets/icons/camara.svg';
+  static const String clock = 'assets/icons/clock.svg';
+  static const String activity = 'assets/icons/Activity.svg';
 }

@@ -79,7 +79,7 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen>
                       }),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

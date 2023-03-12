@@ -16,6 +16,7 @@ class AppointmentViewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -29,6 +30,28 @@ class AppointmentViewScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Container(
+                          height: 60,
+                          decoration: BoxDecoration(
+                              color: AppColor.grey1,
+                              borderRadius: BorderRadius.circular(8)),
+                          child: Row(
+                            children: const [
+                              Text(
+                                "Token Number : ",
+                                style: TextStyle(
+                                    fontSize: 26, fontWeight: FontWeight.w600),
+                              ),
+                              Text(
+                                "58",
+                                style: TextStyle(
+                                    fontSize: 26,
+                                    fontWeight: FontWeight.w600,
+                                    color: AppColor.grey4),
+                              ),
+                            ],
+                          )),
+                      GlobalVariabels.vertical10,
                       const Text(
                         'Clinic',
                         style: TextStyle(
@@ -120,6 +143,7 @@ class AppointmentViewScreen extends StatelessWidget {
                       const Divider(),
                       GlobalVariabels.vertical10,
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -154,20 +178,62 @@ class AppointmentViewScreen extends StatelessWidget {
                               ),
                             ],
                           ),
+                          Container(
+                            height: 30,
+                            width: 88,
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.blueAccent),
+                                borderRadius: BorderRadius.circular(6)),
+                            child: const Center(
+                              child: Text(
+                                "Upcoming",
+                                style: TextStyle(
+                                    fontSize: 12, fontWeight: FontWeight.w400),
+                              ),
+                            ),
+                          )
                         ],
                       ),
                       GlobalVariabels.vertical10,
                       const Divider(),
                       GlobalVariabels.vertical10,
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            "Consultation Started",
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.w600),
+                          ),
+                          Container(
+                            height: 30,
+                            width: 88,
+                            decoration: BoxDecoration(
+                                color: AppColor.grey1,
+                                borderRadius: BorderRadius.circular(20)),
+                            child: const Center(
+                              child: Text(
+                                "02/58",
+                                style: TextStyle(
+                                    fontSize: 14, fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                      GlobalVariabels.vertical10,
+                      const Divider(),
+                      GlobalVariabels.vertical10,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: const [
                           Text(
-                            'Token No : ',
+                            'Booking ID    :',
                             style: TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            '058',
+                            '05842026',
                             style: TextStyle(
                                 color: AppColor.primary,
                                 fontSize: 18,

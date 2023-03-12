@@ -3,7 +3,7 @@ import 'package:dobo/model/core/style/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class PasswordTextField extends StatelessWidget {
-  const PasswordTextField({
+  PasswordTextField({
     Key? key,
     required this.width,
     required this.hintText,
@@ -11,6 +11,7 @@ class PasswordTextField extends StatelessWidget {
     required this.onChanged,
     required this.obscure,
     required this.onObscureClicked,
+    required this.passwordController,
   }) : super(key: key);
 
   final double width;
@@ -19,6 +20,7 @@ class PasswordTextField extends StatelessWidget {
   final String icon;
   final Function(String s) onChanged;
   final Function() onObscureClicked;
+  final TextEditingController passwordController;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +39,7 @@ class PasswordTextField extends StatelessWidget {
           Expanded(
             child: TextField(
               onChanged: onChanged,
+              controller: passwordController,
               style: const TextStyle(color: AppColor.black),
               obscureText: obscure,
               decoration: InputDecoration(

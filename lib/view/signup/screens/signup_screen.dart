@@ -14,6 +14,13 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userNameController = TextEditingController();
+    final emailController = TextEditingController();
+
+    final passwordController = TextEditingController();
+
+    final confirmPassworController = TextEditingController();
+
     final signinProvider = Provider.of<SignUpService>(context);
     final width = MediaQuery.of(context).size.width;
 
@@ -44,25 +51,33 @@ class SignUpScreen extends StatelessWidget {
                 GlobalVariabels.vertical15,
                 GlobalVariabels.vertical15,
                 PrimaryTextField(
-                    width: width,
-                    hintText: 'Enter your name',
-                    icon: AppIcons.person,
-                    onChanged: (value) {}),
+                  width: width,
+                  hintText: 'Enter your name',
+                  icon: AppIcons.person,
+                  onChanged: (value) {},
+                  emailcontroller: userNameController,
+                ),
                 PrimaryTextField(
-                    width: width,
-                    hintText: 'Enter your email',
-                    icon: AppIcons.mail,
-                    onChanged: (value) {}),
+                  width: width,
+                  hintText: 'Enter your email',
+                  icon: AppIcons.mail,
+                  onChanged: (value) {},
+                  emailcontroller: emailController,
+                ),
                 PrimaryTextField(
-                    width: width,
-                    hintText: 'Enter your password',
-                    icon: AppIcons.lock,
-                    onChanged: (value) {}),
+                  width: width,
+                  hintText: 'Enter your password',
+                  icon: AppIcons.lock,
+                  onChanged: (value) {},
+                  emailcontroller: passwordController,
+                ),
                 PrimaryTextField(
-                    width: width,
-                    hintText: 'Confirm your password',
-                    icon: AppIcons.lock,
-                    onChanged: (value) {}),
+                  width: width,
+                  hintText: 'Confirm your password',
+                  icon: AppIcons.lock,
+                  onChanged: (value) {},
+                  emailcontroller: confirmPassworController,
+                ),
                 Row(
                   children: [
                     Checkbox(
