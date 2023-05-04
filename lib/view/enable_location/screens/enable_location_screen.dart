@@ -3,9 +3,11 @@ import 'package:dobo/common/primary_button.dart';
 import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/model/core/assets/app_assets.dart';
 import 'package:dobo/model/core/style/app_colors.dart';
+import 'package:dobo/router/app_route_constants.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/svg.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class EnableLocationScreen extends StatelessWidget {
   const EnableLocationScreen({super.key});
@@ -45,7 +47,17 @@ class EnableLocationScreen extends StatelessWidget {
                 ],
               ),
             ),
-            PrimaryButton(onTap: () {}, label: 'Enable Device Location'),
+            PrimaryButton(
+                onTap: () async {
+                  final location = await Permission.location.request();
+                  final locationAlways =
+                      await Permission.locationAlways.request();
+                  if (await Permission.location.request().isGranted) {
+                    // ignore: use_build_context_synchronously
+                    Navigator.pushNamed(context, RouteConstants.locationSelect);
+                  }
+                },
+                label: 'Enable Device Location'),
             GlobalVariabels.vertical15,
           ],
         ),

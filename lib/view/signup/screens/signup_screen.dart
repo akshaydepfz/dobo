@@ -47,23 +47,31 @@ class SignUpScreen extends StatelessWidget {
                 PrimaryTextField(
                     width: width,
                     hintText: 'Enter your name',
-                    icon: AppIcons.person,
-                    onChanged: (value) {}),
+                    icon: AppIcons.lock,
+                    onChanged: (value) {
+                      signinProvider.onUserNameChanged(value);
+                    }),
                 PrimaryTextField(
                     width: width,
                     hintText: 'Enter your email',
                     icon: AppIcons.mail,
-                    onChanged: (value) {}),
+                    onChanged: (value) {
+                      signinProvider.onEmailChanged(value);
+                    }),
                 PrimaryTextField(
                     width: width,
                     hintText: 'Enter your password',
                     icon: AppIcons.lock,
-                    onChanged: (value) {}),
+                    onChanged: (value) {
+                      signinProvider.onPasswordChanged(value);
+                    }),
                 PrimaryTextField(
                     width: width,
                     hintText: 'Confirm your password',
                     icon: AppIcons.lock,
-                    onChanged: (value) {}),
+                    onChanged: (value) {
+                      signinProvider.onPassword2Changed(value);
+                    }),
                 Row(
                   children: [
                     Checkbox(
@@ -84,9 +92,11 @@ class SignUpScreen extends StatelessWidget {
                   ],
                 ),
                 GlobalVariabels.vertical15,
-                PrimaryButton(onTap: () {
-                  Navigator.pushNamed(context,RouteConstants.accountCreatePop);
-                }, label: 'Sign Up'),
+                PrimaryButton(
+                    onTap: () {
+                      signinProvider.signUp(context);
+                    },
+                    label: 'Sign Up'),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Row(children: const [
@@ -117,9 +127,12 @@ class SignUpScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text('Already have an account?'),
-                    TextButton(onPressed: () {
-                       Navigator.pushNamed(context,RouteConstants.signInScreen);
-                    }, child: const Text('Sign In'))
+                    TextButton(
+                        onPressed: () {
+                          Navigator.pushNamed(
+                              context, RouteConstants.signInScreen);
+                        },
+                        child: const Text('Sign In'))
                   ],
                 )
               ],

@@ -48,16 +48,20 @@ class SignInScreen extends StatelessWidget {
                 GlobalVariabels.vertical15,
                 PrimaryTextField(
                   width: width,
-                  hintText: 'Enter Your mail',
-                  icon: AppIcons.person,
-                  onChanged: (String value) {},
+                  hintText: 'Enter Your Username',
+                  icon: AppIcons.lock,
+                  onChanged: (String value) {
+                    loginProvider.onUserNameChanged(value);
+                  },
                 ),
                 PasswordTextField(
                   obscure: loginProvider.obsureText,
                   width: width,
                   hintText: 'Enter Your Password',
                   icon: AppIcons.lock,
-                  onChanged: (String value) {},
+                  onChanged: (String value) {
+                    loginProvider.onPasswordChanged(value);
+                  },
                   onObscureClicked: () {
                     loginProvider.onObscureClicked();
                   },
@@ -66,16 +70,18 @@ class SignInScreen extends StatelessWidget {
                   alignment: Alignment.topRight,
                   child: TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context,RouteConstants.forgotScreen);
+                      Navigator.pushNamed(context, RouteConstants.forgotScreen);
                     },
                     child: const Text(
                       'Forgot password?',
                     ),
                   ),
                 ),
-                PrimaryButton(onTap: () {
-                  Navigator.pushNamed(context,RouteConstants.landingScreen);
-                }, label: 'Sign In'),
+                PrimaryButton(
+                    onTap: () {
+                      loginProvider.signIn(context);
+                    },
+                    label: 'Sign In'),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Row(children: const [
@@ -107,9 +113,12 @@ class SignInScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text('Dont have an account?'),
-                    TextButton(onPressed: () {
-                     Navigator.pushNamed(context,RouteConstants.signUpScreen);
-                    }, child: const Text('Sign up'))
+                    TextButton(
+                        onPressed: () {
+                          Navigator.pushNamed(
+                              context, RouteConstants.signUpScreen);
+                        },
+                        child: const Text('Sign up'))
                   ],
                 )
               ],

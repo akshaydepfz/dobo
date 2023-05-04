@@ -43,6 +43,9 @@ dependencies:
   drop_shadow: ^0.0.2+1
   syncfusion_flutter_calendar: ^20.3.57
   flutter_rating_bar: ^4.0.1
+  dio: ^5.1.1
+  shared_preferences: ^2.1.0
+  permission_handler: ^10.2.0
 
 dev_dependencies:
   flutter_test:
