@@ -1,6 +1,6 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:dobo/model/core/assets/app_icons.dart';
+import 'package:dobo/core/assets/app_icons.dart';
 import 'package:dobo/view/category/screens/category_screens.dart';
 import 'package:dobo/view/favorite/screens/favorite_screen.dart';
 import 'package:dobo/view/home/screens/home_screen.dart';

@@ -1,4 +1,4 @@
-import 'package:dobo/model/core/assets/app_assets.dart';
+import 'package:dobo/core/assets/app_assets.dart';
 
 class OnBoardingContent {
   final String image;

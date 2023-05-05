@@ -1,8 +1,8 @@
 import 'package:dobo/common/primary_appbar.dart';
 import 'package:dobo/common/primary_button.dart';
 import 'package:dobo/common/secondary_button.dart';
-import 'package:dobo/model/core/assets/app_assets.dart';
-import 'package:dobo/model/core/style/app_colors.dart';
+import 'package:dobo/core/assets/app_assets.dart';
+import 'package:dobo/core/style/app_colors.dart';
 import 'package:dobo/router/app_route_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';

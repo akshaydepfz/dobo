@@ -1,18 +1,21 @@
 import 'package:dobo/constants/global_variables.dart';
-import 'package:dobo/model/core/assets/app_assets.dart';
-import 'package:dobo/model/core/assets/app_icons.dart';
-import 'package:dobo/model/core/style/app_colors.dart';
+import 'package:dobo/core/assets/app_assets.dart';
+import 'package:dobo/core/assets/app_icons.dart';
+import 'package:dobo/core/style/app_colors.dart';
 import 'package:dobo/router/app_route_constants.dart';
 import 'package:dobo/view/clinic_view/screens/clinic_view_.screen.dart';
+import 'package:dobo/view/home/services/home_provider.dart';
 import 'package:dobo/view/home/widgets/clinics_card.dart';
 import 'package:dobo/view/location_select/screens/location_select_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<HomeProvider>(context);
     final width = MediaQuery.of(context).size.width;
 
     return Scaffold(
@@ -27,10 +30,11 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      children:  [
+                      children: [
                         GestureDetector(
-                          onTap: (){
-                            Navigator.pushNamed(context,RouteConstants.profileScreen);
+                          onTap: () {
+                            provider.getNearestClinics();
+                            //  Navigator.pushNamed(context,RouteConstants.profileScreen);
                           },
                           child: const SizedBox(
                             height: 50,
@@ -48,10 +52,11 @@ class HomeScreen extends StatelessWidget {
                           style: TextStyle(fontSize: 16),
                         ),
                         GestureDetector(
-                          onTap: (){
-                           Navigator.pushNamed(context,RouteConstants.locationSelect);
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, RouteConstants.locationSelect);
                           },
-                          child:const Icon(
+                          child: const Icon(
                             Icons.expand_more_outlined,
                             size: 30,
                             color: AppColor.grey3,
@@ -61,7 +66,8 @@ class HomeScreen extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context,RouteConstants.notificationScreen);
+                        Navigator.pushNamed(
+                            context, RouteConstants.notificationScreen);
                       },
                       child: SizedBox(
                         height: 30,
@@ -150,7 +156,8 @@ class HomeScreen extends StatelessWidget {
                       category: 'Health care clinic',
                       image: AppAssets.health,
                       onTap: () {
-                        Navigator.pushNamed(context,RouteConstants.clinicViewScreen);
+                        Navigator.pushNamed(
+                            context, RouteConstants.clinicViewScreen);
                         // Navigator.push(context,MaterialPageRoute(builder:(context) =>ClinicViewScreen()));
                       },
                     );
@@ -165,8 +172,9 @@ class HomeScreen extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, i) {
                         return GestureDetector(
-                          onTap: (){
-                            Navigator.pushNamed(context,RouteConstants.doctorViewScreen);
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, RouteConstants.doctorViewScreen);
                           },
                           child: Container(
                             margin: const EdgeInsets.all(10),

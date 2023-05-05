@@ -1,4 +1,4 @@
-import 'package:dobo/model/core/assets/app_assets.dart';
+import 'package:dobo/core/assets/app_assets.dart';
 import 'package:dobo/view/home/widgets/clinics_card.dart';
 import 'package:flutter/material.dart';
 

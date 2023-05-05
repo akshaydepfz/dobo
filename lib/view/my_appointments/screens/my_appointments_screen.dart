@@ -1,5 +1,5 @@
-import 'package:dobo/model/core/assets/app_icons.dart';
-import 'package:dobo/model/core/style/app_colors.dart';
+import 'package:dobo/core/assets/app_icons.dart';
+import 'package:dobo/core/style/app_colors.dart';
 import 'package:dobo/view/my_appointments/widgets/cancelled_card.dart';
 import 'package:dobo/view/my_appointments/widgets/completed_card.dart';
 import 'package:dobo/view/my_appointments/widgets/upcoming_card.dart';

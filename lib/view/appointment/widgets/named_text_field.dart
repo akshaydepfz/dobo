@@ -1,5 +1,5 @@
 import 'package:dobo/constants/global_variables.dart';
-import 'package:dobo/model/core/style/app_colors.dart';
+import 'package:dobo/core/style/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class NamedTextfield extends StatelessWidget {

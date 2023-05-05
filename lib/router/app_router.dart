@@ -36,85 +36,99 @@ import 'package:dobo/view/signin/screens/signin_screen.dart';
 import 'package:dobo/view/signup/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 
-class AppRoute{
-  Route onGenerateRoute(RouteSettings route){
+class AppRoute {
+  Route onGenerateRoute(RouteSettings route) {
     switch (route.name) {
       case RouteConstants.signInScreen:
-        return MaterialPageRoute(builder:(context) =>const SignInScreen());
+        return MaterialPageRoute(builder: (context) => const SignInScreen());
       case RouteConstants.signUpScreen:
-        return MaterialPageRoute(builder:(context) =>const SignUpScreen());
+        return MaterialPageRoute(builder: (context) => const SignUpScreen());
       case RouteConstants.forgotScreen:
-        return MaterialPageRoute(builder:(context) =>const ForgotPasswordScreen());
+        return MaterialPageRoute(
+            builder: (context) => const ForgotPasswordScreen());
       case RouteConstants.newPassword:
-        return MaterialPageRoute(builder:(context) =>const NewPasswordSet());  
+        return MaterialPageRoute(builder: (context) => const NewPasswordSet());
       case RouteConstants.accountCreatePop:
-        return MaterialPageRoute(builder:(context) =>const AccountCreatedPop()); 
+        return MaterialPageRoute(
+            builder: (context) => const AccountCreatedPop());
       case RouteConstants.enableLocation:
-        return MaterialPageRoute(builder:(context) =>const EnableLocationScreen());    
+        return MaterialPageRoute(
+            builder: (context) => const EnableLocationScreen());
       case RouteConstants.landingScreen:
-        return MaterialPageRoute(builder:(context) =>LandingScreen());
-      
+        return MaterialPageRoute(builder: (context) => LandingScreen());
+
       case RouteConstants.homeScreen:
-        return MaterialPageRoute(builder:(context) =>const HomeScreen());
+        return MaterialPageRoute(builder: (context) => const HomeScreen());
       case RouteConstants.categoryScreen:
-        return MaterialPageRoute(builder:(context) =>const CategoryScreen());  
+        return MaterialPageRoute(builder: (context) => const CategoryScreen());
       case RouteConstants.appointmentsScreen:
-        return MaterialPageRoute(builder:(context) =>const MyAppointmentsScreen());  
+        return MaterialPageRoute(
+            builder: (context) => const MyAppointmentsScreen());
       case RouteConstants.favouriteScreen:
-        return MaterialPageRoute(builder:(context) =>const FavoriteScreen());
+        return MaterialPageRoute(builder: (context) => const FavoriteScreen());
       case RouteConstants.profileScreen:
-        return MaterialPageRoute(builder:(context) =>const ProfileScreen());    
+        return MaterialPageRoute(builder: (context) => const ProfileScreen());
 
       case RouteConstants.clinicViewScreen:
-        return MaterialPageRoute(builder:(context) =>const ClinicViewScreen());
+        return MaterialPageRoute(
+            builder: (context) => const ClinicViewScreen());
       case RouteConstants.categoryview:
-        return MaterialPageRoute(builder:(context) =>const CategoryViewScreen());  
+        return MaterialPageRoute(
+            builder: (context) => const CategoryViewScreen());
       case RouteConstants.doctorViewScreen:
-        return MaterialPageRoute(builder:(context) =>const DoctorViewScreen());
+        return MaterialPageRoute(
+            builder: (context) => const DoctorViewScreen());
       case RouteConstants.dateSelectScreen:
-        return MaterialPageRoute(builder:(context) =>const DateSelectingScreen());
+        return MaterialPageRoute(
+            builder: (context) => const DateSelectingScreen());
       case RouteConstants.patientScreen:
-        return MaterialPageRoute(builder:(context) =>const PatientDetailsScreen());
+        return MaterialPageRoute(
+            builder: (context) => const PatientDetailsScreen());
       case RouteConstants.reviewSummary:
-        return MaterialPageRoute(builder:(context) =>const ReviewSummaryScreen());
+        return MaterialPageRoute(
+            builder: (context) => const ReviewSummaryScreen());
       case RouteConstants.bookingDonePop:
-        return MaterialPageRoute(builder:(context) =>const BookingSuccessPop());  
+        return MaterialPageRoute(
+            builder: (context) => const BookingSuccessPop());
       case RouteConstants.bookingFailPop:
-        return MaterialPageRoute(builder:(context) =>const BookingFailPop()); 
+        return MaterialPageRoute(builder: (context) => const BookingFailPop());
       case RouteConstants.appointmentView:
-        return MaterialPageRoute(builder:(context) =>const AppointmentViewScreen());   
+        return MaterialPageRoute(
+            builder: (context) => const AppointmentViewScreen());
       case RouteConstants.resceduleAppointment:
-        return MaterialPageRoute(builder:(context) => RescheduleAppointment()); 
+        return MaterialPageRoute(builder: (context) => RescheduleAppointment());
       case RouteConstants.cancelAppointment:
-        return MaterialPageRoute(builder:(context) =>CancellAppointment());    
+        return MaterialPageRoute(builder: (context) => CancellAppointment());
       case RouteConstants.appointmentRescedulePop:
-        return MaterialPageRoute(builder:(context) =>const ReschedulePop());  
+        return MaterialPageRoute(builder: (context) => const ReschedulePop());
       case RouteConstants.appointmentcancelPop:
-        return MaterialPageRoute(builder:(context) =>const AppointmentCancelPop());
+        return MaterialPageRoute(
+            builder: (context) => const AppointmentCancelPop());
       case RouteConstants.sessionEndPop:
-        return MaterialPageRoute(builder:(context) =>const SessionEndPop());
+        return MaterialPageRoute(builder: (context) => const SessionEndPop());
       case RouteConstants.editProfile:
-        return MaterialPageRoute(builder:(context) =>ProfileEditScreen());      
+        return MaterialPageRoute(builder: (context) => ProfileEditScreen());
       case RouteConstants.notificationScreen:
-        return MaterialPageRoute(builder:(context) =>const NotificationScreen()); 
+        return MaterialPageRoute(
+            builder: (context) => const NotificationScreen());
       case RouteConstants.locationSelect:
-        return MaterialPageRoute(builder:(context) =>const LocationSelectScreen());
+        return MaterialPageRoute(builder: (context) => LocationSelectScreen());
       case RouteConstants.reviewScreen:
-        return MaterialPageRoute(builder:(context) =>const ReviewScreen());
+        return MaterialPageRoute(builder: (context) => const ReviewScreen());
       case RouteConstants.reviewPop:
-        return MaterialPageRoute(builder:(context) =>const ReviewPop()); 
+        return MaterialPageRoute(builder: (context) => const ReviewPop());
       case RouteConstants.articleScreen:
-        return MaterialPageRoute(builder:(context) =>const ArticleScreen());
+        return MaterialPageRoute(builder: (context) => const ArticleScreen());
       case RouteConstants.articleViewScreen:
-        return MaterialPageRoute(builder:(context) =>const ArticleViewScreen()); 
+        return MaterialPageRoute(
+            builder: (context) => const ArticleViewScreen());
       case RouteConstants.changePassword:
-        return MaterialPageRoute(builder:(context) =>const ChangePasswordScreen()); 
+        return MaterialPageRoute(
+            builder: (context) => const ChangePasswordScreen());
 
-
-
-
-      default:return MaterialPageRoute<MaterialPageRoute>
-       (builder: (context) =>  const OnBoardingScreen());
+      default:
+        return MaterialPageRoute<MaterialPageRoute>(
+            builder: (context) => const OnBoardingScreen());
     }
   }
 }
