@@ -30,6 +30,8 @@ class FavoriteScreen extends StatelessWidget {
                     shrinkWrap: true,
                     itemBuilder: (context, i) {
                       return ClinicsCard(
+                        avarageRating: '',
+                        ratingCount: '',
                         width: width,
                         name: 'The Family Care',
                         category: 'Health care clinic',

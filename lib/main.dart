@@ -1,15 +1,10 @@
 import 'package:dobo/router/app_router.dart';
 import 'package:dobo/view/appointment/services/reshedule_radio_button.dart';
 import 'package:dobo/view/category/services/category_service.dart';
-import 'package:dobo/view/enable_location/screens/enable_location_screen.dart';
 import 'package:dobo/view/home/services/home_provider.dart';
 import 'package:dobo/view/landing_page/screens/landing_screen.dart';
 import 'package:dobo/view/landing_page/services/bottom_nav_service.dart';
-import 'package:dobo/view/location_select/screens/location_select_screen.dart';
-import 'package:dobo/view/onBoarding/screens/on_boarding_screen.dart';
-import 'package:dobo/view/signin/screens/signin_screen.dart';
 import 'package:dobo/view/signin/services/signin_provider.dart';
-import 'package:dobo/view/signup/screens/signup_screen.dart';
 import 'package:dobo/view/signup/services/signup_service.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';

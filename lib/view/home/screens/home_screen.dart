@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/core/assets/app_assets.dart';
 import 'package:dobo/core/assets/app_icons.dart';
@@ -10,8 +11,21 @@ import 'package:dobo/view/location_select/screens/location_select_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    Provider.of<HomeProvider>(context,listen: false).getNearestClinics();
+    Provider.of<HomeProvider>(context,listen: false).getReminders();
+    Provider.of<HomeProvider>(context,listen: false).getSliders();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -144,17 +158,43 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                 ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Visibility(
+                  visible: provider.reminders.isNotEmpty,
+                  child: CarouselSlider.builder(
+                      itemCount: provider.reminders.length,
+                      itemBuilder: (context, i, intex) {
+                        return ReminderCard(
+                            width: width,
+                            doctor: provider.reminders[0].title,
+                            dateTime: provider.reminders[0].time,
+                            token: provider.reminders[0].token);
+                      },
+                      options: CarouselOptions(
+                          height: 80,
+                          scrollPhysics: const BouncingScrollPhysics(),
+                          autoPlay: true,
+                          initialPage: 0,
+                          viewportFraction: 1.0)),
+                ),
                 TitleCard(title: 'Popular Clinics', onTap: () {}),
                 ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 4,
+                  itemCount: provider.clinicList.length,
                   shrinkWrap: true,
                   itemBuilder: (context, i) {
                     return ClinicsCard(
                       width: width,
-                      name: 'The Family Care',
-                      category: 'Health care clinic',
-                      image: AppAssets.health,
+                      avarageRating:
+                          provider.clinicList[i].avgRating.toString(),
+                      ratingCount:
+                          provider.clinicList[i].reviews.length.toString(),
+                      name: provider.clinicList[i].clinicName,
+                      category: provider.clinicList[i].subtext,
+                      image: provider.clinicList[i].image ??
+                          "https://t4.ftcdn.net/jpg/03/47/41/03/360_F_347410397_5PpZbcQpnEqqzlGjOk1R5d11977LbMUW.jpg",
                       onTap: () {
                         Navigator.pushNamed(
                             context, RouteConstants.clinicViewScreen);
@@ -214,6 +254,65 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class ReminderCard extends StatelessWidget {
+  const ReminderCard({
+    super.key,
+    required this.width,
+    required this.doctor,
+    required this.dateTime,
+    required this.token,
+  });
+
+  final double width;
+  final String doctor;
+  final String dateTime;
+  final String token;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(12.0),
+      height: 80,
+      width: width,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8.0),
+        border: Border.all(color: const Color(0xFF1B988D)),
+        color: const Color(0xFFEEFCFA),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            doctor,
+            style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+                color: Color(0xFF1B988D)),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                dateTime,
+                style:
+                    const TextStyle(fontSize: 15.0, color: Color(0xFF1B988D)),
+              ),
+              Text(
+                token,
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16.0,
+                    color: Color(0xFF1B988D)),
+              )
+            ],
+          )
+        ],
       ),
     );
   }

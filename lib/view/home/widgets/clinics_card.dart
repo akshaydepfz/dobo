@@ -9,13 +9,19 @@ class ClinicsCard extends StatelessWidget {
     required this.width,
     required this.name,
     required this.category,
-    required this.image, required this.onTap,
+    required this.image,
+    required this.onTap,
+    required this.ratingCount,
+    required this.avarageRating,
   }) : super(key: key);
 
   final double width;
   final String name;
   final String category;
   final String image;
+  final String ratingCount;
+  final String avarageRating;
+
   final Function() onTap;
 
   @override
@@ -37,7 +43,7 @@ class ClinicsCard extends StatelessWidget {
               children: [
                 SizedBox(
                   width: 100,
-                  child: Image.asset(image),
+                  child: Image.network(image),
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,9 +74,9 @@ class ClinicsCard extends StatelessWidget {
                         const SizedBox(
                           width: 10,
                         ),
-                        const Text(
-                          '4.6  (3,362 reviews)',
-                          style: TextStyle(color: AppColor.grey3),
+                         Text(
+                          '$avarageRating ($ratingCount reviews)',
+                          style: const TextStyle(color: AppColor.grey3),
                         )
                       ],
                     ),
