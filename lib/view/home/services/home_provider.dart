@@ -77,4 +77,7 @@ class HomeProvider extends ChangeNotifier {
       LogController.activityLog('HomeProvider', "getReminders", "Failed");
     }
   }
+
+
+
 }

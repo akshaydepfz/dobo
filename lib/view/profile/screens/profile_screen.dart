@@ -2,14 +2,17 @@ import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/core/assets/app_assets.dart';
 import 'package:dobo/core/style/app_colors.dart';
 import 'package:dobo/router/app_route_constants.dart';
+import 'package:dobo/view/profile/services/profile_services.dart';
 import 'package:dobo/view/profile/widgets/profile_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<ProfileService>(context);
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -73,7 +76,9 @@ class ProfileScreen extends StatelessWidget {
                   ProfileTile(title: 'Privacy Settings', onTap: () {}),
                   ProfileTile(title: 'Help Center', onTap: () {}),
                   ProfileTile(title: 'Contact Us', onTap: () {}),
-                  ProfileTile(title: 'Logout', onTap: () {}),
+                  ProfileTile(title: 'Logout', onTap: () {
+provider.logOut(context);
+                  }),
                   ProfileTile(
                     title: 'Delete Account',
                     onTap: () {},

@@ -4,10 +4,11 @@ import 'package:dobo/core/assets/app_assets.dart';
 import 'package:dobo/core/assets/app_icons.dart';
 import 'package:dobo/core/style/app_colors.dart';
 import 'package:dobo/router/app_route_constants.dart';
-import 'package:dobo/view/clinic_view/screens/clinic_view_.screen.dart';
 import 'package:dobo/view/home/services/home_provider.dart';
 import 'package:dobo/view/home/widgets/clinics_card.dart';
-import 'package:dobo/view/location_select/screens/location_select_screen.dart';
+import 'package:dobo/view/home/widgets/reminder_card.dart';
+import 'package:dobo/view/home/widgets/slider_card.dart';
+import 'package:dobo/view/home/widgets/title_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -47,8 +48,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            provider.getNearestClinics();
-                            //  Navigator.pushNamed(context,RouteConstants.profileScreen);
+                            
+                           Navigator.pushNamed(context,RouteConstants.profileScreen);
                           },
                           child: const SizedBox(
                             height: 50,
@@ -123,39 +124,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 GlobalVariabels.vertical10,
                 GlobalVariabels.vertical10,
-                Container(
-                  padding: const EdgeInsets.all(15),
-                  height: 160,
-                  width: width,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    gradient: const LinearGradient(
-                      end: Alignment.topCenter,
-                      colors: [
-                        Color(0xFF00776D),
-                        Color(0xFF00DCC9),
-                      ],
-                    ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text(
-                        'Medical Checks!',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 05,
-                      ),
-                      Text(
-                        'Chck your health condition regularly to minimize the incidence of disease in future.',
-                        style: TextStyle(color: Colors.white),
-                      )
-                    ],
+                Visibility(
+                  visible: provider.sliders.isNotEmpty,
+                  child: CarouselSlider.builder(
+                     options: CarouselOptions(
+                             height: 160,
+                            scrollPhysics: const BouncingScrollPhysics(),
+                            autoPlay: true,
+                            initialPage: 0,
+                            viewportFraction: 1.0),
+                    itemCount: provider.sliders.length,
+                    itemBuilder: (context, i, intex) {
+                      return SliderCard(width: width, title: provider.sliders[i].title, description: provider.sliders[i].description,);
+                    }
+                    
                   ),
                 ),
                 const SizedBox(
@@ -259,91 +241,4 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class ReminderCard extends StatelessWidget {
-  const ReminderCard({
-    super.key,
-    required this.width,
-    required this.doctor,
-    required this.dateTime,
-    required this.token,
-  });
 
-  final double width;
-  final String doctor;
-  final String dateTime;
-  final String token;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(12.0),
-      height: 80,
-      width: width,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8.0),
-        border: Border.all(color: const Color(0xFF1B988D)),
-        color: const Color(0xFFEEFCFA),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            doctor,
-            style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-                color: Color(0xFF1B988D)),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                dateTime,
-                style:
-                    const TextStyle(fontSize: 15.0, color: Color(0xFF1B988D)),
-              ),
-              Text(
-                token,
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16.0,
-                    color: Color(0xFF1B988D)),
-              )
-            ],
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class TitleCard extends StatelessWidget {
-  const TitleCard({
-    Key? key,
-    required this.title,
-    required this.onTap,
-  }) : super(key: key);
-  final String title;
-  final Function() onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          title,
-          style: const TextStyle(color: Colors.black, fontSize: 16),
-        ),
-        TextButton(
-          onPressed: onTap,
-          child: const Text(
-            'See All',
-            style: TextStyle(fontSize: 16),
-          ),
-        ),
-      ],
-    );
-  }
-}
