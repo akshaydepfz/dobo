@@ -67,7 +67,7 @@ print(response.statusCode)
     String token = pref.getString("accessToken") ?? '';
     try {
       final response =
-          await dio.get('https://dobo.co.in/api/v1/patients/reminders/',
+          await dio.get('https://dobo.co.in/api/v1/reminders/',
               options: Options(headers: {
                 'Authorization': 'Bearer $token',
               }));

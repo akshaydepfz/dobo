@@ -1,9 +1,5 @@
-// To parse this JSON data, do
-//
-//     final clinicModel = clinicModelFromJson(jsonString);
 
-
-class ClinicModel {
+class ClinicDetailsModel {
     String id;
     List<Image> images;
     List<Timing> timings;
@@ -33,7 +29,7 @@ class ClinicModel {
     dynamic creator;
     int user;
 
-    ClinicModel({
+    ClinicDetailsModel({
         required this.id,
         required this.images,
         required this.timings,
@@ -64,7 +60,7 @@ class ClinicModel {
         required this.user,
     });
 
-    factory ClinicModel.fromJson(Map<String, dynamic> json) => ClinicModel(
+    factory ClinicDetailsModel.fromJson(Map<String, dynamic> json) => ClinicDetailsModel(
         id: json["id"],
         images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
         timings: List<Timing>.from(json["timings"].map((x) => Timing.fromJson(x))),

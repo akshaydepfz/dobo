@@ -49,6 +49,7 @@ dependencies:
   google_maps_flutter: ^2.2.6
   carousel_slider: ^4.2.1
   shimmer: ^2.0.0
+  lottie: ^2.3.2
 
 dev_dependencies:
   flutter_test:
@@ -77,6 +78,7 @@ flutter:
     - assets/images/
     - assets/icons/
     - assets/icons/categories/
+    - assets/lottie/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

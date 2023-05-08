@@ -71,7 +71,7 @@ class AppRoute {
 
       case RouteConstants.clinicViewScreen:
         return MaterialPageRoute(
-            builder: (context) => const ClinicViewScreen());
+            builder: (context) =>  ClinicViewScreen( clinicId: '',));
       case RouteConstants.categoryview:
         return MaterialPageRoute(
             builder: (context) => const CategoryViewScreen());

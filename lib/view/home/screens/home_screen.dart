@@ -4,6 +4,7 @@ import 'package:dobo/core/assets/app_assets.dart';
 import 'package:dobo/core/assets/app_icons.dart';
 import 'package:dobo/core/style/app_colors.dart';
 import 'package:dobo/router/app_route_constants.dart';
+import 'package:dobo/view/clinic_view/screens/clinic_view_.screen.dart';
 import 'package:dobo/view/home/services/home_provider.dart';
 import 'package:dobo/view/home/widgets/clinics_card.dart';
 import 'package:dobo/view/home/widgets/reminder_card.dart';
@@ -24,8 +25,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     Provider.of<HomeProvider>(context,listen: false).getNearestClinics();
-    // Provider.of<HomeProvider>(context,listen: false).getReminders();
-    // Provider.of<HomeProvider>(context,listen: false).getSliders();
+    Provider.of<HomeProvider>(context,listen: false).getReminders();
+    Provider.of<HomeProvider>(context,listen: false).getSliders();
     super.initState();
   }
 
@@ -35,9 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(onPressed: (){
-        provider.getNearestClinics();
-      }),
+  
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -195,8 +194,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       image: provider.clinicList[i].image ??
                           "https://t4.ftcdn.net/jpg/03/47/41/03/360_F_347410397_5PpZbcQpnEqqzlGjOk1R5d11977LbMUW.jpg",
                       onTap: () {
-                        Navigator.pushNamed(
-                            context, RouteConstants.clinicViewScreen);
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> ClinicViewScreen(clinicId: provider.clinicList[i].id,)));
                         // Navigator.push(context,MaterialPageRoute(builder:(context) =>ClinicViewScreen()));
                       },
                     );

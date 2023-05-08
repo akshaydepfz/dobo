@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:dobo/router/app_router.dart';
 import 'package:dobo/view/appointment/services/reshedule_radio_button.dart';
 import 'package:dobo/view/category/services/category_service.dart';
+import 'package:dobo/view/clinic_view/services/clinic_view_service.dart';
 import 'package:dobo/view/forgot_password/services/password_service.dart';
 import 'package:dobo/view/home/services/home_provider.dart';
 import 'package:dobo/view/landing_page/screens/landing_screen.dart';
@@ -60,6 +61,11 @@ class MyApp extends StatelessWidget {
         ),ChangeNotifierProvider(
           create: (_) => PasswordService(),
         ),
+ChangeNotifierProvider(
+          create: (_) => ClinicDetailsService(),
+        ),
+
+        
 
         
         
