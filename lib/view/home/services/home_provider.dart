@@ -19,11 +19,14 @@ class HomeProvider extends ChangeNotifier {
     String token = pref.getString("accessToken") ?? '';
 
     try {
-      final response = await dio.get(ApiEndpoints.nearestClinic,
+
+
+
+          final response = await dio.get("https://dobo.co.in/api/v1/clinics/clinics/nearest/?location=10.54,76.58",
           options: Options(headers: {
             'Authorization': 'Bearer $token',
           }));
-
+         
       if (response.statusCode == 200) {
         List data = response.data;
         clinicList = data.map((json) => ClinicModel.fromJson(json)).toList();
@@ -31,8 +34,10 @@ class HomeProvider extends ChangeNotifier {
         LogController.activityLog(
             'HomeProvider', "getNearestClinics", "Success");
       }
+      print(response.statusCode);
     } on DioError catch (e) {
-      LogController.activityLog('HomeProvider', "getNearestClinics", "Failed");
+            print(e.error);
+      LogController.activityLog('HomeProvider', "getNearestClinics", "Failed  ");
     }
   }
 
@@ -42,12 +47,12 @@ class HomeProvider extends ChangeNotifier {
 
     try {
       final response =
-          await dio.get('https://dobo.co.in/api/v1/patients/sliders/',
+          await dio.get('https://dobo.co.in/api/v1/sliders/',
               options: Options(headers: {
                 'Authorization': 'Bearer $token',
               }));
-
-      if (response.statusCode == 200) {
+print(response.statusCode)
+;      if (response.statusCode == 200) {
         List data = response.data;
         sliders = data.map((e) => SliderModel.fromJson(e)).toList();
         LogController.activityLog('HomeProvider', "getSliders", "Success");

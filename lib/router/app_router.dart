@@ -45,7 +45,7 @@ class AppRoute {
         return MaterialPageRoute(builder: (context) => const SignUpScreen());
       case RouteConstants.forgotScreen:
         return MaterialPageRoute(
-            builder: (context) => const ForgotPasswordScreen());
+            builder: (context) =>  ForgotPasswordScreen());
       case RouteConstants.newPassword:
         return MaterialPageRoute(builder: (context) => const NewPasswordSet());
       case RouteConstants.accountCreatePop:

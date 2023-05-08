@@ -3,6 +3,7 @@ import 'package:dobo/core/assets/app_assets.dart';
 import 'package:dobo/core/style/app_colors.dart';
 import 'package:dobo/router/app_route_constants.dart';
 import 'package:dobo/view/my_appointments/screens/my_appointments_screen.dart';
+import 'package:dobo/view/my_appointments/widgets/appointment_buttons.dart';
 import 'package:flutter/material.dart';
 
 class UpComingCard extends StatelessWidget {

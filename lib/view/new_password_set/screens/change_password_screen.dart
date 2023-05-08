@@ -4,7 +4,9 @@ import 'package:dobo/common/primary_text_field.dart';
 import 'package:dobo/core/assets/app_icons.dart';
 import 'package:dobo/core/style/app_colors.dart';
 import 'package:dobo/router/app_route_constants.dart';
+import 'package:dobo/view/forgot_password/services/password_service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
   const ChangePasswordScreen({super.key});
@@ -12,6 +14,7 @@ class ChangePasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<PasswordService>(context);
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -35,9 +38,12 @@ class ChangePasswordScreen extends StatelessWidget {
                 width: width,
                 hintText: 'Enter your registered mail',
                 icon: AppIcons.mail,
-                onChanged: (value) {}),
-            PrimaryButton(onTap: () {
-              Navigator.pushReplacementNamed(context,RouteConstants.newPassword);
+                onChanged: (value) {provider.onPasswordChange(value);}),
+            PrimaryButton(
+              isLoading: provider.isLoading,
+              onTap: () {
+              provider.getRestMailLink(context);
+              // Navigator.pushReplacementNamed(context,RouteConstants.newPassword);
             }, label: 'Send')
           ],
         ),

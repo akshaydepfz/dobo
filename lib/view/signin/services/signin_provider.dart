@@ -9,6 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SigninProvider extends ChangeNotifier {
+  bool _isLoading = false;
+
+
+  bool get isLoading =>_isLoading;
   bool _obsureText = false;
   String username = "";
   String password = "";
@@ -33,6 +37,8 @@ class SigninProvider extends ChangeNotifier {
 
   Future<void> signIn(BuildContext context) async {
     if (validator(context)) {
+      _isLoading = true;
+      notifyListeners();
       try {
         final response = await dio.post(ApiEndpoints.login, data: {
           "username": username,
@@ -48,11 +54,16 @@ class SigninProvider extends ChangeNotifier {
           String refresh = data['refresh'];
           await pref.setString("accessToken", token);
           await pref.setString("refresh", refresh);
+               _isLoading = false;
+      notifyListeners();
 
           // ignore: use_build_context_synchronously
           Navigator.pushNamed(context, RouteConstants.enableLocation);
+
         }
       } on DioError catch (e) {
+         _isLoading = false;
+      notifyListeners();
         LogController.activityLog("SigninProvider", "SignIn", "failed");
         print(e);
       }

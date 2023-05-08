@@ -78,6 +78,7 @@ class SignInScreen extends StatelessWidget {
                   ),
                 ),
                 PrimaryButton(
+                  isLoading: loginProvider.isLoading,
                     onTap: () {
                       loginProvider.signIn(context);
                     },

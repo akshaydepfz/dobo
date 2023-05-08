@@ -11,6 +11,7 @@ import 'package:dobo/view/home/widgets/slider_card.dart';
 import 'package:dobo/view/home/widgets/title_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shimmer/shimmer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -23,8 +24,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     Provider.of<HomeProvider>(context,listen: false).getNearestClinics();
-    Provider.of<HomeProvider>(context,listen: false).getReminders();
-    Provider.of<HomeProvider>(context,listen: false).getSliders();
+    // Provider.of<HomeProvider>(context,listen: false).getReminders();
+    // Provider.of<HomeProvider>(context,listen: false).getSliders();
     super.initState();
   }
 
@@ -34,6 +35,9 @@ class _HomeScreenState extends State<HomeScreen> {
     final width = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton(onPressed: (){
+        provider.getNearestClinics();
+      }),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -124,21 +128,34 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 GlobalVariabels.vertical10,
                 GlobalVariabels.vertical10,
-                Visibility(
-                  visible: provider.sliders.isNotEmpty,
-                  child: CarouselSlider.builder(
-                     options: CarouselOptions(
-                             height: 160,
-                            scrollPhysics: const BouncingScrollPhysics(),
-                            autoPlay: true,
-                            initialPage: 0,
-                            viewportFraction: 1.0),
-                    itemCount: provider.sliders.length,
-                    itemBuilder: (context, i, intex) {
-                      return SliderCard(width: width, title: provider.sliders[i].title, description: provider.sliders[i].description,);
-                    }
-                    
-                  ),
+            provider.sliders.isEmpty ? SizedBox(
+  width: width,
+  height: 160.0,
+  child: Shimmer.fromColors(
+    baseColor: AppColor.primary.withOpacity(0.1),
+    highlightColor: AppColor.primary2.withOpacity(0.2),
+    child: Container(
+      decoration: BoxDecoration( color: Colors.white,
+         borderRadius: BorderRadius.circular(8),
+      ),
+     
+      height: 160,
+      width: width,
+    )
+  )
+)
+:   CarouselSlider.builder(
+                   options: CarouselOptions(
+                           height: 160,
+                          scrollPhysics: const BouncingScrollPhysics(),
+                          autoPlay: true,
+                          initialPage: 0,
+                          viewportFraction: 1.0),
+                  itemCount: provider.sliders.length,
+                  itemBuilder: (context, i, intex) {
+                    return SliderCard(width: width, title: provider.sliders[i].title, description: provider.sliders[i].description,);
+                  }
+                  
                 ),
                 const SizedBox(
                   height: 20,
@@ -172,7 +189,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       avarageRating:
                           provider.clinicList[i].avgRating.toString(),
                       ratingCount:
-                          provider.clinicList[i].reviews.length.toString(),
+                          2.toString(),
                       name: provider.clinicList[i].clinicName,
                       category: provider.clinicList[i].subtext,
                       image: provider.clinicList[i].image ??

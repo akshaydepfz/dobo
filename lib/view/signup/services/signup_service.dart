@@ -86,3 +86,9 @@ void showSnackBarWrong(BuildContext context, String message) {
     backgroundColor: Colors.red,
   ));
 }
+void showSnackBarSuccess(BuildContext context, String message) {
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    content: Text(message),
+    backgroundColor: Colors.green,
+  ));
+}
