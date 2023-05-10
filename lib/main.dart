@@ -4,10 +4,12 @@ import 'package:dobo/router/app_router.dart';
 import 'package:dobo/view/appointment/services/reshedule_radio_button.dart';
 import 'package:dobo/view/category/services/category_service.dart';
 import 'package:dobo/view/clinic_view/services/clinic_view_service.dart';
+import 'package:dobo/view/doctor_view/services/doctor_details_service.dart';
 import 'package:dobo/view/forgot_password/services/password_service.dart';
 import 'package:dobo/view/home/services/home_provider.dart';
 import 'package:dobo/view/landing_page/screens/landing_screen.dart';
 import 'package:dobo/view/landing_page/services/bottom_nav_service.dart';
+import 'package:dobo/view/notification/services/notification_service.dart';
 import 'package:dobo/view/profile/services/profile_services.dart';
 import 'package:dobo/view/signin/screens/signin_screen.dart';
 import 'package:dobo/view/signin/services/signin_provider.dart';
@@ -18,13 +20,15 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'view/my_appointments/services/appointment_services.dart';
 
-Future<void> main()async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final pref = await SharedPreferences.getInstance();
- String token= pref.getString('accessToken') ??"";
-log("Token :  $token");
+  String token = pref.getString('accessToken') ?? "";
+  log("Token :  $token");
   runApp(
-     MyApp(token: token,),
+    MyApp(
+      token: token,
+    ),
   );
 }
 
@@ -54,21 +58,28 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => HomeProvider(),
-        ), ChangeNotifierProvider(
+        ),
+        ChangeNotifierProvider(
           create: (_) => ProfileService(),
-        ),ChangeNotifierProvider(
+        ),
+        ChangeNotifierProvider(
           create: (_) => AppointmentService(),
-        ),ChangeNotifierProvider(
+        ),
+        ChangeNotifierProvider(
           create: (_) => PasswordService(),
         ),
-ChangeNotifierProvider(
+        ChangeNotifierProvider(
           create: (_) => ClinicDetailsService(),
         ),
-
-        
-
-        
-        
+        ChangeNotifierProvider(
+          create: (_) => DoctorDetailService(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => NotificationService(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => AppointmentService(),
+        ),
       ],
       child: MaterialApp(
         onGenerateRoute: AppRoute().onGenerateRoute,
@@ -78,7 +89,7 @@ ChangeNotifierProvider(
           textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
           primarySwatch: Colors.cyan,
         ),
-        home: token==""?  const SignInScreen(): LandingScreen(),
+        home: token == "" ? const SignInScreen() : LandingScreen(),
       ),
     );
   }

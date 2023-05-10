@@ -1,47 +1,51 @@
+import 'package:dobo/common/common_loading.dart';
 import 'package:dobo/common/primary_appbar.dart';
-import 'package:dobo/router/app_route_constants.dart';
+import 'package:dobo/view/notification/services/notification_service.dart';
 import 'package:dobo/view/notification/widgets/notification_card.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class NotificationScreen extends StatelessWidget {
+class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});
 
   @override
+  State<NotificationScreen> createState() => _NotificationScreenState();
+}
+
+class _NotificationScreenState extends State<NotificationScreen> {
+  @override
+  void initState() {
+    Provider.of<NotificationService>(context, listen: false).getNotifications();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<NotificationService>(context);
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const PrimaryAppbar(title: 'Notifications'),
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Column(
-                  children:  [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context,RouteConstants.sessionEndPop);
-                      },
-                      child:const NotificationCard(
-                        isWrong: false,
-                        title: 'Appointment Success!',
-                        msg:
-                            'You have successfully booked an appointment with Dr Alan Warson on December 24,2024, 12:00 am Don\'t Forget to activate your reminder',
-                        time: 'Aug 24, 2022 at 9:41 AM',
-                      ),
-                    ),
-                    NotificationCard(
-                      isWrong: true,
-                      title: 'Appointment Cancelled!',
-                      msg:
-                          'You You have successfully canceled your appointment with Dr.Alan Watson on December 24, 2024.',
-                      time: 'Yesterday at 9:41 AM',
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
+        child: Column(
+          children: [
+            const PrimaryAppbar(title: 'Notifications'),
+            provider.notificationList == null
+                ? const CommonLoadingWidget()
+                : Expanded(
+                    child: ListView.builder(
+                        shrinkWrap: true,
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: provider.notificationList!.length,
+                        itemBuilder: (context, i) {
+                          return NotificationCard(
+                            onTap: () {},
+                            isWrong: false,
+                            title: provider.notificationList![i].title,
+                            msg: provider.notificationList![i].description,
+                            time: provider.notificationList![i].created
+                                .toString(),
+                          );
+                        }),
+                  )
+          ],
         ),
       ),
     );

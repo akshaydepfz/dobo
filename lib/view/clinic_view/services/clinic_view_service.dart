@@ -21,7 +21,7 @@ class ClinicDetailsService extends ChangeNotifier {
           options: Options(headers: {
             'Authorization': 'Bearer $token',
           }));
-      print(response.statusCode);
+
       if (response.statusCode == 200) {
         clinicDetail = ClinicDetailsModel.fromJson(response.data);
 

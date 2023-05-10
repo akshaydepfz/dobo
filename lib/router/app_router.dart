@@ -45,7 +45,7 @@ class AppRoute {
         return MaterialPageRoute(builder: (context) => const SignUpScreen());
       case RouteConstants.forgotScreen:
         return MaterialPageRoute(
-            builder: (context) =>  ForgotPasswordScreen());
+            builder: (context) => const ForgotPasswordScreen());
       case RouteConstants.newPassword:
         return MaterialPageRoute(builder: (context) => const NewPasswordSet());
       case RouteConstants.accountCreatePop:
@@ -71,13 +71,17 @@ class AppRoute {
 
       case RouteConstants.clinicViewScreen:
         return MaterialPageRoute(
-            builder: (context) =>  ClinicViewScreen( clinicId: '',));
+            builder: (context) => const ClinicViewScreen(
+                  clinicId: '',
+                ));
       case RouteConstants.categoryview:
         return MaterialPageRoute(
             builder: (context) => const CategoryViewScreen());
       case RouteConstants.doctorViewScreen:
         return MaterialPageRoute(
-            builder: (context) => const DoctorViewScreen());
+            builder: (context) => const DoctorViewScreen(
+                  doctorId: '',
+                ));
       case RouteConstants.dateSelectScreen:
         return MaterialPageRoute(
             builder: (context) => const DateSelectingScreen());

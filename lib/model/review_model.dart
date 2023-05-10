@@ -1,30 +1,36 @@
-class SliderModel {
+class ReviewModel {
   String id;
   DateTime created;
   DateTime updated;
   bool isActive;
-  String title;
-  String description;
+  String review;
+  int rating;
   dynamic creator;
+  String doctor;
+  String patient;
 
-  SliderModel({
+  ReviewModel({
     required this.id,
     required this.created,
     required this.updated,
     required this.isActive,
-    required this.title,
-    required this.description,
+    required this.review,
+    required this.rating,
     this.creator,
+    required this.doctor,
+    required this.patient,
   });
 
-  factory SliderModel.fromJson(Map<String, dynamic> json) => SliderModel(
+  factory ReviewModel.fromJson(Map<String, dynamic> json) => ReviewModel(
         id: json["id"],
         created: DateTime.parse(json["created"]),
         updated: DateTime.parse(json["updated"]),
         isActive: json["is_active"],
-        title: json["title"],
-        description: json["description"],
+        review: json["review"],
+        rating: json["rating"],
         creator: json["creator"],
+        doctor: json["doctor"],
+        patient: json["patient"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -32,8 +38,10 @@ class SliderModel {
         "created": created.toIso8601String(),
         "updated": updated.toIso8601String(),
         "is_active": isActive,
-        "title": title,
-        "description": description,
+        "review": review,
+        "rating": rating,
         "creator": creator,
+        "doctor": doctor,
+        "patient": patient,
       };
 }

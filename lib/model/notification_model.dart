@@ -1,4 +1,4 @@
-class SliderModel {
+class NotificationModel {
   String id;
   DateTime created;
   DateTime updated;
@@ -7,7 +7,7 @@ class SliderModel {
   String description;
   dynamic creator;
 
-  SliderModel({
+  NotificationModel({
     required this.id,
     required this.created,
     required this.updated,
@@ -17,7 +17,8 @@ class SliderModel {
     this.creator,
   });
 
-  factory SliderModel.fromJson(Map<String, dynamic> json) => SliderModel(
+  factory NotificationModel.fromJson(Map<String, dynamic> json) =>
+      NotificationModel(
         id: json["id"],
         created: DateTime.parse(json["created"]),
         updated: DateTime.parse(json["updated"]),

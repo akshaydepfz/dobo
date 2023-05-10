@@ -1,15 +1,14 @@
+import 'package:dobo/common/common_loading.dart';
 import 'package:dobo/common/primary_appbar.dart';
 import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/core/assets/app_assets.dart';
 import 'package:dobo/core/assets/app_icons.dart';
-import 'package:dobo/core/assets/app_lottie.dart';
 import 'package:dobo/core/style/app_colors.dart';
-import 'package:dobo/router/app_route_constants.dart';
 import 'package:dobo/view/clinic_view/services/clinic_view_service.dart';
+import 'package:dobo/view/doctor_view/screens/doctor_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:lottie/lottie.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ClinicViewScreen extends StatefulWidget {
@@ -42,19 +41,7 @@ class _ClinicViewScreenState extends State<ClinicViewScreen> {
             )
           : null,
       body: provider.clinicDetail == null
-          ? Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Text('Loading..'),
-                  SizedBox(
-                      height: width / 2,
-                      width: width / 2,
-                      child: LottieBuilder.asset(AppLottie.loading)),
-                ],
-              ),
-            )
+          ? const CommonLoadingWidget()
           : SingleChildScrollView(
               child: SafeArea(
                 child: Column(
@@ -192,6 +179,16 @@ class _ClinicViewScreenState extends State<ClinicViewScreen> {
                                   );
                                 }
                                 return DoctorCard(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  DoctorViewScreen(
+                                                    doctorId: provider
+                                                        .doctorList![i].id,
+                                                  )));
+                                    },
                                     width: width,
                                     image: 'image',
                                     name: provider.doctorList![i].fullName,
@@ -220,21 +217,20 @@ class DoctorCard extends StatelessWidget {
     required this.department,
     required this.ratingCount,
     required this.reviews,
+    required this.onTap,
   });
   final String image;
   final String name;
   final String department;
   final String ratingCount;
   final String reviews;
-
+  final Function() onTap;
   final double width;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, RouteConstants.doctorViewScreen);
-      },
+      onTap: onTap,
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 10),
         decoration: BoxDecoration(

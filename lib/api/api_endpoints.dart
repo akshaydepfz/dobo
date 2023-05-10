@@ -9,4 +9,8 @@ class ApiEndpoints {
   static const clinicDetails = '$baseUrl/api/v1/clinics/clinics';
   static const clinicDoctorsList =
       '$baseUrl/api/v1/clinics/clinics/doctors/?clinic_id=';
+  static const doctorDetails = '$baseUrl/api/v1/doctors/';
+  static const doctorReview = '$baseUrl/api/v1/doctors/reviews/?doctor_id=';
+  static const notifications = '$baseUrl/api/v1/notifications/';
+  static const appointmentList = '$baseUrl/api/v1/clinics/appointments/';
 }

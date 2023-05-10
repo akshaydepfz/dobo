@@ -1,9 +1,11 @@
 import 'package:dobo/core/assets/app_icons.dart';
 import 'package:dobo/core/style/app_colors.dart';
+import 'package:dobo/view/my_appointments/services/appointment_services.dart';
 import 'package:dobo/view/my_appointments/widgets/cancelled_card.dart';
 import 'package:dobo/view/my_appointments/widgets/completed_card.dart';
 import 'package:dobo/view/my_appointments/widgets/upcoming_card.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MyAppointmentsScreen extends StatefulWidget {
   const MyAppointmentsScreen({super.key});
@@ -14,6 +16,13 @@ class MyAppointmentsScreen extends StatefulWidget {
 
 class _MyAppointmentsScreenState extends State<MyAppointmentsScreen>
     with TickerProviderStateMixin {
+  @override
+  void initState() {
+    Provider.of<AppointmentService>(context, listen: false)
+        .getAppointmentList();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     TabController tabController = TabController(length: 3, vsync: this);
@@ -86,4 +95,3 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen>
     );
   }
 }
-
