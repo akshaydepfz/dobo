@@ -1,7 +1,7 @@
 import 'dart:developer';
-
 import 'package:dobo/router/app_router.dart';
 import 'package:dobo/view/appointment/services/reshedule_radio_button.dart';
+import 'package:dobo/view/article/services/article_services.dart';
 import 'package:dobo/view/category/services/category_service.dart';
 import 'package:dobo/view/clinic_view/services/clinic_view_service.dart';
 import 'package:dobo/view/doctor_view/services/doctor_details_service.dart';
@@ -26,9 +26,7 @@ Future<void> main() async {
   String token = pref.getString('accessToken') ?? "";
   log("Token :  $token");
   runApp(
-    MyApp(
-      token: token,
-    ),
+    MyApp(token: token),
   );
 }
 
@@ -79,6 +77,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => AppointmentService(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ArticleService(),
         ),
       ],
       child: MaterialApp(

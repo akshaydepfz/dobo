@@ -12,12 +12,12 @@ class AppointmentService extends ChangeNotifier {
   List<AppointmentListModel>? completedAppontments;
   List<AppointmentListModel>? cancelleddAppontments;
 
-  Future<void> getAppointmentList() async {
+  Future<void> getUpcomingAppointments() async {
     final pref = await SharedPreferences.getInstance();
     String token = pref.getString("accessToken") ?? '';
 
     try {
-      final response = await dio.get(ApiEndpoints.appointmentList,
+      final response = await dio.get("${ApiEndpoints.appointmentList}pending",
           options: Options(headers: {
             'Authorization': 'Bearer $token',
           }));
@@ -28,11 +28,59 @@ class AppointmentService extends ChangeNotifier {
             data.map((json) => AppointmentListModel.fromJson(json)).toList();
         notifyListeners();
         LogController.activityLog(
-            'ClinicDetailsService', "getDoctorList", 'Success');
+            'AppointmentService', "getUpcomingAppointments", 'Success');
       }
     } on DioError catch (_) {
       LogController.activityLog(
-          'ClinicDetailsService', "getDoctorList", 'Failed');
+          'AppointmentService', "getUpcomingAppointments", 'Failed');
+    }
+  }
+
+  Future<void> getCompletdAppointments() async {
+    final pref = await SharedPreferences.getInstance();
+    String token = pref.getString("accessToken") ?? '';
+
+    try {
+      final response = await dio.get("${ApiEndpoints.appointmentList}completed",
+          options: Options(headers: {
+            'Authorization': 'Bearer $token',
+          }));
+      if (response.statusCode == 200) {
+        List data = response.data;
+
+        completedAppontments =
+            data.map((json) => AppointmentListModel.fromJson(json)).toList();
+        notifyListeners();
+        LogController.activityLog(
+            'AppointmentService', "getCompletdAppointments", 'Success');
+      }
+    } on DioError catch (_) {
+      LogController.activityLog(
+          'AppointmentService', "getCompletdAppointments", 'Failed');
+    }
+  }
+
+  Future<void> getCancelledAppintments() async {
+    final pref = await SharedPreferences.getInstance();
+    String token = pref.getString("accessToken") ?? '';
+
+    try {
+      final response = await dio.get("${ApiEndpoints.appointmentList}cancelled",
+          options: Options(headers: {
+            'Authorization': 'Bearer $token',
+          }));
+      if (response.statusCode == 200) {
+        List data = response.data;
+
+        cancelleddAppontments =
+            data.map((json) => AppointmentListModel.fromJson(json)).toList();
+        notifyListeners();
+        LogController.activityLog(
+            'AppointmentService', "getCancelledAppintments", 'Success');
+      }
+    } on DioError catch (_) {
+      LogController.activityLog(
+          'AppointmentService', "getCancelledAppintments", 'Failed');
     }
   }
 }

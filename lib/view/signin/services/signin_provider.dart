@@ -11,8 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SigninProvider extends ChangeNotifier {
   bool _isLoading = false;
 
-
-  bool get isLoading =>_isLoading;
+  bool get isLoading => _isLoading;
   bool _obsureText = false;
   String username = "";
   String password = "";
@@ -54,16 +53,15 @@ class SigninProvider extends ChangeNotifier {
           String refresh = data['refresh'];
           await pref.setString("accessToken", token);
           await pref.setString("refresh", refresh);
-               _isLoading = false;
-      notifyListeners();
+          _isLoading = false;
+          notifyListeners();
 
           // ignore: use_build_context_synchronously
           Navigator.pushNamed(context, RouteConstants.enableLocation);
-
         }
       } on DioError catch (e) {
-         _isLoading = false;
-      notifyListeners();
+        _isLoading = false;
+        notifyListeners();
         LogController.activityLog("SigninProvider", "SignIn", "failed");
         print(e);
       }

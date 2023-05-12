@@ -12,5 +12,12 @@ class ApiEndpoints {
   static const doctorDetails = '$baseUrl/api/v1/doctors/';
   static const doctorReview = '$baseUrl/api/v1/doctors/reviews/?doctor_id=';
   static const notifications = '$baseUrl/api/v1/notifications/';
-  static const appointmentList = '$baseUrl/api/v1/clinics/appointments/';
+  static const appointmentList =
+      '$baseUrl/api/v1/clinics/appointments/?status=';
+
+  static const articlList = '$baseUrl/api/v1/articles/';
+  static const trendingArticles =
+      '$baseUrl/api/v1/articles/?date=&is_trending=true';
+
+  static const doctorDepartmentfilter = '$baseUrl/api/v1/doctors/?department=';
 }

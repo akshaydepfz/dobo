@@ -27,11 +27,14 @@ class ProfileService extends ChangeNotifier {
         options: Options(headers: {'Authorization': 'Bearer $token'}),
       );
       if (response.statusCode == 200) {
-        LogController.activityLog('ProfileProvider', 'Get User Details', "success");
+        LogController.activityLog(
+            'ProfileProvider', 'Get User Details', "success");
         userModel = UserModel.fromJson(response.data);
+        notifyListeners();
       }
     } on DioError catch (_) {
-              LogController.activityLog('ProfileProvider', 'Get User Details', "Failed");
+      LogController.activityLog(
+          'ProfileProvider', 'Get User Details', "Failed");
     }
   }
 }

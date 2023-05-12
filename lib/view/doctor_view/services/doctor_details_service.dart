@@ -45,6 +45,9 @@ class DoctorDetailService extends ChangeNotifier {
         notifyListeners();
         LogController.activityLog(
             'DoctorDetailService', "getDoctorReview", 'Success');
+      } else {
+        LogController.activityLog('DoctorDetailService', "getDoctorReview",
+            'Failed with status code ${response.statusCode}');
       }
     } on DioError catch (_) {
       LogController.activityLog(

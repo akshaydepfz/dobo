@@ -1,38 +1,71 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:dobo/common/primary_button.dart';
 import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/core/style/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 
-class LocationSelectScreen extends StatelessWidget {
-  LocationSelectScreen({super.key});
-  final Completer<GoogleMapController> _controller =
-      Completer<GoogleMapController>();
+class LocationSelectScreen extends StatefulWidget {
+  const LocationSelectScreen({super.key});
 
-  static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
-  );
+  @override
+  State<LocationSelectScreen> createState() => _LocationSelectScreenState();
+}
 
-  static const CameraPosition _kLake = CameraPosition(
-      bearing: 192.8334901395799,
-      target: LatLng(37.43296265331129, -122.08832357078792),
-      tilt: 59.440717697143555,
-      zoom: 19.151926040649414);
-
+class _LocationSelectScreenState extends State<LocationSelectScreen> {
+  final _mapController = MapController(initMapWithUserPosition: true);
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      body: GoogleMap(
-        mapType: MapType.hybrid,
-        initialCameraPosition: _kGooglePlex,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
+      body: OSMFlutter(
+        controller: _mapController,
+        trackMyPosition: true,
+        initZoom: 12,
+        minZoomLevel: 14,
+        maxZoomLevel: 14,
+        stepZoom: 1.0,
+        mapIsLoading: const Center(
+          child: CircularProgressIndicator(),
+        ),
+        userLocationMarker: UserLocationMaker(
+          personMarker: const MarkerIcon(
+            icon: Icon(
+              Icons.location_history_rounded,
+              color: Colors.red,
+              size: 48,
+            ),
+          ),
+          directionArrowMarker: const MarkerIcon(
+            icon: Icon(
+              Icons.place,
+              color: Colors.red,
+              size: 60,
+            ),
+          ),
+        ),
+        roadConfiguration: const RoadOption(
+          roadColor: Colors.yellowAccent,
+        ),
+        markerOption: MarkerOption(
+            defaultMarker: const MarkerIcon(
+          icon: Icon(
+            Icons.person_pin_circle,
+            color: Colors.blue,
+            size: 56,
+          ),
+        )),
+        onMapIsReady: (isReady) async {
+          log(isReady.toString());
+          if (isReady) {
+            await Future.delayed(const Duration(seconds: 1), () async {
+              _mapController.currentLocation();
+            });
+          }
         },
       ),
       bottomNavigationBar: Container(

@@ -1,3 +1,4 @@
+import 'package:dobo/common/common_loading.dart';
 import 'package:dobo/core/assets/app_icons.dart';
 import 'package:dobo/core/style/app_colors.dart';
 import 'package:dobo/view/my_appointments/services/appointment_services.dart';
@@ -19,12 +20,17 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen>
   @override
   void initState() {
     Provider.of<AppointmentService>(context, listen: false)
-        .getAppointmentList();
+        .getUpcomingAppointments();
+    Provider.of<AppointmentService>(context, listen: false)
+        .getCompletdAppointments();
+    Provider.of<AppointmentService>(context, listen: false)
+        .getCancelledAppintments();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<AppointmentService>(context);
     TabController tabController = TabController(length: 3, vsync: this);
     return Scaffold(
       body: SafeArea(
@@ -68,24 +74,51 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen>
               child: TabBarView(
                 controller: tabController,
                 children: [
-                  ListView.builder(
-                      itemCount: 10,
-                      shrinkWrap: true,
-                      itemBuilder: (context, i) {
-                        return const UpComingCard();
-                      }),
-                  ListView.builder(
-                      itemCount: 10,
-                      shrinkWrap: true,
-                      itemBuilder: (context, i) {
-                        return const CompletedCard();
-                      }),
-                  ListView.builder(
-                      itemCount: 10,
-                      shrinkWrap: true,
-                      itemBuilder: (context, i) {
-                        return const CancelldCard();
-                      }),
+                  provider.upcomingAppontments == null
+                      ? const Center(
+                          child: CommonLoadingWidget(),
+                        )
+                      : ListView.builder(
+                          itemCount: provider.upcomingAppontments!.length,
+                          shrinkWrap: true,
+                          itemBuilder: (context, i) {
+                            if (provider.upcomingAppontments!.isEmpty) {
+                              return const Center(
+                                child: Text('No Appointments Found!'),
+                              );
+                            }
+                            return const UpComingCard();
+                          }),
+                  provider.completedAppontments == null
+                      ? const Center(
+                          child: CommonLoadingWidget(),
+                        )
+                      : ListView.builder(
+                          itemCount: provider.completedAppontments!.length,
+                          shrinkWrap: true,
+                          itemBuilder: (context, i) {
+                            if (provider.upcomingAppontments!.isEmpty) {
+                              return const Center(
+                                child: Text('No Appointments Found!'),
+                              );
+                            }
+                            return const CompletedCard();
+                          }),
+                  provider.cancelleddAppontments == null
+                      ? const Center(
+                          child: CommonLoadingWidget(),
+                        )
+                      : ListView.builder(
+                          itemCount: provider.cancelleddAppontments!.length,
+                          shrinkWrap: true,
+                          itemBuilder: (context, i) {
+                            if (provider.upcomingAppontments!.isEmpty) {
+                              return const Center(
+                                child: Text('No Appointments Found!'),
+                              );
+                            }
+                            return const CancelldCard();
+                          }),
                 ],
               ),
             )

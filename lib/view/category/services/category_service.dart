@@ -1,7 +1,14 @@
+import 'package:dio/dio.dart';
+import 'package:dobo/api/api_endpoints.dart';
+import 'package:dobo/log/log_controller.dart';
+import 'package:dobo/model/doctor_model.dart';
 import 'package:dobo/view/category/model/category_model.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CategoryProvider extends ChangeNotifier {
+  final dio = Dio();
+  List<DoctorListModel>? doctors;
   List<CategoryModel> categoryItems = [
     CategoryModel(
         icon: 'assets/icons/categories/doctor.png', title: 'General Physician'),
@@ -31,4 +38,27 @@ class CategoryProvider extends ChangeNotifier {
     CategoryModel(
         icon: 'assets/icons/categories/nutrition.png', title: 'Nutritionist'),
   ];
+
+  Future<void> getDoctorList(String department) async {
+    final pref = await SharedPreferences.getInstance();
+    String token = pref.getString("accessToken") ?? '';
+
+    try {
+      final response =
+          await dio.get("${ApiEndpoints.doctorDepartmentfilter}$department",
+              options: Options(headers: {
+                'Authorization': 'Bearer $token',
+              }));
+      if (response.statusCode == 200) {
+        List data = response.data;
+        doctors = data.map((json) => DoctorListModel.fromJson(json)).toList();
+        notifyListeners();
+        LogController.activityLog(
+            'ClinicDetailsService', "getDoctorList", 'Success');
+      }
+    } on DioError catch (_) {
+      LogController.activityLog(
+          'ClinicDetailsService', "getDoctorList", 'Failed');
+    }
+  }
 }
