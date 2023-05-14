@@ -51,6 +51,8 @@ dependencies:
   shimmer: ^2.0.0
   lottie: ^2.3.2
   flutter_osm_plugin: ^0.53.4+1
+  flutter_widget_from_html: ^0.9.1
+  
 
 dev_dependencies:
   flutter_test:

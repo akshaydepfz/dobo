@@ -127,7 +127,9 @@ class AppRoute {
         return MaterialPageRoute(builder: (context) => const ArticleScreen());
       case RouteConstants.articleViewScreen:
         return MaterialPageRoute(
-            builder: (context) => const ArticleViewScreen());
+            builder: (context) => const ArticleViewScreen(
+                  articlHTML: '',
+                ));
       case RouteConstants.changePassword:
         return MaterialPageRoute(
             builder: (context) => const ChangePasswordScreen());

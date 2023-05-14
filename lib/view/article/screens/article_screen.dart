@@ -2,6 +2,7 @@ import 'package:dobo/common/common_loading.dart';
 import 'package:dobo/core/assets/app_icons.dart';
 import 'package:dobo/core/style/app_colors.dart';
 import 'package:dobo/router/app_route_constants.dart';
+import 'package:dobo/view/article/screens/article_view_screen.dart';
 import 'package:dobo/view/article/services/article_services.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -82,8 +83,15 @@ class _ArticleScreenState extends State<ArticleScreen> {
                               itemBuilder: (BuildContext context, i) {
                                 return GestureDetector(
                                   onTap: () {
-                                    Navigator.pushNamed(context,
-                                        RouteConstants.articleViewScreen);
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ArticleViewScreen(
+                                                  articlHTML: provider
+                                                      .trendingList![i]
+                                                      .description,
+                                                )));
                                   },
                                   child: TrendingArticleCard(
                                       date: provider.trendingList![i].date
@@ -118,12 +126,23 @@ class _ArticleScreenState extends State<ArticleScreen> {
                       shrinkWrap: true,
                       itemCount: provider.articleList!.length,
                       itemBuilder: (BuildContext context, i) {
-                        return ArticleCard(
-                            date: provider.articleList![i].date.toString(),
-                            image: provider.articleList![i].image,
-                            title: provider.articleList![i].title,
-                            maxHeight: maxHeight,
-                            maxWidth: maxWidth);
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ArticleViewScreen(
+                                          articlHTML: provider
+                                              .articleList![i].description,
+                                        )));
+                          },
+                          child: ArticleCard(
+                              date: provider.articleList![i].date.toString(),
+                              image: provider.articleList![i].image,
+                              title: provider.articleList![i].title,
+                              maxHeight: maxHeight,
+                              maxWidth: maxWidth),
+                        );
                       },
                     ),
                   ],
