@@ -24,9 +24,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
-    Provider.of<HomeProvider>(context,listen: false).getNearestClinics();
-    Provider.of<HomeProvider>(context,listen: false).getReminders();
-    Provider.of<HomeProvider>(context,listen: false).getSliders();
+    Provider.of<HomeProvider>(context, listen: false).getLocation();
+    Provider.of<HomeProvider>(context, listen: false).getNearestClinics();
+    Provider.of<HomeProvider>(context, listen: false).getReminders();
+    Provider.of<HomeProvider>(context, listen: false).getSliders();
     super.initState();
   }
 
@@ -36,7 +37,6 @@ class _HomeScreenState extends State<HomeScreen> {
     final width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-  
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -51,8 +51,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            
-                           Navigator.pushNamed(context,RouteConstants.profileScreen);
+                            Navigator.pushNamed(
+                                context, RouteConstants.profileScreen);
                           },
                           child: const SizedBox(
                             height: 50,
@@ -65,9 +65,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         const SizedBox(
                           width: 10,
                         ),
-                        const Text(
-                          'Malappuram...',
-                          style: TextStyle(fontSize: 16),
+                        SizedBox(
+                          width: width * .28,
+                          child: Text(
+                            provider.location,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(fontSize: 16),
+                          ),
                         ),
                         GestureDetector(
                           onTap: () {
@@ -127,35 +132,36 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 GlobalVariabels.vertical10,
                 GlobalVariabels.vertical10,
-            provider.sliders.isEmpty ? SizedBox(
-  width: width,
-  height: 160.0,
-  child: Shimmer.fromColors(
-    baseColor: AppColor.primary.withOpacity(0.1),
-    highlightColor: AppColor.primary2.withOpacity(0.2),
-    child: Container(
-      decoration: BoxDecoration( color: Colors.white,
-         borderRadius: BorderRadius.circular(8),
-      ),
-     
-      height: 160,
-      width: width,
-    )
-  )
-)
-:   CarouselSlider.builder(
-                   options: CarouselOptions(
-                           height: 160,
-                          scrollPhysics: const BouncingScrollPhysics(),
-                          autoPlay: true,
-                          initialPage: 0,
-                          viewportFraction: 1.0),
-                  itemCount: provider.sliders.length,
-                  itemBuilder: (context, i, intex) {
-                    return SliderCard(width: width, title: provider.sliders[i].title, description: provider.sliders[i].description,);
-                  }
-                  
-                ),
+                provider.sliders.isEmpty
+                    ? SizedBox(
+                        width: width,
+                        height: 160.0,
+                        child: Shimmer.fromColors(
+                            baseColor: AppColor.primary.withOpacity(0.1),
+                            highlightColor: AppColor.primary2.withOpacity(0.2),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              height: 160,
+                              width: width,
+                            )))
+                    : CarouselSlider.builder(
+                        options: CarouselOptions(
+                            height: 160,
+                            scrollPhysics: const BouncingScrollPhysics(),
+                            autoPlay: true,
+                            initialPage: 0,
+                            viewportFraction: 1.0),
+                        itemCount: provider.sliders.length,
+                        itemBuilder: (context, i, intex) {
+                          return SliderCard(
+                            width: width,
+                            title: provider.sliders[i].title,
+                            description: provider.sliders[i].description,
+                          );
+                        }),
                 const SizedBox(
                   height: 20,
                 ),
@@ -187,14 +193,18 @@ class _HomeScreenState extends State<HomeScreen> {
                       width: width,
                       avarageRating:
                           provider.clinicList[i].avgRating.toString(),
-                      ratingCount:
-                          2.toString(),
+                      ratingCount: 2.toString(),
                       name: provider.clinicList[i].clinicName,
                       category: provider.clinicList[i].subtext,
                       image: provider.clinicList[i].image ??
                           "https://t4.ftcdn.net/jpg/03/47/41/03/360_F_347410397_5PpZbcQpnEqqzlGjOk1R5d11977LbMUW.jpg",
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> ClinicViewScreen(clinicId: provider.clinicList[i].id,)));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ClinicViewScreen(
+                                      clinicId: provider.clinicList[i].id,
+                                    )));
                         // Navigator.push(context,MaterialPageRoute(builder:(context) =>ClinicViewScreen()));
                       },
                     );
@@ -255,5 +265,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
-

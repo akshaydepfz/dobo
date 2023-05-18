@@ -9,6 +9,8 @@ import 'package:dobo/view/forgot_password/services/password_service.dart';
 import 'package:dobo/view/home/services/home_provider.dart';
 import 'package:dobo/view/landing_page/screens/landing_screen.dart';
 import 'package:dobo/view/landing_page/services/bottom_nav_service.dart';
+import 'package:dobo/view/location_select/screens/location_select_screen.dart';
+import 'package:dobo/view/location_select/services/location_select_service.dart';
 import 'package:dobo/view/notification/services/notification_service.dart';
 import 'package:dobo/view/profile/services/profile_services.dart';
 import 'package:dobo/view/signin/screens/signin_screen.dart';
@@ -81,11 +83,14 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => ArticleService(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => LocationSelectService(),
+        ),
       ],
       child: MaterialApp(
         onGenerateRoute: AppRoute().onGenerateRoute,
         debugShowCheckedModeBanner: false,
-        title: 'DOBO Booking',
+        title: 'DOBO',
         theme: ThemeData(
           textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
           primarySwatch: Colors.cyan,

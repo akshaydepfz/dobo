@@ -26,6 +26,7 @@ class AppointmentService extends ChangeNotifier {
 
         upcomingAppontments =
             data.map((json) => AppointmentListModel.fromJson(json)).toList();
+
         notifyListeners();
         LogController.activityLog(
             'AppointmentService', "getUpcomingAppointments", 'Success');

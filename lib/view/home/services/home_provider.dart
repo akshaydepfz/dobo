@@ -9,24 +9,31 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeProvider extends ChangeNotifier {
   final dio = Dio();
+  String _location = 'Loading...';
+
+  String get location => _location;
 
   List<ClinicModel> clinicList = [];
   List<SliderModel> sliders = [];
   List<ReminderModel> reminders = [];
+
+  Future<void> getLocation() async {
+    final pref = await SharedPreferences.getInstance();
+    _location = pref.getString('location') ?? "Loading... ";
+    notifyListeners();
+  }
 
   Future getNearestClinics() async {
     final pref = await SharedPreferences.getInstance();
     String token = pref.getString("accessToken") ?? '';
 
     try {
-
-
-
-          final response = await dio.get("https://dobo.co.in/api/v1/clinics/clinics/nearest/?location=10.54,76.58",
+      final response = await dio.get(
+          "https://dobo.co.in/api/v1/clinics/clinics/nearest/?location=10.54,76.58",
           options: Options(headers: {
             'Authorization': 'Bearer $token',
           }));
-         
+
       if (response.statusCode == 200) {
         List data = response.data;
         clinicList = data.map((json) => ClinicModel.fromJson(json)).toList();
@@ -36,8 +43,9 @@ class HomeProvider extends ChangeNotifier {
       }
       print(response.statusCode);
     } on DioError catch (e) {
-            print(e.error);
-      LogController.activityLog('HomeProvider', "getNearestClinics", "Failed  ");
+      print(e.error);
+      LogController.activityLog(
+          'HomeProvider', "getNearestClinics", "Failed  ");
     }
   }
 
@@ -46,13 +54,12 @@ class HomeProvider extends ChangeNotifier {
     String token = pref.getString("accessToken") ?? '';
 
     try {
-      final response =
-          await dio.get('https://dobo.co.in/api/v1/sliders/',
-              options: Options(headers: {
-                'Authorization': 'Bearer $token',
-              }));
-print(response.statusCode)
-;      if (response.statusCode == 200) {
+      final response = await dio.get('https://dobo.co.in/api/v1/sliders/',
+          options: Options(headers: {
+            'Authorization': 'Bearer $token',
+          }));
+      print(response.statusCode);
+      if (response.statusCode == 200) {
         List data = response.data;
         sliders = data.map((e) => SliderModel.fromJson(e)).toList();
         LogController.activityLog('HomeProvider', "getSliders", "Success");
@@ -66,11 +73,10 @@ print(response.statusCode)
     final pref = await SharedPreferences.getInstance();
     String token = pref.getString("accessToken") ?? '';
     try {
-      final response =
-          await dio.get('https://dobo.co.in/api/v1/reminders/',
-              options: Options(headers: {
-                'Authorization': 'Bearer $token',
-              }));
+      final response = await dio.get('https://dobo.co.in/api/v1/reminders/',
+          options: Options(headers: {
+            'Authorization': 'Bearer $token',
+          }));
 
       if (response.statusCode == 200) {
         List data = response.data;
@@ -82,7 +88,4 @@ print(response.statusCode)
       LogController.activityLog('HomeProvider', "getReminders", "Failed");
     }
   }
-
-
-
 }

@@ -60,10 +60,10 @@ class SigninProvider extends ChangeNotifier {
           Navigator.pushNamed(context, RouteConstants.enableLocation);
         }
       } on DioError catch (e) {
+        showSnackBarWrong(context, e.response!.data.toString());
         _isLoading = false;
         notifyListeners();
         LogController.activityLog("SigninProvider", "SignIn", "failed");
-        print(e);
       }
     }
   }

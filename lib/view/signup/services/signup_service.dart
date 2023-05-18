@@ -1,11 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:dobo/api/api_endpoints.dart';
 import 'package:dobo/log/log_controller.dart';
+import 'package:dobo/router/app_route_constants.dart';
 import 'package:flutter/material.dart';
 
 class SignUpService extends ChangeNotifier {
   bool _acceptTC = false;
+  bool _isLoading = false;
 
+  bool get isoading => _isLoading;
   String username = "";
   String password = "";
   String password2 = "";
@@ -42,6 +45,8 @@ class SignUpService extends ChangeNotifier {
 
   Future<void> signUp(BuildContext context) async {
     if (validation(context)) {
+      _isLoading = true;
+      notifyListeners();
       try {
         final response = await dio.post(ApiEndpoints.register, data: {
           "username": username,
@@ -53,11 +58,19 @@ class SignUpService extends ChangeNotifier {
         });
 
         if (response.statusCode == 200 || response.statusCode == 201) {
+          _isLoading = false;
+          notifyListeners();
           LogController.activityLog("SignUpService", "Signin", "Success");
+          // ignore: use_build_context_synchronously
+          showSnackBarSuccess(context, "Signin Successfull Please Signin");
+          // ignore: use_build_context_synchronously
+          Navigator.pushReplacementNamed(context, RouteConstants.signInScreen);
         }
       } on DioError catch (e) {
+        _isLoading = false;
+        notifyListeners();
         LogController.activityLog("SignUpService", "Signin", "Failed");
-        print(e.message);
+        showSnackBarWrong(context, e.response!.data.toString());
       }
     }
   }
@@ -86,6 +99,7 @@ void showSnackBarWrong(BuildContext context, String message) {
     backgroundColor: Colors.red,
   ));
 }
+
 void showSnackBarSuccess(BuildContext context, String message) {
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
     content: Text(message),

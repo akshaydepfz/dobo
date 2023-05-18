@@ -4,8 +4,12 @@ import 'dart:developer';
 import 'package:dobo/common/primary_button.dart';
 import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/core/style/app_colors.dart';
+import 'package:dobo/router/app_route_constants.dart';
+import 'package:dobo/view/location_select/services/location_select_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LocationSelectScreen extends StatefulWidget {
   const LocationSelectScreen({super.key});
@@ -18,6 +22,7 @@ class _LocationSelectScreenState extends State<LocationSelectScreen> {
   final _mapController = MapController(initMapWithUserPosition: true);
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<LocationSelectService>(context);
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
 
@@ -35,7 +40,7 @@ class _LocationSelectScreenState extends State<LocationSelectScreen> {
         userLocationMarker: UserLocationMaker(
           personMarker: const MarkerIcon(
             icon: Icon(
-              Icons.location_history_rounded,
+              Icons.place,
               color: Colors.red,
               size: 48,
             ),
@@ -59,6 +64,9 @@ class _LocationSelectScreenState extends State<LocationSelectScreen> {
             size: 56,
           ),
         )),
+        onLocationChanged: (v) {
+          provider.getAddressFromLatLong(context, v.latitude, v.longitude);
+        },
         onMapIsReady: (isReady) async {
           log(isReady.toString());
           if (isReady) {
@@ -93,19 +101,28 @@ class _LocationSelectScreenState extends State<LocationSelectScreen> {
               ),
             ),
             GlobalVariabels.vertical15,
-            const Text(
-              'Malappuram, kerala, india',
-              style: TextStyle(fontSize: 16),
+            Text(
+              provider.address,
+              style: const TextStyle(fontSize: 16),
             ),
             GlobalVariabels.vertical10,
             const Divider(),
             GlobalVariabels.vertical10,
             CommonTextField(
-                onChanged: (value) {}, hint: 'Enter your your address'),
+                onChanged: (value) {},
+                hint: 'Enter your your address (optional)'),
             GlobalVariabels.vertical15,
-            CommonTextField(onChanged: (value) {}, hint: 'Work, Home,'),
+            CommonTextField(
+                onChanged: (value) {}, hint: 'Work, Home, (optional)'),
             GlobalVariabels.vertical10,
-            PrimaryButton(onTap: () {}, label: 'Confirm Location'),
+            PrimaryButton(
+                onTap: () async {
+                  final pref = await SharedPreferences.getInstance();
+                  pref.setString('location', provider.address);
+                  // ignore: use_build_context_synchronously
+                  Navigator.pushNamed(context, RouteConstants.landingScreen);
+                },
+                label: 'Confirm Location'),
           ],
         ),
       ),

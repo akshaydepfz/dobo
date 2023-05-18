@@ -30,7 +30,7 @@ class SignInScreen extends StatelessWidget {
                 SizedBox(
                   width: width * .60,
                   child: const Text(
-                    'Welcome back to Doctor app,',
+                    'Welcome back to DOBO,',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 26,
@@ -78,7 +78,7 @@ class SignInScreen extends StatelessWidget {
                   ),
                 ),
                 PrimaryButton(
-                  isLoading: loginProvider.isLoading,
+                    isLoading: loginProvider.isLoading,
                     onTap: () {
                       loginProvider.signIn(context);
                     },

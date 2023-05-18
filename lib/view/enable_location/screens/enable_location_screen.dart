@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dobo/common/primary_appbar.dart';
 import 'package:dobo/common/primary_button.dart';
 import 'package:dobo/constants/global_variables.dart';
@@ -53,6 +55,9 @@ class EnableLocationScreen extends StatelessWidget {
                   final locationAlways =
                       await Permission.locationAlways.request();
                   if (await Permission.location.request().isGranted) {
+                    // ignore: use_build_context_synchronously
+                    Navigator.pushNamed(context, RouteConstants.locationSelect);
+                  } else if (Platform.isIOS) {
                     // ignore: use_build_context_synchronously
                     Navigator.pushNamed(context, RouteConstants.locationSelect);
                   }

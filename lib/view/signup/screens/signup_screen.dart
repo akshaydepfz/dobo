@@ -29,7 +29,7 @@ class SignUpScreen extends StatelessWidget {
                 SizedBox(
                   width: width * .65,
                   child: const Text(
-                    'Create Doctor app account,',
+                    'Create DOBO Patient account,',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 26,
@@ -93,6 +93,7 @@ class SignUpScreen extends StatelessWidget {
                 ),
                 GlobalVariabels.vertical15,
                 PrimaryButton(
+                    isLoading: signinProvider.isoading,
                     onTap: () {
                       signinProvider.signUp(context);
                     },
