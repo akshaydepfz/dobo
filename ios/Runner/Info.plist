@@ -32,6 +32,8 @@
 	<string>This app needs access to location when in the background.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app needs access to location in the background.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>user can send voice recordings</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>

@@ -15,12 +15,12 @@ class ProfileTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Column(
-        children: [
-          const Divider(),
-          Padding(
+    return Column(
+      children: [
+        const Divider(),
+        GestureDetector(
+          onTap: onTap,
+          child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 16),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -40,8 +40,8 @@ class ProfileTile extends StatelessWidget {
               ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

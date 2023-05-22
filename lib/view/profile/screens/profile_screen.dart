@@ -1,3 +1,5 @@
+import 'package:dobo/common/primary_button.dart';
+import 'package:dobo/common/secondary_button.dart';
 import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/core/assets/app_assets.dart';
 import 'package:dobo/core/style/app_colors.dart';
@@ -23,6 +25,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     final provider = Provider.of<ProfileService>(context);
     return Scaffold(
       body: SafeArea(
@@ -101,11 +104,82 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ProfileTile(
                       title: 'Logout',
                       onTap: () {
-                        provider.logOut(context);
+                        showDialog(
+                            context: context,
+                            builder: (context) => Dialog(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(15.0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        const Text(
+                                          'Logout',
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        GlobalVariabels.vertical10,
+                                        const Divider(),
+                                        const Text(
+                                          'Are you sure want logout?',
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                        GlobalVariabels.vertical10,
+                                        PrimaryButton(
+                                            onTap: () {
+                                              provider.logOut(context);
+                                            },
+                                            label: 'Logout'),
+                                        SecondaryButton(
+                                            onTap: () {
+                                              Navigator.pop(context);
+                                            },
+                                            label: 'Cancel')
+                                      ],
+                                    ),
+                                  ),
+                                ));
                       }),
                   ProfileTile(
                     title: 'Delete Account',
-                    onTap: () {},
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) => Dialog(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      const Text(
+                                        'Delete Account',
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      GlobalVariabels.vertical10,
+                                      const Divider(),
+                                      const Text(
+                                        'Are you sure want delete your account?',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(fontSize: 16),
+                                      ),
+                                      GlobalVariabels.vertical10,
+                                      PrimaryButton(
+                                          onTap: () {
+                                            provider.logOut(context);
+                                          },
+                                          label: 'Delete Account'),
+                                      SecondaryButton(
+                                          onTap: () {
+                                            Navigator.pop(context);
+                                          },
+                                          label: 'Cancel')
+                                    ],
+                                  ),
+                                ),
+                              ));
+                    },
                     color: Colors.red,
                   ),
                 ],

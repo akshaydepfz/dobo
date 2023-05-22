@@ -1,4 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dobo/common/primary_button.dart';
+import 'package:dobo/common/secondary_button.dart';
 import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/core/assets/app_assets.dart';
 import 'package:dobo/core/assets/app_icons.dart';
@@ -76,8 +78,40 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Navigator.pushNamed(
-                                context, RouteConstants.locationSelect);
+                            showDialog(
+                                context: context,
+                                builder: (context) => Dialog(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(15.0),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            const Text(
+                                              'Change Your Location Now!',
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            GlobalVariabels.vertical10,
+                                            const Divider(),
+                                            GlobalVariabels.vertical10,
+                                            PrimaryButton(
+                                                onTap: () {
+                                                  Navigator.pushNamed(
+                                                      context,
+                                                      RouteConstants
+                                                          .locationSelect);
+                                                },
+                                                label: 'Change Location'),
+                                            SecondaryButton(
+                                                onTap: () {
+                                                  Navigator.pop(context);
+                                                },
+                                                label: 'Cancel')
+                                          ],
+                                        ),
+                                      ),
+                                    ));
                           },
                           child: const Icon(
                             Icons.expand_more_outlined,
