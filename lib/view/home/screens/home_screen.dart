@@ -7,6 +7,7 @@ import 'package:dobo/core/assets/app_icons.dart';
 import 'package:dobo/core/style/app_colors.dart';
 import 'package:dobo/router/app_route_constants.dart';
 import 'package:dobo/view/clinic_view/screens/clinic_view_.screen.dart';
+import 'package:dobo/view/doctor_view/screens/doctor_view.dart';
 import 'package:dobo/view/home/services/home_provider.dart';
 import 'package:dobo/view/home/widgets/clinics_card.dart';
 import 'package:dobo/view/home/widgets/reminder_card.dart';
@@ -30,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Provider.of<HomeProvider>(context, listen: false).getNearestClinics();
     Provider.of<HomeProvider>(context, listen: false).getReminders();
     Provider.of<HomeProvider>(context, listen: false).getSliders();
+    Provider.of<HomeProvider>(context, listen: false).getDoctorList();
     super.initState();
   }
 
@@ -44,6 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Padding(
             padding: const EdgeInsets.all(15.0),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -193,7 +196,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           return SliderCard(
                             width: width,
                             title: provider.sliders[i].title,
-                            description: provider.sliders[i].description,
+                            image: provider.sliders[i].description,
                           );
                         }),
                 const SizedBox(
@@ -201,21 +204,36 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 Visibility(
                   visible: provider.reminders.isNotEmpty,
-                  child: CarouselSlider.builder(
-                      itemCount: provider.reminders.length,
-                      itemBuilder: (context, i, intex) {
-                        return ReminderCard(
-                            width: width,
-                            doctor: provider.reminders[0].title,
-                            dateTime: provider.reminders[0].time,
-                            token: provider.reminders[0].token);
-                      },
-                      options: CarouselOptions(
-                          height: 80,
-                          scrollPhysics: const BouncingScrollPhysics(),
-                          autoPlay: true,
-                          initialPage: 0,
-                          viewportFraction: 1.0)),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Today Bookings',
+                        style: TextStyle(color: Colors.black, fontSize: 16),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      CarouselSlider.builder(
+                          itemCount: provider.reminders.length,
+                          itemBuilder: (context, i, intex) {
+                            return ReminderCard(
+                              width: width,
+                              doctor: provider.reminders[i].title,
+                              dateTime: provider.reminders[i].time,
+                              token: provider.reminders[i].token,
+                              clinic: provider.reminders[i].clinic,
+                              department: provider.reminders[i].department,
+                            );
+                          },
+                          options: CarouselOptions(
+                              height: 100,
+                              scrollPhysics: const BouncingScrollPhysics(),
+                              autoPlay: true,
+                              initialPage: 0,
+                              viewportFraction: 1.0)),
+                    ],
+                  ),
                 ),
                 TitleCard(title: 'Popular Clinics', onTap: () {}),
                 ListView.builder(
@@ -247,49 +265,75 @@ class _HomeScreenState extends State<HomeScreen> {
                 TitleCard(title: 'Specialist Doctors', onTap: () {}),
                 SizedBox(
                   height: 170,
-                  child: ListView.builder(
-                      itemCount: 4,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, i) {
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(
-                                context, RouteConstants.doctorViewScreen);
-                          },
-                          child: Container(
-                            margin: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            width: 157,
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                  height: 100,
-                                  width: width,
-                                  child: Image.asset(
-                                    AppAssets.doctor,
-                                    fit: BoxFit.cover,
+                  child: provider.doctorList == null
+                      ? const SizedBox(child: SizedBox())
+                      : ListView.builder(
+                          itemCount: provider.doctorList!.length,
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, i) {
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => DoctorViewScreen(
+                                        doctorId: provider.doctorList![i].id),
                                   ),
+                                );
+                                // Navigator.pushNamed(
+                                //     context, RouteConstants.doctorViewScreen);
+                              },
+                              child: Container(
+                                margin: const EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(8.0),
                                 ),
-                                const SizedBox(
-                                  height: 5,
+                                width: 157,
+                                child: Column(
+                                  children: [
+                                    SizedBox(
+                                      height: 100,
+                                      width: width,
+                                      child: provider.doctorList![i].image ==
+                                              null
+                                          ? Container(
+                                              padding: const EdgeInsets.all(10),
+                                              decoration: BoxDecoration(
+                                                  color: Colors.grey.shade200,
+                                                  borderRadius:
+                                                      const BorderRadius.only(
+                                                    topLeft:
+                                                        Radius.circular(5.0),
+                                                    topRight:
+                                                        Radius.circular(5.0),
+                                                  )),
+                                              child:
+                                                  Image.asset(AppAssets.avatar),
+                                            )
+                                          : Image.network(
+                                              provider.doctorList![i].image,
+                                              fit: BoxFit.cover,
+                                            ),
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                      provider.doctorList![i].fullName,
+                                      style: const TextStyle(),
+                                    ),
+                                    Text(
+                                      provider.doctorList![i].designation,
+                                      style: const TextStyle(
+                                          color: AppColor.primary),
+                                    )
+                                  ],
                                 ),
-                                const Text(
-                                  'Dr. Rubayet Sakib',
-                                  style: TextStyle(),
-                                ),
-                                const Text(
-                                  'Dental Specialist',
-                                  style: TextStyle(color: AppColor.primary),
-                                )
-                              ],
-                            ),
-                          ),
-                        );
-                      }),
+                              ),
+                            );
+                          }),
                 )
               ],
             ),

@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:dobo/api/api_endpoints.dart';
 import 'package:dobo/log/log_controller.dart';
 import 'package:dobo/model/clinic_model.dart';
+import 'package:dobo/model/doctor_model.dart';
 import 'package:dobo/model/reminder_model.dart';
 import 'package:dobo/model/slider_model.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +16,7 @@ class HomeProvider extends ChangeNotifier {
   List<ClinicModel> clinicList = [];
   List<SliderModel> sliders = [];
   List<ReminderModel> reminders = [];
+  List<DoctorListModel>? doctorList;
 
   Future<void> getLocation() async {
     final pref = await SharedPreferences.getInstance();
@@ -86,6 +87,27 @@ class HomeProvider extends ChangeNotifier {
       }
     } on DioError catch (_) {
       LogController.activityLog('HomeProvider', "getReminders", "Failed");
+    }
+  }
+
+  Future getDoctorList() async {
+    final pref = await SharedPreferences.getInstance();
+    String token = pref.getString("accessToken") ?? '';
+    try {
+      final response = await dio.get('https://dobo.co.in/api/v1/doctors/',
+          options: Options(headers: {
+            'Authorization': 'Bearer $token',
+          }));
+
+      if (response.statusCode == 200) {
+        List data = response.data;
+        doctorList =
+            data.map((json) => DoctorListModel.fromJson(json)).toList();
+        notifyListeners();
+        LogController.activityLog('HomeProvider', "getDoctorList", "Sucess");
+      }
+    } on DioError catch (_) {
+      LogController.activityLog('HomeProvider', "getDoctorList", "Failed");
     }
   }
 }

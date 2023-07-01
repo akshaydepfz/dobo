@@ -23,7 +23,7 @@ class SliderModel {
         updated: DateTime.parse(json["updated"]),
         isActive: json["is_active"],
         title: json["title"],
-        description: json["description"],
+        description: json["image"],
         creator: json["creator"],
       );
 

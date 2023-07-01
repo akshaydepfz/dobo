@@ -116,12 +116,7 @@ class _LocationSelectScreenState extends State<LocationSelectScreen> {
                 onChanged: (value) {}, hint: 'Work, Home, (optional)'),
             GlobalVariabels.vertical10,
             PrimaryButton(
-                onTap: () async {
-                  final pref = await SharedPreferences.getInstance();
-                  pref.setString('location', provider.address);
-                  // ignore: use_build_context_synchronously
-                  Navigator.pushNamed(context, RouteConstants.landingScreen);
-                },
+                onTap: () => provider.setLocation(context),
                 label: 'Confirm Location'),
           ],
         ),

@@ -1,3 +1,4 @@
+import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/core/assets/app_icons.dart';
 import 'package:dobo/core/style/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -41,10 +42,17 @@ class ClinicsCard extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  width: 100,
-                  child: Image.network(image),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(5.0),
+                  child: SizedBox(
+                    width: 90,
+                    child: Image.network(
+                      image,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
+                GlobalVariabels.horizontal10,
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -74,7 +82,7 @@ class ClinicsCard extends StatelessWidget {
                         const SizedBox(
                           width: 10,
                         ),
-                         Text(
+                        Text(
                           '$avarageRating ($ratingCount reviews)',
                           style: const TextStyle(color: AppColor.grey3),
                         )

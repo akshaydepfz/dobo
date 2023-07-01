@@ -12,4 +12,5 @@ class AppAssets {
   static const String bookingFail = 'assets/images/booking_fail.svg';
   static const String reschedulePop = 'assets/images/reschedule.svg';
   static const String donePop = 'assets/images/done_pop.svg';
+  static const String appicon = 'assets/images/logo.svg';
 }

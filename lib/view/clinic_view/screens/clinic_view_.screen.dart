@@ -58,19 +58,20 @@ class _ClinicViewScreenState extends State<ClinicViewScreen> {
                           Row(
                             children: [
                               Container(
-                                  width: 100,
-                                  decoration: BoxDecoration(
-                                      image: const DecorationImage(
-                                          image: AssetImage(
-                                        AppAssets.health,
-                                      )),
-                                      borderRadius: BorderRadius.circular(12),
-                                      border:
-                                          Border.all(color: AppColor.grey2)),
-                                  height: 100,
-                                  child: const Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                  )),
+                                width: 100,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12),
+                                    border: Border.all(color: AppColor.grey2)),
+                                height: 100,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(12),
+                                  child: Image.network(
+                                    provider.clinicDetail!.image ??
+                                        "https://t4.ftcdn.net/jpg/03/47/41/03/360_F_347410397_5PpZbcQpnEqqzlGjOk1R5d11977LbMUW.jpg",
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
                               GlobalVariabels.horizontal10,
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,

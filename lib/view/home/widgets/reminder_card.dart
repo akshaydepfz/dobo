@@ -7,18 +7,23 @@ class ReminderCard extends StatelessWidget {
     required this.doctor,
     required this.dateTime,
     required this.token,
+    required this.clinic,
+    required this.department,
   });
 
   final double width;
   final String doctor;
   final String dateTime;
   final String token;
+  final String clinic;
+  final String department;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.only(right: 10),
       padding: const EdgeInsets.all(12.0),
-      height: 80,
+      height: 100,
       width: width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.0),
@@ -29,13 +34,22 @@ class ReminderCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            doctor,
-            style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-                color: Color(0xFF1B988D)),
+          Row(
+            children: [
+              Text(
+                doctor,
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    color: Color(0xFF1B988D)),
+              ),
+              const SizedBox(
+                width: 5,
+              ),
+              Text("- ${department}")
+            ],
           ),
+          Text(clinic),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -50,7 +64,7 @@ class ReminderCard extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     fontSize: 16.0,
                     color: Color(0xFF1B988D)),
-              )
+              ),
             ],
           )
         ],

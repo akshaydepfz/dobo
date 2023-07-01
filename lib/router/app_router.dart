@@ -32,8 +32,7 @@ import 'package:dobo/view/profile/screens/profile_screen.dart';
 import 'package:dobo/view/review/screens/review_screen.dart';
 import 'package:dobo/view/review_animation/screen/review_pop.dart';
 import 'package:dobo/view/review_animation/screen/session_end_pop.dart';
-import 'package:dobo/view/signin/screens/signin_screen.dart';
-import 'package:dobo/view/signup/screens/signup_screen.dart';
+import 'package:dobo/view/otp/screens/signin_screen.dart';
 import 'package:flutter/material.dart';
 
 class AppRoute {
@@ -41,8 +40,6 @@ class AppRoute {
     switch (route.name) {
       case RouteConstants.signInScreen:
         return MaterialPageRoute(builder: (context) => const SignInScreen());
-      case RouteConstants.signUpScreen:
-        return MaterialPageRoute(builder: (context) => const SignUpScreen());
       case RouteConstants.forgotScreen:
         return MaterialPageRoute(
             builder: (context) => const ForgotPasswordScreen());

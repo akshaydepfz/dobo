@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:dobo/api/api_endpoints.dart';
 import 'package:dobo/log/log_controller.dart';
-import 'package:dobo/view/signup/services/signup_service.dart';
+import 'package:dobo/view/profile_create/services/signup_service.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

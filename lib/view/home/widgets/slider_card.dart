@@ -3,48 +3,24 @@ import 'package:flutter/material.dart';
 class SliderCard extends StatelessWidget {
   const SliderCard({
     super.key,
-    required this.width, required this.title, required this.description,
+    required this.width,
+    required this.title,
+    required this.image,
   });
 
   final double width;
   final String title;
-  final String description;
+  final String image;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.only(right: 10),
       padding: const EdgeInsets.all(15),
-    
       width: width,
       decoration: BoxDecoration(
+        image: DecorationImage(image: NetworkImage(image), fit: BoxFit.cover),
         borderRadius: BorderRadius.circular(8),
-        gradient: const LinearGradient(
-          end: Alignment.topCenter,
-          colors: [
-            Color(0xFF00776D),
-            Color(0xFF00DCC9),
-          ],
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children:  [
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-          ),
-          const SizedBox(
-            height: 05,
-          ),
-          Text(
-           description,
-            style: const TextStyle(color: Colors.white),
-          )
-        ],
       ),
     );
   }

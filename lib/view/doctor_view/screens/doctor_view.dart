@@ -51,16 +51,16 @@ class _DoctorViewScreenState extends State<DoctorViewScreen> {
                               Container(
                                   width: 100,
                                   decoration: BoxDecoration(
-                                      image: const DecorationImage(
-                                          image: AssetImage(
-                                        AppAssets.doctor2,
-                                      )),
                                       borderRadius: BorderRadius.circular(12),
                                       border:
                                           Border.all(color: AppColor.grey2)),
                                   height: 100,
-                                  child: const Padding(
-                                    padding: EdgeInsets.all(8.0),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: provider.doctorDetail!.image == null
+                                        ? Image.asset(AppAssets.avatar)
+                                        : Image.network(
+                                            provider.doctorDetail!.image),
                                   )),
                               GlobalVariabels.horizontal10,
                               Column(
@@ -129,17 +129,25 @@ class _DoctorViewScreenState extends State<DoctorViewScreen> {
                                 fontWeight: FontWeight.bold, fontSize: 17),
                           ),
                           GlobalVariabels.vertical15,
-                          ListView.builder(
-                              itemCount: provider.reviews!.length,
-                              shrinkWrap: true,
-                              itemBuilder: (context, i) {
-                                return RatiingCard(
-                                  image: 'image',
-                                  rating: provider.reviews![i].rating,
-                                  review: provider.reviews![i].review,
-                                  name: '',
-                                );
-                              })
+                          provider.reviews == null
+                              ? const Center(
+                                  child: CircularProgressIndicator(),
+                                )
+                              : provider.reviews!.isEmpty
+                                  ? const Center(
+                                      child: Text('No Reviews Found!'),
+                                    )
+                                  : ListView.builder(
+                                      itemCount: provider.reviews!.length,
+                                      shrinkWrap: true,
+                                      itemBuilder: (context, i) {
+                                        return RatiingCard(
+                                          image: 'image',
+                                          rating: provider.reviews![i].rating,
+                                          review: provider.reviews![i].review,
+                                          name: '',
+                                        );
+                                      })
                         ],
                       ),
                     ),

@@ -46,7 +46,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                   provider.userModel == null
-                      ? Container()
+                      ? const Center(
+                          child: LinearProgressIndicator(
+                          minHeight: 1,
+                        ))
                       : Row(
                           children: [
                             Container(
@@ -59,7 +62,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     width: 2,
                                     color: AppColor.primary,
                                   )),
-                              child: Image.asset(AppAssets.avatar),
+                              child: provider.userModel!.image == ""
+                                  ? Image.asset(AppAssets.avatar)
+                                  : ClipRRect(
+                                      borderRadius: BorderRadius.circular(90),
+                                      child: Image.network(
+                                        provider.userModel!.image,
+                                        fit: BoxFit.cover,
+                                      )),
                             ),
                             GlobalVariabels.horizontal10,
                             Column(

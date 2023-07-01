@@ -56,10 +56,12 @@ class EnableLocationScreen extends StatelessWidget {
                       await Permission.locationAlways.request();
                   if (await Permission.location.request().isGranted) {
                     // ignore: use_build_context_synchronously
-                    Navigator.pushNamed(context, RouteConstants.locationSelect);
+                    Navigator.pushReplacementNamed(
+                        context, RouteConstants.locationSelect);
                   } else if (Platform.isIOS) {
                     // ignore: use_build_context_synchronously
-                    Navigator.pushNamed(context, RouteConstants.locationSelect);
+                    Navigator.pushReplacementNamed(
+                        context, RouteConstants.locationSelect);
                   }
                 },
                 label: 'Enable Device Location'),
