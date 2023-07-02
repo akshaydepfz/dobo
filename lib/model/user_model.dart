@@ -17,6 +17,7 @@ class UserModel {
   String userType;
   List<dynamic> groups;
   List<dynamic> userPermissions;
+  String phone;
 
   UserModel(
       {required this.id,
@@ -32,7 +33,8 @@ class UserModel {
       required this.userType,
       required this.groups,
       required this.userPermissions,
-      required this.image});
+      required this.image,
+      required this.phone});
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
       id: json["id"],
@@ -49,6 +51,7 @@ class UserModel {
       groups: List<dynamic>.from(json["groups"].map((x) => x)),
       userPermissions:
           List<dynamic>.from(json["user_permissions"].map((x) => x)),
+      phone: json['phone'] ?? "",
       image: json['image'] ?? "");
 
   Map<String, dynamic> toJson() => {

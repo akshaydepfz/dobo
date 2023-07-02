@@ -6,6 +6,7 @@ import 'package:dobo/core/assets/app_assets.dart';
 import 'package:dobo/core/assets/app_icons.dart';
 import 'package:dobo/core/style/app_colors.dart';
 import 'package:dobo/router/app_route_constants.dart';
+import 'package:dobo/view/appointment/screens/date_slot_select.dart';
 import 'package:dobo/view/clinic_view/screens/clinic_view_.screen.dart';
 import 'package:dobo/view/doctor_view/services/doctor_details_service.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +41,7 @@ class _DoctorViewScreenState extends State<DoctorViewScreen> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    const PrimaryAppbar(title: 'The family care'),
+                    PrimaryAppbar(title: provider.doctorDetail!.fullName),
                     Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: Column(
@@ -86,27 +87,27 @@ class _DoctorViewScreenState extends State<DoctorViewScreen> {
                           GlobalVariabels.vertical15,
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: const [
+                            children: [
                               RateReviewCard(
                                   label: 'Patients',
                                   icon: AppIcons.group,
-                                  count: '5,000+'),
-                              SizedBox(
+                                  count: provider.doctorDetail!.patientsServed),
+                              const SizedBox(
                                 height: 60,
                                 child: VerticalDivider(),
                               ),
                               RateReviewCard(
                                   label: 'Rating',
                                   icon: AppIcons.star,
-                                  count: '4.8'),
-                              SizedBox(
+                                  count: provider.doctorDetail!.avgRating),
+                              const SizedBox(
                                 height: 60,
                                 child: VerticalDivider(),
                               ),
                               RateReviewCard(
                                   label: 'Reviews',
                                   icon: AppIcons.chat,
-                                  count: '4,942'),
+                                  count: provider.doctorDetail!.reviewsCount),
                             ],
                           ),
                           GlobalVariabels.vertical15,
@@ -142,10 +143,12 @@ class _DoctorViewScreenState extends State<DoctorViewScreen> {
                                       shrinkWrap: true,
                                       itemBuilder: (context, i) {
                                         return RatiingCard(
-                                          image: 'image',
+                                          image:
+                                              provider.reviews![i].patientImage,
                                           rating: provider.reviews![i].rating,
                                           review: provider.reviews![i].review,
-                                          name: '',
+                                          name:
+                                              provider.reviews![i].patientName,
                                         );
                                       })
                         ],
@@ -153,8 +156,12 @@ class _DoctorViewScreenState extends State<DoctorViewScreen> {
                     ),
                     PrimaryButton(
                         onTap: () {
-                          Navigator.pushNamed(
-                              context, RouteConstants.dateSelectScreen);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DateSelectingScreen(
+                                        doctorId: provider.doctorDetail!.id,
+                                      )));
                         },
                         label: 'Book Appointment')
                   ],
@@ -187,9 +194,11 @@ class RatiingCard extends StatelessWidget {
         children: [
           ListTile(
             contentPadding: EdgeInsets.zero,
-            leading: const CircleAvatar(
+            leading: CircleAvatar(
               radius: 25,
-              backgroundImage: AssetImage(AppAssets.avatar),
+              child: image == ''
+                  ? Image.asset(AppAssets.avatar)
+                  : Image.network(image),
             ),
             title: Text(
               name,

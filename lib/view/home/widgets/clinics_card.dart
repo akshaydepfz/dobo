@@ -1,4 +1,5 @@
 import 'package:dobo/constants/global_variables.dart';
+import 'package:dobo/core/assets/app_assets.dart';
 import 'package:dobo/core/assets/app_icons.dart';
 import 'package:dobo/core/style/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,8 @@ class ClinicsCard extends StatelessWidget {
     required this.onTap,
     required this.ratingCount,
     required this.avarageRating,
+    required this.onFavoriteClick,
+    required this.isFavorite,
   }) : super(key: key);
 
   final double width;
@@ -22,8 +25,9 @@ class ClinicsCard extends StatelessWidget {
   final String image;
   final String ratingCount;
   final String avarageRating;
-
+  final Function() onFavoriteClick;
   final Function() onTap;
+  final bool isFavorite;
 
   @override
   Widget build(BuildContext context) {
@@ -46,10 +50,12 @@ class ClinicsCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(5.0),
                   child: SizedBox(
                     width: 90,
-                    child: Image.network(
-                      image,
-                      fit: BoxFit.cover,
-                    ),
+                    child: image == ""
+                        ? Image.asset(AppAssets.avatar)
+                        : Image.network(
+                            image,
+                            fit: BoxFit.cover,
+                          ),
                   ),
                 ),
                 GlobalVariabels.horizontal10,
@@ -93,9 +99,19 @@ class ClinicsCard extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
-            height: 20,
-            child: Image.asset(AppIcons.favOutline),
+          GestureDetector(
+            onTap: onFavoriteClick,
+            child: SizedBox(
+              height: 20,
+              child: isFavorite
+                  ? SvgPicture.asset(
+                      AppIcons.favorite,
+                      color: AppColor.primary,
+                    )
+                  : Image.asset(
+                      AppIcons.favOutline,
+                    ),
+            ),
           )
         ],
       ),

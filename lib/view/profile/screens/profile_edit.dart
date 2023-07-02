@@ -3,21 +3,30 @@ import 'package:dobo/common/primary_button.dart';
 import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/core/assets/app_assets.dart';
 import 'package:dobo/core/assets/app_icons.dart';
+import 'package:dobo/core/style/app_colors.dart';
+import 'package:dobo/view/profile/services/profile_services.dart';
 import 'package:dobo/view/profile/widgets/editable_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
-class ProfileEditScreen extends StatelessWidget {
+class ProfileEditScreen extends StatefulWidget {
   ProfileEditScreen({super.key});
-  final TextEditingController _nameController =
-      TextEditingController(text: 'Martin Bator');
-  final TextEditingController _phoneController =
-      TextEditingController(text: '+91 2649351476');
-  final TextEditingController _emailController =
-      TextEditingController(text: 'martinbator@gmail.com');
+
+  @override
+  State<ProfileEditScreen> createState() => _ProfileEditScreenState();
+}
+
+class _ProfileEditScreenState extends State<ProfileEditScreen> {
+  @override
+  void initState() {
+    Provider.of<ProfileService>(context, listen: false).setProfileEdit();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<ProfileService>(context);
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SafeArea(
@@ -29,9 +38,26 @@ class ProfileEditScreen extends StatelessWidget {
                 SizedBox(
                   height: height * .12,
                   width: height * .12,
-                  child: const CircleAvatar(
-                    backgroundImage: AssetImage(
-                      AppAssets.avatar,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: AppColor.grey2,
+                        borderRadius: BorderRadius.circular(60)),
+                    child: GestureDetector(
+                      onTap: () => provider.pickImage(),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(60),
+                        child: Center(
+                          child: provider.image != null
+                              ? Image.file(provider.image!)
+                              : provider.userModel!.image == ''
+                                  ? Image.asset(
+                                      AppAssets.avatar,
+                                      fit: BoxFit.cover,
+                                    )
+                                  : Image.network(provider.userModel!.image,
+                                      fit: BoxFit.cover),
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -54,26 +80,29 @@ class ProfileEditScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     EditableTextField(
-                      controller: _nameController,
+                      hint: 'Name',
+                      controller: provider.nameController,
                       onChanged: (value) {},
                     ),
                     GlobalVariabels.vertical15,
                     EditableTextField(
-                      controller: _phoneController,
+                      hint: 'Phone Number',
+                      controller: provider.phoneController,
                       onChanged: (value) {},
                     ),
                     GlobalVariabels.vertical15,
                     EditableTextField(
-                      controller: _emailController,
+                      hint: 'Email',
+                      controller: provider.emailController,
                       onChanged: (value) {},
                     ),
                   ],
                 ),
               ),
             ),
-            PrimaryButton(onTap: () {
-              Navigator.pop(context);
-            }, label: 'Save Changes')
+            PrimaryButton(
+                onTap: () => provider.updateProfile(context),
+                label: 'Save Changes')
           ],
         ),
       ),

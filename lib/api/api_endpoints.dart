@@ -23,4 +23,13 @@ class ApiEndpoints {
       '$baseUrl/api/v1/articles/?date=&is_trending=true';
 
   static const doctorDepartmentfilter = '$baseUrl/api/v1/doctors/?department=';
+
+  static const addFavClinic =
+      '$baseUrl/api/v1/clinics/clinics/add_favorite/?clinic_id=';
+  static const removeFavClinic =
+      '$baseUrl/api/v1/clinics/clinics/remove_favorite/?clinic_id=';
+  static const getDepartments = '$baseUrl/api/v1/departments/';
+  static const slotes = '$baseUrl/api/v1/doctors/schedules/?doctor_id=';
+  static const relativeAdd =
+      '$baseUrl/api/v1/patients/add_relative/?patient_id=';
 }

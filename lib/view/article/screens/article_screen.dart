@@ -1,7 +1,6 @@
 import 'package:dobo/common/common_loading.dart';
 import 'package:dobo/core/assets/app_icons.dart';
 import 'package:dobo/core/style/app_colors.dart';
-import 'package:dobo/router/app_route_constants.dart';
 import 'package:dobo/view/article/screens/article_view_screen.dart';
 import 'package:dobo/view/article/services/article_services.dart';
 import 'package:flutter/material.dart';

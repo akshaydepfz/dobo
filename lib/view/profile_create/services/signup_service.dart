@@ -20,7 +20,7 @@ class ProfileCreateProvider extends ChangeNotifier {
 
   File? image;
   final picker = ImagePicker();
-  String url = '';
+
   Future pickImage() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {

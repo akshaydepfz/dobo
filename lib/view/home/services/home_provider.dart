@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:dobo/api/api_endpoints.dart';
 import 'package:dobo/log/log_controller.dart';
 import 'package:dobo/model/clinic_model.dart';
 import 'package:dobo/model/doctor_model.dart';
@@ -110,4 +111,47 @@ class HomeProvider extends ChangeNotifier {
       LogController.activityLog('HomeProvider', "getDoctorList", "Failed");
     }
   }
+
+  Future addClinicFavorite(
+      BuildContext context, String clinicId, bool isFavorite) async {
+    final pref = await SharedPreferences.getInstance();
+    String token = pref.getString("accessToken") ?? '';
+    if (isFavorite) {
+      try {
+        final response =
+            await dio.delete("${ApiEndpoints.removeFavClinic}$clinicId",
+                options: Options(headers: {
+                  'Authorization': 'Bearer $token',
+                }));
+
+        if (response.statusCode == 200) {
+          print(response.data);
+          LogController.activityLog(
+              'HomeProvider', "addClinicFavorite", "Success");
+          getNearestClinics();
+        }
+      } on DioError catch (e) {
+        LogController.activityLog(
+            'HomeProvider', "addClinicFavorite", "Failed");
+      }
+    } else {
+      try {
+        final response = await dio.post("${ApiEndpoints.addFavClinic}$clinicId",
+            options: Options(headers: {
+              'Authorization': 'Bearer $token',
+            }));
+
+        if (response.statusCode == 200) {
+          LogController.activityLog(
+              'HomeProvider', "addClinicFavorite", "Success");
+          getNearestClinics();
+        }
+      } on DioError catch (_) {
+        LogController.activityLog(
+            'HomeProvider', "addClinicFavorite", "Failed");
+      }
+    }
+  }
+
+  
 }

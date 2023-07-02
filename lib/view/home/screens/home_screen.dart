@@ -13,6 +13,8 @@ import 'package:dobo/view/home/widgets/clinics_card.dart';
 import 'package:dobo/view/home/widgets/reminder_card.dart';
 import 'package:dobo/view/home/widgets/slider_card.dart';
 import 'package:dobo/view/home/widgets/title_card.dart';
+import 'package:dobo/view/profile/services/profile_services.dart';
+import 'package:dobo/view/search/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
@@ -27,6 +29,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
+    Provider.of<ProfileService>(context, listen: false).getProfileDetails();
     Provider.of<HomeProvider>(context, listen: false).getLocation();
     Provider.of<HomeProvider>(context, listen: false).getNearestClinics();
     Provider.of<HomeProvider>(context, listen: false).getReminders();
@@ -38,6 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<HomeProvider>(context);
+    final profileProvider = Provider.of<ProfileService>(context);
     final width = MediaQuery.of(context).size.width;
 
     return Scaffold(
@@ -59,12 +63,33 @@ class _HomeScreenState extends State<HomeScreen> {
                             Navigator.pushNamed(
                                 context, RouteConstants.profileScreen);
                           },
-                          child: const SizedBox(
+                          child: SizedBox(
                             height: 50,
                             width: 50,
-                            child: CircleAvatar(
-                              backgroundImage: AssetImage(AppAssets.avatar),
-                            ),
+                            child: profileProvider.userModel == null
+                                ? ClipRRect(
+                                    borderRadius: BorderRadius.circular(60),
+                                    child: Image.asset(AppAssets.avatar))
+                                : Container(
+                                    decoration: const BoxDecoration(
+                                        color: Colors.transparent,
+                                        shape: BoxShape.circle),
+                                    child: profileProvider.userModel!.image ==
+                                            ''
+                                        ? ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(60),
+                                            child:
+                                                Image.asset(AppAssets.avatar))
+                                        : ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(60),
+                                            child: Image.network(
+                                              profileProvider.userModel!.image,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                  ),
                           ),
                         ),
                         const SizedBox(
@@ -139,32 +164,36 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 GlobalVariabels.vertical10,
                 GlobalVariabels.vertical10,
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  height: 60,
-                  decoration: BoxDecoration(
-                    color: AppColor.grey1,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        height: 30,
-                        width: 30,
-                        child: Image.asset(AppIcons.search),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      const Expanded(
-                        child: TextField(
-                          decoration: InputDecoration(
-                              hintStyle: TextStyle(color: AppColor.grey3),
-                              border: InputBorder.none,
-                              hintText: 'Search'),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SearchScreen()));
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    height: 60,
+                    decoration: BoxDecoration(
+                      color: AppColor.grey1,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          height: 30,
+                          width: 30,
+                          child: Image.asset(AppIcons.search),
                         ),
-                      ),
-                    ],
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        const Text(
+                          'Search',
+                          style: TextStyle(fontSize: 16, color: AppColor.grey2),
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 GlobalVariabels.vertical10,
@@ -242,6 +271,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   shrinkWrap: true,
                   itemBuilder: (context, i) {
                     return ClinicsCard(
+                      isFavorite: provider.clinicList[i].isFavorite,
+                      onFavoriteClick: () => provider.addClinicFavorite(
+                        context,
+                        provider.clinicList[i].id,
+                        provider.clinicList[i].isFavorite,
+                      ),
                       width: width,
                       avarageRating:
                           provider.clinicList[i].avgRating.toString(),
@@ -257,7 +292,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                 builder: (context) => ClinicViewScreen(
                                       clinicId: provider.clinicList[i].id,
                                     )));
-                        // Navigator.push(context,MaterialPageRoute(builder:(context) =>ClinicViewScreen()));
                       },
                     );
                   },

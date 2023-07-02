@@ -16,47 +16,54 @@ class DoctorDetailsModel {
   String description;
   dynamic creator;
   Department department;
+  String avgRating;
+  String patientsServed;
+  String reviewsCount;
 
-  DoctorDetailsModel({
-    required this.id,
-    required this.profileId,
-    required this.created,
-    required this.updated,
-    required this.isActive,
-    required this.fullName,
-    required this.gender,
-    required this.phone,
-    required this.designation,
-    required this.qualification,
-    required this.experience,
-    this.image,
-    required this.joiningDate,
-    required this.address,
-    required this.description,
-    this.creator,
-    required this.department,
-  });
+  DoctorDetailsModel(
+      {required this.id,
+      required this.profileId,
+      required this.created,
+      required this.updated,
+      required this.isActive,
+      required this.fullName,
+      required this.gender,
+      required this.phone,
+      required this.designation,
+      required this.qualification,
+      required this.experience,
+      this.image,
+      required this.joiningDate,
+      required this.address,
+      required this.description,
+      this.creator,
+      required this.department,
+      required this.avgRating,
+      required this.patientsServed,
+      required this.reviewsCount});
 
   factory DoctorDetailsModel.fromJson(Map<String, dynamic> json) =>
       DoctorDetailsModel(
-        id: json["id"],
-        profileId: json["profile_id"],
-        created: DateTime.parse(json["created"]),
-        updated: DateTime.parse(json["updated"]),
-        isActive: json["is_active"],
-        fullName: json["full_name"],
-        gender: json["gender"],
-        phone: json["phone"],
-        designation: json["designation"],
-        qualification: json["qualification"],
-        experience: json["experience"],
-        image: json["image"],
-        joiningDate: DateTime.parse(json["joining_date"]),
-        address: json["address"],
-        description: json["description"],
-        creator: json["creator"],
-        department: Department.fromJson(json["department"]),
-      );
+          id: json["id"],
+          profileId: json["profile_id"],
+          created: DateTime.parse(json["created"]),
+          updated: DateTime.parse(json["updated"]),
+          isActive: json["is_active"],
+          fullName: json["full_name"],
+          gender: json["gender"],
+          phone: json["phone"],
+          designation: json["designation"],
+          qualification: json["qualification"],
+          experience: json["experience"],
+          image: json["image"],
+          joiningDate: DateTime.parse(json["joining_date"]),
+          address: json["address"],
+          description: json["description"],
+          creator: json["creator"],
+          department: Department.fromJson(json["department"]),
+          avgRating: json['avg_rating'].toString(),
+          patientsServed: json['patients_served'].toString(),
+          reviewsCount: json['reviews_count'].toString());
 
   Map<String, dynamic> toJson() => {
         "id": id,

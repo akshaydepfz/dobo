@@ -11,6 +11,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../widgets/doctor_card.dart';
+
 class ClinicViewScreen extends StatefulWidget {
   const ClinicViewScreen({super.key, required this.clinicId});
   final String clinicId;
@@ -205,98 +207,6 @@ class _ClinicViewScreenState extends State<ClinicViewScreen> {
                 ),
               ),
             ),
-    );
-  }
-}
-
-class DoctorCard extends StatelessWidget {
-  const DoctorCard({
-    super.key,
-    required this.width,
-    required this.image,
-    required this.name,
-    required this.department,
-    required this.ratingCount,
-    required this.reviews,
-    required this.onTap,
-  });
-  final String image;
-  final String name;
-  final String department;
-  final String ratingCount;
-  final String reviews;
-  final Function() onTap;
-  final double width;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 10),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        height: 100,
-        child: Row(
-          children: [
-            ClipRRect(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(8),
-                bottomLeft: Radius.circular(8),
-              ),
-              child: SizedBox(
-                width: 100,
-                height: 100,
-                child: Image.asset(
-                  AppAssets.doctor,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            GlobalVariabels.horizontal10,
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Dr. $name",
-                    style: const TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                  Text(
-                    department,
-                    style: const TextStyle(color: AppColor.primary),
-                  ),
-                  Expanded(
-                    child: SizedBox(width: width / 1.8, child: const Divider()),
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: SvgPicture.asset(AppIcons.star),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      const Text(
-                        '4.6  (3,362 reviews)',
-                        style: TextStyle(color: AppColor.grey3),
-                      )
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

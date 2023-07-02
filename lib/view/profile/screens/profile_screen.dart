@@ -102,12 +102,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Navigator.pushNamed(
                             context, RouteConstants.editProfile);
                       }),
-                  ProfileTile(
-                      title: 'Change Password',
-                      onTap: () {
-                        Navigator.pushNamed(
-                            context, RouteConstants.changePassword);
-                      }),
                   ProfileTile(title: 'Privacy Settings', onTap: () {}),
                   ProfileTile(title: 'Help Center', onTap: () {}),
                   ProfileTile(title: 'Contact Us', onTap: () {}),

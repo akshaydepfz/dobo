@@ -6,9 +6,11 @@ class EditableTextField extends StatelessWidget {
     Key? key,
     required this.controller,
     required this.onChanged,
+    required this.hint,
   }) : super(key: key);
   final TextEditingController controller;
   final Function(String value) onChanged;
+  final String hint;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,8 @@ class EditableTextField extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: TextField(
         controller: controller,
-        decoration: const InputDecoration(
+        decoration: InputDecoration(
+          hintText: hint,
           border: InputBorder.none,
         ),
       ),

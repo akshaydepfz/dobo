@@ -75,6 +75,7 @@ class AppRoute {
         return MaterialPageRoute(
             builder: (context) => const CategoryViewScreen(
                   departmentId: '',
+                  department: '',
                 ));
       case RouteConstants.doctorViewScreen:
         return MaterialPageRoute(
@@ -83,7 +84,9 @@ class AppRoute {
                 ));
       case RouteConstants.dateSelectScreen:
         return MaterialPageRoute(
-            builder: (context) => const DateSelectingScreen());
+            builder: (context) => const DateSelectingScreen(
+                  doctorId: '',
+                ));
       case RouteConstants.patientScreen:
         return MaterialPageRoute(
             builder: (context) => const PatientDetailsScreen());
@@ -115,7 +118,8 @@ class AppRoute {
         return MaterialPageRoute(
             builder: (context) => const NotificationScreen());
       case RouteConstants.locationSelect:
-        return MaterialPageRoute(builder: (context) => LocationSelectScreen());
+        return MaterialPageRoute(
+            builder: (context) => const LocationSelectScreen());
       case RouteConstants.reviewScreen:
         return MaterialPageRoute(builder: (context) => const ReviewScreen());
       case RouteConstants.reviewPop:

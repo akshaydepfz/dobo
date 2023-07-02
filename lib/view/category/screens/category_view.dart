@@ -4,15 +4,17 @@ import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/core/assets/app_assets.dart';
 import 'package:dobo/core/assets/app_icons.dart';
 import 'package:dobo/core/style/app_colors.dart';
-import 'package:dobo/router/app_route_constants.dart';
 import 'package:dobo/view/category/services/category_service.dart';
+import 'package:dobo/view/doctor_view/screens/doctor_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 class CategoryViewScreen extends StatefulWidget {
-  const CategoryViewScreen({super.key, required this.departmentId});
+  const CategoryViewScreen(
+      {super.key, required this.departmentId, required this.department});
   final String departmentId;
+  final String department;
 
   @override
   State<CategoryViewScreen> createState() => _CategoryViewScreenState();
@@ -31,24 +33,35 @@ class _CategoryViewScreenState extends State<CategoryViewScreen> {
     final provider = Provider.of<CategoryProvider>(context);
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.department),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        centerTitle: true,
+      ),
       body: SafeArea(
         child: provider.doctors == null
             ? const CommonLoadingWidget()
-            : Column(
-                children: [
-                  const PrimaryAppbar(title: 'General Physician'),
-                  Expanded(
+            : provider.doctors!.isEmpty
+                ? const Center(
+                    child: Text('No Doctors Found!'),
+                  )
+                : Expanded(
                     child: ListView.builder(
                       itemCount: provider.doctors!.length,
                       itemBuilder: (context, i) {
                         return GestureDetector(
                           onTap: () {
-                            Navigator.pushNamed(
-                                context, RouteConstants.doctorViewScreen);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DoctorViewScreen(
+                                          doctorId: provider.doctors![i].id,
+                                        )));
                           },
                           child: DoctorCard(
                               width: width,
-                              image: '',
+                              image: provider.doctors![i].image ?? "",
                               name: provider.doctors![i].fullName,
                               department:
                                   provider.doctors![i].department.category,
@@ -56,9 +69,7 @@ class _CategoryViewScreenState extends State<CategoryViewScreen> {
                         );
                       },
                     ),
-                  )
-                ],
-              ),
+                  ),
       ),
     );
   }
@@ -100,10 +111,12 @@ class DoctorCard extends StatelessWidget {
             child: SizedBox(
               width: 100,
               height: 100,
-              child: Image.asset(
-                AppAssets.doctor2,
-                fit: BoxFit.cover,
-              ),
+              child: image == ""
+                  ? Image.asset(
+                      AppAssets.doctor2,
+                      fit: BoxFit.cover,
+                    )
+                  : Image.network(image),
             ),
           ),
           GlobalVariabels.horizontal10,
@@ -112,15 +125,15 @@ class DoctorCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Dr. Rubayet Sakib',
-                  style: TextStyle(
+                Text(
+                  'Dr. $name',
+                  style: const TextStyle(
                     fontSize: 16,
                   ),
                 ),
-                const Text(
-                  'Dental Specialist',
-                  style: TextStyle(color: AppColor.primary),
+                Text(
+                  department,
+                  style: const TextStyle(color: AppColor.primary),
                 ),
                 Expanded(
                   child: SizedBox(width: width / 1.8, child: const Divider()),

@@ -8,7 +8,8 @@ class ReviewModel {
   dynamic creator;
   String doctor;
   String patient;
-
+  String patientName;
+  String patientImage;
   ReviewModel({
     required this.id,
     required this.created,
@@ -19,19 +20,22 @@ class ReviewModel {
     this.creator,
     required this.doctor,
     required this.patient,
+    required this.patientName,
+    required this.patientImage,
   });
 
   factory ReviewModel.fromJson(Map<String, dynamic> json) => ReviewModel(
-        id: json["id"],
-        created: DateTime.parse(json["created"]),
-        updated: DateTime.parse(json["updated"]),
-        isActive: json["is_active"],
-        review: json["review"],
-        rating: json["rating"],
-        creator: json["creator"],
-        doctor: json["doctor"],
-        patient: json["patient"],
-      );
+      id: json["id"],
+      created: DateTime.parse(json["created"]),
+      updated: DateTime.parse(json["updated"]),
+      isActive: json["is_active"],
+      review: json["review"],
+      rating: json["rating"],
+      creator: json["creator"],
+      doctor: json["doctor"],
+      patient: json["patient"],
+      patientName: json['patient_name'],
+      patientImage: json['patient_image'] ?? "");
 
   Map<String, dynamic> toJson() => {
         "id": id,
