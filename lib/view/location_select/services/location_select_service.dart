@@ -5,7 +5,6 @@ import 'package:dobo/router/app_route_constants.dart';
 import 'package:dobo/view/profile_create/services/signup_service.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocationSelectService extends ChangeNotifier {
@@ -22,7 +21,7 @@ class LocationSelectService extends ChangeNotifier {
       latitude = lat;
       longitude = long;
       notifyListeners();
-      print(address);
+
     } catch (e) {
       showSnackBarWrong(context, e.toString());
     }
@@ -32,7 +31,7 @@ class LocationSelectService extends ChangeNotifier {
     final pref = await SharedPreferences.getInstance();
     String token = pref.getString("accessToken") ?? '';
     String id = pref.getString('pk') ?? "";
-    print(id);
+
     pref.setString('location', address);
     if (longitude == null && latitude == null) {
       // ignore: use_build_context_synchronously
@@ -50,7 +49,7 @@ class LocationSelectService extends ChangeNotifier {
               },
             ));
         if (response.statusCode == 200 || response.statusCode == 201) {
-          print(response.data);
+     
           LogController.activityLog(
               'LocationSelectService', "setLocation", 'Success');
           // ignore: use_build_context_synchronously

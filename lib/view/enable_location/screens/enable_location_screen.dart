@@ -51,9 +51,7 @@ class EnableLocationScreen extends StatelessWidget {
             ),
             PrimaryButton(
                 onTap: () async {
-                  final location = await Permission.location.request();
-                  final locationAlways =
-                      await Permission.locationAlways.request();
+                  await Permission.locationAlways.request();
                   if (await Permission.location.request().isGranted) {
                     // ignore: use_build_context_synchronously
                     Navigator.pushReplacementNamed(

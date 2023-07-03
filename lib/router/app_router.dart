@@ -4,7 +4,6 @@ import 'package:dobo/view/appointment/screens/cancell_appointment.dart';
 import 'package:dobo/view/appointment/screens/date_slot_select.dart';
 import 'package:dobo/view/appointment/screens/patient_details.dart';
 import 'package:dobo/view/appointment/screens/reschedule_appointment.dart';
-import 'package:dobo/view/appointment/screens/review_summery.dart';
 import 'package:dobo/view/appointment_animation/screens/bookind_success_pop.dart';
 import 'package:dobo/view/appointment_animation/screens/booking_fail_pop.dart';
 import 'package:dobo/view/article/screens/article_screen.dart';
@@ -111,7 +110,7 @@ class AppRoute {
       case RouteConstants.sessionEndPop:
         return MaterialPageRoute(builder: (context) => const SessionEndPop());
       case RouteConstants.editProfile:
-        return MaterialPageRoute(builder: (context) => ProfileEditScreen());
+        return MaterialPageRoute(builder: (context) => const ProfileEditScreen());
       case RouteConstants.notificationScreen:
         return MaterialPageRoute(
             builder: (context) => const NotificationScreen());

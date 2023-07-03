@@ -1,5 +1,5 @@
 import 'package:dobo/common/common_loading.dart';
-import 'package:dobo/core/assets/app_assets.dart';
+
 import 'package:dobo/view/clinic_view/screens/clinic_view_.screen.dart';
 import 'package:dobo/view/favorite/services/favorite_service.dart';
 import 'package:dobo/view/home/widgets/clinics_card.dart';

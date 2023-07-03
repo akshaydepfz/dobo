@@ -1,5 +1,3 @@
-import 'package:dobo/constants/global_variables.dart';
-import 'package:dobo/core/assets/app_assets.dart';
 import 'package:dobo/core/assets/app_icons.dart';
 import 'package:dobo/core/style/app_colors.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';

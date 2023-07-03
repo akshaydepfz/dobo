@@ -48,7 +48,7 @@ class _OtpAuthScreenState extends State<OtpAuthScreen> {
                 Text(
                   'Please type the verification code sent\nto +91 ${loginProvider.mobile}',
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: AppColor.grey3),
+                  style: const TextStyle(color: AppColor.grey3),
                 ),
                 GlobalVariabels.vertical10,
                 GlobalVariabels.vertical10,
@@ -82,10 +82,9 @@ class _OtpAuthScreenState extends State<OtpAuthScreen> {
                       loginProvider.verifyOTP(context, v);
                     },
                     onChanged: (value) {
-                      print(value);
+                 
                     },
                     beforeTextPaste: (text) {
-                      print("Allowing to paste $text");
                       //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
                       //but you can show anything you want here, like your pop up saying wrong paste format or etc
                       return true;

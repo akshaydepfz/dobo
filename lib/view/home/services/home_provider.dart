@@ -43,9 +43,7 @@ class HomeProvider extends ChangeNotifier {
         LogController.activityLog(
             'HomeProvider', "getNearestClinics", "Success");
       }
-      print(response.statusCode);
-    } on DioError catch (e) {
-      print(e.error);
+    } on DioError catch (_) {
       LogController.activityLog(
           'HomeProvider', "getNearestClinics", "Failed  ");
     }
@@ -60,7 +58,7 @@ class HomeProvider extends ChangeNotifier {
           options: Options(headers: {
             'Authorization': 'Bearer $token',
           }));
-      print(response.statusCode);
+  
       if (response.statusCode == 200) {
         List data = response.data;
         sliders = data.map((e) => SliderModel.fromJson(e)).toList();
@@ -125,12 +123,12 @@ class HomeProvider extends ChangeNotifier {
                 }));
 
         if (response.statusCode == 200) {
-          print(response.data);
+         
           LogController.activityLog(
               'HomeProvider', "addClinicFavorite", "Success");
           getNearestClinics();
         }
-      } on DioError catch (e) {
+      } on DioError catch (_) {
         LogController.activityLog(
             'HomeProvider', "addClinicFavorite", "Failed");
       }
@@ -152,6 +150,4 @@ class HomeProvider extends ChangeNotifier {
       }
     }
   }
-
-  
 }

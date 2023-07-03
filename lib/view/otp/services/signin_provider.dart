@@ -113,7 +113,7 @@ class SigninProvider extends ChangeNotifier {
         _isLoading = false;
         notifyListeners();
         LogController.activityLog("SigninProvider", "verifyOTP", "failed");
-        print(e.response!.statusCode.toString());
+
         showSnackBarWrong(context, e.response!.data.toString());
       }
     }

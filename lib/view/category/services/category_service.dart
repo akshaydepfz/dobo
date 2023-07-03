@@ -10,6 +10,7 @@ class CategoryProvider extends ChangeNotifier {
   final dio = Dio();
   List<DoctorListModel>? doctors;
   List<DepartmentModel>? departments;
+  List<DepartmentModel> quaryDepartments = [];
   // List<CategoryModel> categoryItems = [
   //   CategoryModel(
   //       icon: 'assets/icons/categories/doctor.png', title: 'General Physician'),
@@ -39,6 +40,19 @@ class CategoryProvider extends ChangeNotifier {
   //   CategoryModel(
   //       icon: 'assets/icons/categories/nutrition.png', title: 'Nutritionist'),
   // ];
+
+  String _quary = '';
+  String get quary => _quary;
+
+  void onQuaryChanged(String v) {
+    _quary = v;
+    quaryDepartments = departments!
+        .where((department) =>
+            (department.name.toLowerCase().contains(v.toLowerCase())))
+        .toList();
+
+    notifyListeners();
+  }
 
   Future<void> getDoctorList(String department) async {
     final pref = await SharedPreferences.getInstance();

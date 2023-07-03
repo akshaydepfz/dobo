@@ -12,24 +12,25 @@ class ReviewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     final height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const PrimaryAppbar(title: 'Write a Review'),
                 Container(
-                  margin: const EdgeInsets.only(top: 20,bottom: 20),
+                  margin: const EdgeInsets.only(top: 20, bottom: 20),
                   height: 120,
                   width: 120,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(color: const Color(0xffBFBDBE)),
                       image: const DecorationImage(
-                          fit: BoxFit.fill, image: AssetImage(AppAssets.doctor2))),
+                          fit: BoxFit.fill,
+                          image: AssetImage(AppAssets.doctor2))),
                 ),
                 const Text(
                   'How was your experience\nwith Dr. Rubayet Sakib?',
@@ -40,47 +41,48 @@ class ReviewScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   child: RatingBar.builder(
                     glow: false,
-                    itemBuilder:(context, _) =>const Icon(
-                          Icons.star_rounded,
-                          color:AppColor.primary,
-                        ), 
-                    onRatingUpdate: (rating) {
-                        print(rating);
-                      },
+                    itemBuilder: (context, _) => const Icon(
+                      Icons.star_rounded,
+                      color: AppColor.primary,
                     ),
+                    onRatingUpdate: (rating) {},
+                  ),
                 ),
                 const Divider(),
-                 const Align(
+                const Align(
                   alignment: Alignment.bottomLeft,
-                   child: Text(
+                  child: Text(
                     'Write Your Review',
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                   ),
-                 ),
-                 Container(
-                   decoration: BoxDecoration(
+                  ),
+                ),
+                Container(
+                  decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: AppColor.grey1,
-                   ),
-                   child:const TextField(maxLines: 6,
-                    decoration:InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'Your review here...'
-                    ),
-                   ),
-                 ),
-                 const SizedBox(height: 20,),
-                 PrimaryButton(
-                  onTap: (){
-                    Navigator.pushReplacementNamed(context,RouteConstants.reviewPop);
-                  }, 
-                  label:'Submit'),
-                 SecondaryButton(
-                  onTap: (){
-                    Navigator.pop(context);
-                  }, 
-                  label:'Cancel'), 
+                  ),
+                  child: const TextField(
+                    maxLines: 6,
+                    decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Your review here...'),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                PrimaryButton(
+                    onTap: () {
+                      Navigator.pushReplacementNamed(
+                          context, RouteConstants.reviewPop);
+                    },
+                    label: 'Submit'),
+                SecondaryButton(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    label: 'Cancel'),
               ],
             ),
           ),

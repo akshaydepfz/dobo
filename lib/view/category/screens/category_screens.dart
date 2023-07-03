@@ -1,5 +1,7 @@
 import 'package:dobo/common/common_loading.dart';
-import 'package:dobo/router/app_route_constants.dart';
+import 'package:dobo/constants/global_variables.dart';
+import 'package:dobo/core/assets/app_icons.dart';
+import 'package:dobo/core/style/app_colors.dart';
 import 'package:dobo/view/category/screens/category_view.dart';
 import 'package:dobo/view/category/services/category_service.dart';
 import 'package:flutter/material.dart';
@@ -38,12 +40,43 @@ class _CategoryScreenState extends State<CategoryScreen> {
           const SizedBox(
             height: 20,
           ),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            height: 60,
+            decoration: BoxDecoration(
+              color: AppColor.grey1,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Row(
+              children: [
+                GlobalVariabels.horizontal10,
+                SizedBox(
+                  height: 30,
+                  width: 30,
+                  child: Image.asset(AppIcons.search),
+                ),
+                GlobalVariabels.horizontal10,
+                Expanded(
+                  child: TextField(
+                    onChanged: (v) => categoryProvider.onQuaryChanged(v),
+                    decoration: const InputDecoration(
+                        hintStyle: TextStyle(color: AppColor.grey3),
+                        border: InputBorder.none,
+                        hintText: "Search"),
+                  ),
+                ),
+              ],
+            ),
+          ),
           Expanded(
             child: categoryProvider.departments == null
                 ? const Center(child: CommonLoadingWidget())
                 : GridView.builder(
                     padding: const EdgeInsets.all(15),
-                    itemCount: categoryProvider.departments!.length,
+                    itemCount: categoryProvider.quary == ""
+                        ? categoryProvider.departments!.length
+                        : categoryProvider.quaryDepartments.length,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 3,
@@ -57,10 +90,15 @@ class _CategoryScreenState extends State<CategoryScreen> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => CategoryViewScreen(
-                                      department:
-                                          categoryProvider.departments![i].name,
-                                      departmentId: categoryProvider
-                                          .departments![i].id)));
+                                      department: categoryProvider.quary == ""
+                                          ? categoryProvider
+                                              .departments![i].name
+                                          : categoryProvider
+                                              .quaryDepartments[i].name,
+                                      departmentId: categoryProvider.quary == ""
+                                          ? categoryProvider.departments![i].id
+                                          : categoryProvider
+                                              .quaryDepartments[i].id)));
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -88,15 +126,24 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                     color: Color(0xFFEEFCFA),
                                   ),
                                   child: Center(
-                                      child: Image.network(categoryProvider
-                                          .departments![i].image)),
+                                      child: categoryProvider.quary == ""
+                                          ? Image.network(categoryProvider
+                                              .departments![i].image)
+                                          : Image.network(categoryProvider
+                                              .quaryDepartments[i].image)),
                                 ),
                                 const SizedBox(
                                   height: 5,
                                 ),
-                                Text(
-                                  categoryProvider.departments![i].name,
-                                  textAlign: TextAlign.center,
+                                SizedBox(
+                                  child: Text(
+                                    categoryProvider.quary == ""
+                                        ? categoryProvider.departments![i].name
+                                        : categoryProvider
+                                            .quaryDepartments[i].name,
+                                    maxLines: 2,
+                                    textAlign: TextAlign.center,
+                                  ),
                                 ),
                               ],
                             ),

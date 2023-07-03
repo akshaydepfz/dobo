@@ -27,9 +27,7 @@ class FavoriteProvider extends ChangeNotifier {
         LogController.activityLog(
             'FavoriteProvider', "getfavoriteClinics", "Success");
       }
-      print(response.statusCode);
-    } on DioError catch (e) {
-      print(e.error);
+    } on DioError catch (_) {
       LogController.activityLog(
           'FavoriteProvider', "getfavoriteClinics", "Failed  ");
     }
@@ -48,12 +46,12 @@ class FavoriteProvider extends ChangeNotifier {
                 }));
 
         if (response.statusCode == 200) {
-          print(response.data);
+  
           LogController.activityLog(
               'HomeProvider', "addClinicFavorite", "Success");
           getfavoriteClinics();
         }
-      } on DioError catch (e) {
+      } on DioError catch (_) {
         LogController.activityLog(
             'HomeProvider', "addClinicFavorite", "Failed");
       }

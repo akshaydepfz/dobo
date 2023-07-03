@@ -1,5 +1,4 @@
 import 'package:dobo/common/common_loading.dart';
-import 'package:dobo/common/primary_appbar.dart';
 import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/core/assets/app_assets.dart';
 import 'package:dobo/core/assets/app_icons.dart';

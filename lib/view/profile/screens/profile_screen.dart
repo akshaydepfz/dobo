@@ -25,7 +25,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
+
     final provider = Provider.of<ProfileService>(context);
     return Scaffold(
       body: SafeArea(

@@ -38,7 +38,7 @@ class ProfileService extends ChangeNotifier {
   Future<void> logOut(BuildContext context) async {
     final pref = await SharedPreferences.getInstance();
     pref.clear();
-    // ignore: use_build_context_synchronously
+
     Navigator.pushReplacementNamed(context, RouteConstants.signInScreen);
   }
 
@@ -60,7 +60,7 @@ class ProfileService extends ChangeNotifier {
         LogController.activityLog(
             'ProfileProvider', 'Get User Details', "success");
         userModel = UserModel.fromJson(response.data);
-        print(response.data);
+
         notifyListeners();
       }
     } on DioError catch (_) {
@@ -109,7 +109,7 @@ class ProfileService extends ChangeNotifier {
           ));
       if (response.statusCode == 200 || response.statusCode == 201) {
         LogController.activityLog('ProfileService', "updateProfile", 'Success');
-        // ignore: use_build_context_synchronously
+
         getProfileDetails();
         setProfileEdit();
         _isLoading = false;
@@ -121,7 +121,7 @@ class ProfileService extends ChangeNotifier {
       LogController.activityLog('ProfileService', "updateProfile", 'Failed');
       _isLoading = false;
       notifyListeners();
-      // ignore: use_build_context_synchronously
+
       showSnackBarWrong(context, e.response.toString());
     }
   }

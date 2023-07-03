@@ -105,7 +105,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     Expanded(
                       child: TextField(
                         decoration: InputDecoration(
-                            hintStyle: TextStyle(color: AppColor.grey3),
+                            hintStyle: const TextStyle(color: AppColor.grey3),
                             border: InputBorder.none,
                             hintText: provider.searchDoctor
                                 ? 'Search doctor'

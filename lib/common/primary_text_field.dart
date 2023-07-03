@@ -27,7 +27,7 @@ class PrimaryTextField extends StatelessWidget {
       child: Row(
         children: [
           icon == ""
-              ? SizedBox()
+              ? const SizedBox()
               : SizedBox(height: 20, width: 20, child: Image.asset(icon)),
           const SizedBox(
             width: 10,

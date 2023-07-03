@@ -1,15 +1,12 @@
 import 'dart:async';
 import 'dart:developer';
-
 import 'package:dobo/common/primary_button.dart';
 import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/core/style/app_colors.dart';
-import 'package:dobo/router/app_route_constants.dart';
 import 'package:dobo/view/location_select/services/location_select_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LocationSelectScreen extends StatefulWidget {
   const LocationSelectScreen({super.key});

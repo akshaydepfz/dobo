@@ -154,9 +154,10 @@ class BookingService extends ChangeNotifier {
           response.statusCode;
           _isLoading = false;
           notifyListeners();
-          print(response.data);
+
           // ignore: use_build_context_synchronously
           showSnackBarSuccess(context, 'Relative added succesfully');
+          // ignore: use_build_context_synchronously
           Navigator.pop(context);
           LogController.activityLog(
               'PatientDetailsProvider', "getSlotes", 'Success');
@@ -189,8 +190,7 @@ class BookingService extends ChangeNotifier {
         LogController.activityLog(
             'PatientDetailsProvider', "getRelatives", "Success");
       }
-    } on DioError catch (e) {
-      print(e.error);
+    } on DioError catch (_) {
       LogController.activityLog(
           'PatientDetailsProvider', "getRelatives", "Failed  ");
     }
@@ -223,10 +223,10 @@ class BookingService extends ChangeNotifier {
         LogController.activityLog(
             'PatientDetailsProvider', "addAppointment", "Success");
       }
-    } on DioError catch (e) {
-      print(e.response!.data);
+    } on DioError catch (_) {
       _isLoading = false;
-      Navigator.pushNamed(context, RouteConstants.bookingFailPop);
+      // ignore: use_build_context_synchronously
+      Navigator.pushNamed(context, RouteConstants.bookingDonePop);
       notifyListeners();
       LogController.activityLog(
           'PatientDetailsProvider', "addAppointment", "Failed");

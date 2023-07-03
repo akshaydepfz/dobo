@@ -100,7 +100,7 @@ class ProfileCreateProvider extends ChangeNotifier {
         if (response.statusCode == 200 || response.statusCode == 201) {
           _isLoading = false;
           notifyListeners();
-          print(response.data);
+    
           LogController.activityLog("profileCreate", "Signin", "Success");
           // ignore: use_build_context_synchronously
 
@@ -113,6 +113,7 @@ class ProfileCreateProvider extends ChangeNotifier {
         notifyListeners();
         LogController.activityLog("SignUpService", "profileCreate", "Failed");
 
+        // ignore: use_build_context_synchronously
         showSnackBarWrong(context, e.response.toString());
       }
     }

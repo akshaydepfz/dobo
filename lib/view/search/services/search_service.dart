@@ -73,11 +73,10 @@ class SearchService extends ChangeNotifier {
                 }));
 
         if (response.statusCode == 200) {
-          print(response.data);
           LogController.activityLog(
               'HomeProvider', "addClinicFavorite", "Success");
         }
-      } on DioError catch (e) {
+      } on DioError catch (_) {
         LogController.activityLog(
             'HomeProvider', "addClinicFavorite", "Failed");
       }

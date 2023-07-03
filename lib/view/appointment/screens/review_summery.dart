@@ -4,7 +4,6 @@ import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/core/assets/app_assets.dart';
 import 'package:dobo/core/assets/app_icons.dart';
 import 'package:dobo/core/style/app_colors.dart';
-import 'package:dobo/router/app_route_constants.dart';
 import 'package:dobo/view/appointment/services/booking_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -107,7 +106,7 @@ class _ReviewSummaryScreenState extends State<ReviewSummaryScreen> {
                       ),
                       GlobalVariabels.vertical15,
                       provider.doctorDetail == null
-                          ? LinearProgressIndicator()
+                          ? const LinearProgressIndicator()
                           : Row(
                               children: [
                                 Container(
@@ -129,12 +128,12 @@ class _ReviewSummaryScreenState extends State<ReviewSummaryScreen> {
                                   children: [
                                     Text(
                                       'Dr.${provider.doctorDetail!.fullName}',
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     GlobalVariabels.vertical10,
-                                    IconTextTile(
+                                    const IconTextTile(
                                         name: 'The family care',
                                         icon: AppIcons.hospital),
                                     GlobalVariabels.vertical10,
@@ -167,7 +166,7 @@ class _ReviewSummaryScreenState extends State<ReviewSummaryScreen> {
                               )),
                           Text(
                             widget.time,
-                            style: TextStyle(fontSize: 16),
+                            style: const TextStyle(fontSize: 16),
                           ),
                         ],
                       ),

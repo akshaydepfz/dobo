@@ -46,7 +46,7 @@ class ReminderCard extends StatelessWidget {
               const SizedBox(
                 width: 5,
               ),
-              Text("- ${department}")
+              Text("- $department")
             ],
           ),
           Text(clinic),
