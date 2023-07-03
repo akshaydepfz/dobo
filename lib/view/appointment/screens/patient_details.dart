@@ -276,7 +276,12 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                                     "${provider.selectdappointmentDate!.day}-${provider.selectdappointmentDate!.month}-${provider.selectdappointmentDate!.year}",
                                 problem: provider.description,
                                 doctorID: provider.doctorID,
-                                name: userProvider.userModel!.firstName,
+                                name: provider.isPatient
+                                    ? userProvider.userModel!.firstName
+                                    : provider
+                                        .relatives![
+                                            provider.selectedRelativeIndex]
+                                        .fullName,
                                 gender: 'Male',
                                 age: '18')));
                   },

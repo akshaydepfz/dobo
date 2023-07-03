@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:dobo/api/api_endpoints.dart';
 import 'package:dobo/log/log_controller.dart';
@@ -218,18 +219,22 @@ class BookingService extends ChangeNotifier {
       if (response.statusCode == 200 || response.statusCode == 201) {
         _isLoading = false;
         notifyListeners();
+        log(response.data.toString());
         // ignore: use_build_context_synchronously
         Navigator.pushNamed(context, RouteConstants.bookingDonePop);
         LogController.activityLog(
             'PatientDetailsProvider', "addAppointment", "Success");
       }
-    } on DioError catch (_) {
+    } on DioError catch (e) {
       _isLoading = false;
-      // ignore: use_build_context_synchronously
-      Navigator.pushNamed(context, RouteConstants.bookingDonePop);
       notifyListeners();
+      // ignore: use_build_context_synchronously
+      Navigator.pushNamed(context, RouteConstants.bookingFailPop);
+      // ignore: use_build_context_synchronously
+      showSnackBarWrong(context, e.response!.data);
       LogController.activityLog(
           'PatientDetailsProvider', "addAppointment", "Failed");
+      log(e.response!.statusCode.toString());
     }
   }
 }
