@@ -29,12 +29,11 @@ class AddRelativeScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               PrimaryTextField(
-                  width: width,
-                  hintText: 'Enter your name',
-                  icon: AppIcons.lock,
-                  onChanged: (value) {
-                    //   provider.onUserNameChanged(value);
-                  }),
+                width: width,
+                hintText: 'Enter your name',
+                icon: AppIcons.lock,
+                onChanged: (value) {},
+              ),
               DropDownTextField(
                 items: const ["Male", "Female"],
                 selectedValue: 'Male',
