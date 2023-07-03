@@ -5,14 +5,45 @@ import 'package:dobo/core/assets/app_assets.dart';
 import 'package:dobo/core/assets/app_icons.dart';
 import 'package:dobo/core/style/app_colors.dart';
 import 'package:dobo/router/app_route_constants.dart';
+import 'package:dobo/view/appointment/services/booking_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
-class ReviewSummaryScreen extends StatelessWidget {
-  const ReviewSummaryScreen({super.key});
+class ReviewSummaryScreen extends StatefulWidget {
+  final String time;
+  final String date;
+  final String problem;
+  final String doctorID;
+  final String name;
+  final String gender;
+  final String age;
+
+  const ReviewSummaryScreen(
+      {super.key,
+      required this.time,
+      required this.date,
+      required this.problem,
+      required this.doctorID,
+      required this.name,
+      required this.gender,
+      required this.age});
+
+  @override
+  State<ReviewSummaryScreen> createState() => _ReviewSummaryScreenState();
+}
+
+class _ReviewSummaryScreenState extends State<ReviewSummaryScreen> {
+  @override
+  void initState() {
+    Provider.of<BookingService>(context, listen: false)
+        .getDoctorDetails(widget.doctorID);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<BookingService>(context);
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SafeArea(
@@ -26,47 +57,47 @@ class ReviewSummaryScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      EditableTile(
-                        onTap: () {},
-                        title: 'Clinic',
-                      ),
-                      GlobalVariabels.vertical15,
-                      Row(
-                        children: [
-                          Container(
-                            height: height * .11,
-                            width: height * .11,
-                            decoration: BoxDecoration(
-                              image: const DecorationImage(
-                                  image: AssetImage(AppAssets.health),
-                                  fit: BoxFit.cover),
-                              border: Border.all(color: AppColor.grey3),
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                          ),
-                          GlobalVariabels.horizontal10,
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text(
-                                'The family care',
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
-                              ),
-                              GlobalVariabels.vertical10,
-                              IconTextTile(
-                                  name: '+91 2649351476', icon: AppIcons.call),
-                              GlobalVariabels.vertical10,
-                              IconTextTile(
-                                  name: 'Malappuram, kerala, india',
-                                  icon: AppIcons.location),
-                            ],
-                          ),
-                        ],
-                      ),
-                      GlobalVariabels.vertical15,
-                      const Divider(),
-                      GlobalVariabels.vertical15,
+                      // EditableTile(
+                      //   onTap: () {},
+                      //   title: 'Clinic',
+                      // ),
+                      // GlobalVariabels.vertical15,
+                      // Row(
+                      //   children: [
+                      //     Container(
+                      //       height: height * .11,
+                      //       width: height * .11,
+                      //       decoration: BoxDecoration(
+                      //         image: const DecorationImage(
+                      //             image: AssetImage(AppAssets.health),
+                      //             fit: BoxFit.cover),
+                      //         border: Border.all(color: AppColor.grey3),
+                      //         borderRadius: BorderRadius.circular(16),
+                      //       ),
+                      //     ),
+                      //     GlobalVariabels.horizontal10,
+                      //     Column(
+                      //       crossAxisAlignment: CrossAxisAlignment.start,
+                      //       children: const [
+                      //         Text(
+                      //           'The family care',
+                      //           style: TextStyle(
+                      //               fontSize: 16, fontWeight: FontWeight.bold),
+                      //         ),
+                      //         GlobalVariabels.vertical10,
+                      //         IconTextTile(
+                      //             name: '+91 2649351476', icon: AppIcons.call),
+                      //         GlobalVariabels.vertical10,
+                      //         IconTextTile(
+                      //             name: 'Malappuram, kerala, india',
+                      //             icon: AppIcons.location),
+                      //       ],
+                      //     ),
+                      //   ],
+                      // ),
+                      // GlobalVariabels.vertical15,
+                      // const Divider(),
+
                       const Text(
                         'Doctor',
                         style: TextStyle(
@@ -75,41 +106,47 @@ class ReviewSummaryScreen extends StatelessWidget {
                         ),
                       ),
                       GlobalVariabels.vertical15,
-                      Row(
-                        children: [
-                          Container(
-                            height: height * .11,
-                            width: height * .11,
-                            decoration: BoxDecoration(
-                              image: const DecorationImage(
-                                  image: AssetImage(AppAssets.doctor2),
-                                  fit: BoxFit.cover),
-                              border: Border.all(color: AppColor.grey3),
-                              borderRadius: BorderRadius.circular(16),
+                      provider.doctorDetail == null
+                          ? LinearProgressIndicator()
+                          : Row(
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.all(5),
+                                  height: height * .11,
+                                  width: height * .11,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: AppColor.grey3),
+                                    borderRadius: BorderRadius.circular(16),
+                                  ),
+                                  child: provider.doctorDetail!.image == null
+                                      ? Image.asset(AppAssets.avatar)
+                                      : Image.network(
+                                          provider.doctorDetail!.image),
+                                ),
+                                GlobalVariabels.horizontal10,
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Dr.${provider.doctorDetail!.fullName}',
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    GlobalVariabels.vertical10,
+                                    IconTextTile(
+                                        name: 'The family care',
+                                        icon: AppIcons.hospital),
+                                    GlobalVariabels.vertical10,
+                                    IconTextTile(
+                                      name: provider
+                                          .doctorDetail!.department.category,
+                                      icon: AppIcons.medal,
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
-                          ),
-                          GlobalVariabels.horizontal10,
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text(
-                                'Dr. Rubayet Sakib',
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
-                              ),
-                              GlobalVariabels.vertical10,
-                              IconTextTile(
-                                  name: 'The family care',
-                                  icon: AppIcons.hospital),
-                              GlobalVariabels.vertical10,
-                              IconTextTile(
-                                name: 'Dental Specialist',
-                                icon: AppIcons.medal,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
                       GlobalVariabels.vertical10,
                       const Divider(),
                       GlobalVariabels.vertical10,
@@ -118,18 +155,18 @@ class ReviewSummaryScreen extends StatelessWidget {
                         title: 'Date & Time',
                       ),
                       Row(
-                        children: const [
+                        children: [
                           Text(
-                            'March 15, 2022',
-                            style: TextStyle(fontSize: 16),
+                            widget.date,
+                            style: const TextStyle(fontSize: 16),
                           ),
-                          SizedBox(
+                          const SizedBox(
                               height: 20,
                               child: VerticalDivider(
                                 thickness: 2,
                               )),
                           Text(
-                            '09:00 AM',
+                            widget.time,
                             style: TextStyle(fontSize: 16),
                           ),
                         ],
@@ -142,11 +179,11 @@ class ReviewSummaryScreen extends StatelessWidget {
                         title: 'Patient Details',
                       ),
                       GlobalVariabels.vertical10,
-                      const TextTile(title: 'Name', value: 'Rubayet Sakib'),
+                      TextTile(title: 'Name', value: widget.name),
                       const Divider(),
-                      const TextTile(title: 'Gender', value: 'Male'),
+                      TextTile(title: 'Gender', value: widget.gender),
                       const Divider(),
-                      const TextTile(title: 'Age', value: '24'),
+                      TextTile(title: 'Age', value: widget.age),
                       const Divider(),
                       GlobalVariabels.vertical10,
                       const Text(
@@ -155,9 +192,8 @@ class ReviewSummaryScreen extends StatelessWidget {
                             fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                       GlobalVariabels.vertical10,
-                      const Text(
-                        'The family care is oneof the to are pmost to health care providers , India. Our hos pital’s are renowned for to their medical infras the tructure...',
-                        style: TextStyle(),
+                      Text(
+                        widget.problem,
                       ),
                       GlobalVariabels.vertical10,
                     ],
@@ -165,9 +201,15 @@ class ReviewSummaryScreen extends StatelessWidget {
                 ),
               ),
             ),
-            PrimaryButton(onTap: () {
-              Navigator.pushNamed(context, RouteConstants.bookingFailPop);
-            }, label: 'Book Now')
+            PrimaryButton(
+                isLoading: provider.isLoading,
+                onTap: () => provider.addAppointment(
+                    context,
+                    provider.isPatient
+                        ? ''
+                        : provider
+                            .relatives![provider.selectedRelativeIndex].pk),
+                label: 'Book Now')
           ],
         ),
       ),

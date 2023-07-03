@@ -4,6 +4,7 @@ import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/core/style/app_colors.dart';
 import 'package:dobo/router/app_route_constants.dart';
 import 'package:dobo/view/appointment/services/booking_service.dart';
+import 'package:dobo/view/profile_create/services/signup_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
@@ -64,7 +65,7 @@ class _DateSelectingScreenState extends State<DateSelectingScreen> {
                         onTap: (v) {
                           provider.onDateChanged(v.date!);
                         },
-                        initialDisplayDate: provider.selectdDate,
+                        initialDisplayDate: provider.selectdappointmentDate,
                         cellBorderColor: Colors.transparent,
                         todayHighlightColor: Colors.white,
                         view: CalendarView.month,
@@ -83,7 +84,7 @@ class _DateSelectingScreenState extends State<DateSelectingScreen> {
                     provider.slotes == null
                         ? const CircularProgressIndicator()
                         : GridView.builder(
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             itemCount: provider.slotes!.length,
                             gridDelegate:
@@ -93,16 +94,26 @@ class _DateSelectingScreenState extends State<DateSelectingScreen> {
                                     childAspectRatio: 3.0,
                                     mainAxisSpacing: 10),
                             itemBuilder: (context, i) {
-                              return Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: AppColor.primary.withOpacity(0.2),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    provider.slotes![i].startTime,
-                                    style: const TextStyle(
-                                        color: AppColor.primary),
+                              return GestureDetector(
+                                onTap: () => provider.onSlotChange(
+                                    i, provider.slotes![i].id),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: provider.selectedSlotIndex == i
+                                          ? AppColor.primary.withOpacity(0.2)
+                                          : Colors.white,
+                                      border: provider.selectedSlotIndex == i
+                                          ? Border.all(color: AppColor.primary)
+                                          : Border.all(
+                                              color: AppColor.primary)),
+                                  child: Center(
+                                    child: Text(
+                                      "${provider.slotes![i].startTime.substring(0, 5)} to ${provider.slotes![i].endTime.substring(0, 5)}",
+                                      style: const TextStyle(
+                                        color: AppColor.primary,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               );
@@ -112,7 +123,13 @@ class _DateSelectingScreenState extends State<DateSelectingScreen> {
               ),
               PrimaryButton(
                   onTap: () {
-                    Navigator.pushNamed(context, RouteConstants.patientScreen);
+                    if (provider.selectdappointmentDate == null) {
+                      showSnackBarWrong(context, 'Please select date');
+                    } else {
+                      provider.doctorIDStore(widget.doctorId);
+                      Navigator.pushNamed(
+                          context, RouteConstants.patientScreen);
+                    }
                   },
                   label: 'Next')
             ],

@@ -2,9 +2,11 @@ import 'package:dobo/common/primary_appbar.dart';
 import 'package:dobo/common/primary_button.dart';
 import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/core/style/app_colors.dart';
-import 'package:dobo/router/app_route_constants.dart';
 import 'package:dobo/view/appointment/screens/add_relative_screen.dart';
-import 'package:dobo/view/appointment/services/patient_details_service.dart';
+import 'package:dobo/view/appointment/screens/review_summery.dart';
+import 'package:dobo/view/appointment/services/booking_service.dart';
+import 'package:dobo/view/profile/services/profile_services.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,14 +20,16 @@ class PatientDetailsScreen extends StatefulWidget {
 class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
   @override
   void initState() {
-    Provider.of<PatientDetailsProvider>(context, listen: false).getRelatives();
+    Provider.of<BookingService>(context, listen: false).getRelatives();
+    Provider.of<ProfileService>(context, listen: false).getProfileDetails();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    final provider = Provider.of<PatientDetailsProvider>(context);
+    final provider = Provider.of<BookingService>(context);
+    final userProvider = Provider.of<ProfileService>(context);
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -243,9 +247,10 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                             borderRadius: BorderRadius.circular(12),
                             color: AppColor.grey1,
                           ),
-                          child: const TextField(
+                          child: TextField(
                             maxLines: 10,
-                            decoration: InputDecoration(
+                            onChanged: (v) => provider.ondescriptionChange(v),
+                            decoration: const InputDecoration(
                                 hintText: 'Description',
                                 border: InputBorder.none,
                                 hintStyle: TextStyle(
@@ -260,7 +265,20 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
               GlobalVariabels.vertical15,
               PrimaryButton(
                   onTap: () {
-                    Navigator.pushNamed(context, RouteConstants.reviewSummary);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ReviewSummaryScreen(
+                                time: provider
+                                    .slotes![provider.selectedSlotIndex]
+                                    .startTime,
+                                date:
+                                    "${provider.selectdappointmentDate!.day}-${provider.selectdappointmentDate!.month}-${provider.selectdappointmentDate!.year}",
+                                problem: provider.description,
+                                doctorID: provider.doctorID,
+                                name: userProvider.userModel!.firstName,
+                                gender: 'Male',
+                                age: '18')));
                   },
                   label: 'Next')
             ],

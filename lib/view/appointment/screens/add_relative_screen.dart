@@ -3,7 +3,8 @@ import 'package:dobo/common/primary_text_field.dart';
 import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/core/assets/app_icons.dart';
 import 'package:dobo/core/style/app_colors.dart';
-import 'package:dobo/view/appointment/services/patient_details_service.dart';
+import 'package:dobo/view/appointment/services/booking_service.dart';
+
 import 'package:dobo/view/profile_create/widgets/drop_down_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +14,7 @@ class AddRelativeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<PatientDetailsProvider>(context);
+    final provider = Provider.of<BookingService>(context);
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(

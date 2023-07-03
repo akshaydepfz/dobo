@@ -8,8 +8,6 @@ import 'package:dobo/core/style/app_colors.dart';
 import 'package:dobo/router/app_route_constants.dart';
 import 'package:dobo/view/appointment/screens/review_summery.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class AppointmentViewScreen extends StatelessWidget {
   const AppointmentViewScreen({super.key});
@@ -205,12 +203,18 @@ class AppointmentViewScreen extends StatelessWidget {
                         style: TextStyle(),
                       ),
                       GlobalVariabels.vertical10,
-                      PrimaryButton(onTap: () {
-                        Navigator.pushNamed(context, RouteConstants.resceduleAppointment);
-                      }, label: 'Reschedule'),
-                      SecondaryButton(onTap: () {
-                         Navigator.pushNamed(context, RouteConstants.cancelAppointment);
-                      }, label: 'Cancel')
+                      PrimaryButton(
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, RouteConstants.resceduleAppointment);
+                          },
+                          label: 'Reschedule'),
+                      SecondaryButton(
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, RouteConstants.cancelAppointment);
+                          },
+                          label: 'Cancel')
                     ],
                   ),
                 ),

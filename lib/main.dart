@@ -1,7 +1,5 @@
 import 'package:dobo/router/app_router.dart';
-import 'package:dobo/view/appointment/screens/patient_details.dart';
 import 'package:dobo/view/appointment/services/booking_service.dart';
-import 'package:dobo/view/appointment/services/patient_details_service.dart';
 import 'package:dobo/view/appointment/services/reshedule_radio_button.dart';
 import 'package:dobo/view/article/services/article_services.dart';
 import 'package:dobo/view/category/services/category_service.dart';
@@ -23,7 +21,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'view/appointment/screens/add_relative_screen.dart';
 import 'view/my_appointments/services/appointment_services.dart';
 
 Future<void> main() async {
@@ -98,9 +95,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => SearchService(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => PatientDetailsProvider(),
-        ),
       ],
       child: MaterialApp(
         onGenerateRoute: AppRoute().onGenerateRoute,
@@ -110,7 +104,7 @@ class MyApp extends StatelessWidget {
           textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
           primarySwatch: Colors.cyan,
         ),
-        home: token == "" ? const SignInScreen() : const PatientDetailsScreen(),
+        home: token == "" ? const SignInScreen() : LandingScreen(),
       ),
     );
   }

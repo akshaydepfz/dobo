@@ -90,9 +90,7 @@ class AppRoute {
       case RouteConstants.patientScreen:
         return MaterialPageRoute(
             builder: (context) => const PatientDetailsScreen());
-      case RouteConstants.reviewSummary:
-        return MaterialPageRoute(
-            builder: (context) => const ReviewSummaryScreen());
+
       case RouteConstants.bookingDonePop:
         return MaterialPageRoute(
             builder: (context) => const BookingSuccessPop());
