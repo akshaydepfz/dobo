@@ -110,7 +110,7 @@ class MyApp extends StatelessWidget {
           textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
           primarySwatch: Colors.cyan,
         ),
-        home: token == "" ? const SignInScreen() : AddRelativeScreen(),
+        home: token == "" ? const SignInScreen() : const PatientDetailsScreen(),
       ),
     );
   }

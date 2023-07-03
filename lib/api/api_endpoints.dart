@@ -32,4 +32,5 @@ class ApiEndpoints {
   static const slotes = '$baseUrl/api/v1/doctors/schedules/?doctor_id=';
   static const relativeAdd =
       '$baseUrl/api/v1/patients/add_relative/?patient_id=';
+  static const relativeList = '$baseUrl/api/v1/patients/relatives/?patient_id=';
 }

@@ -32,7 +32,7 @@ class AddRelativeScreen extends StatelessWidget {
                 width: width,
                 hintText: 'Enter your name',
                 icon: AppIcons.lock,
-                onChanged: (value) {},
+                onChanged: (value) => provider.onNameChanged(value),
               ),
               DropDownTextField(
                 items: const ["Male", "Female"],
@@ -73,7 +73,10 @@ class AddRelativeScreen extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              PrimaryButton(onTap: () {}, label: 'Save')
+              PrimaryButton(
+                  isLoading: provider.isLoading,
+                  onTap: () => provider.addPatient(context),
+                  label: 'Save')
             ],
           ),
         ),

@@ -3,13 +3,24 @@ import 'package:dobo/common/primary_button.dart';
 import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/core/style/app_colors.dart';
 import 'package:dobo/router/app_route_constants.dart';
+import 'package:dobo/view/appointment/screens/add_relative_screen.dart';
 import 'package:dobo/view/appointment/services/patient_details_service.dart';
-import 'package:dobo/view/appointment/widgets/named_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class PatientDetailsScreen extends StatelessWidget {
+class PatientDetailsScreen extends StatefulWidget {
   const PatientDetailsScreen({super.key});
+
+  @override
+  State<PatientDetailsScreen> createState() => _PatientDetailsScreenState();
+}
+
+class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
+  @override
+  void initState() {
+    Provider.of<PatientDetailsProvider>(context, listen: false).getRelatives();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -142,8 +153,58 @@ class PatientDetailsScreen extends StatelessWidget {
                     if (!provider.isPatient)
                       Column(
                         children: [
+                          Visibility(
+                            visible: provider.relatives != null,
+                            child: ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: provider.relatives!.length,
+                                itemBuilder: (context, i) {
+                                  return Container(
+                                    margin: const EdgeInsets.only(top: 15),
+                                    height: 60,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8),
+                                      color: Colors.white,
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Radio(
+                                              value: i,
+                                              groupValue: provider
+                                                  .selectedRelativeIndex,
+                                              onChanged: (b) => provider
+                                                  .onRelaviteIndexChange(i),
+                                            ),
+                                            GlobalVariabels.horizontal10,
+                                            Text(
+                                                provider.relatives![i].fullName)
+                                          ],
+                                        ),
+                                        IconButton(
+                                          onPressed: () {},
+                                          icon: const Icon(
+                                            Icons.close,
+                                            color: AppColor.grey3,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                }),
+                          ),
                           GlobalVariabels.vertical15,
                           GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const AddRelativeScreen()));
+                            },
                             child: Container(
                               height: 50,
                               decoration: BoxDecoration(
