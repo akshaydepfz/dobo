@@ -8,6 +8,8 @@ import 'package:dobo/core/style/app_colors.dart';
 import 'package:dobo/router/app_route_constants.dart';
 import 'package:dobo/view/clinic_view/screens/clinic_view_.screen.dart';
 import 'package:dobo/view/doctor_view/screens/doctor_view.dart';
+import 'package:dobo/view/home/screens/all_clinics_screen.dart';
+import 'package:dobo/view/home/screens/all_doctors_screen.dart';
 import 'package:dobo/view/home/services/home_provider.dart';
 import 'package:dobo/view/home/widgets/clinics_card.dart';
 import 'package:dobo/view/home/widgets/reminder_card.dart';
@@ -264,7 +266,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                 ),
-                TitleCard(title: 'Popular Clinics', onTap: () {}),
+                TitleCard(
+                    title: 'Popular Clinics',
+                    onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AllClinicsScreen()))),
                 ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: provider.clinicList.length,
@@ -296,7 +303,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   },
                 ),
-                TitleCard(title: 'Specialist Doctors', onTap: () {}),
+                TitleCard(
+                    title: 'Doctors',
+                    onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AllDoctorsScreen()))),
                 SizedBox(
                   height: 170,
                   child: provider.doctorList == null

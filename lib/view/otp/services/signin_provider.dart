@@ -68,15 +68,14 @@ class SigninProvider extends ChangeNotifier {
     if (otp.length < 6) {
       showSnackBarWrong(context, "Please enter valid mobile number");
     } else {
-      _isLoading = true;
-      notifyListeners();
       try {
         final response = await dio.post(
             "https://dobo.co.in/api/v1/accounts/login-next/?username=91$mobile",
             data: {
               "otp": otp,
             });
-
+        _isLoading = true;
+        notifyListeners();
         if (response.statusCode == 200) {
           _isLoading = false;
           notifyListeners();

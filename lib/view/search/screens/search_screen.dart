@@ -2,14 +2,12 @@ import 'package:dobo/common/common_loading.dart';
 import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/core/assets/app_icons.dart';
 import 'package:dobo/core/style/app_colors.dart';
-
 import 'package:dobo/view/clinic_view/screens/clinic_view_.screen.dart';
 import 'package:dobo/view/doctor_view/screens/doctor_view.dart';
 import 'package:dobo/view/home/widgets/clinics_card.dart';
 import 'package:dobo/view/search/services/search_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../category/screens/category_view.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -126,81 +124,79 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
               ),
               Expanded(
-                  child: (provider.clinicList == null &&
-                          provider.doctorList == null)
-                      ? const Center(
-                          child: Text('Search Doctors and Clinics'),
-                        )
-                      : provider.searchDoctor
-                          ? provider.doctorList == null
-                              ? const Center(
-                                  child: CommonLoadingWidget(),
-                                )
-                              : ListView.builder(
-                                  itemCount: provider.doctorList!.length,
-                                  itemBuilder: (context, i) {
-                                    return GestureDetector(
-                                      onTap: () {
-                                        Navigator.push(
+                child: (provider.clinicList == null &&
+                        provider.doctorList == null)
+                    ? const Center(
+                        child: Text('Search Doctors and Clinics'),
+                      )
+                    : provider.searchDoctor
+                        ? provider.doctorList == null
+                            ? const Center(
+                                child: CommonLoadingWidget(),
+                              )
+                            : ListView.builder(
+                                itemCount: provider.doctorList!.length,
+                                itemBuilder: (context, i) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  DoctorViewScreen(
+                                                    doctorId: provider
+                                                        .doctorList![i].id,
+                                                  )));
+                                    },
+                                    child: DoctorCard(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        image:
+                                            provider.doctorList![i].image ?? "",
+                                        name: provider.doctorList![i].fullName,
+                                        department: provider
+                                            .doctorList![i].department.category,
+                                        rating: '4.6'),
+                                  );
+                                })
+                        : provider.clinicList == null
+                            ? const Center(
+                                child: CommonLoadingWidget(),
+                              )
+                            : ListView.builder(
+                                itemCount: provider.clinicList!.length,
+                                itemBuilder: (context, i) {
+                                  return ClinicsCard(
+                                    isFavorite:
+                                        provider.clinicList![i].isFavorite,
+                                    onFavoriteClick: () =>
+                                        provider.addClinicFavorite(
                                             context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    DoctorViewScreen(
-                                                      doctorId: provider
-                                                          .doctorList![i].id,
-                                                    )));
-                                      },
-                                      child: DoctorCard(
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          image:
-                                              provider.doctorList![i].image ??
-                                                  "",
-                                          name:
-                                              provider.doctorList![i].fullName,
-                                          department: provider.doctorList![i]
-                                              .department.category,
-                                          rating: '4.6'),
-                                    );
-                                  })
-                          : provider.clinicList == null
-                              ? const Center(
-                                  child: CommonLoadingWidget(),
-                                )
-                              : ListView.builder(
-                                  itemCount: provider.clinicList!.length,
-                                  itemBuilder: (context, i) {
-                                    return ClinicsCard(
-                                      isFavorite:
-                                          provider.clinicList![i].isFavorite,
-                                      onFavoriteClick: () =>
-                                          provider.addClinicFavorite(
-                                              context,
-                                              provider.clinicList![i].id,
-                                              provider
-                                                  .clinicList![i].isFavorite,
-                                              controller.text),
-                                      width: MediaQuery.of(context).size.width,
-                                      avarageRating: provider
-                                          .clinicList![i].avgRating
-                                          .toString(),
-                                      ratingCount: 2.toString(),
-                                      name: provider.clinicList![i].clinicName,
-                                      category: provider.clinicList![i].subtext,
-                                      image: provider.clinicList![i].image ??
-                                          "https://t4.ftcdn.net/jpg/03/47/41/03/360_F_347410397_5PpZbcQpnEqqzlGjOk1R5d11977LbMUW.jpg",
-                                      onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ClinicViewScreen(
-                                                      clinicId: provider
-                                                          .clinicList![i].id,
-                                                    )));
-                                      },
-                                    );
-                                  }))
+                                            provider.clinicList![i].id,
+                                            provider.clinicList![i].isFavorite,
+                                            controller.text),
+                                    width: MediaQuery.of(context).size.width,
+                                    avarageRating: provider
+                                        .clinicList![i].avgRating
+                                        .toString(),
+                                    ratingCount: 2.toString(),
+                                    name: provider.clinicList![i].clinicName,
+                                    category: provider.clinicList![i].subtext,
+                                    image: provider.clinicList![i].image ??
+                                        "https://t4.ftcdn.net/jpg/03/47/41/03/360_F_347410397_5PpZbcQpnEqqzlGjOk1R5d11977LbMUW.jpg",
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ClinicViewScreen(
+                                                    clinicId: provider
+                                                        .clinicList![i].id,
+                                                  )));
+                                    },
+                                  );
+                                }),
+              )
             ],
           ),
         ),
