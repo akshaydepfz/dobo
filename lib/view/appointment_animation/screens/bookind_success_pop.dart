@@ -1,5 +1,6 @@
 import 'package:dobo/common/primary_button.dart';
 import 'package:dobo/common/secondary_button.dart';
+import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/core/assets/app_assets.dart';
 import 'package:dobo/core/style/app_colors.dart';
 import 'package:dobo/view/landing_page/screens/landing_screen.dart';
@@ -7,7 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class BookingSuccessPop extends StatelessWidget {
-  const BookingSuccessPop({Key? key}) : super(key: key);
+  final String tokenNo;
+
+  const BookingSuccessPop({Key? key, required this.tokenNo}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +32,25 @@ class BookingSuccessPop extends StatelessWidget {
               'Congratulations!',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
+            GlobalVariabels.vertical10,
+            const Text(
+              'Your Token Number is',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            GlobalVariabels.vertical10,
+            Text(
+              tokenNo,
+              style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+            ),
+            // GlobalVariabels.vertical10,
+            // const Text(
+            //   'Booking ID : 05842026',
+            //   style: TextStyle(fontSize: 16, color: AppColor.grey4),
+            // ),
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 20),
               child: Text(
-                'Appointment successfuly booked.\n you will receive a notification and\n the doctor you selected will\n contact you',
+                'Appointment successfuly booked.\n you will receive a notification',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 15,

@@ -2,6 +2,7 @@ import 'package:dobo/common/primary_button.dart';
 import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/core/assets/app_assets.dart';
 import 'package:dobo/core/style/app_colors.dart';
+import 'package:dobo/view/landing_page/screens/landing_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -39,9 +40,12 @@ class AppointmentCancelPop extends StatelessWidget {
             ),
           ),
           const Spacer(),
-          PrimaryButton(onTap: () {
-            Navigator.pop(context);
-          }, label: 'Done'),
+          PrimaryButton(
+              onTap: () {
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => LandingScreen()));
+              },
+              label: 'Done'),
           GlobalVariabels.vertical15,
         ],
       ),

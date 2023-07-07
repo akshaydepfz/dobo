@@ -7,13 +7,48 @@ import 'package:dobo/core/assets/app_icons.dart';
 import 'package:dobo/core/style/app_colors.dart';
 import 'package:dobo/router/app_route_constants.dart';
 import 'package:dobo/view/appointment/screens/review_summery.dart';
+import 'package:dobo/view/my_appointments/services/appointment_services.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class AppointmentViewScreen extends StatelessWidget {
-  const AppointmentViewScreen({super.key});
+class AppointmentViewScreen extends StatefulWidget {
+  const AppointmentViewScreen(
+      {super.key,
+      required this.doctorId,
+      required this.clinicId,
+      required this.date,
+      required this.time,
+      required this.tokenNo,
+      required this.name,
+      required this.gender,
+      required this.age,
+      required this.problem});
+  final String doctorId;
+  final String clinicId;
+  final DateTime date;
+  final String time;
+  final String tokenNo;
+  final String name;
+  final String gender;
+  final DateTime age;
+  final String problem;
+  @override
+  State<AppointmentViewScreen> createState() => _AppointmentViewScreenState();
+}
+
+class _AppointmentViewScreenState extends State<AppointmentViewScreen> {
+  @override
+  void initState() {
+    Provider.of<AppointmentService>(context, listen: false)
+        .getClinicDetails(widget.clinicId);
+    Provider.of<AppointmentService>(context, listen: false)
+        .getDoctorDetails(widget.doctorId);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<AppointmentService>(context);
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SafeArea(
@@ -50,23 +85,27 @@ class AppointmentViewScreen extends StatelessWidget {
                             ),
                           ),
                           GlobalVariabels.horizontal10,
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text(
-                                'The family care',
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
-                              ),
-                              GlobalVariabels.vertical10,
-                              IconTextTile(
-                                  name: '+91 2649351476', icon: AppIcons.call),
-                              GlobalVariabels.vertical10,
-                              IconTextTile(
-                                  name: 'Malappuram, kerala, india',
-                                  icon: AppIcons.location),
-                            ],
-                          ),
+                          provider.clinicDetail == null
+                              ? const SizedBox()
+                              : Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      provider.clinicDetail!.clinicName,
+                                      style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    GlobalVariabels.vertical10,
+                                    IconTextTile(
+                                        name: provider.clinicDetail!.phone,
+                                        icon: AppIcons.call),
+                                    GlobalVariabels.vertical10,
+                                    IconTextTile(
+                                        name: provider.clinicDetail!.city,
+                                        icon: AppIcons.location),
+                                  ],
+                                ),
                         ],
                       ),
                       GlobalVariabels.vertical10,
@@ -80,41 +119,47 @@ class AppointmentViewScreen extends StatelessWidget {
                         ),
                       ),
                       GlobalVariabels.vertical10,
-                      Row(
-                        children: [
-                          Container(
-                            height: height * .11,
-                            width: height * .11,
-                            decoration: BoxDecoration(
-                              image: const DecorationImage(
-                                  image: AssetImage(AppAssets.doctor2),
-                                  fit: BoxFit.cover),
-                              border: Border.all(color: AppColor.grey3),
-                              borderRadius: BorderRadius.circular(16),
+                      provider.doctorDetail == null
+                          ? const SizedBox()
+                          : Row(
+                              children: [
+                                Container(
+                                  height: height * .11,
+                                  width: height * .11,
+                                  decoration: BoxDecoration(
+                                    image: const DecorationImage(
+                                        image: AssetImage(AppAssets.doctor2),
+                                        fit: BoxFit.cover),
+                                    border: Border.all(color: AppColor.grey3),
+                                    borderRadius: BorderRadius.circular(16),
+                                  ),
+                                ),
+                                GlobalVariabels.horizontal10,
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Dr. ${provider.doctorDetail!.fullName}',
+                                      style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    GlobalVariabels.vertical10,
+                                    IconTextTile(
+                                        name: provider.clinicDetail == null
+                                            ? ""
+                                            : provider.clinicDetail!.clinicName,
+                                        icon: AppIcons.hospital),
+                                    GlobalVariabels.vertical10,
+                                    IconTextTile(
+                                      name: provider
+                                          .doctorDetail!.department.category,
+                                      icon: AppIcons.medal,
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
-                          ),
-                          GlobalVariabels.horizontal10,
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text(
-                                'Dr. Rubayet Sakib',
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
-                              ),
-                              GlobalVariabels.vertical10,
-                              IconTextTile(
-                                  name: 'The family care',
-                                  icon: AppIcons.hospital),
-                              GlobalVariabels.vertical10,
-                              IconTextTile(
-                                name: 'Dental Specialist',
-                                icon: AppIcons.medal,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
                       GlobalVariabels.vertical10,
                       const Divider(),
                       GlobalVariabels.vertical10,
@@ -132,20 +177,20 @@ class AppointmentViewScreen extends StatelessWidget {
                               ),
                               GlobalVariabels.vertical10,
                               Row(
-                                children: const [
-                                  Text(
-                                    'March 15, 2022',
+                                children: [
+                                  const Text(
+                                    'July 15, 2023',
                                     style: TextStyle(
                                       fontSize: 15,
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 20,
                                     child: VerticalDivider(),
                                   ),
                                   Text(
-                                    '09:00 AM',
-                                    style: TextStyle(
+                                    widget.time,
+                                    style: const TextStyle(
                                       fontSize: 15,
                                     ),
                                   )
@@ -159,15 +204,15 @@ class AppointmentViewScreen extends StatelessWidget {
                       const Divider(),
                       GlobalVariabels.vertical10,
                       Row(
-                        children: const [
-                          Text(
+                        children: [
+                          const Text(
                             'Token No : ',
                             style: TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            '058',
-                            style: TextStyle(
+                            widget.tokenNo,
+                            style: const TextStyle(
                                 color: AppColor.primary,
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold),
@@ -185,9 +230,9 @@ class AppointmentViewScreen extends StatelessWidget {
                         ),
                       ),
                       GlobalVariabels.vertical10,
-                      const TextTile(title: 'Name', value: 'Rubayet Sakib'),
+                      TextTile(title: 'Name', value: widget.name),
                       const Divider(),
-                      const TextTile(title: 'Gender', value: 'Male'),
+                      TextTile(title: 'Gender', value: widget.gender),
                       const Divider(),
                       const TextTile(title: 'Age', value: '24'),
                       const Divider(),
@@ -198,9 +243,9 @@ class AppointmentViewScreen extends StatelessWidget {
                             fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                       GlobalVariabels.vertical10,
-                      const Text(
-                        'The family care is oneof the to are pmost to health care providers , India. Our hos pital’s are renowned for to their medical infras the tructure...',
-                        style: TextStyle(),
+                      Text(
+                        widget.problem,
+                        style: const TextStyle(),
                       ),
                       GlobalVariabels.vertical10,
                       PrimaryButton(

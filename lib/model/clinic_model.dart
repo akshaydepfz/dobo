@@ -1,10 +1,6 @@
-// To parse this JSON data, do
-//
-//     final clinicModel = clinicModelFromJson(jsonString);
-
 class ClinicModel {
   String id;
-  List<Image> images;
+
   List<Timing> timings;
   double avgRating;
   List<dynamic> departments;
@@ -35,7 +31,6 @@ class ClinicModel {
 
   ClinicModel(
       {required this.id,
-      required this.images,
       required this.timings,
       required this.avgRating,
       required this.departments,
@@ -66,7 +61,6 @@ class ClinicModel {
 
   factory ClinicModel.fromJson(Map<String, dynamic> json) => ClinicModel(
       id: json["id"],
-      images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
       timings:
           List<Timing>.from(json["timings"].map((x) => Timing.fromJson(x))),
       avgRating: json["avg_rating"] ?? 0,
@@ -98,7 +92,6 @@ class ClinicModel {
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "images": List<dynamic>.from(images.map((x) => x.toJson())),
         "timings": List<dynamic>.from(timings.map((x) => x.toJson())),
         "avg_rating": avgRating,
         "departments": List<dynamic>.from(departments.map((x) => x)),
@@ -125,30 +118,6 @@ class ClinicModel {
         "years_of_experience": yearsOfExperience,
         "creator": creator,
         "user": user,
-      };
-}
-
-class Image {
-  int id;
-  String image;
-  String clinic;
-
-  Image({
-    required this.id,
-    required this.image,
-    required this.clinic,
-  });
-
-  factory Image.fromJson(Map<String, dynamic> json) => Image(
-        id: json["id"],
-        image: json["image"],
-        clinic: json["clinic"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "image": image,
-        "clinic": clinic,
       };
 }
 

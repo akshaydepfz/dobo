@@ -7,13 +7,23 @@ import 'package:flutter/material.dart';
 class CancelldCard extends StatelessWidget {
   const CancelldCard({
     Key? key,
+    required this.clinicName,
+    required this.doctorName,
+    required this.time,
+    required this.clinicImage,
+    required this.weekday,
   }) : super(key: key);
+  final String clinicName;
+  final String doctorName;
+  final String time;
+  final String clinicImage;
+  final String weekday;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-       onTap: (){
-        Navigator.pushNamed(context,RouteConstants.appointmentView);
+      onTap: () {
+        Navigator.pushNamed(context, RouteConstants.appointmentView);
       },
       child: Container(
         padding: const EdgeInsets.all(10),
@@ -32,16 +42,16 @@ class CancelldCard extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'The family care',
-                      style: TextStyle(
+                    Text(
+                      clinicName,
+                      style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const Text(
-                      'Dr. Rubayet Sakib',
-                      style: TextStyle(color: AppColor.grey4),
+                    Text(
+                      'Dr. $doctorName',
+                      style: const TextStyle(color: AppColor.grey4),
                     ),
                     GlobalVariabels.vertical10,
                     Row(
@@ -64,9 +74,10 @@ class CancelldCard extends StatelessWidget {
                           ),
                         ),
                         GlobalVariabels.horizontal10,
-                        const Text(
-                          'Today',
-                          style: TextStyle(fontSize: 14, color: AppColor.grey4),
+                        Text(
+                          weekday,
+                          style: const TextStyle(
+                              fontSize: 14, color: AppColor.grey4),
                         ),
                         const SizedBox(
                           height: 20,
@@ -74,9 +85,10 @@ class CancelldCard extends StatelessWidget {
                             thickness: 1,
                           ),
                         ),
-                        const Text(
-                          '08:30 AM',
-                          style: TextStyle(fontSize: 14, color: AppColor.grey4),
+                        Text(
+                          time,
+                          style: const TextStyle(
+                              fontSize: 14, color: AppColor.grey4),
                         ),
                       ],
                     ),

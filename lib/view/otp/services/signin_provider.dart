@@ -52,7 +52,7 @@ class SigninProvider extends ChangeNotifier {
           // ignore: use_build_context_synchronously
           showSnackBarSuccess(context, 'OTP Sent to the given mobile number');
           // ignore: use_build_context_synchronously
-          Navigator.push(context,
+          Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) => const OtpAuthScreen()));
         }
       } on DioError catch (e) {
@@ -96,13 +96,13 @@ class SigninProvider extends ChangeNotifier {
           showSnackBarSuccess(context, 'Verification successfull');
           if (created) {
             // ignore: use_build_context_synchronously
-            Navigator.push(
+            Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                     builder: (context) => const ProfileCreateScreen()));
           } else {
             // ignore: use_build_context_synchronously
-            Navigator.push(
+            Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                     builder: (context) => const LocationSelectScreen()));

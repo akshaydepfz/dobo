@@ -8,14 +8,26 @@ import 'package:flutter/material.dart';
 class UpComingCard extends StatelessWidget {
   const UpComingCard({
     Key? key,
+    required this.clinicName,
+    required this.doctorName,
+    required this.time,
+    required this.clinicImage,
+    required this.weekday,
+    required this.onCancellPressed,
+    required this.onReschedulePressed, required this.onCardPressed,
   }) : super(key: key);
-
+  final String clinicName;
+  final String doctorName;
+  final String time;
+  final String clinicImage;
+  final String weekday;
+  final Function() onCancellPressed;
+  final Function() onReschedulePressed;
+  final Function() onCardPressed;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        Navigator.pushNamed(context,RouteConstants.appointmentView);
-      },
+      onTap: onCardPressed,
       child: Container(
         padding: const EdgeInsets.all(10),
         margin: const EdgeInsets.all(10),
@@ -29,20 +41,27 @@ class UpComingCard extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 100, child: Image.asset(AppAssets.health)),
+                SizedBox(
+                    height: 100,
+                    child: clinicImage == ''
+                        ? Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Image.asset(AppAssets.avatar),
+                          )
+                        : Image.network(clinicImage)),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'The family care',
-                      style: TextStyle(
+                    Text(
+                      clinicName,
+                      style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const Text(
-                      'Dr. Rubayet Sakib',
-                      style: TextStyle(color: AppColor.grey4),
+                    Text(
+                      'Dr. $doctorName',
+                      style: const TextStyle(color: AppColor.grey4),
                     ),
                     GlobalVariabels.vertical10,
                     Row(
@@ -65,8 +84,8 @@ class UpComingCard extends StatelessWidget {
                           ),
                         ),
                         GlobalVariabels.horizontal10,
-                        const Text(
-                          'Today',
+                        Text(
+                          weekday,
                           style: TextStyle(fontSize: 14, color: AppColor.grey4),
                         ),
                         const SizedBox(
@@ -75,8 +94,8 @@ class UpComingCard extends StatelessWidget {
                             thickness: 1,
                           ),
                         ),
-                        const Text(
-                          '08:30 AM',
+                        Text(
+                          time,
                           style: TextStyle(fontSize: 14, color: AppColor.grey4),
                         ),
                       ],
@@ -92,15 +111,14 @@ class UpComingCard extends StatelessWidget {
                     textColor: AppColor.primary,
                     label: 'Cancel',
                     buttonColor: AppColor.primary.withOpacity(.20),
-                    onTap: () {
-                       Navigator.pushNamed(context, RouteConstants.cancelAppointment);
-                    }),
+                    onTap: onCancellPressed),
                 AppointmentButtons(
                     textColor: Colors.white,
                     label: 'Reschedule',
                     buttonColor: AppColor.primary,
                     onTap: () {
-                      Navigator.pushNamed(context, RouteConstants.resceduleAppointment);
+                      Navigator.pushNamed(
+                          context, RouteConstants.resceduleAppointment);
                     }),
               ],
             )

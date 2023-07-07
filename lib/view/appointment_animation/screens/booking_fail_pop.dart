@@ -2,6 +2,7 @@ import 'package:dobo/common/primary_button.dart';
 import 'package:dobo/common/secondary_button.dart';
 import 'package:dobo/core/assets/app_assets.dart';
 import 'package:dobo/core/style/app_colors.dart';
+import 'package:dobo/view/landing_page/screens/landing_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -40,12 +41,17 @@ class BookingFailPop extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            PrimaryButton(onTap: () {
-              Navigator.pop(context);
-            }, label: 'Try Again'),
-            SecondaryButton(onTap: () {
-              Navigator.pop(context);
-            }, label: 'Cancel'),
+            PrimaryButton(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                label: 'Try Again'),
+            SecondaryButton(
+                onTap: () {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => LandingScreen()));
+                },
+                label: 'Cancel'),
           ],
         ),
       ),

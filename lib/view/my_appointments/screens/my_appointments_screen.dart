@@ -1,6 +1,8 @@
 import 'package:dobo/common/common_loading.dart';
 import 'package:dobo/core/assets/app_icons.dart';
 import 'package:dobo/core/style/app_colors.dart';
+import 'package:dobo/view/appointment/screens/cancell_appointment.dart';
+import 'package:dobo/view/my_appointments/screens/appointment_view.dart';
 import 'package:dobo/view/my_appointments/services/appointment_services.dart';
 import 'package:dobo/view/my_appointments/widgets/cancelled_card.dart';
 import 'package:dobo/view/my_appointments/widgets/completed_card.dart';
@@ -40,17 +42,17 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen>
               padding: const EdgeInsets.all(15.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const SizedBox(
+                children: const [
+                  SizedBox(
                     width: 10,
                   ),
-                  const Text(
+                  Text(
                     'My Appointment',
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
                     height: 25,
-                    child: Image.asset(AppIcons.search),
+                    // child: Image.asset(AppIcons.search),
                   )
                 ],
               ),
@@ -78,47 +80,128 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen>
                       ? const Center(
                           child: CommonLoadingWidget(),
                         )
-                      : ListView.builder(
-                          itemCount: provider.upcomingAppontments!.length,
-                          shrinkWrap: true,
-                          itemBuilder: (context, i) {
-                            if (provider.upcomingAppontments!.isEmpty) {
-                              return const Center(
-                                child: Text('No Appointments Found!'),
-                              );
-                            }
-                            return const UpComingCard();
-                          }),
+                      : provider.upcomingAppontments!.isEmpty
+                          ? const Center(
+                              child: Text('No Appointments Found!'),
+                            )
+                          : ListView.builder(
+                              itemCount: provider.upcomingAppontments!.length,
+                              shrinkWrap: true,
+                              itemBuilder: (context, i) {
+                                return UpComingCard(
+                                  onCardPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                AppointmentViewScreen(
+                                                    doctorId: provider
+                                                        .upcomingAppontments![i]
+                                                        .schedule!
+                                                        .doctor!,
+                                                    clinicId: provider
+                                                        .upcomingAppontments![i]
+                                                        .schedule!
+                                                        .clinic!,
+                                                    date: provider
+                                                        .upcomingAppontments![i]
+                                                        .schedule!
+                                                        .created!,
+                                                    time: provider
+                                                        .upcomingAppontments![i]
+                                                        .schedule!
+                                                        .startTime!,
+                                                    tokenNo: provider
+                                                        .upcomingAppontments![i]
+                                                        .tokenNumber!
+                                                        .toString(),
+                                                    name: provider
+                                                        .upcomingAppontments![i]
+                                                        .patient!
+                                                        .fullName!,
+                                                    gender:
+                                                        provider
+                                                            .upcomingAppontments![
+                                                                i]
+                                                            .patient!
+                                                            .gender!,
+                                                    age: provider
+                                                        .upcomingAppontments![i]
+                                                        .patient!
+                                                        .dob!,
+                                                    problem: provider
+                                                        .upcomingAppontments![i]
+                                                        .reason!)));
+                                  },
+                                  onCancellPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                CancellAppointment(
+                                                    appointmentId: provider
+                                                        .upcomingAppontments![i]
+                                                        .id!)));
+                                  },
+                                  onReschedulePressed: () {},
+                                  weekday: provider.upcomingAppontments![i]
+                                      .schedule!.weekday!,
+                                  clinicName: provider
+                                      .upcomingAppontments![i].clinicName!,
+                                  doctorName: provider
+                                      .upcomingAppontments![i].doctorName!,
+                                  time: provider.upcomingAppontments![i]
+                                      .schedule!.startTime!
+                                      .toString()
+                                      .substring(0, 5),
+                                  clinicImage: provider.upcomingAppontments![i]
+                                          .clinicPhoto ??
+                                      '',
+                                );
+                              }),
                   provider.completedAppontments == null
                       ? const Center(
                           child: CommonLoadingWidget(),
                         )
-                      : ListView.builder(
-                          itemCount: provider.completedAppontments!.length,
-                          shrinkWrap: true,
-                          itemBuilder: (context, i) {
-                            if (provider.upcomingAppontments!.isEmpty) {
-                              return const Center(
-                                child: Text('No Appointments Found!'),
-                              );
-                            }
-                            return const CompletedCard();
-                          }),
+                      : provider.completedAppontments!.isEmpty
+                          ? const Center(
+                              child: Text('No Appointments Found!'),
+                            )
+                          : ListView.builder(
+                              itemCount: provider.completedAppontments!.length,
+                              shrinkWrap: true,
+                              itemBuilder: (context, i) {
+                                return const CompletedCard();
+                              }),
                   provider.cancelleddAppontments == null
                       ? const Center(
                           child: CommonLoadingWidget(),
                         )
-                      : ListView.builder(
-                          itemCount: provider.cancelleddAppontments!.length,
-                          shrinkWrap: true,
-                          itemBuilder: (context, i) {
-                            if (provider.upcomingAppontments!.isEmpty) {
-                              return const Center(
-                                child: Text('No Appointments Found!'),
-                              );
-                            }
-                            return const CancelldCard();
-                          }),
+                      : provider.cancelleddAppontments!.isEmpty
+                          ? const Center(
+                              child: Text('No Appointments Found!'),
+                            )
+                          : ListView.builder(
+                              itemCount: provider.cancelleddAppontments!.length,
+                              shrinkWrap: true,
+                              itemBuilder: (context, i) {
+                                return CancelldCard(
+                                  weekday: provider.cancelleddAppontments![i]
+                                      .schedule!.weekday!,
+                                  clinicName: provider
+                                      .cancelleddAppontments![i].clinicName!,
+                                  doctorName: provider
+                                      .cancelleddAppontments![i].doctorName!,
+                                  time: provider.cancelleddAppontments![i]
+                                      .schedule!.startTime!
+                                      .toString()
+                                      .substring(0, 5),
+                                  clinicImage: provider
+                                          .cancelleddAppontments![i]
+                                          .clinicPhoto ??
+                                      '',
+                                );
+                              }),
                 ],
               ),
             )

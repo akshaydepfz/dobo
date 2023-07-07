@@ -21,6 +21,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     final provider = Provider.of<NotificationService>(context);
     return Scaffold(
       body: SafeArea(
@@ -29,22 +30,29 @@ class _NotificationScreenState extends State<NotificationScreen> {
             const PrimaryAppbar(title: 'Notifications'),
             provider.notificationList == null
                 ? const CommonLoadingWidget()
-                : Expanded(
-                    child: ListView.builder(
-                        shrinkWrap: true,
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: provider.notificationList!.length,
-                        itemBuilder: (context, i) {
-                          return NotificationCard(
-                            onTap: () {},
-                            isWrong: false,
-                            title: provider.notificationList![i].title,
-                            msg: provider.notificationList![i].description,
-                            time: provider.notificationList![i].created
-                                .toString(),
-                          );
-                        }),
-                  )
+                : provider.notificationList!.isEmpty
+                    ? Padding(
+                        padding: EdgeInsets.only(top: height / 3),
+                        child: const Center(
+                          child: Text('No notifications found'),
+                        ),
+                      )
+                    : Expanded(
+                        child: ListView.builder(
+                            shrinkWrap: true,
+                            physics: const BouncingScrollPhysics(),
+                            itemCount: provider.notificationList!.length,
+                            itemBuilder: (context, i) {
+                              return NotificationCard(
+                                onTap: () {},
+                                isWrong: false,
+                                title: provider.notificationList![i].title,
+                                msg: provider.notificationList![i].description,
+                                time: provider.notificationList![i].created
+                                    .toString(),
+                              );
+                            }),
+                      )
           ],
         ),
       ),

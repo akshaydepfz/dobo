@@ -182,7 +182,7 @@ class ProfileCreateScreen extends StatelessWidget {
                     const Text('Already have an account?'),
                     TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(
+                          Navigator.pushReplacementNamed(
                               context, RouteConstants.signInScreen);
                         },
                         child: const Text('Sign In'))

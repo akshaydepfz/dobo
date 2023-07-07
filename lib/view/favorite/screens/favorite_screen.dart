@@ -47,7 +47,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                         child: const CommonLoadingWidget())
                     : provider.clinicList!.isEmpty
                         ? Padding(
-                            padding: EdgeInsets.only(top: height * .30),
+                            padding: EdgeInsets.only(top: height * .35),
                             child: const Text('No Favorite Clinics!'),
                           )
                         : ListView.builder(

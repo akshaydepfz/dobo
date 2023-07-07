@@ -92,16 +92,19 @@ class AppRoute {
 
       case RouteConstants.bookingDonePop:
         return MaterialPageRoute(
-            builder: (context) => const BookingSuccessPop());
+            builder: (context) => const BookingSuccessPop(
+                  tokenNo: '',
+                ));
       case RouteConstants.bookingFailPop:
         return MaterialPageRoute(builder: (context) => const BookingFailPop());
-      case RouteConstants.appointmentView:
-        return MaterialPageRoute(
-            builder: (context) => const AppointmentViewScreen());
+
       case RouteConstants.resceduleAppointment:
         return MaterialPageRoute(builder: (context) => RescheduleAppointment());
       case RouteConstants.cancelAppointment:
-        return MaterialPageRoute(builder: (context) => CancellAppointment());
+        return MaterialPageRoute(
+            builder: (context) => CancellAppointment(
+                  appointmentId: '',
+                ));
       case RouteConstants.appointmentRescedulePop:
         return MaterialPageRoute(builder: (context) => const ReschedulePop());
       case RouteConstants.appointmentcancelPop:
@@ -110,7 +113,8 @@ class AppRoute {
       case RouteConstants.sessionEndPop:
         return MaterialPageRoute(builder: (context) => const SessionEndPop());
       case RouteConstants.editProfile:
-        return MaterialPageRoute(builder: (context) => const ProfileEditScreen());
+        return MaterialPageRoute(
+            builder: (context) => const ProfileEditScreen());
       case RouteConstants.notificationScreen:
         return MaterialPageRoute(
             builder: (context) => const NotificationScreen());

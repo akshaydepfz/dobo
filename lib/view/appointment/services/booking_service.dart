@@ -6,6 +6,7 @@ import 'package:dobo/model/doctor_details_model.dart';
 import 'package:dobo/model/relative_model.dart';
 import 'package:dobo/model/slote_model.dart';
 import 'package:dobo/router/app_route_constants.dart';
+import 'package:dobo/view/appointment_animation/screens/bookind_success_pop.dart';
 import 'package:dobo/view/profile_create/services/signup_service.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -220,8 +221,16 @@ class BookingService extends ChangeNotifier {
         _isLoading = false;
         notifyListeners();
         log(response.data.toString());
+        int tokenNo = await response.data['token_number'];
         // ignore: use_build_context_synchronously
-        Navigator.pushNamed(context, RouteConstants.bookingDonePop);
+
+        // ignore: use_build_context_synchronously
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    BookingSuccessPop(tokenNo: tokenNo.toString())));
+
         LogController.activityLog(
             'PatientDetailsProvider', "addAppointment", "Success");
       }
@@ -229,9 +238,9 @@ class BookingService extends ChangeNotifier {
       _isLoading = false;
       notifyListeners();
       // ignore: use_build_context_synchronously
-      Navigator.pushNamed(context, RouteConstants.bookingFailPop);
+      Navigator.pushReplacementNamed(context, RouteConstants.bookingFailPop);
       // ignore: use_build_context_synchronously
-      showSnackBarWrong(context, e.response!.data);
+      showSnackBarWrong(context, e.response!.data.toString());
       LogController.activityLog(
           'PatientDetailsProvider', "addAppointment", "Failed");
       log(e.response!.statusCode.toString());

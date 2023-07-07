@@ -34,4 +34,8 @@ class ApiEndpoints {
       '$baseUrl/api/v1/patients/add_relative/?patient_id=';
   static const relativeList = '$baseUrl/api/v1/patients/relatives/?patient_id=';
   static const addAppointment = '$baseUrl/api/v1/clinics/appointments/';
+  static const cancellAppointment =
+      '$baseUrl/api/v1/clinics/appointments/cancel/?appointment_id=';
+
+ 
 }
