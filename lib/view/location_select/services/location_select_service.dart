@@ -21,7 +21,6 @@ class LocationSelectService extends ChangeNotifier {
       latitude = lat;
       longitude = long;
       notifyListeners();
-
     } catch (e) {
       showSnackBarWrong(context, e.toString());
     }
@@ -49,7 +48,6 @@ class LocationSelectService extends ChangeNotifier {
               },
             ));
         if (response.statusCode == 200 || response.statusCode == 201) {
-     
           LogController.activityLog(
               'LocationSelectService', "setLocation", 'Success');
           // ignore: use_build_context_synchronously
@@ -59,6 +57,7 @@ class LocationSelectService extends ChangeNotifier {
         LogController.activityLog(
             'LocationSelectService', "setLocation", 'Failed');
         // ignore: use_build_context_synchronously
+        Navigator.pushReplacementNamed(context, RouteConstants.landingScreen);
         showSnackBarWrong(context, e.response.toString());
       }
     }

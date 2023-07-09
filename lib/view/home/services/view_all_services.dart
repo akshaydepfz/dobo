@@ -53,43 +53,6 @@ class ViewAllService extends ChangeNotifier {
     }
   }
 
-  Future addClinicFavorite(
-      BuildContext context, String clinicId, bool isFavorite) async {
-    final pref = await SharedPreferences.getInstance();
-    String token = pref.getString("accessToken") ?? '';
-    if (isFavorite) {
-      try {
-        final response =
-            await dio.delete("${ApiEndpoints.removeFavClinic}$clinicId",
-                options: Options(headers: {
-                  'Authorization': 'Bearer $token',
-                }));
-
-        if (response.statusCode == 200) {
-          getClinicList();
-          LogController.activityLog(
-              'HomeProvider', "addClinicFavorite", "Success");
-        }
-      } on DioError catch (_) {
-        LogController.activityLog(
-            'HomeProvider', "addClinicFavorite", "Failed");
-      }
-    } else {
-      try {
-        final response = await dio.post("${ApiEndpoints.addFavClinic}$clinicId",
-            options: Options(headers: {
-              'Authorization': 'Bearer $token',
-            }));
-
-        if (response.statusCode == 200) {
-          getClinicList();
-          LogController.activityLog(
-              'HomeProvider', "addClinicFavorite", "Success");
-        }
-      } on DioError catch (_) {
-        LogController.activityLog(
-            'HomeProvider', "addClinicFavorite", "Failed");
-      }
-    }
-  }
+ 
+  
 }

@@ -278,11 +278,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   shrinkWrap: true,
                   itemBuilder: (context, i) {
                     return ClinicsCard(
+                      isFavoriteLoad: provider.favorieIndex == i
+                          ? provider.isFavoriteLoad
+                          : false,
                       isFavorite: provider.clinicList[i].isFavorite,
                       onFavoriteClick: () => provider.addClinicFavorite(
                         context,
                         provider.clinicList[i].id,
                         provider.clinicList[i].isFavorite,
+                        i,
                       ),
                       width: width,
                       avarageRating:

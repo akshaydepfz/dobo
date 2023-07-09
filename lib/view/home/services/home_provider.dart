@@ -11,8 +11,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 class HomeProvider extends ChangeNotifier {
   final dio = Dio();
   String _location = 'Loading...';
-
   String get location => _location;
+
+  bool _isFavoriteLoad = false;
+  int _favorieIndex = 0;
+  int get favorieIndex => _favorieIndex;
+  bool get isFavoriteLoad => _isFavoriteLoad;
 
   List<ClinicModel> clinicList = [];
   List<SliderModel> sliders = [];
@@ -58,7 +62,7 @@ class HomeProvider extends ChangeNotifier {
           options: Options(headers: {
             'Authorization': 'Bearer $token',
           }));
-  
+
       if (response.statusCode == 200) {
         List data = response.data;
         sliders = data.map((e) => SliderModel.fromJson(e)).toList();
@@ -111,10 +115,14 @@ class HomeProvider extends ChangeNotifier {
   }
 
   Future addClinicFavorite(
-      BuildContext context, String clinicId, bool isFavorite) async {
+      BuildContext context, String clinicId, bool isFavorite, int index) async {
     final pref = await SharedPreferences.getInstance();
     String token = pref.getString("accessToken") ?? '';
+    _favorieIndex = index;
+    notifyListeners();
     if (isFavorite) {
+      _isFavoriteLoad = true;
+      notifyListeners();
       try {
         final response =
             await dio.delete("${ApiEndpoints.removeFavClinic}$clinicId",
@@ -123,28 +131,37 @@ class HomeProvider extends ChangeNotifier {
                 }));
 
         if (response.statusCode == 200) {
-         
+          _isFavoriteLoad = false;
+          notifyListeners();
           LogController.activityLog(
               'HomeProvider', "addClinicFavorite", "Success");
           getNearestClinics();
         }
       } on DioError catch (_) {
+        _isFavoriteLoad = false;
+        notifyListeners();
         LogController.activityLog(
             'HomeProvider', "addClinicFavorite", "Failed");
       }
     } else {
       try {
+        _isFavoriteLoad = true;
+        notifyListeners();
         final response = await dio.post("${ApiEndpoints.addFavClinic}$clinicId",
             options: Options(headers: {
               'Authorization': 'Bearer $token',
             }));
 
         if (response.statusCode == 200) {
+          _isFavoriteLoad = false;
+          notifyListeners();
           LogController.activityLog(
               'HomeProvider', "addClinicFavorite", "Success");
           getNearestClinics();
         }
       } on DioError catch (_) {
+        _isFavoriteLoad = false;
+        notifyListeners();
         LogController.activityLog(
             'HomeProvider', "addClinicFavorite", "Failed");
       }

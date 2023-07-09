@@ -100,7 +100,7 @@ class ProfileCreateProvider extends ChangeNotifier {
         if (response.statusCode == 200 || response.statusCode == 201) {
           _isLoading = false;
           notifyListeners();
-    
+
           LogController.activityLog("profileCreate", "Signin", "Success");
           // ignore: use_build_context_synchronously
 
@@ -126,6 +126,8 @@ class ProfileCreateProvider extends ChangeNotifier {
       showSnackBarWrong(context, "Please enter your date of birth");
     } else if (_acceptTC == false) {
       showSnackBarWrong(context, "Please accept the terms and conditions");
+    } else if (image == null) {
+      showSnackBarWrong(context, "Please select profile photo");
     } else {
       return true;
     }

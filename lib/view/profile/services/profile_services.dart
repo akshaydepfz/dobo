@@ -57,6 +57,7 @@ class ProfileService extends ChangeNotifier {
         options: Options(headers: {'Authorization': 'Bearer $token'}),
       );
       if (response.statusCode == 200) {
+        print(response.data);
         LogController.activityLog(
             'ProfileProvider', 'Get User Details', "success");
         userModel = UserModel.fromJson(response.data);

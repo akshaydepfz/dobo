@@ -167,6 +167,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                 itemCount: provider.clinicList!.length,
                                 itemBuilder: (context, i) {
                                   return ClinicsCard(
+                                    isFavoriteLoad: false,
                                     isFavorite:
                                         provider.clinicList![i].isFavorite,
                                     onFavoriteClick: () =>

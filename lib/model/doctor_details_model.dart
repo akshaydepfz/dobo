@@ -50,7 +50,7 @@ class DoctorDetailsModel {
           updated: DateTime.parse(json["updated"]),
           isActive: json["is_active"],
           fullName: json["full_name"],
-          gender: json["gender"],
+          gender: json["gender"] ?? "",
           phone: json["phone"],
           designation: json["designation"],
           qualification: json["qualification"],

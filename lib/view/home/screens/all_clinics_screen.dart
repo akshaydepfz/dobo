@@ -5,6 +5,7 @@ import 'package:dobo/core/style/app_colors.dart';
 import 'package:dobo/view/category/screens/category_view.dart';
 import 'package:dobo/view/clinic_view/screens/clinic_view_.screen.dart';
 import 'package:dobo/view/doctor_view/screens/doctor_view.dart';
+import 'package:dobo/view/home/services/home_provider.dart';
 import 'package:dobo/view/home/services/view_all_services.dart';
 import 'package:dobo/view/home/widgets/clinics_card.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,7 @@ class _AllClinicsScreenState extends State<AllClinicsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final favoriteProvider = Provider.of<HomeProvider>(context);
     final provider = Provider.of<ViewAllService>(context);
     return Scaffold(
       appBar: AppBar(
@@ -82,11 +84,16 @@ class _AllClinicsScreenState extends State<AllClinicsScreen> {
                       itemCount: provider.clinicList!.length,
                       itemBuilder: (context, i) {
                         return ClinicsCard(
+                          isFavoriteLoad: favoriteProvider.favorieIndex == i
+                              ? favoriteProvider.isFavoriteLoad
+                              : false,
                           isFavorite: provider.clinicList![i].isFavorite,
-                          onFavoriteClick: () => provider.addClinicFavorite(
+                          onFavoriteClick: () =>
+                              favoriteProvider.addClinicFavorite(
                             context,
                             provider.clinicList![i].id,
                             provider.clinicList![i].isFavorite,
+                            i,
                           ),
                           width: MediaQuery.of(context).size.width,
                           avarageRating:

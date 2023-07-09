@@ -17,6 +17,7 @@ class ClinicsCard extends StatelessWidget {
     required this.avarageRating,
     required this.onFavoriteClick,
     required this.isFavorite,
+    required this.isFavoriteLoad,
   }) : super(key: key);
 
   final double width;
@@ -28,6 +29,7 @@ class ClinicsCard extends StatelessWidget {
   final Function() onFavoriteClick;
   final Function() onTap;
   final bool isFavorite;
+  final bool isFavoriteLoad;
 
   @override
   Widget build(BuildContext context) {
@@ -103,14 +105,21 @@ class ClinicsCard extends StatelessWidget {
             onTap: onFavoriteClick,
             child: SizedBox(
               height: 20,
-              child: isFavorite
-                  ? SvgPicture.asset(
-                      AppIcons.favorite,
-                      color: AppColor.primary,
-                    )
-                  : Image.asset(
-                      AppIcons.favOutline,
-                    ),
+              child: isFavoriteLoad
+                  ? const SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 1,
+                      ))
+                  : isFavorite
+                      ? SvgPicture.asset(
+                          AppIcons.favorite,
+                          color: AppColor.primary,
+                        )
+                      : Image.asset(
+                          AppIcons.favOutline,
+                        ),
             ),
           )
         ],
