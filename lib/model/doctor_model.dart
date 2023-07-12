@@ -73,7 +73,7 @@ class DoctorListModel {
         "experience": experience,
         "image": image,
         "joining_date":
-            "${joiningDate!.year.toString().padLeft(4, '0')}-${joiningDate!.month.toString().padLeft(2, '0')}-${joiningDate.day.toString().padLeft(2, '0')}",
+            "${joiningDate.year.toString().padLeft(4, '0')}-${joiningDate.month.toString().padLeft(2, '0')}-${joiningDate.day.toString().padLeft(2, '0')}",
         "address": address,
         "description": description,
         "creator": creator,
