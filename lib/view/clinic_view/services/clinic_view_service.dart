@@ -13,6 +13,7 @@ class ClinicDetailsService extends ChangeNotifier {
   ClinicDetailsModel? clinicDetail;
 
   Future<void> getClinicDetails(String id) async {
+    print(id);
     final pref = await SharedPreferences.getInstance();
     String token = pref.getString("accessToken") ?? '';
 
@@ -29,7 +30,8 @@ class ClinicDetailsService extends ChangeNotifier {
         LogController.activityLog(
             'ClinicDetailsService', "getClinicDetails", 'Success');
       }
-    } on DioError catch (_) {
+    } on DioError catch (e) {
+      print(e.response!.data);
       LogController.activityLog(
           'ClinicDetailsService', "getClinicDetails", 'Failed');
     }

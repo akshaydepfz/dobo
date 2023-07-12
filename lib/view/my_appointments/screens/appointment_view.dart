@@ -71,43 +71,51 @@ class _AppointmentViewScreenState extends State<AppointmentViewScreen> {
                         ),
                       ),
                       GlobalVariabels.vertical10,
-                      Row(
-                        children: [
-                          Container(
-                            height: height * .11,
-                            width: height * .11,
-                            decoration: BoxDecoration(
-                              image: const DecorationImage(
-                                  image: AssetImage(AppAssets.health),
-                                  fit: BoxFit.cover),
-                              border: Border.all(color: AppColor.grey3),
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                          ),
-                          GlobalVariabels.horizontal10,
-                          provider.clinicDetail == null
-                              ? const SizedBox()
-                              : Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      provider.clinicDetail!.clinicName,
-                                      style: const TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    GlobalVariabels.vertical10,
-                                    IconTextTile(
-                                        name: provider.clinicDetail!.phone,
-                                        icon: AppIcons.call),
-                                    GlobalVariabels.vertical10,
-                                    IconTextTile(
-                                        name: provider.clinicDetail!.city,
-                                        icon: AppIcons.location),
-                                  ],
+                      provider.clinicDetail == null
+                          ? SizedBox()
+                          : Row(
+                              children: [
+                                Container(
+                                  height: height * .11,
+                                  width: height * .11,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: AppColor.grey3),
+                                    borderRadius: BorderRadius.circular(16),
+                                  ),
+                                  child: provider.clinicDetail!.image == ''
+                                      ? Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Image.asset(AppAssets.avatar),
+                                        )
+                                      : Image.network(
+                                          provider.clinicDetail!.image),
                                 ),
-                        ],
-                      ),
+                                GlobalVariabels.horizontal10,
+                                provider.clinicDetail == null
+                                    ? const SizedBox()
+                                    : Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            provider.clinicDetail!.clinicName,
+                                            style: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          GlobalVariabels.vertical10,
+                                          IconTextTile(
+                                              name:
+                                                  provider.clinicDetail!.phone,
+                                              icon: AppIcons.call),
+                                          GlobalVariabels.vertical10,
+                                          IconTextTile(
+                                              name: provider.clinicDetail!.city,
+                                              icon: AppIcons.location),
+                                        ],
+                                      ),
+                              ],
+                            ),
                       GlobalVariabels.vertical10,
                       const Divider(),
                       GlobalVariabels.vertical10,
@@ -127,12 +135,16 @@ class _AppointmentViewScreenState extends State<AppointmentViewScreen> {
                                   height: height * .11,
                                   width: height * .11,
                                   decoration: BoxDecoration(
-                                    image: const DecorationImage(
-                                        image: AssetImage(AppAssets.doctor2),
-                                        fit: BoxFit.cover),
                                     border: Border.all(color: AppColor.grey3),
                                     borderRadius: BorderRadius.circular(16),
                                   ),
+                                  child: provider.doctorDetail!.image == null
+                                      ? Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Image.asset(AppAssets.avatar),
+                                        )
+                                      : Image.network(
+                                          provider.doctorDetail!.image),
                                 ),
                                 GlobalVariabels.horizontal10,
                                 Column(

@@ -20,7 +20,6 @@ import 'package:dobo/view/forgot_password/screens/forgot_password_screen.dart';
 import 'package:dobo/view/home/screens/home_screen.dart';
 import 'package:dobo/view/landing_page/screens/landing_screen.dart';
 import 'package:dobo/view/location_select/screens/location_select_screen.dart';
-import 'package:dobo/view/my_appointments/screens/appointment_view.dart';
 import 'package:dobo/view/my_appointments/screens/my_appointments_screen.dart';
 import 'package:dobo/view/new_password_set/screens/change_password_screen.dart';
 import 'package:dobo/view/new_password_set/screens/new_password_screen.dart';
@@ -84,7 +83,7 @@ class AppRoute {
       case RouteConstants.dateSelectScreen:
         return MaterialPageRoute(
             builder: (context) => const DateSelectingScreen(
-                  doctorId: '',
+                  doctorId: '', isRechedule: false,
                 ));
       case RouteConstants.patientScreen:
         return MaterialPageRoute(
@@ -99,7 +98,7 @@ class AppRoute {
         return MaterialPageRoute(builder: (context) => const BookingFailPop());
 
       case RouteConstants.resceduleAppointment:
-        return MaterialPageRoute(builder: (context) => RescheduleAppointment());
+        return MaterialPageRoute(builder: (context) => RescheduleAppointment(doctorId: '',));
       case RouteConstants.cancelAppointment:
         return MaterialPageRoute(
             builder: (context) => CancellAppointment(

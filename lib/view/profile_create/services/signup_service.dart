@@ -78,8 +78,8 @@ class ProfileCreateProvider extends ChangeNotifier {
       _isLoading = true;
       notifyListeners();
       try {
-        String fileName = image!.path;
-        dio.options.headers["Content-Type"] = "multipart/form-data";
+        // String fileName = image!.path;
+        //     dio.options.headers["Content-Type"] = "multipart/form-data";
         FormData formData = FormData.fromMap({
           "full_name": username,
           "dob":
@@ -87,20 +87,20 @@ class ProfileCreateProvider extends ChangeNotifier {
           "gender": gender,
           "address": address,
           "email": email,
-          'image': await MultipartFile.fromFile(image!.path.toString(),
-              filename: fileName),
         });
+        // 'image': await MultipartFile.fromFile(image!.path.toString(),
+        //       filename: fileName),
         final response = await dio.post(ApiEndpoints.profileCreate,
             data: formData,
             options: Options(headers: {
-              'Content-Type': 'multipart/form-data',
+              // 'Content-Type': 'multipart/form-data',
               'Authorization': 'Bearer $token',
             }));
+        print(response.data);
 
         if (response.statusCode == 200 || response.statusCode == 201) {
           _isLoading = false;
           notifyListeners();
-
           LogController.activityLog("profileCreate", "Signin", "Success");
           // ignore: use_build_context_synchronously
 

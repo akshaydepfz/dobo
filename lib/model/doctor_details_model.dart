@@ -56,9 +56,10 @@ class DoctorDetailsModel {
           qualification: json["qualification"],
           experience: json["experience"],
           image: json["image"],
-          joiningDate: DateTime.parse(json["joining_date"]),
+          joiningDate: DateTime.parse(
+              json["joining_date"] ?? "2023-07-13 02:45:27.983267"),
           address: json["address"],
-          description: json["description"],
+          description: json["description"] ?? "",
           creator: json["creator"],
           department: Department.fromJson(json["department"]),
           avgRating: json['avg_rating'].toString(),

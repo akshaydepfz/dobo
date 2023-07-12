@@ -1,6 +1,7 @@
 import 'package:dobo/common/common_loading.dart';
 import 'package:dobo/common/primary_appbar.dart';
 import 'package:dobo/constants/global_variables.dart';
+import 'package:dobo/core/assets/app_assets.dart';
 import 'package:dobo/core/assets/app_icons.dart';
 import 'package:dobo/core/style/app_colors.dart';
 import 'package:dobo/view/clinic_view/services/clinic_view_service.dart';
@@ -66,11 +67,15 @@ class _ClinicViewScreenState extends State<ClinicViewScreen> {
                                 height: 100,
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(12),
-                                  child: Image.network(
-                                    provider.clinicDetail!.image ??
-                                        "https://t4.ftcdn.net/jpg/03/47/41/03/360_F_347410397_5PpZbcQpnEqqzlGjOk1R5d11977LbMUW.jpg",
-                                    fit: BoxFit.cover,
-                                  ),
+                                  child: provider.clinicDetail!.image == ""
+                                      ? Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Image.asset(AppAssets.avatar),
+                                        )
+                                      : Image.network(
+                                          provider.clinicDetail!.image,
+                                          fit: BoxFit.cover,
+                                        ),
                                 ),
                               ),
                               GlobalVariabels.horizontal10,

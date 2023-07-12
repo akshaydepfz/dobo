@@ -51,9 +51,10 @@ class _AllDoctorsScreenState extends State<AllDoctorsScreen> {
                     const SizedBox(
                       width: 10,
                     ),
-                    const Expanded(
+                    Expanded(
                       child: TextField(
-                        decoration: InputDecoration(
+                        onChanged: (v) => provider.onDoctorQuaryChanged(v),
+                        decoration: const InputDecoration(
                             hintStyle: TextStyle(color: AppColor.grey3),
                             border: InputBorder.none,
                             hintText: "Search Doctors"),
@@ -71,34 +72,34 @@ class _AllDoctorsScreenState extends State<AllDoctorsScreen> {
                 ),
               ),
               GlobalVariabels.vertical10,
-              if (provider.doctorList == null)
-                const Center(
-                  child: CommonLoadingWidget(),
-                )
-              else
-                Expanded(
-                  child: ListView.builder(
-                      itemCount: provider.doctorList!.length,
-                      itemBuilder: (context, i) {
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => DoctorViewScreen(
-                                          doctorId: provider.doctorList![i].id,
-                                        )));
-                          },
-                          child: DoctorCard(
-                              width: MediaQuery.of(context).size.width,
-                              image: provider.doctorList![i].image ?? "",
-                              name: provider.doctorList![i].fullName,
-                              department:
-                                  provider.doctorList![i].department.category,
-                              rating: '4.6'),
-                        );
-                      }),
-                )
+              provider.doctorList == null
+                  ? const Center(
+                      child: CommonLoadingWidget(),
+                    )
+                  : Expanded(
+                      child: ListView.builder(
+                          itemCount: provider.doctorList!.length,
+                          itemBuilder: (context, i) {
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => DoctorViewScreen(
+                                              doctorId:
+                                                  provider.doctorList![i].id,
+                                            )));
+                              },
+                              child: DoctorCard(
+                                  width: MediaQuery.of(context).size.width,
+                                  image: provider.doctorList![i].image ?? "",
+                                  name: provider.doctorList![i].fullName,
+                                  department: provider
+                                      .doctorList![i].department.category,
+                                  rating: '4.6'),
+                            );
+                          }),
+                    )
             ],
           ),
         ),

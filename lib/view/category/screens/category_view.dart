@@ -45,29 +45,28 @@ class _CategoryViewScreenState extends State<CategoryViewScreen> {
                 ? const Center(
                     child: Text('No Doctors Found!'),
                   )
-                : Expanded(
-                    child: ListView.builder(
-                      itemCount: provider.doctors!.length,
-                      itemBuilder: (context, i) {
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => DoctorViewScreen(
-                                          doctorId: provider.doctors![i].id,
-                                        )));
-                          },
-                          child: DoctorCard(
-                              width: width,
-                              image: provider.doctors![i].image ?? "",
-                              name: provider.doctors![i].fullName,
-                              department:
-                                  provider.doctors![i].department.category,
-                              rating: '4.6'),
-                        );
-                      },
-                    ),
+                : ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: provider.doctors!.length,
+                    itemBuilder: (context, i) {
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DoctorViewScreen(
+                                        doctorId: provider.doctors![i].id,
+                                      )));
+                        },
+                        child: DoctorCard(
+                            width: width,
+                            image: provider.doctors![i].image ?? "",
+                            name: provider.doctors![i].fullName,
+                            department:
+                                provider.doctors![i].department.category,
+                            rating: '4.6'),
+                      );
+                    },
                   ),
       ),
     );
@@ -111,9 +110,12 @@ class DoctorCard extends StatelessWidget {
               width: 100,
               height: 100,
               child: image == ""
-                  ? Image.asset(
-                      AppAssets.doctor2,
-                      fit: BoxFit.cover,
+                  ? Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image.asset(
+                        AppAssets.avatar,
+                        fit: BoxFit.cover,
+                      ),
                     )
                   : Image.network(image),
             ),

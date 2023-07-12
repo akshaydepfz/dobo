@@ -1,5 +1,4 @@
 import 'package:dobo/common/common_loading.dart';
-import 'package:dobo/core/assets/app_icons.dart';
 import 'package:dobo/core/style/app_colors.dart';
 import 'package:dobo/view/appointment/screens/cancell_appointment.dart';
 import 'package:dobo/view/my_appointments/screens/appointment_view.dart';
@@ -130,8 +129,10 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen>
                                                         .patient!
                                                         .dob!,
                                                     problem: provider
-                                                        .upcomingAppontments![i]
-                                                        .reason!)));
+                                                            .upcomingAppontments![
+                                                                i]
+                                                            .reason ??
+                                                        "")));
                                   },
                                   onCancellPressed: () {
                                     Navigator.push(
@@ -171,7 +172,76 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen>
                               itemCount: provider.completedAppontments!.length,
                               shrinkWrap: true,
                               itemBuilder: (context, i) {
-                                return const CompletedCard();
+                                return CompletedCard(
+                                  onCardPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => AppointmentViewScreen(
+                                                doctorId: provider
+                                                    .completedAppontments![i]
+                                                    .schedule!
+                                                    .doctor!,
+                                                clinicId: provider
+                                                    .completedAppontments![i]
+                                                    .schedule!
+                                                    .clinic!,
+                                                date: provider
+                                                    .completedAppontments![i]
+                                                    .schedule!
+                                                    .created!,
+                                                time: provider
+                                                    .completedAppontments![i]
+                                                    .schedule!
+                                                    .startTime!,
+                                                tokenNo: provider
+                                                    .completedAppontments![i]
+                                                    .tokenNumber!
+                                                    .toString(),
+                                                name: provider
+                                                    .completedAppontments![i]
+                                                    .patient!
+                                                    .fullName!,
+                                                gender: provider
+                                                    .completedAppontments![i]
+                                                    .patient!
+                                                    .gender!,
+                                                age: provider
+                                                    .completedAppontments![i]
+                                                    .patient!
+                                                    .dob!,
+                                                problem: provider
+                                                        .completedAppontments![
+                                                            i]
+                                                        .reason ??
+                                                    "")));
+                                  },
+                                  onCancellPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                CancellAppointment(
+                                                    appointmentId: provider
+                                                        .completedAppontments![
+                                                            i]
+                                                        .id!)));
+                                  },
+                                  onReschedulePressed: () {},
+                                  weekday: provider.completedAppontments![i]
+                                      .schedule!.weekday!,
+                                  clinicName: provider
+                                      .completedAppontments![i].clinicName!,
+                                  doctorName: provider
+                                      .completedAppontments![i].doctorName!,
+                                  time: provider.completedAppontments![i]
+                                      .schedule!.startTime!
+                                      .toString()
+                                      .substring(0, 5),
+                                  clinicImage: provider.completedAppontments![i]
+                                          .clinicPhoto ??
+                                      '',
+                                );
                               }),
                   provider.cancelleddAppontments == null
                       ? const Center(

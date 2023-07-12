@@ -11,7 +11,9 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class DateSelectingScreen extends StatefulWidget {
   final String doctorId;
-  const DateSelectingScreen({super.key, required this.doctorId});
+  final bool isRechedule;
+  const DateSelectingScreen(
+      {super.key, required this.doctorId, required this.isRechedule});
 
   @override
   State<DateSelectingScreen> createState() => _DateSelectingScreenState();
@@ -125,10 +127,14 @@ class _DateSelectingScreenState extends State<DateSelectingScreen> {
                   onTap: () {
                     if (provider.selectdappointmentDate == null) {
                       showSnackBarWrong(context, 'Please select date');
-                    } else {
+                    } else if (provider.selectedSlotId == '') {
+                      showSnackBarWrong(context, 'Please select slote');
+                    } else if (!widget.isRechedule) {
                       provider.doctorIDStore(widget.doctorId);
                       Navigator.pushNamed(
                           context, RouteConstants.patientScreen);
+                    }else{
+                      
                     }
                   },
                   label: 'Next')

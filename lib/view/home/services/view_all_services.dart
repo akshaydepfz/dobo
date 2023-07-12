@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:dobo/api/api_endpoints.dart';
 import 'package:dobo/log/log_controller.dart';
 import 'package:dobo/model/clinic_model.dart';
 import 'package:dobo/model/doctor_model.dart';
@@ -9,7 +8,38 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ViewAllService extends ChangeNotifier {
   List<DoctorListModel>? doctorList;
   List<ClinicModel>? clinicList;
+
   final Dio dio = Dio();
+
+  String _quary = '';
+  String get quary => _quary;
+
+  void onQuaryChanged(String v) {
+    if (v.trim() != '') {
+      _quary = v;
+      clinicList = clinicList!
+          .where((clinicList) =>
+              (clinicList.clinicName.toLowerCase().contains(v.toLowerCase())))
+          .toList();
+      notifyListeners();
+    } else {
+      getClinicList();
+    }
+  }
+
+  void onDoctorQuaryChanged(String v) {
+    if (v.trim() != '') {
+      _quary = v;
+      doctorList = doctorList!
+          .where((doctorList) =>
+              (doctorList.fullName.toLowerCase().contains(v.toLowerCase())))
+          .toList();
+
+      notifyListeners();
+    } else {
+      getDoctorList();
+    }
+  }
 
   Future getDoctorList() async {
     final pref = await SharedPreferences.getInstance();
@@ -52,7 +82,4 @@ class ViewAllService extends ChangeNotifier {
       LogController.activityLog('HomeProvider', "getClinicList", "Failed");
     }
   }
-
- 
-  
 }

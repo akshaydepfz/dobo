@@ -14,7 +14,8 @@ class UpComingCard extends StatelessWidget {
     required this.clinicImage,
     required this.weekday,
     required this.onCancellPressed,
-    required this.onReschedulePressed, required this.onCardPressed,
+    required this.onReschedulePressed,
+    required this.onCardPressed,
   }) : super(key: key);
   final String clinicName;
   final String doctorName;
@@ -86,7 +87,8 @@ class UpComingCard extends StatelessWidget {
                         GlobalVariabels.horizontal10,
                         Text(
                           weekday,
-                          style: TextStyle(fontSize: 14, color: AppColor.grey4),
+                          style: const TextStyle(
+                              fontSize: 14, color: AppColor.grey4),
                         ),
                         const SizedBox(
                           height: 20,
@@ -96,7 +98,8 @@ class UpComingCard extends StatelessWidget {
                         ),
                         Text(
                           time,
-                          style: TextStyle(fontSize: 14, color: AppColor.grey4),
+                          style: const TextStyle(
+                              fontSize: 14, color: AppColor.grey4),
                         ),
                       ],
                     ),

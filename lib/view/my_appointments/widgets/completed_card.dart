@@ -8,14 +8,28 @@ import 'package:flutter/material.dart';
 class CompletedCard extends StatelessWidget {
   const CompletedCard({
     Key? key,
+    required this.clinicName,
+    required this.doctorName,
+    required this.time,
+    required this.clinicImage,
+    required this.weekday,
+    required this.onCancellPressed,
+    required this.onReschedulePressed,
+    required this.onCardPressed,
   }) : super(key: key);
+  final String clinicName;
+  final String doctorName;
+  final String time;
+  final String clinicImage;
+  final String weekday;
+  final Function() onCancellPressed;
+  final Function() onReschedulePressed;
+  final Function() onCardPressed;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        Navigator.pushNamed(context,RouteConstants.appointmentView);
-      },
+      onTap: onCardPressed,
       child: Container(
         padding: const EdgeInsets.all(10),
         margin: const EdgeInsets.all(10),
@@ -29,20 +43,30 @@ class CompletedCard extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 100, child: Image.asset(AppAssets.health)),
+                SizedBox(
+                    height: 100,
+                    child: clinicImage == ''
+                        ? Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image.asset(AppAssets.avatar),
+                          )
+                        : Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image.network(clinicImage),
+                          )),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'The family care',
-                      style: TextStyle(
+                    Text(
+                      clinicName,
+                      style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const Text(
-                      'Dr. Rubayet Sakib',
-                      style: TextStyle(color: AppColor.grey4),
+                    Text(
+                      'Dr.$doctorName',
+                      style: const TextStyle(color: AppColor.grey4),
                     ),
                     GlobalVariabels.vertical10,
                     Row(
@@ -65,9 +89,10 @@ class CompletedCard extends StatelessWidget {
                           ),
                         ),
                         GlobalVariabels.horizontal10,
-                        const Text(
-                          'Today',
-                          style: TextStyle(fontSize: 14, color: AppColor.grey4),
+                        Text(
+                          weekday,
+                          style: const TextStyle(
+                              fontSize: 14, color: AppColor.grey4),
                         ),
                         const SizedBox(
                           height: 20,
@@ -75,9 +100,10 @@ class CompletedCard extends StatelessWidget {
                             thickness: 1,
                           ),
                         ),
-                        const Text(
-                          '08:30 AM',
-                          style: TextStyle(fontSize: 14, color: AppColor.grey4),
+                        Text(
+                          time,
+                          style: const TextStyle(
+                              fontSize: 14, color: AppColor.grey4),
                         ),
                       ],
                     ),
@@ -98,7 +124,7 @@ class CompletedCard extends StatelessWidget {
                     label: 'Leave a review',
                     buttonColor: AppColor.primary,
                     onTap: () {
-                      Navigator.pushNamed(context,RouteConstants.reviewScreen);
+                      Navigator.pushNamed(context, RouteConstants.reviewScreen);
                     }),
               ],
             )

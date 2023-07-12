@@ -2,9 +2,8 @@ import 'package:dobo/common/common_loading.dart';
 import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/core/assets/app_icons.dart';
 import 'package:dobo/core/style/app_colors.dart';
-import 'package:dobo/view/category/screens/category_view.dart';
+import 'package:dobo/model/clinic_model.dart';
 import 'package:dobo/view/clinic_view/screens/clinic_view_.screen.dart';
-import 'package:dobo/view/doctor_view/screens/doctor_view.dart';
 import 'package:dobo/view/home/services/home_provider.dart';
 import 'package:dobo/view/home/services/view_all_services.dart';
 import 'package:dobo/view/home/widgets/clinics_card.dart';
@@ -54,8 +53,9 @@ class _AllClinicsScreenState extends State<AllClinicsScreen> {
                     const SizedBox(
                       width: 10,
                     ),
-                    const Expanded(
+                    Expanded(
                       child: TextField(
+                        onChanged: (v) => provider.onQuaryChanged(v),
                         decoration: InputDecoration(
                             hintStyle: TextStyle(color: AppColor.grey3),
                             border: InputBorder.none,
@@ -83,6 +83,8 @@ class _AllClinicsScreenState extends State<AllClinicsScreen> {
                   child: ListView.builder(
                       itemCount: provider.clinicList!.length,
                       itemBuilder: (context, i) {
+                        ClinicModel data;
+                        data = provider.clinicList![i];
                         return ClinicsCard(
                           isFavoriteLoad: favoriteProvider.favorieIndex == i
                               ? favoriteProvider.isFavoriteLoad
@@ -99,7 +101,7 @@ class _AllClinicsScreenState extends State<AllClinicsScreen> {
                           avarageRating:
                               provider.clinicList![i].avgRating.toString(),
                           ratingCount: 2.toString(),
-                          name: provider.clinicList![i].clinicName,
+                          name: data.clinicName,
                           category: provider.clinicList![i].subtext,
                           image: provider.clinicList![i].image ??
                               "https://t4.ftcdn.net/jpg/03/47/41/03/360_F_347410397_5PpZbcQpnEqqzlGjOk1R5d11977LbMUW.jpg",

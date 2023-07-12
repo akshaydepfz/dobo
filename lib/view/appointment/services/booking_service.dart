@@ -7,6 +7,7 @@ import 'package:dobo/model/relative_model.dart';
 import 'package:dobo/model/slote_model.dart';
 import 'package:dobo/router/app_route_constants.dart';
 import 'package:dobo/view/appointment_animation/screens/bookind_success_pop.dart';
+import 'package:dobo/view/booking_animation/screens/reschedule_pop.dart';
 import 'package:dobo/view/profile_create/services/signup_service.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -25,7 +26,7 @@ class BookingService extends ChangeNotifier {
   String age = "";
   String description = '';
 
-  int _selectedSlotIndex = 0;
+  int _selectedSlotIndex = 10000;
   int get selectedSlotIndex => _selectedSlotIndex;
   String _selectedSlotId = '';
   String get selectedSlotId => _selectedSlotId;
@@ -51,6 +52,7 @@ class BookingService extends ChangeNotifier {
     _selectedSlotId = id;
     _selectedSlotIndex = i;
     notifyListeners();
+    print(_selectedSlotId);
   }
 
   Future<void> getDoctorDetails(String id) async {
@@ -87,6 +89,24 @@ class BookingService extends ChangeNotifier {
 
         slotes = data.map((json) => SloteModel.fromJson(json)).toList();
         notifyListeners();
+        LogController.activityLog('BookingService', "getSlotes", 'Success');
+      }
+    } on DioError catch (_) {
+      LogController.activityLog('BookingService', "getSlotes", 'Failed');
+    }
+  }
+
+  Future<void> rescheduleAppointment(String pk) async {
+    final pref = await SharedPreferences.getInstance();
+    String token = pref.getString("accessToken") ?? '';
+    try {
+      final response = await dio.get(
+          "${ApiEndpoints.baseUrl}/api/v1/clinics/appointments/$pk",
+          options: Options(headers: {
+            'Authorization': 'Bearer $token',
+          }));
+
+      if (response.statusCode == 200) {
         LogController.activityLog('BookingService', "getSlotes", 'Success');
       }
     } on DioError catch (_) {
@@ -156,6 +176,7 @@ class BookingService extends ChangeNotifier {
           response.statusCode;
           _isLoading = false;
           notifyListeners();
+          getRelatives();
 
           // ignore: use_build_context_synchronously
           showSnackBarSuccess(context, 'Relative added succesfully');
@@ -186,6 +207,7 @@ class BookingService extends ChangeNotifier {
 
       if (response.statusCode == 200) {
         List data = response.data;
+
         relatives = data.map((json) => RelativeModel.fromJson(json)).toList();
         notifyListeners();
 
@@ -216,7 +238,7 @@ class BookingService extends ChangeNotifier {
           options: Options(headers: {
             'Authorization': 'Bearer $token',
           }));
-
+      print(response.statusCode);
       if (response.statusCode == 200 || response.statusCode == 201) {
         _isLoading = false;
         notifyListeners();

@@ -38,7 +38,7 @@ class SigninProvider extends ChangeNotifier {
       try {
         final response = await dio.post(ApiEndpoints.login, data: {
           "mobile": "91$mobile",
-          "user_type": "patients",
+          "user_type": "patient",
         });
         if (response.statusCode == 200) {
           final data = response.data;
@@ -74,8 +74,10 @@ class SigninProvider extends ChangeNotifier {
             data: {
               "otp": otp,
             });
+
         _isLoading = true;
         notifyListeners();
+        print(response.data);
         if (response.statusCode == 200) {
           _isLoading = false;
           notifyListeners();
@@ -83,10 +85,12 @@ class SigninProvider extends ChangeNotifier {
           // ignore: use_build_context_synchronously
           // ignore: use_build_context_synchronously
           final pref = await SharedPreferences.getInstance();
+
           var data = response.data;
           String token = data['access_token'];
           String refresh = data['refresh_token'];
           String pk = data['profile_id'].toString();
+
           await pref.setString("pk", pk);
           await pref.setString("accessToken", token);
           await pref.setString("refresh", refresh);
@@ -94,7 +98,8 @@ class SigninProvider extends ChangeNotifier {
           notifyListeners();
           // ignore: use_build_context_synchronously
           showSnackBarSuccess(context, 'Verification successfull');
-          if (created) {
+
+          if (data['profile_id'] == '') {
             // ignore: use_build_context_synchronously
             Navigator.pushReplacement(
                 context,

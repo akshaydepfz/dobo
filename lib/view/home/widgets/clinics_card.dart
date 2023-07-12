@@ -64,10 +64,13 @@ class ClinicsCard extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      name,
-                      style: const TextStyle(
-                          fontSize: 15, fontWeight: FontWeight.bold),
+                    SizedBox(
+                      width: width * .50,
+                      child: Text(
+                        name,
+                        style: const TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold),
+                      ),
                     ),
                     Text(
                       category,

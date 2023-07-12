@@ -1,7 +1,6 @@
 import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/core/assets/app_assets.dart';
 import 'package:dobo/core/style/app_colors.dart';
-import 'package:dobo/router/app_route_constants.dart';
 import 'package:flutter/material.dart';
 
 class CancelldCard extends StatelessWidget {
@@ -22,9 +21,6 @@ class CancelldCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, RouteConstants.appointmentView);
-      },
       child: Container(
         padding: const EdgeInsets.all(10),
         margin: const EdgeInsets.all(10),
@@ -38,7 +34,17 @@ class CancelldCard extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 100, child: Image.asset(AppAssets.health)),
+                SizedBox(
+                    height: 100,
+                    child: clinicImage == ''
+                        ? Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image.asset(AppAssets.avatar),
+                          )
+                        : Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image.network(clinicImage),
+                          )),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

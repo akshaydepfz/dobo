@@ -2,6 +2,7 @@ import 'package:dobo/common/primary_appbar.dart';
 import 'package:dobo/common/primary_button.dart';
 import 'package:dobo/core/style/app_colors.dart';
 import 'package:dobo/router/app_route_constants.dart';
+import 'package:dobo/view/appointment/screens/date_slot_select.dart';
 import 'package:dobo/view/appointment/services/reshedule_radio_button.dart';
 import 'package:dobo/view/appointment/widgets/radio_reason_tile.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,8 @@ import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class RescheduleAppointment extends StatelessWidget {
-  RescheduleAppointment({super.key});
+  RescheduleAppointment({super.key, required this.doctorId});
+  final String doctorId;
 
   List<Map> reasons = [
     {'reason': 'I’m having a schedule clash'},
@@ -64,7 +66,11 @@ class RescheduleAppointment extends StatelessWidget {
             ),
             PrimaryButton(
               onTap: () {
-                Navigator.pushNamed(context, RouteConstants.dateSelectScreen);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => DateSelectingScreen(
+                            doctorId: doctorId, isRechedule: true)));
               },
               label: 'Next',
             )

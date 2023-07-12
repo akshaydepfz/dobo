@@ -7,7 +7,6 @@ import 'package:dobo/view/clinic_view/services/clinic_view_service.dart';
 import 'package:dobo/view/doctor_view/services/doctor_details_service.dart';
 import 'package:dobo/view/favorite/services/favorite_service.dart';
 import 'package:dobo/view/forgot_password/services/password_service.dart';
-import 'package:dobo/view/home/screens/all_clinics_screen.dart';
 import 'package:dobo/view/home/services/home_provider.dart';
 import 'package:dobo/view/home/services/view_all_services.dart';
 import 'package:dobo/view/landing_page/screens/landing_screen.dart';

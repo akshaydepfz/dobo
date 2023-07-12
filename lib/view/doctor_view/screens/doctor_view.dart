@@ -156,11 +156,14 @@ class _DoctorViewScreenState extends State<DoctorViewScreen> {
                     PrimaryButton(
                         onTap: () {
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DateSelectingScreen(
-                                        doctorId: provider.doctorDetail!.id,
-                                      )));
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DateSelectingScreen(
+                                doctorId: provider.doctorDetail!.id,
+                                isRechedule: false,
+                              ),
+                            ),
+                          );
                         },
                         label: 'Book Appointment')
                   ],

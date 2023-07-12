@@ -58,6 +58,7 @@ class LocationSelectService extends ChangeNotifier {
             'LocationSelectService', "setLocation", 'Failed');
         // ignore: use_build_context_synchronously
         Navigator.pushReplacementNamed(context, RouteConstants.landingScreen);
+        // ignore: use_build_context_synchronously
         showSnackBarWrong(context, e.response.toString());
       }
     }

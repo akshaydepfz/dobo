@@ -5,6 +5,7 @@ import 'package:dobo/core/assets/app_assets.dart';
 import 'package:dobo/core/assets/app_icons.dart';
 import 'package:dobo/core/style/app_colors.dart';
 import 'package:dobo/view/appointment/services/booking_service.dart';
+import 'package:dobo/view/profile_create/services/signup_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
@@ -202,12 +203,14 @@ class _ReviewSummaryScreenState extends State<ReviewSummaryScreen> {
             ),
             PrimaryButton(
                 isLoading: provider.isLoading,
-                onTap: () => provider.addAppointment(
-                    context,
-                    provider.isPatient
-                        ? ''
-                        : provider
-                            .relatives![provider.selectedRelativeIndex].pk),
+                onTap: () {
+                  provider.addAppointment(
+                      context,
+                      provider.isPatient
+                          ? ''
+                          : provider
+                              .relatives![provider.selectedRelativeIndex].pk);
+                },
                 label: 'Book Now')
           ],
         ),

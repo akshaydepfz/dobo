@@ -93,7 +93,6 @@ class AppointmentService extends ChangeNotifier {
 
   Future<void> cancellAppointment(
       BuildContext context, String appointmentId, String resone) async {
-    print(appointmentId);
     final pref = await SharedPreferences.getInstance();
     String token = pref.getString("accessToken") ?? '';
 
@@ -105,7 +104,6 @@ class AppointmentService extends ChangeNotifier {
                 'Authorization': 'Bearer $token',
               }));
       if (response.statusCode == 200) {
-        print(response.data);
         // ignore: use_build_context_synchronously
         Navigator.push(
             context,
