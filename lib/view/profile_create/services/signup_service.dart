@@ -16,6 +16,7 @@ class ProfileCreateProvider extends ChangeNotifier {
   String gender = "Male";
   String email = "";
   String address = "";
+  String whatsapp = "";
   bool get acceptTc => _acceptTC;
 
   File? image;
@@ -28,6 +29,8 @@ class ProfileCreateProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  FormData formData = FormData.fromMap({});
 
   DateTime? selectedDate;
 
@@ -70,7 +73,40 @@ class ProfileCreateProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void onWhatsappChange(String value) {
+    whatsapp = value;
+    notifyListeners();
+  }
+
   Future<void> profileCreate(BuildContext context) async {
+    if (image != null) {
+      String fileName = image!.path;
+      dio.options.headers["Content-Type"] = "multipart/form-data";
+      formData = FormData.fromMap({
+        "full_name": username,
+        "dob":
+            "${selectedDate!.year}-${selectedDate!.month}-${selectedDate!.day}",
+        "gender": gender,
+        "address": address,
+        "email": email,
+        "whatsapp_number": whatsapp,
+        'image': await MultipartFile.fromFile(image!.path.toString(),
+            filename: fileName),
+      });
+      notifyListeners();
+    } else {
+      formData = FormData.fromMap({
+        "full_name": username,
+        "dob":
+            "${selectedDate!.year}-${selectedDate!.month}-${selectedDate!.day}",
+        "gender": gender,
+        "address": address,
+        "email": email,
+        "whatsapp_number": whatsapp,
+      });
+      notifyListeners();
+    }
+
     final pref = await SharedPreferences.getInstance();
     String token = pref.getString("accessToken") ?? '';
     // ignore: use_build_context_synchronously
@@ -78,18 +114,6 @@ class ProfileCreateProvider extends ChangeNotifier {
       _isLoading = true;
       notifyListeners();
       try {
-        // String fileName = image!.path;
-        //     dio.options.headers["Content-Type"] = "multipart/form-data";
-        FormData formData = FormData.fromMap({
-          "full_name": username,
-          "dob":
-              "${selectedDate!.year}-${selectedDate!.month}-${selectedDate!.day}",
-          "gender": gender,
-          "address": address,
-          "email": email,
-        });
-        // 'image': await MultipartFile.fromFile(image!.path.toString(),
-        //       filename: fileName),
         final response = await dio.post(ApiEndpoints.profileCreate,
             data: formData,
             options: Options(headers: {
@@ -102,9 +126,16 @@ class ProfileCreateProvider extends ChangeNotifier {
           _isLoading = false;
           notifyListeners();
           LogController.activityLog("profileCreate", "Signin", "Success");
+          final pref = await SharedPreferences.getInstance();
+
+          var data = response.data;
+
+          String pk = data['pk'].toString();
+          await pref.setString("pk", pk);
           // ignore: use_build_context_synchronously
 
           // ignore: use_build_context_synchronously
+          // showSnackBarSuccess(context, response.data.toString());
           Navigator.pushReplacementNamed(
               context, RouteConstants.enableLocation);
         }
@@ -126,8 +157,6 @@ class ProfileCreateProvider extends ChangeNotifier {
       showSnackBarWrong(context, "Please enter your date of birth");
     } else if (_acceptTC == false) {
       showSnackBarWrong(context, "Please accept the terms and conditions");
-    } else if (image == null) {
-      showSnackBarWrong(context, "Please select profile photo");
     } else {
       return true;
     }

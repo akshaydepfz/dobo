@@ -7,17 +7,17 @@ import 'package:dobo/model/relative_model.dart';
 import 'package:dobo/model/slote_model.dart';
 import 'package:dobo/router/app_route_constants.dart';
 import 'package:dobo/view/appointment_animation/screens/bookind_success_pop.dart';
-import 'package:dobo/view/booking_animation/screens/reschedule_pop.dart';
 import 'package:dobo/view/profile_create/services/signup_service.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class BookingService extends ChangeNotifier {
-  DateTime? selectdappointmentDate;
+  DateTime selectdappointmentDate = DateTime.now();
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
   bool _isPatient = true;
+  String _docID = '';
   List<RelativeModel>? relatives;
   bool get isPatient => _isPatient;
   String name = "";
@@ -45,14 +45,16 @@ class BookingService extends ChangeNotifier {
 
   void onDateChanged(DateTime date) {
     selectdappointmentDate = date;
+    slotes = null;
     notifyListeners();
+    getSlotes(_docID);
+    print(selectdappointmentDate.day);
   }
 
   void onSlotChange(int i, String id) {
     _selectedSlotId = id;
     _selectedSlotIndex = i;
     notifyListeners();
-    print(_selectedSlotId);
   }
 
   Future<void> getDoctorDetails(String id) async {
@@ -69,7 +71,7 @@ class BookingService extends ChangeNotifier {
         LogController.activityLog(
             'DoctorDetailService', "getDoctorDetails", 'Success');
       }
-    } on DioError catch (_) {
+    } on DioError catch (e) {
       LogController.activityLog(
           'DoctorDetailService', "getDoctorDetails", 'Failed');
     }
@@ -80,18 +82,23 @@ class BookingService extends ChangeNotifier {
     String token = pref.getString("accessToken") ?? '';
     try {
       final response = await dio.get("${ApiEndpoints.slotes}$doctorId",
+          queryParameters: {
+            "date":
+                '${selectdappointmentDate.year}-${selectdappointmentDate.month}-${selectdappointmentDate.day}'
+          },
           options: Options(headers: {
             'Authorization': 'Bearer $token',
           }));
 
       if (response.statusCode == 200) {
+        _docID = doctorId;
         List data = response.data;
-
         slotes = data.map((json) => SloteModel.fromJson(json)).toList();
         notifyListeners();
         LogController.activityLog('BookingService', "getSlotes", 'Success');
       }
-    } on DioError catch (_) {
+    } on DioError catch (e) {
+      print(e.response!.data);
       LogController.activityLog('BookingService', "getSlotes", 'Failed');
     }
   }
@@ -232,7 +239,7 @@ class BookingService extends ChangeNotifier {
           data: {
             "schedule": selectedSlotId,
             "date":
-                "${selectdappointmentDate!.year}-${selectdappointmentDate!.month}-${selectdappointmentDate!.day}",
+                "${selectdappointmentDate.year}-${selectdappointmentDate.month}-${selectdappointmentDate.day}",
             "patient": isPatient ? id : patientID,
           },
           options: Options(headers: {

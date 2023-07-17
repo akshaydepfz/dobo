@@ -135,6 +135,13 @@ class ProfileCreateScreen extends StatelessWidget {
                 ),
                 PrimaryTextField(
                     width: width,
+                    hintText: 'Whatsapp Number',
+                    icon: AppIcons.whatsapp,
+                    onChanged: (value) {
+                      provider.onAddressChanged(value);
+                    }),
+                PrimaryTextField(
+                    width: width,
                     hintText: 'Email ID',
                     icon: AppIcons.mail,
                     onChanged: (value) {

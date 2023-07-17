@@ -273,7 +273,7 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                                     .slotes![provider.selectedSlotIndex]
                                     .startTime,
                                 date:
-                                    "${provider.selectdappointmentDate!.day}-${provider.selectdappointmentDate!.month}-${provider.selectdappointmentDate!.year}",
+                                    "${provider.selectdappointmentDate.day}-${provider.selectdappointmentDate.month}-${provider.selectdappointmentDate.year}",
                                 problem: provider.description,
                                 doctorID: provider.doctorID,
                                 name: provider.isPatient

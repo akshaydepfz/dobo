@@ -31,4 +31,5 @@ class AppIcons {
   static const String calenderPng = 'assets/icons/calendar.png';
   static const String locationPng = 'assets/icons/location.png';
   static const String gender = 'assets/icons/gender.png';
+  static const String whatsapp = 'assets/icons/whatsapp.png';
 }

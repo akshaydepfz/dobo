@@ -70,6 +70,7 @@ class _DateSelectingScreenState extends State<DateSelectingScreen> {
                         initialDisplayDate: provider.selectdappointmentDate,
                         cellBorderColor: Colors.transparent,
                         todayHighlightColor: Colors.white,
+                        initialSelectedDate: DateTime.now(),
                         view: CalendarView.month,
                       ),
                     ),
@@ -84,42 +85,50 @@ class _DateSelectingScreenState extends State<DateSelectingScreen> {
                     ),
                     GlobalVariabels.vertical15,
                     provider.slotes == null
-                        ? const CircularProgressIndicator()
-                        : GridView.builder(
-                            physics: const NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: provider.slotes!.length,
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 3,
-                                    crossAxisSpacing: 20,
-                                    childAspectRatio: 3.0,
-                                    mainAxisSpacing: 10),
-                            itemBuilder: (context, i) {
-                              return GestureDetector(
-                                onTap: () => provider.onSlotChange(
-                                    i, provider.slotes![i].id),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: provider.selectedSlotIndex == i
-                                          ? AppColor.primary.withOpacity(0.2)
-                                          : Colors.white,
-                                      border: provider.selectedSlotIndex == i
-                                          ? Border.all(color: AppColor.primary)
-                                          : Border.all(
-                                              color: AppColor.primary)),
-                                  child: Center(
-                                    child: Text(
-                                      "${provider.slotes![i].startTime.substring(0, 5)} to ${provider.slotes![i].endTime.substring(0, 5)}",
-                                      style: const TextStyle(
-                                        color: AppColor.primary,
+                        ? const LinearProgressIndicator()
+                        : provider.slotes!.isEmpty
+                            ? const Center(
+                                child: Text("No Available Slotes!"),
+                              )
+                            : GridView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: provider.slotes!.length,
+                                gridDelegate:
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 3,
+                                        crossAxisSpacing: 20,
+                                        childAspectRatio: 3.0,
+                                        mainAxisSpacing: 10),
+                                itemBuilder: (context, i) {
+                                  return GestureDetector(
+                                    onTap: () => provider.onSlotChange(
+                                        i, provider.slotes![i].id),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          color: provider.selectedSlotIndex == i
+                                              ? AppColor.primary
+                                                  .withOpacity(0.2)
+                                              : Colors.white,
+                                          border:
+                                              provider.selectedSlotIndex == i
+                                                  ? Border.all(
+                                                      color: AppColor.primary)
+                                                  : Border.all(
+                                                      color: AppColor.primary)),
+                                      child: Center(
+                                        child: Text(
+                                          "${provider.slotes![i].startTime.substring(0, 5)} to ${provider.slotes![i].endTime.substring(0, 5)}",
+                                          style: const TextStyle(
+                                            color: AppColor.primary,
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ),
-                              );
-                            }),
+                                  );
+                                }),
                   ],
                 ),
               ),
@@ -133,9 +142,7 @@ class _DateSelectingScreenState extends State<DateSelectingScreen> {
                       provider.doctorIDStore(widget.doctorId);
                       Navigator.pushNamed(
                           context, RouteConstants.patientScreen);
-                    }else{
-                      
-                    }
+                    } else {}
                   },
                   label: 'Next')
             ],

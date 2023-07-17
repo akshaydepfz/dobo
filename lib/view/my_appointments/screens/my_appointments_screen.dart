@@ -216,16 +216,18 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen>
                                                         .reason ??
                                                     "")));
                                   },
-                                  onCancellPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                CancellAppointment(
-                                                    appointmentId: provider
-                                                        .completedAppontments![
-                                                            i]
-                                                        .id!)));
+                                  onLeaveAReview: () {
+                                    print(provider.cancelleddAppontments![i]
+                                        .schedule!.doctor);
+                                    // Navigator.push(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //         builder: (context) =>
+                                    //             CancellAppointment(
+                                    //                 appointmentId: provider
+                                    //                     .completedAppontments![
+                                    //                         i]
+                                    //                     .id!)));
                                   },
                                   onReschedulePressed: () {},
                                   weekday: provider.completedAppontments![i]

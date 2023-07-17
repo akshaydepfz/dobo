@@ -84,8 +84,8 @@ class ClinicDetailsModel {
         ownerPhone: json["owner_phone"] ?? "",
         ownerEmail: json["owner_email"] ?? "",
         ownerAddress: json["owner_address"] ?? "",
-        patientsServed: json["patients_served"],
-        yearsOfExperience: json["years_of_experience"],
+        patientsServed: json["patients_served"] ?? "0",
+        yearsOfExperience: json["years_of_experience"] ?? "",
         creator: json["creator"],
         user: json["user"],
       );

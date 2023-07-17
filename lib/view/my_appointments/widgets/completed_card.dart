@@ -13,7 +13,7 @@ class CompletedCard extends StatelessWidget {
     required this.time,
     required this.clinicImage,
     required this.weekday,
-    required this.onCancellPressed,
+    required this.onLeaveAReview,
     required this.onReschedulePressed,
     required this.onCardPressed,
   }) : super(key: key);
@@ -22,7 +22,7 @@ class CompletedCard extends StatelessWidget {
   final String time;
   final String clinicImage;
   final String weekday;
-  final Function() onCancellPressed;
+  final Function() onLeaveAReview;
   final Function() onReschedulePressed;
   final Function() onCardPressed;
 
@@ -123,9 +123,7 @@ class CompletedCard extends StatelessWidget {
                     textColor: Colors.white,
                     label: 'Leave a review',
                     buttonColor: AppColor.primary,
-                    onTap: () {
-                      Navigator.pushNamed(context, RouteConstants.reviewScreen);
-                    }),
+                    onTap: onLeaveAReview),
               ],
             )
           ],

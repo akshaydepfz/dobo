@@ -82,6 +82,7 @@ class AppointmentService extends ChangeNotifier {
         cancelleddAppontments =
             data.map((json) => AppointmentListModel.fromJson(json)).toList();
         notifyListeners();
+
         LogController.activityLog(
             'AppointmentService', "getCancelledAppintments", 'Success');
       }
