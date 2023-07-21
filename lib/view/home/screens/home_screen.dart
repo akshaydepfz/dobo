@@ -307,84 +307,86 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   },
                 ),
-                TitleCard(
-                    title: 'Doctors',
-                    onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const AllDoctorsScreen()))),
-                SizedBox(
-                  height: 170,
-                  child: provider.doctorList == null
-                      ? const SizedBox(child: SizedBox())
-                      : ListView.builder(
-                          itemCount: provider.doctorList!.length,
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, i) {
-                            return GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => DoctorViewScreen(
-                                        doctorId: provider.doctorList![i].id),
-                                  ),
-                                );
-                                // Navigator.pushNamed(
-                                //     context, RouteConstants.doctorViewScreen);
-                              },
-                              child: Container(
-                                margin: const EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                width: 157,
-                                child: Column(
-                                  children: [
-                                    SizedBox(
-                                      height: 100,
-                                      width: width,
-                                      child: provider.doctorList![i].image ==
-                                              null
-                                          ? Container(
-                                              padding: const EdgeInsets.all(10),
-                                              decoration: BoxDecoration(
-                                                  color: Colors.grey.shade200,
-                                                  borderRadius:
-                                                      const BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(5.0),
-                                                    topRight:
-                                                        Radius.circular(5.0),
-                                                  )),
-                                              child:
-                                                  Image.asset(AppAssets.avatar),
-                                            )
-                                          : Image.network(
-                                              provider.doctorList![i].image,
-                                              fit: BoxFit.cover,
-                                            ),
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text(
-                                      provider.doctorList![i].fullName,
-                                      style: const TextStyle(),
-                                    ),
-                                    Text(
-                                      provider.doctorList![i].designation,
-                                      style: const TextStyle(
-                                          color: AppColor.primary),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            );
-                          }),
-                )
+                // TitleCard(
+                //     title: 'Doctors',
+                //     onTap: () => Navigator.push(
+                //         context,
+                //         MaterialPageRoute(
+                //             builder: (context) => const AllDoctorsScreen()))),
+                // SizedBox(
+                //   height: 170,
+                //   child: provider.doctorList == null
+                //       ? const SizedBox(child: SizedBox())
+                //       : ListView.builder(
+                //           itemCount: provider.doctorList!.length,
+                //           shrinkWrap: true,
+                //           scrollDirection: Axis.horizontal,
+                //           itemBuilder: (context, i) {
+                //             return GestureDetector(
+                //               onTap: () {
+                //                 Navigator.push(
+                //                   context,
+                //                   MaterialPageRoute(
+                //                     builder: (context) => DoctorViewScreen(
+                //                         doctorId: provider.doctorList![i].id),
+                //                   ),
+                //                 );
+                //                 // Navigator.pushNamed(
+                //                 //     context, RouteConstants.doctorViewScreen);
+                //               },
+                //               child: Container(
+                //                 margin: const EdgeInsets.all(10),
+                //                 decoration: BoxDecoration(
+                //                   color: Colors.white,
+                //                   borderRadius: BorderRadius.circular(8.0),
+                //                 ),
+                //                 width: 157,
+                //                 child: Column(
+                //                   children: [
+                //                     SizedBox(
+                //                       height: 100,
+                //                       width: width,
+                //                       child: provider.doctorList![i].image ==
+                //                               null
+                //                           ? Container(
+                //                               padding: const EdgeInsets.all(10),
+                //                               decoration: BoxDecoration(
+                //                                   color: Colors.grey.shade200,
+                //                                   borderRadius:
+                //                                       const BorderRadius.only(
+                //                                     topLeft:
+                //                                         Radius.circular(5.0),
+                //                                     topRight:
+                //                                         Radius.circular(5.0),
+                //                                   )),
+                //                               child:
+                //                                   Image.asset(AppAssets.avatar),
+                //                             )
+                //                           : Image.network(
+                //                               provider.doctorList![i].image,
+                //                               fit: BoxFit.cover,
+                //                             ),
+                //                     ),
+                //                     const SizedBox(
+                //                       height: 5,
+                //                     ),
+                //                     Text(
+                //                       provider.doctorList![i].fullName,
+                //                       style: const TextStyle(),
+                //                     ),
+                //                     Text(
+                //                       provider.doctorList![i].designation,
+                //                       textAlign: TextAlign.center,
+                //                       maxLines: 1,
+                //                       style: const TextStyle(
+                //                           color: AppColor.primary),
+                //                     )
+                //                   ],
+                //                 ),
+                //               ),
+                //             );
+                //           }),
+                // )
               ],
             ),
           ),

@@ -36,6 +36,5 @@ class ApiEndpoints {
   static const addAppointment = '$baseUrl/api/v1/clinics/appointments/';
   static const cancellAppointment =
       '$baseUrl/api/v1/clinics/appointments/cancel/?appointment_id=';
-
- 
+  static const helpCenter = '$baseUrl/api/v1/general/';
 }

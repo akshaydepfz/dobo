@@ -4,10 +4,13 @@ import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/core/assets/app_assets.dart';
 import 'package:dobo/core/style/app_colors.dart';
 import 'package:dobo/router/app_route_constants.dart';
+import 'package:dobo/view/profile/screens/contact_us_screen.dart';
+import 'package:dobo/view/profile/screens/help_centre_screen.dart';
 import 'package:dobo/view/profile/services/profile_services.dart';
 import 'package:dobo/view/profile/widgets/profile_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -23,9 +26,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
     super.initState();
   }
 
+  Future<void> _launchUrl() async {
+    if (!await launchUrl(Uri.parse('https://dobo.co.in/privacy-policy/'))) {
+      throw Exception('Could not launch url launcher');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-
     final provider = Provider.of<ProfileService>(context);
     return Scaffold(
       body: SafeArea(
@@ -102,9 +110,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Navigator.pushNamed(
                             context, RouteConstants.editProfile);
                       }),
-                  ProfileTile(title: 'Privacy Settings', onTap: () {}),
-                  ProfileTile(title: 'Help Center', onTap: () {}),
-                  ProfileTile(title: 'Contact Us', onTap: () {}),
+                  ProfileTile(
+                      title: 'Privacy Policy',
+                      onTap: () {
+                        _launchUrl();
+                      }),
+                  ProfileTile(
+                      title: 'Help Center',
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const HelpCentreScren()));
+                      }),
+                  ProfileTile(
+                      title: 'Contact Us',
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const ContactUsScreen()));
+                      }),
                   ProfileTile(
                       title: 'Logout',
                       onTap: () {

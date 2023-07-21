@@ -56,7 +56,7 @@ class _AllClinicsScreenState extends State<AllClinicsScreen> {
                     Expanded(
                       child: TextField(
                         onChanged: (v) => provider.onQuaryChanged(v),
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             hintStyle: TextStyle(color: AppColor.grey3),
                             border: InputBorder.none,
                             hintText: "Search clinic"),

@@ -13,6 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ProfileService extends ChangeNotifier {
   final dio = Dio();
   UserModel? userModel;
+  String? helpCenterHTML;
   FormData formData = FormData();
   bool _isLoading = false;
   bool get isLoading => _isLoading;
@@ -66,6 +67,26 @@ class ProfileService extends ChangeNotifier {
     } on DioError catch (_) {
       LogController.activityLog(
           'ProfileProvider', 'Get User Details', "Failed");
+    }
+  }
+
+  Future<void> getHelpcenterHTML() async {
+    final pref = await SharedPreferences.getInstance();
+    String token = pref.getString("accessToken") ?? '';
+    try {
+      final response = await dio.get(
+        ApiEndpoints.helpCenter,
+        options: Options(headers: {'Authorization': 'Bearer $token'}),
+      );
+      if (response.statusCode == 200) {
+        LogController.activityLog(
+            'ProfileProvider', 'getHelpcenterHTML', "success");
+        helpCenterHTML = response.data['help_center'];
+        notifyListeners();
+      }
+    } on DioError catch (_) {
+      LogController.activityLog(
+          'ProfileProvider', 'getHelpcenterHTML', "Failed");
     }
   }
 
