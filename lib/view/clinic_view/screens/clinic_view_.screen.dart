@@ -125,7 +125,7 @@ class _ClinicViewScreenState extends State<ClinicViewScreen> {
                               const RateReviewCard(
                                   label: 'Reviews',
                                   icon: AppIcons.chat,
-                                  count: '4,942'),
+                                  count: '0'),
                             ],
                           ),
                           GlobalVariabels.vertical15,
@@ -159,51 +159,39 @@ class _ClinicViewScreenState extends State<ClinicViewScreen> {
                                 fontWeight: FontWeight.bold, fontSize: 17),
                           ),
                           GlobalVariabels.vertical15,
-                          ListView.builder(
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemCount: provider.doctorList == null
-                                  ? 3
-                                  : provider.doctorList!.length,
-                              shrinkWrap: true,
-                              itemBuilder: (context, i) {
-                                if (provider.doctorList == null) {
-                                  return Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Shimmer.fromColors(
-                                        baseColor:
-                                            AppColor.primary.withOpacity(0.1),
-                                        highlightColor:
-                                            AppColor.primary2.withOpacity(0.2),
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                          ),
-                                          height: 100,
-                                          width: width,
-                                        )),
-                                  );
-                                }
-                                return DoctorCard(
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  DoctorViewScreen(
-                                                    doctorId: provider
-                                                        .doctorList![i].id,
-                                                  )));
-                                    },
-                                    width: width,
-                                    image: 'image',
-                                    name: provider.doctorList![i].fullName,
-                                    department: provider
-                                        .doctorList![i].department.category,
-                                    ratingCount: 'ratingCount',
-                                    reviews: 'reviews');
-                              })
+                          provider.doctorList == null
+                              ? const LinearProgressIndicator()
+                              : ListView.builder(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: provider.doctorList!.length,
+                                  shrinkWrap: true,
+                                  itemBuilder: (context, i) {
+                                    return provider.doctorList!.isEmpty
+                                        ? const Center(
+                                            child: Text('No Doctors Found!'),
+                                          )
+                                        : DoctorCard(
+                                            onTap: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          DoctorViewScreen(
+                                                            doctorId: provider
+                                                                .doctorList![i]
+                                                                .id,
+                                                          )));
+                                            },
+                                            width: width,
+                                            image:
+                                                provider.doctorList![i].image,
+                                            name: provider
+                                                .doctorList![i].fullName,
+                                            department: provider.doctorList![i]
+                                                .department.category,
+                                            ratingCount: 'ratingCount',
+                                            reviews: 'reviews');
+                                  })
                         ],
                       ),
                     )
@@ -274,7 +262,8 @@ class IconTile extends StatelessWidget {
       children: [
         SizedBox(height: 20, width: 20, child: SvgPicture.asset(icon)),
         GlobalVariabels.horizontal10,
-        Text(title),
+        SizedBox(
+            width: MediaQuery.of(context).size.width / 2, child: Text(title)),
       ],
     );
   }

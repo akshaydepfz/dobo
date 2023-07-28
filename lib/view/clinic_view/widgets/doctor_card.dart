@@ -45,10 +45,12 @@ class DoctorCard extends StatelessWidget {
               child: SizedBox(
                 width: 100,
                 height: 100,
-                child: Image.asset(
-                  AppAssets.doctor,
-                  fit: BoxFit.cover,
-                ),
+                child: image == ''
+                    ? Image.asset(AppAssets.avatar)
+                    : Image.network(
+                        image,
+                        fit: BoxFit.cover,
+                      ),
               ),
             ),
             GlobalVariabels.horizontal10,

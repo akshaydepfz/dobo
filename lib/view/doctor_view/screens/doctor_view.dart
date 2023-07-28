@@ -55,13 +55,12 @@ class _DoctorViewScreenState extends State<DoctorViewScreen> {
                                       border:
                                           Border.all(color: AppColor.grey2)),
                                   height: 100,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: provider.doctorDetail!.image == null
-                                        ? Image.asset(AppAssets.avatar)
-                                        : Image.network(
-                                            provider.doctorDetail!.image),
-                                  )),
+                                  child: provider.doctorDetail!.image == null
+                                      ? Image.asset(AppAssets.avatar)
+                                      : Image.network(
+                                          provider.doctorDetail!.image,
+                                          fit: BoxFit.cover,
+                                        )),
                               GlobalVariabels.horizontal10,
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,

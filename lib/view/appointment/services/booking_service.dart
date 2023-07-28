@@ -93,6 +93,7 @@ class BookingService extends ChangeNotifier {
       if (response.statusCode == 200) {
         _docID = doctorId;
         List data = response.data;
+        print(data);
         slotes = data.map((json) => SloteModel.fromJson(json)).toList();
         notifyListeners();
         LogController.activityLog('BookingService', "getSlotes", 'Success');

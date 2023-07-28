@@ -99,7 +99,15 @@ class ProfileService extends ChangeNotifier {
       _isLoading = true;
       notifyListeners();
 
-      if (image != null) {
+      if (nameController.text.isNotEmpty &&
+          phoneController.text.isEmpty &&
+          emailController.text.isEmpty &&
+          image == null) {
+        formData = FormData.fromMap({
+          "full_name": _nameController.text,
+        });
+        notifyListeners();
+      } else if (image != null) {
         String fileName = image!.path;
         formData = FormData.fromMap({
           "phone": _phoneController.text,
