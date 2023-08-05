@@ -43,7 +43,7 @@ class AppointmentListModel {
       AppointmentListModel(
         id: json["id"],
         clinicName: json["clinic_name"],
-        clinicPhoto: json["clinic_photo"],
+        clinicPhoto: json["clinic_photo"] ?? "",
         doctorName: json["doctor_name"],
         created:
             json["created"] == null ? null : DateTime.parse(json["created"]),

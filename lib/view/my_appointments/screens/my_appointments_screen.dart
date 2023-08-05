@@ -155,11 +155,8 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen>
                                       .schedule!.startTime!
                                       .toString()
                                       .substring(0, 5),
-                                  clinicImage: provider.upcomingAppontments![i]
-                                              .clinicPhoto ==
-                                          ""
-                                      ? ""
-                                      : "https://dobo.co.in/${provider.upcomingAppontments![i].clinicPhoto}",
+                                  clinicImage: provider
+                                      .upcomingAppontments![i].clinicPhoto,
                                 );
                               }),
                   provider.completedAppontments == null
@@ -219,8 +216,6 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen>
                                                     "")));
                                   },
                                   onLeaveAReview: () {
-                                    print(provider.cancelleddAppontments![i]
-                                        .schedule!.doctor);
                                     // Navigator.push(
                                     //     context,
                                     //     MaterialPageRoute(
@@ -242,11 +237,8 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen>
                                       .schedule!.startTime!
                                       .toString()
                                       .substring(0, 5),
-                                  clinicImage: provider.upcomingAppontments![i]
-                                              .clinicPhoto ==
-                                          ""
-                                      ? ""
-                                      : "https://dobo.co.in/${provider.upcomingAppontments![i].clinicPhoto}",
+                                  clinicImage: provider
+                                      .upcomingAppontments![i].clinicPhoto,
                                 );
                               }),
                   provider.cancelleddAppontments == null
@@ -272,11 +264,8 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen>
                                       .schedule!.startTime!
                                       .toString()
                                       .substring(0, 5),
-                                  clinicImage: provider.upcomingAppontments![i]
-                                              .clinicPhoto ==
-                                          ""
-                                      ? ""
-                                      : "https://dobo.co.in/${provider.upcomingAppontments![i].clinicPhoto}",
+                                  clinicImage: provider
+                                      .upcomingAppontments![i].clinicPhoto,
                                 );
                               }),
                 ],
