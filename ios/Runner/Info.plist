@@ -26,18 +26,22 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>for user image set</string>
+	<key>NSCameraUsageDescription</key>
+	<string>for user profilr picutre setting.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>for user current location get</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>App Needs Access location for user location get</string>
+	<key>NSLocationUsageDescription</key>
+	<string>for user current location get</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>for user current location get </string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>user can send voice recordings</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>For user profile picutre setting</string>
-	<key>NSCameraUsageDescription</key>
-    <string>for user profilr picutre setting.</string>
+	<string>for user profile image get</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>

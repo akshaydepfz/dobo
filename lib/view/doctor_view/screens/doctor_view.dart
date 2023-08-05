@@ -57,9 +57,13 @@ class _DoctorViewScreenState extends State<DoctorViewScreen> {
                                   height: 100,
                                   child: provider.doctorDetail!.image == null
                                       ? Image.asset(AppAssets.avatar)
-                                      : Image.network(
-                                          provider.doctorDetail!.image,
-                                          fit: BoxFit.cover,
+                                      : ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                          child: Image.network(
+                                            provider.doctorDetail!.image,
+                                            fit: BoxFit.cover,
+                                          ),
                                         )),
                               GlobalVariabels.horizontal10,
                               Column(

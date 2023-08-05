@@ -117,7 +117,10 @@ class DoctorCard extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     )
-                  : Image.network(image),
+                  : Image.network(
+                      image,
+                      fit: BoxFit.cover,
+                    ),
             ),
           ),
           GlobalVariabels.horizontal10,

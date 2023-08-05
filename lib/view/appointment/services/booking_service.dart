@@ -78,6 +78,7 @@ class BookingService extends ChangeNotifier {
   }
 
   Future<void> getSlotes(String doctorId) async {
+    print(doctorId);
     final pref = await SharedPreferences.getInstance();
     String token = pref.getString("accessToken") ?? '';
     try {

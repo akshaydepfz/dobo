@@ -156,8 +156,10 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen>
                                       .toString()
                                       .substring(0, 5),
                                   clinicImage: provider.upcomingAppontments![i]
-                                          .clinicPhoto ??
-                                      '',
+                                              .clinicPhoto ==
+                                          ""
+                                      ? ""
+                                      : "https://dobo.co.in/${provider.upcomingAppontments![i].clinicPhoto}",
                                 );
                               }),
                   provider.completedAppontments == null
@@ -240,9 +242,11 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen>
                                       .schedule!.startTime!
                                       .toString()
                                       .substring(0, 5),
-                                  clinicImage: provider.completedAppontments![i]
-                                          .clinicPhoto ??
-                                      '',
+                                  clinicImage: provider.upcomingAppontments![i]
+                                              .clinicPhoto ==
+                                          ""
+                                      ? ""
+                                      : "https://dobo.co.in/${provider.upcomingAppontments![i].clinicPhoto}",
                                 );
                               }),
                   provider.cancelleddAppontments == null
@@ -268,10 +272,11 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen>
                                       .schedule!.startTime!
                                       .toString()
                                       .substring(0, 5),
-                                  clinicImage: provider
-                                          .cancelleddAppontments![i]
-                                          .clinicPhoto ??
-                                      '',
+                                  clinicImage: provider.upcomingAppontments![i]
+                                              .clinicPhoto ==
+                                          ""
+                                      ? ""
+                                      : "https://dobo.co.in/${provider.upcomingAppontments![i].clinicPhoto}",
                                 );
                               }),
                 ],

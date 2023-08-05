@@ -4,8 +4,10 @@ import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/core/assets/app_assets.dart';
 import 'package:dobo/core/style/app_colors.dart';
 import 'package:dobo/view/landing_page/screens/landing_screen.dart';
+import 'package:dobo/view/landing_page/services/bottom_nav_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class BookingSuccessPop extends StatelessWidget {
   final String tokenNo;
@@ -14,6 +16,7 @@ class BookingSuccessPop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bottomNavProvider = Provider.of<BottomNavService>(context);
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SafeArea(
@@ -63,10 +66,12 @@ class BookingSuccessPop extends StatelessWidget {
                 onTap: () {
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) => LandingScreen()));
+                  bottomNavProvider.onTabClicked(2);
                 },
                 label: 'View Appointment'),
             SecondaryButton(
                 onTap: () {
+                  bottomNavProvider.onTabClicked(0);
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) => LandingScreen()));
                 },

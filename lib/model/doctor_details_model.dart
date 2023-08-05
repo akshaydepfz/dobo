@@ -61,7 +61,7 @@ class DoctorDetailsModel {
           address: json["address"],
           description: json["description"] ?? "",
           creator: json["creator"],
-          department: Department.fromJson(json["department"]),
+          department: Department.fromJson(json["department_data"]),
           avgRating: json['avg_rating'].toString(),
           patientsServed: json['patients_served'].toString(),
           reviewsCount: json['reviews_count'].toString());

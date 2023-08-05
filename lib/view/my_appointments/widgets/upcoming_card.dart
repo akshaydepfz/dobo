@@ -44,12 +44,20 @@ class UpComingCard extends StatelessWidget {
               children: [
                 SizedBox(
                     height: 100,
+                    width: 100,
                     child: clinicImage == ''
                         ? Padding(
                             padding: const EdgeInsets.all(15.0),
                             child: Image.asset(AppAssets.avatar),
                           )
-                        : Image.network(clinicImage)),
+                        : ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: Image.network(
+                              clinicImage,
+                              fit: BoxFit.cover,
+                            ),
+                          )),
+                GlobalVariabels.horizontal10,
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

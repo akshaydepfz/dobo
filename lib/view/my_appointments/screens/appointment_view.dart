@@ -87,8 +87,14 @@ class _AppointmentViewScreenState extends State<AppointmentViewScreen> {
                                           padding: const EdgeInsets.all(8.0),
                                           child: Image.asset(AppAssets.avatar),
                                         )
-                                      : Image.network(
-                                          provider.clinicDetail!.image),
+                                      : ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(12.0),
+                                          child: Image.network(
+                                            provider.clinicDetail!.image,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
                                 ),
                                 GlobalVariabels.horizontal10,
                                 provider.clinicDetail == null
@@ -143,8 +149,14 @@ class _AppointmentViewScreenState extends State<AppointmentViewScreen> {
                                           padding: const EdgeInsets.all(8.0),
                                           child: Image.asset(AppAssets.avatar),
                                         )
-                                      : Image.network(
-                                          provider.doctorDetail!.image),
+                                      : ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(12.0),
+                                          child: Image.network(
+                                            provider.doctorDetail!.image,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
                                 ),
                                 GlobalVariabels.horizontal10,
                                 Column(

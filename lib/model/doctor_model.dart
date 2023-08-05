@@ -47,7 +47,7 @@ class DoctorListModel {
         fullName: json["full_name"],
         gender: json["gender"] ?? "",
         phone: json["phone"] ?? "",
-        designation: json["designation"],
+        designation: json["designation"] ?? "",
         qualification: json["qualification"] ?? "",
         experience: json["experience"] ?? '',
         image: json["image"] ?? "",
@@ -56,7 +56,7 @@ class DoctorListModel {
         address: json["address"] ?? "",
         description: json["description"] ?? "",
         creator: json["creator"],
-        department: Department.fromJson(json["department"]),
+        department: Department.fromJson(json["department_data"]),
       );
 
   Map<String, dynamic> toJson() => {
