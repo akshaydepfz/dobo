@@ -34,13 +34,20 @@ class _DoctorViewScreenState extends State<DoctorViewScreen> {
   Widget build(BuildContext context) {
     final provider = Provider.of<DoctorDetailService>(context);
     return Scaffold(
+      appBar: AppBar(
+          foregroundColor: AppColor.primary,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          title: Text(provider.doctorDetail == null
+              ? ""
+              : provider.doctorDetail!.fullName)),
       body: provider.doctorDetail == null
           ? const CommonLoadingWidget()
           : SafeArea(
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    PrimaryAppbar(title: provider.doctorDetail!.fullName),
+                    // PrimaryAppbar(title: provider.doctorDetail!.fullName),
                     Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: Column(
@@ -56,7 +63,10 @@ class _DoctorViewScreenState extends State<DoctorViewScreen> {
                                           Border.all(color: AppColor.grey2)),
                                   height: 100,
                                   child: provider.doctorDetail!.image == null
-                                      ? Image.asset(AppAssets.avatar)
+                                      ? Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Image.asset(AppAssets.avatar),
+                                        )
                                       : ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(12),
@@ -115,12 +125,20 @@ class _DoctorViewScreenState extends State<DoctorViewScreen> {
                           GlobalVariabels.vertical15,
                           const Divider(),
                           GlobalVariabels.vertical15,
-                          const Text(
-                            'About',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 17),
+                          Visibility(
+                            visible: provider.doctorDetail!.description == null,
+                            child: Column(
+                              children: const [
+                                Text(
+                                  'About',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17),
+                                ),
+                                GlobalVariabels.vertical15,
+                              ],
+                            ),
                           ),
-                          GlobalVariabels.vertical15,
                           Text(
                             provider.doctorDetail!.description,
                             style: const TextStyle(fontSize: 15),
@@ -158,12 +176,14 @@ class _DoctorViewScreenState extends State<DoctorViewScreen> {
                     ),
                     PrimaryButton(
                         onTap: () {
+                          //TODO
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => DateSelectingScreen(
                                 doctorId: provider.doctorDetail!.id,
                                 isRechedule: false,
+                                appointmentId: '',
                               ),
                             ),
                           );

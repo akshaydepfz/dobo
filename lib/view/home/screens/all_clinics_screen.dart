@@ -32,7 +32,7 @@ class _AllClinicsScreenState extends State<AllClinicsScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        foregroundColor: Colors.black,
+        foregroundColor: AppColor.primary,
         title: const Text("Clinics"),
         centerTitle: true,
       ),
@@ -103,8 +103,7 @@ class _AllClinicsScreenState extends State<AllClinicsScreen> {
                           ratingCount: 2.toString(),
                           name: data.clinicName,
                           category: provider.clinicList![i].subtext,
-                          image: provider.clinicList![i].image ??
-                              "https://t4.ftcdn.net/jpg/03/47/41/03/360_F_347410397_5PpZbcQpnEqqzlGjOk1R5d11977LbMUW.jpg",
+                          image: provider.clinicList![i].image ?? "",
                           onTap: () {
                             Navigator.push(
                                 context,

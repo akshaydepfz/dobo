@@ -7,9 +7,7 @@ import 'package:dobo/core/assets/app_icons.dart';
 import 'package:dobo/core/style/app_colors.dart';
 import 'package:dobo/router/app_route_constants.dart';
 import 'package:dobo/view/clinic_view/screens/clinic_view_.screen.dart';
-import 'package:dobo/view/doctor_view/screens/doctor_view.dart';
 import 'package:dobo/view/home/screens/all_clinics_screen.dart';
-import 'package:dobo/view/home/screens/all_doctors_screen.dart';
 import 'package:dobo/view/home/services/home_provider.dart';
 import 'package:dobo/view/home/widgets/clinics_card.dart';
 import 'package:dobo/view/home/widgets/reminder_card.dart';
@@ -191,7 +189,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           width: 10,
                         ),
                         const Text(
-                          'Search',
+                          'Search Doctor / Clinic',
                           style: TextStyle(fontSize: 16, color: AppColor.grey2),
                         )
                       ],
@@ -294,8 +292,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ratingCount: 2.toString(),
                       name: provider.clinicList[i].clinicName,
                       category: provider.clinicList[i].subtext,
-                      image: provider.clinicList[i].image ??
-                          "https://t4.ftcdn.net/jpg/03/47/41/03/360_F_347410397_5PpZbcQpnEqqzlGjOk1R5d11977LbMUW.jpg",
+                      image: provider.clinicList[i].image ?? "",
                       onTap: () {
                         Navigator.push(
                             context,

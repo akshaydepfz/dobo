@@ -35,11 +35,14 @@ class _ClinicViewScreenState extends State<ClinicViewScreen> {
     final provider = Provider.of<ClinicDetailsService>(context);
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: provider.clinicDetail == null
+      appBar: provider.clinicDetail != null
           ? AppBar(
               foregroundColor: AppColor.primary,
               backgroundColor: Colors.transparent,
               elevation: 0,
+              title: Text(provider.clinicDetail != null
+                  ? provider.clinicDetail!.clinicName
+                  : ''),
             )
           : null,
       body: provider.clinicDetail == null
@@ -48,10 +51,6 @@ class _ClinicViewScreenState extends State<ClinicViewScreen> {
               child: SafeArea(
                 child: Column(
                   children: [
-                    PrimaryAppbar(
-                        title: provider.clinicDetail != null
-                            ? provider.clinicDetail!.clinicName
-                            : ''),
                     Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: Column(
@@ -131,27 +130,35 @@ class _ClinicViewScreenState extends State<ClinicViewScreen> {
                           GlobalVariabels.vertical15,
                           const Divider(),
                           GlobalVariabels.vertical15,
-                          const Text(
-                            'About Clinic',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 17),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          SizedBox(
-                            height: 60,
-                            child: Text(
-                              provider.clinicDetail!.description,
-                              maxLines: 3,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                color: AppColor.grey4,
-                              ),
+                          Visibility(
+                            visible: provider.clinicDetail!.description == null,
+                            child: Column(
+                              children: [
+                                const Text(
+                                  'About Clinic',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                SizedBox(
+                                  height: 60,
+                                  child: Text(
+                                    provider.clinicDetail!.description,
+                                    maxLines: 3,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                      color: AppColor.grey4,
+                                    ),
+                                  ),
+                                ),
+                                GlobalVariabels.vertical15,
+                                const Divider(),
+                              ],
                             ),
                           ),
-                          GlobalVariabels.vertical15,
-                          const Divider(),
                           GlobalVariabels.vertical15,
                           const Text(
                             'Our Doctors',
@@ -161,37 +168,46 @@ class _ClinicViewScreenState extends State<ClinicViewScreen> {
                           GlobalVariabels.vertical15,
                           provider.doctorList == null
                               ? const LinearProgressIndicator()
-                              : ListView.builder(
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  itemCount: provider.doctorList!.length,
-                                  shrinkWrap: true,
-                                  itemBuilder: (context, i) {
-                                    return provider.doctorList!.isEmpty
-                                        ? const Center(
-                                            child: Text('No Doctors Found!'),
-                                          )
-                                        : DoctorCard(
-                                            onTap: () {
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          DoctorViewScreen(
-                                                            doctorId: provider
-                                                                .doctorList![i]
-                                                                .id,
-                                                          )));
-                                            },
-                                            width: width,
-                                            image:
-                                                provider.doctorList![i].image,
-                                            name: provider
-                                                .doctorList![i].fullName,
-                                            department: provider.doctorList![i]
-                                                .department.category,
-                                            ratingCount: 'ratingCount',
-                                            reviews: 'reviews');
-                                  })
+                              : provider.doctorList!.isEmpty
+                                  ? const Center(
+                                      child: Text("No Doctors Found!"),
+                                    )
+                                  : ListView.builder(
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      itemCount: provider.doctorList!.length,
+                                      shrinkWrap: true,
+                                      itemBuilder: (context, i) {
+                                        return provider.doctorList!.isEmpty
+                                            ? const Center(
+                                                child:
+                                                    Text('No Doctors Found!'),
+                                              )
+                                            : DoctorCard(
+                                                onTap: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              DoctorViewScreen(
+                                                                doctorId: provider
+                                                                    .doctorList![
+                                                                        i]
+                                                                    .id,
+                                                              )));
+                                                },
+                                                width: width,
+                                                image: provider
+                                                    .doctorList![i].image,
+                                                name: provider
+                                                    .doctorList![i].fullName,
+                                                department: provider
+                                                    .doctorList![i]
+                                                    .department
+                                                    .category,
+                                                ratingCount: 'ratingCount',
+                                                reviews: 'reviews');
+                                      })
                         ],
                       ),
                     )

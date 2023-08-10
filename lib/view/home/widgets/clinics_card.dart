@@ -49,11 +49,18 @@ class ClinicsCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(5.0),
+                  borderRadius: BorderRadius.circular(6.0),
                   child: SizedBox(
                     width: 90,
+                    height: 90,
                     child: image == ""
-                        ? Image.asset(AppAssets.avatar)
+                        ? Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image.asset(
+                              AppAssets.avatar,
+                              fit: BoxFit.cover,
+                            ),
+                          )
                         : Image.network(
                             image,
                             fit: BoxFit.cover,

@@ -83,7 +83,9 @@ class AppRoute {
       case RouteConstants.dateSelectScreen:
         return MaterialPageRoute(
             builder: (context) => const DateSelectingScreen(
-                  doctorId: '', isRechedule: false,
+                  doctorId: '',
+                  isRechedule: false,
+                  appointmentId: '',
                 ));
       case RouteConstants.patientScreen:
         return MaterialPageRoute(
@@ -98,7 +100,10 @@ class AppRoute {
         return MaterialPageRoute(builder: (context) => const BookingFailPop());
 
       case RouteConstants.resceduleAppointment:
-        return MaterialPageRoute(builder: (context) => RescheduleAppointment(doctorId: '',));
+        return MaterialPageRoute(
+            builder: (context) => RescheduleAppointment(
+                  doctorId: '',
+                ));
       case RouteConstants.cancelAppointment:
         return MaterialPageRoute(
             builder: (context) => CancellAppointment(

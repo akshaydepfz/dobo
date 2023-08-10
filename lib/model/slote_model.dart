@@ -4,52 +4,53 @@
 
 import 'dart:convert';
 
-SloteModel sloteModelFromJson(String str) => SloteModel.fromJson(json.decode(str));
+SloteModel sloteModelFromJson(String str) =>
+    SloteModel.fromJson(json.decode(str));
 
 String sloteModelToJson(SloteModel data) => json.encode(data.toJson());
 
 class SloteModel {
-    String id;
-    String doctorName;
-    dynamic doctorPhoto;
-    String doctorDepartment;
-    int pendingAppointmentCount;
-    int completedAppointmentCount;
-    int cancelledAppointmentCount;
-    int absentAppointmentCount;
-    DateTime created;
-    DateTime updated;
-    bool isActive;
-    String startTime;
-    String endTime;
-    String weekday;
-    int maxAppointments;
-    dynamic creator;
-    Clinic clinic;
-    Doctor doctor;
+  String id;
+  String doctorName;
+  dynamic doctorPhoto;
+  String doctorDepartment;
+  int pendingAppointmentCount;
+  int completedAppointmentCount;
+  int cancelledAppointmentCount;
+  int absentAppointmentCount;
+  DateTime created;
+  DateTime updated;
+  bool isActive;
+  String startTime;
+  String endTime;
+  String weekday;
+  int maxAppointments;
+  dynamic creator;
+  Clinic clinic;
+  Doctor doctor;
 
-    SloteModel({
-        required this.id,
-        required this.doctorName,
-        this.doctorPhoto,
-        required this.doctorDepartment,
-        required this.pendingAppointmentCount,
-        required this.completedAppointmentCount,
-        required this.cancelledAppointmentCount,
-        required this.absentAppointmentCount,
-        required this.created,
-        required this.updated,
-        required this.isActive,
-        required this.startTime,
-        required this.endTime,
-        required this.weekday,
-        required this.maxAppointments,
-        this.creator,
-        required this.clinic,
-        required this.doctor,
-    });
+  SloteModel({
+    required this.id,
+    required this.doctorName,
+    this.doctorPhoto,
+    required this.doctorDepartment,
+    required this.pendingAppointmentCount,
+    required this.completedAppointmentCount,
+    required this.cancelledAppointmentCount,
+    required this.absentAppointmentCount,
+    required this.created,
+    required this.updated,
+    required this.isActive,
+    required this.startTime,
+    required this.endTime,
+    required this.weekday,
+    required this.maxAppointments,
+    this.creator,
+    required this.clinic,
+    required this.doctor,
+  });
 
-    factory SloteModel.fromJson(Map<String, dynamic> json) => SloteModel(
+  factory SloteModel.fromJson(Map<String, dynamic> json) => SloteModel(
         id: json["id"],
         doctorName: json["doctor_name"],
         doctorPhoto: json["doctor_photo"],
@@ -68,9 +69,9 @@ class SloteModel {
         creator: json["creator"],
         clinic: Clinic.fromJson(json["clinic"]),
         doctor: Doctor.fromJson(json["doctor"]),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "doctor_name": doctorName,
         "doctor_photo": doctorPhoto,
@@ -89,102 +90,101 @@ class SloteModel {
         "creator": creator,
         "clinic": clinic.toJson(),
         "doctor": doctor.toJson(),
-    };
+      };
 }
 
 class Clinic {
-    String id;
-    DateTime created;
-    DateTime updated;
-    bool isActive;
-    String clinicName;
-    String phone;
-    dynamic whatsapp;
-    String streetName;
-    String city;
-    String pincode;
-    String description;
-    dynamic email;
-    dynamic image;
-    dynamic logo;
-    String location;
-    String status;
-    dynamic ownerName;
-    dynamic ownerPhone;
-    dynamic ownerEmail;
-    dynamic ownerAddress;
-    dynamic patientsServed;
-    dynamic yearsOfExperience;
-    bool isAccepted;
-    dynamic creator;
-    int user;
-    String district;
-    String state;
-    List<dynamic> departments;
+  String id;
+  DateTime created;
+  DateTime updated;
+  bool isActive;
+  String clinicName;
+  String phone;
+  dynamic whatsapp;
+  String streetName;
+  String city;
+  String pincode;
+  String description;
+  dynamic email;
+  String image;
+  dynamic logo;
+  String location;
+  String status;
+  dynamic ownerName;
+  dynamic ownerPhone;
+  dynamic ownerEmail;
+  dynamic ownerAddress;
+  dynamic patientsServed;
+  dynamic yearsOfExperience;
+  bool isAccepted;
+  dynamic creator;
+  int user;
+  String district;
+  String state;
+  List<dynamic> departments;
 
-    Clinic({
-        required this.id,
-        required this.created,
-        required this.updated,
-        required this.isActive,
-        required this.clinicName,
-        required this.phone,
-        this.whatsapp,
-        required this.streetName,
-        required this.city,
-        required this.pincode,
-        required this.description,
-        this.email,
-        this.image,
-        this.logo,
-        required this.location,
-        required this.status,
-        this.ownerName,
-        this.ownerPhone,
-        this.ownerEmail,
-        this.ownerAddress,
-        this.patientsServed,
-        this.yearsOfExperience,
-        required this.isAccepted,
-        this.creator,
-        required this.user,
-        required this.district,
-        required this.state,
-        required this.departments,
-    });
+  Clinic({
+    required this.id,
+    required this.created,
+    required this.updated,
+    required this.isActive,
+    required this.clinicName,
+    required this.phone,
+    this.whatsapp,
+    required this.streetName,
+    required this.city,
+    required this.pincode,
+    required this.description,
+    this.email,
+    required this.image,
+    this.logo,
+    required this.location,
+    required this.status,
+    this.ownerName,
+    this.ownerPhone,
+    this.ownerEmail,
+    this.ownerAddress,
+    this.patientsServed,
+    this.yearsOfExperience,
+    required this.isAccepted,
+    this.creator,
+    required this.user,
+    required this.district,
+    required this.state,
+    required this.departments,
+  });
 
-    factory Clinic.fromJson(Map<String, dynamic> json) => Clinic(
+  factory Clinic.fromJson(Map<String, dynamic> json) => Clinic(
         id: json["id"],
         created: DateTime.parse(json["created"]),
         updated: DateTime.parse(json["updated"]),
         isActive: json["is_active"],
-        clinicName: json["clinic_name"],
-        phone: json["phone"],
-        whatsapp: json["whatsapp"],
-        streetName: json["street_name"],
-        city: json["city"],
-        pincode: json["pincode"],
-        description: json["description"],
-        email: json["email"],
-        image: json["image"],
-        logo: json["logo"],
-        location: json["location"],
+        clinicName: json["clinic_name"] ?? "",
+        phone: json["phone"] ?? "",
+        whatsapp: json["whatsapp"] ?? "",
+        streetName: json["street_name"] ?? "",
+        city: json["city"] ?? "",
+        pincode: json["pincode"] ?? "",
+        description: json["description"] ?? "",
+        email: json["email"] ?? "",
+        image: json["image"] ?? "",
+        logo: json["logo"] ?? "",
+        location: json["location"] ?? "",
         status: json["status"],
-        ownerName: json["owner_name"],
-        ownerPhone: json["owner_phone"],
-        ownerEmail: json["owner_email"],
-        ownerAddress: json["owner_address"],
-        patientsServed: json["patients_served"],
-        yearsOfExperience: json["years_of_experience"],
+        ownerPhone: json["owner_phone"] ?? "",
+        ownerEmail: json["owner_email"] ?? "",
+        ownerAddress: json["owner_address"] ?? "",
+        patientsServed: json["patients_served"] ?? "",
+        yearsOfExperience: json["years_of_experience"] ?? "",
         isAccepted: json["is_accepted"],
-        creator: json["creator"],
-        user: json["user"],
-        district: json["district"],
-        state: json["state"],
+        creator: json["creator"] ?? 0,
+        user: json["user"] ?? 0,
+        district: json["district"] ?? "",
+        state: json["state"] ?? '',
         departments: List<dynamic>.from(json["departments"].map((x) => x)),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "created": created.toIso8601String(),
         "updated": updated.toIso8601String(),
@@ -213,53 +213,53 @@ class Clinic {
         "district": district,
         "state": state,
         "departments": List<dynamic>.from(departments.map((x) => x)),
-    };
+      };
 }
 
 class Doctor {
-    String id;
-    DateTime created;
-    DateTime updated;
-    bool isActive;
-    String fullName;
-    String gender;
-    String phone;
-    String designation;
-    String qualification;
-    dynamic image;
-    DateTime dateJoined;
-    String address;
-    dynamic description;
-    int patientsServed;
-    bool isProfileCompleted;
-    bool isVerified;
-    dynamic creator;
-    int user;
-    String department;
+  String id;
+  DateTime created;
+  DateTime updated;
+  bool isActive;
+  String fullName;
+  String gender;
+  String phone;
+  String designation;
+  String qualification;
+  dynamic image;
+  DateTime dateJoined;
+  String address;
+  dynamic description;
+  int patientsServed;
+  bool isProfileCompleted;
+  bool isVerified;
+  dynamic creator;
+  int user;
+  String department;
 
-    Doctor({
-        required this.id,
-        required this.created,
-        required this.updated,
-        required this.isActive,
-        required this.fullName,
-        required this.gender,
-        required this.phone,
-        required this.designation,
-        required this.qualification,
-        this.image,
-        required this.dateJoined,
-        required this.address,
-        this.description,
-        required this.patientsServed,
-        required this.isProfileCompleted,
-        required this.isVerified,
-        this.creator,
-        required this.user,
-        required this.department,
-    });
+  Doctor({
+    required this.id,
+    required this.created,
+    required this.updated,
+    required this.isActive,
+    required this.fullName,
+    required this.gender,
+    required this.phone,
+    required this.designation,
+    required this.qualification,
+    this.image,
+    required this.dateJoined,
+    required this.address,
+    this.description,
+    required this.patientsServed,
+    required this.isProfileCompleted,
+    required this.isVerified,
+    this.creator,
+    required this.user,
+    required this.department,
+  });
 
-    factory Doctor.fromJson(Map<String, dynamic> json) => Doctor(
+  factory Doctor.fromJson(Map<String, dynamic> json) => Doctor(
         id: json["id"],
         created: DateTime.parse(json["created"]),
         updated: DateTime.parse(json["updated"]),
@@ -279,9 +279,9 @@ class Doctor {
         creator: json["creator"],
         user: json["user"],
         department: json["department"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "created": created.toIso8601String(),
         "updated": updated.toIso8601String(),
@@ -292,7 +292,8 @@ class Doctor {
         "designation": designation,
         "qualification": qualification,
         "image": image,
-        "date_joined": "${dateJoined.year.toString().padLeft(4, '0')}-${dateJoined.month.toString().padLeft(2, '0')}-${dateJoined.day.toString().padLeft(2, '0')}",
+        "date_joined":
+            "${dateJoined.year.toString().padLeft(4, '0')}-${dateJoined.month.toString().padLeft(2, '0')}-${dateJoined.day.toString().padLeft(2, '0')}",
         "address": address,
         "description": description,
         "patients_served": patientsServed,
@@ -301,5 +302,5 @@ class Doctor {
         "creator": creator,
         "user": user,
         "department": department,
-    };
+      };
 }

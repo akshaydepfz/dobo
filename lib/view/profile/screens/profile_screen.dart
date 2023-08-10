@@ -36,6 +36,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     final provider = Provider.of<ProfileService>(context);
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        foregroundColor: AppColor.primary,
+        title: const Text("Profile"),
+        centerTitle: true,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Center(
@@ -43,16 +50,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               padding: const EdgeInsets.all(15.0),
               child: Column(
                 children: [
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  const Text(
-                    'Profile',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
                   provider.userModel == null
                       ? const Center(
                           child: LinearProgressIndicator(

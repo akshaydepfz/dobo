@@ -31,7 +31,7 @@ class AddRelativeScreen extends StatelessWidget {
             children: [
               PrimaryTextField(
                 width: width,
-                hintText: 'Enter your name',
+                hintText: 'Enter relative name',
                 icon: AppIcons.lock,
                 onChanged: (value) => provider.onNameChanged(value),
               ),

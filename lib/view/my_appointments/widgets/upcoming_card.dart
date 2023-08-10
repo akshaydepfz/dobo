@@ -127,10 +127,7 @@ class UpComingCard extends StatelessWidget {
                     textColor: Colors.white,
                     label: 'Reschedule',
                     buttonColor: AppColor.primary,
-                    onTap: () {
-                      Navigator.pushNamed(
-                          context, RouteConstants.resceduleAppointment);
-                    }),
+                    onTap: onReschedulePressed),
               ],
             )
           ],

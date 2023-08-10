@@ -48,7 +48,6 @@ class BookingService extends ChangeNotifier {
     slotes = null;
     notifyListeners();
     getSlotes(_docID);
-    print(selectdappointmentDate.day);
   }
 
   void onSlotChange(int i, String id) {
@@ -71,14 +70,13 @@ class BookingService extends ChangeNotifier {
         LogController.activityLog(
             'DoctorDetailService', "getDoctorDetails", 'Success');
       }
-    } on DioError catch (e) {
+    } on DioError catch (_) {
       LogController.activityLog(
           'DoctorDetailService', "getDoctorDetails", 'Failed');
     }
   }
 
   Future<void> getSlotes(String doctorId) async {
-    print(doctorId);
     final pref = await SharedPreferences.getInstance();
     String token = pref.getString("accessToken") ?? '';
     try {
@@ -94,13 +92,12 @@ class BookingService extends ChangeNotifier {
       if (response.statusCode == 200) {
         _docID = doctorId;
         List data = response.data;
-        print(data);
+
         slotes = data.map((json) => SloteModel.fromJson(json)).toList();
         notifyListeners();
         LogController.activityLog('BookingService', "getSlotes", 'Success');
       }
-    } on DioError catch (e) {
-      print(e.response!.data);
+    } on DioError catch (_) {
       LogController.activityLog('BookingService', "getSlotes", 'Failed');
     }
   }
@@ -109,17 +106,22 @@ class BookingService extends ChangeNotifier {
     final pref = await SharedPreferences.getInstance();
     String token = pref.getString("accessToken") ?? '';
     try {
-      final response = await dio.get(
-          "${ApiEndpoints.baseUrl}/api/v1/clinics/appointments/$pk",
+      final response = await dio.patch(
+          "${ApiEndpoints.baseUrl}/api/v1/clinics/appointments/$pk/",
+          data: {
+            
+          },
           options: Options(headers: {
             'Authorization': 'Bearer $token',
           }));
 
       if (response.statusCode == 200) {
-        LogController.activityLog('BookingService', "getSlotes", 'Success');
+        LogController.activityLog(
+            'BookingService', "rescheduleAppointment", 'Success');
       }
     } on DioError catch (_) {
-      LogController.activityLog('BookingService', "getSlotes", 'Failed');
+      LogController.activityLog(
+          'BookingService', "rescheduleAppointment", 'Failed');
     }
   }
 
@@ -247,7 +249,7 @@ class BookingService extends ChangeNotifier {
           options: Options(headers: {
             'Authorization': 'Bearer $token',
           }));
-      print(response.statusCode);
+
       if (response.statusCode == 200 || response.statusCode == 201) {
         _isLoading = false;
         notifyListeners();

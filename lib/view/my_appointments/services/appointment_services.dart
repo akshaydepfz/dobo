@@ -18,6 +18,12 @@ class AppointmentService extends ChangeNotifier {
   ClinicDetailsModel? clinicDetail;
   DoctorDetailsModel? doctorDetail;
 
+  void onBackPressed() {
+    doctorDetail = null;
+    clinicDetail = null;
+    notifyListeners();
+  }
+
   Future<void> getUpcomingAppointments() async {
     final pref = await SharedPreferences.getInstance();
     String token = pref.getString("accessToken") ?? '';

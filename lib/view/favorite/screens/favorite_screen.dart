@@ -1,4 +1,5 @@
 import 'package:dobo/common/common_loading.dart';
+import 'package:dobo/core/style/app_colors.dart';
 
 import 'package:dobo/view/clinic_view/screens/clinic_view_.screen.dart';
 import 'package:dobo/view/favorite/services/favorite_service.dart';
@@ -26,21 +27,18 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
     final height = MediaQuery.of(context).size.height;
     final provider = Provider.of<FavoriteProvider>(context);
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        foregroundColor: AppColor.primary,
+        title: const Text("Favorites"),
+        centerTitle: true,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Center(
             child: Column(
               children: [
-                const SizedBox(
-                  height: 20,
-                ),
-                const Text(
-                  'Favorites',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
                 provider.clinicList == null
                     ? Padding(
                         padding: EdgeInsets.only(top: height * .30),
@@ -70,8 +68,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                 ratingCount: 2.toString(),
                                 name: provider.clinicList![i].clinicName,
                                 category: provider.clinicList![i].subtext,
-                                image: provider.clinicList![i].image ??
-                                    "https://t4.ftcdn.net/jpg/03/47/41/03/360_F_347410397_5PpZbcQpnEqqzlGjOk1R5d11977LbMUW.jpg",
+                                image: provider.clinicList![i].image ?? "",
                                 onTap: () {
                                   Navigator.push(
                                       context,

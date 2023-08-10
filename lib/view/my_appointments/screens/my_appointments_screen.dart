@@ -1,6 +1,7 @@
 import 'package:dobo/common/common_loading.dart';
 import 'package:dobo/core/style/app_colors.dart';
 import 'package:dobo/view/appointment/screens/cancell_appointment.dart';
+import 'package:dobo/view/appointment/screens/reschedule_appointment.dart';
 import 'package:dobo/view/my_appointments/screens/appointment_view.dart';
 import 'package:dobo/view/my_appointments/services/appointment_services.dart';
 import 'package:dobo/view/my_appointments/widgets/cancelled_card.dart';
@@ -34,28 +35,16 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen>
     final provider = Provider.of<AppointmentService>(context);
     TabController tabController = TabController(length: 3, vsync: this);
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        foregroundColor: AppColor.primary,
+        title: const Text("My Appointment"),
+        centerTitle: true,
+      ),
       body: SafeArea(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    'My Appointment',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    height: 25,
-                    // child: Image.asset(AppIcons.search),
-                  )
-                ],
-              ),
-            ),
             TabBar(
               indicatorWeight: 3,
               labelPadding:
@@ -144,7 +133,18 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen>
                                                         .upcomingAppontments![i]
                                                         .id!)));
                                   },
-                                  onReschedulePressed: () {},
+                                  onReschedulePressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                RescheduleAppointment(
+                                                  doctorId: provider
+                                                      .upcomingAppontments![i]
+                                                      .schedule!
+                                                      .doctor!,
+                                                )));
+                                  },
                                   weekday: provider.upcomingAppontments![i]
                                       .schedule!.weekday!,
                                   clinicName: provider
