@@ -18,6 +18,13 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
+  @override
+  void initState() {
+    Provider.of<SearchService>(context, listen: false).getClinicList('');
+    Provider.of<SearchService>(context, listen: false).getDoctorList('');
+    super.initState();
+  }
+
   final TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
