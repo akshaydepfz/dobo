@@ -183,7 +183,7 @@ class Schedule {
   int? maxAppointments;
   dynamic creator;
   String? clinic;
-  String? doctor;
+  String doctor;
 
   Schedule({
     this.id,
@@ -196,7 +196,7 @@ class Schedule {
     this.maxAppointments,
     this.creator,
     this.clinic,
-    this.doctor,
+    required this.doctor,
   });
 
   factory Schedule.fromJson(Map<String, dynamic> json) => Schedule(

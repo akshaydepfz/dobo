@@ -103,6 +103,7 @@ class AppRoute {
         return MaterialPageRoute(
             builder: (context) => RescheduleAppointment(
                   doctorId: '',
+                  appointmentId: '',
                 ));
       case RouteConstants.cancelAppointment:
         return MaterialPageRoute(

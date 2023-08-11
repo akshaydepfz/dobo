@@ -6,7 +6,9 @@ import 'package:dobo/model/doctor_details_model.dart';
 import 'package:dobo/model/relative_model.dart';
 import 'package:dobo/model/slote_model.dart';
 import 'package:dobo/router/app_route_constants.dart';
+import 'package:dobo/view/account_create_pop/screens/account_created.dart';
 import 'package:dobo/view/appointment_animation/screens/bookind_success_pop.dart';
+import 'package:dobo/view/my_appointments/screens/reschedule_succes_pop.dart';
 import 'package:dobo/view/profile_create/services/signup_service.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -102,20 +104,30 @@ class BookingService extends ChangeNotifier {
     }
   }
 
-  Future<void> rescheduleAppointment(String pk) async {
+  Future<void> rescheduleAppointment(BuildContext context, String pk) async {
     final pref = await SharedPreferences.getInstance();
     String token = pref.getString("accessToken") ?? '';
     try {
+      print("${ApiEndpoints.baseUrl}/api/v1/clinics/appointments/$pk/");
       final response = await dio.patch(
           "${ApiEndpoints.baseUrl}/api/v1/clinics/appointments/$pk/",
           data: {
-            
+            "reconsultation_date":
+                '${selectdappointmentDate.year}-${selectdappointmentDate.month}-${selectdappointmentDate.day}'
           },
           options: Options(headers: {
             'Authorization': 'Bearer $token',
           }));
 
       if (response.statusCode == 200) {
+        // ignore: use_build_context_synchronously
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => RescheduleSuccessPop(
+                      date:
+                          '${selectdappointmentDate.day}-${selectdappointmentDate.month}-${selectdappointmentDate.year}',
+                    )));
         LogController.activityLog(
             'BookingService', "rescheduleAppointment", 'Success');
       }

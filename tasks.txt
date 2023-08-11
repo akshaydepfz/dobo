@@ -1,7 +1,6 @@
-1. My Booking card view 
+
 2. Doctor Review and Clinic Review
 3. reschedule
 4. profile edit 
-5. location post
 6. booking search
 7. when create a appointment the appointmentn note not showing

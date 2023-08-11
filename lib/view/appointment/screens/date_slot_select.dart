@@ -196,7 +196,8 @@ class _DateSelectingScreenState extends State<DateSelectingScreen> {
                       Navigator.pushNamed(
                           context, RouteConstants.patientScreen);
                     } else {
-                      provider.rescheduleAppointment(widget.appointmentId);
+                      provider.rescheduleAppointment(
+                          context, widget.appointmentId);
                     }
                   },
                   label: 'Next')

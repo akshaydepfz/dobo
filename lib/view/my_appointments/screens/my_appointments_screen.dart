@@ -87,7 +87,7 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen>
                                                     doctorId: provider
                                                         .upcomingAppontments![i]
                                                         .schedule!
-                                                        .doctor!,
+                                                        .doctor,
                                                     clinicId: provider
                                                         .upcomingAppontments![i]
                                                         .schedule!
@@ -135,15 +135,19 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen>
                                                         .id!)));
                                   },
                                   onReschedulePressed: () {
+                            
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
                                                 RescheduleAppointment(
+                                                  appointmentId: provider
+                                                      .upcomingAppontments![i]
+                                                      .id!,
                                                   doctorId: provider
                                                       .upcomingAppontments![i]
                                                       .schedule!
-                                                      .doctor!,
+                                                      .doctor,
                                                 )));
                                   },
                                   weekday: provider.upcomingAppontments![i]
@@ -181,7 +185,7 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen>
                                                 doctorId: provider
                                                     .completedAppontments![i]
                                                     .schedule!
-                                                    .doctor!,
+                                                    .doctor,
                                                 clinicId: provider
                                                     .completedAppontments![i]
                                                     .schedule!
