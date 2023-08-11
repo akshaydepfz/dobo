@@ -123,7 +123,7 @@ class CompletedCard extends StatelessWidget {
                     textColor: AppColor.primary,
                     label: 'Book again',
                     buttonColor: AppColor.primary.withOpacity(.20),
-                    onTap: () {}),
+                    onTap: onReschedulePressed),
                 AppointmentButtons(
                     textColor: Colors.white,
                     label: 'Leave a review',

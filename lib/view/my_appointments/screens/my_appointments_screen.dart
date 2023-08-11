@@ -1,6 +1,7 @@
 import 'package:dobo/common/common_loading.dart';
 import 'package:dobo/core/style/app_colors.dart';
 import 'package:dobo/view/appointment/screens/cancell_appointment.dart';
+import 'package:dobo/view/appointment/screens/date_slot_select.dart';
 import 'package:dobo/view/appointment/screens/reschedule_appointment.dart';
 import 'package:dobo/view/my_appointments/screens/appointment_view.dart';
 import 'package:dobo/view/my_appointments/services/appointment_services.dart';
@@ -231,7 +232,19 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen>
                                                   doctorNAme: '',
                                                 )));
                                   },
-                                  onReschedulePressed: () {},
+                                  onReschedulePressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            DateSelectingScreen(
+                                          doctorId: provider.doctorDetail!.id,
+                                          isRechedule: false,
+                                          appointmentId: '',
+                                        ),
+                                      ),
+                                    );
+                                  },
                                   weekday: provider.completedAppontments![i]
                                       .schedule!.weekday!,
                                   clinicName: provider
