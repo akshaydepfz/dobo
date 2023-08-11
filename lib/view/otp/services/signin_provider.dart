@@ -85,32 +85,37 @@ class SigninProvider extends ChangeNotifier {
           // ignore: use_build_context_synchronously
           // ignore: use_build_context_synchronously
           final pref = await SharedPreferences.getInstance();
-
           var data = response.data;
-          String token = data['access_token'];
-          String refresh = data['refresh_token'];
-          String pk = data['profile_id'].toString();
+          String userType = data['user_type'];
+          if (userType == 'patient') {
+            String token = data['access_token'];
+            String refresh = data['refresh_token'];
+            String pk = data['profile_id'].toString();
 
-          await pref.setString("pk", pk);
-          await pref.setString("accessToken", token);
-          await pref.setString("refresh", refresh);
-          _isLoading = false;
-          notifyListeners();
-          // ignore: use_build_context_synchronously
-          showSnackBarSuccess(context, 'Verification successfull');
-
-          if (data['profile_id'] == '') {
+            await pref.setString("pk", pk);
+            await pref.setString("accessToken", token);
+            await pref.setString("refresh", refresh);
+            _isLoading = false;
+            notifyListeners();
             // ignore: use_build_context_synchronously
-            Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const ProfileCreateScreen()));
+            showSnackBarSuccess(context, 'Verification successfull');
+
+            if (data['profile_id'] == '') {
+              // ignore: use_build_context_synchronously
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ProfileCreateScreen()));
+            } else {
+              // ignore: use_build_context_synchronously
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const LocationSelectScreen()));
+            }
           } else {
             // ignore: use_build_context_synchronously
-            Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const LocationSelectScreen()));
+            showSnackBarWrong(context, 'You are already register as a $userType');
           }
         }
       } on DioError catch (e) {

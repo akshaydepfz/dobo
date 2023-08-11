@@ -36,6 +36,7 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen>
     TabController tabController = TabController(length: 3, vsync: this);
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         elevation: 0,
         foregroundColor: AppColor.primary,

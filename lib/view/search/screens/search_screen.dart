@@ -32,6 +32,7 @@ class _SearchScreenState extends State<SearchScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
+        foregroundColor: AppColor.primary,
         elevation: 0,
         centerTitle: true,
         title: const Text("Search Doctors and clinics"),
@@ -109,6 +110,13 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                     Expanded(
                       child: TextField(
+                        onChanged: (v) {
+                          if (provider.searchDoctor) {
+                            provider.onDoctorQuaryChanged(v);
+                          } else {
+                            provider.onClinicQuaryChanged(v);
+                          }
+                        },
                         decoration: InputDecoration(
                             hintStyle: const TextStyle(color: AppColor.grey3),
                             border: InputBorder.none,
@@ -190,8 +198,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                     ratingCount: 2.toString(),
                                     name: provider.clinicList![i].clinicName,
                                     category: provider.clinicList![i].subtext,
-                                    image: provider.clinicList![i].image ??
-                                        "https://t4.ftcdn.net/jpg/03/47/41/03/360_F_347410397_5PpZbcQpnEqqzlGjOk1R5d11977LbMUW.jpg",
+                                    image: provider.clinicList![i].image ?? "",
                                     onTap: () {
                                       Navigator.push(
                                           context,

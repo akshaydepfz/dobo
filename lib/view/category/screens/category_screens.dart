@@ -26,6 +26,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
     final categoryProvider = Provider.of<CategoryProvider>(context);
     return Scaffold(
       appBar: AppBar(
+          automaticallyImplyLeading: false,
           foregroundColor: AppColor.primary,
           backgroundColor: Colors.transparent,
           elevation: 0,

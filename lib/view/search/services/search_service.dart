@@ -12,6 +12,8 @@ class SearchService extends ChangeNotifier {
   Dio dio = Dio();
   List<DoctorListModel>? doctorList;
   List<ClinicModel>? clinicList;
+  String _quary = '';
+  String get quary => _quary;
   void oncategoryChange() {
     _searchDoctor = !_searchDoctor;
     notifyListeners();
@@ -21,11 +23,10 @@ class SearchService extends ChangeNotifier {
     final pref = await SharedPreferences.getInstance();
     String token = pref.getString("accessToken") ?? '';
     try {
-      final response =
-          await dio.get('https://dobo.co.in/api/v1/doctors/?search=$quary',
-              options: Options(headers: {
-                'Authorization': 'Bearer $token',
-              }));
+      final response = await dio.get('https://dobo.co.in/api/v1/doctors/',
+          options: Options(headers: {
+            'Authorization': 'Bearer $token',
+          }));
 
       if (response.statusCode == 200) {
         List data = response.data;
@@ -43,11 +44,11 @@ class SearchService extends ChangeNotifier {
     final pref = await SharedPreferences.getInstance();
     String token = pref.getString("accessToken") ?? '';
     try {
-      final response = await dio.get(
-          'https://dobo.co.in/api/v1/clinics/clinics/?search=$quary',
-          options: Options(headers: {
-            'Authorization': 'Bearer $token',
-          }));
+      final response =
+          await dio.get('https://dobo.co.in/api/v1/clinics/clinics',
+              options: Options(headers: {
+                'Authorization': 'Bearer $token',
+              }));
 
       if (response.statusCode == 200) {
         List data = response.data;
@@ -96,6 +97,34 @@ class SearchService extends ChangeNotifier {
         LogController.activityLog(
             'HomeProvider', "addClinicFavorite", "Failed");
       }
+    }
+  }
+
+  void onDoctorQuaryChanged(String v) {
+    if (v != '') {
+      _quary = v;
+      doctorList = doctorList!
+          .where((doctorList) =>
+              (doctorList.fullName.toLowerCase().contains(v.toLowerCase())))
+          .toList();
+
+      notifyListeners();
+    } else {
+      getDoctorList(quary);
+    }
+  }
+
+  void onClinicQuaryChanged(String v) {
+    if (v != '') {
+      _quary = v;
+      clinicList = clinicList!
+          .where((clinicList) =>
+              (clinicList.clinicName.toLowerCase().contains(v.toLowerCase())))
+          .toList();
+
+      notifyListeners();
+    } else {
+      getClinicList(quary);
     }
   }
 }
