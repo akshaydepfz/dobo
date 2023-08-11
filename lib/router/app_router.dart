@@ -126,8 +126,7 @@ class AppRoute {
       case RouteConstants.locationSelect:
         return MaterialPageRoute(
             builder: (context) => const LocationSelectScreen());
-      case RouteConstants.reviewScreen:
-        return MaterialPageRoute(builder: (context) => const ReviewScreen());
+
       case RouteConstants.reviewPop:
         return MaterialPageRoute(builder: (context) => const ReviewPop());
       case RouteConstants.articleScreen:

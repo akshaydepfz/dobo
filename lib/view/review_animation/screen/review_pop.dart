@@ -12,38 +12,43 @@ class ReviewPop extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: Column(
-        children: [
-          Center(
-            child: Padding(
-              padding: EdgeInsets.only(top: height*.12,bottom: height*.05),
-              child: SizedBox(
-              height: height * .20,
-              child: SvgPicture.asset(AppAssets.donePop)),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Center(
+              child: Padding(
+                padding:
+                    EdgeInsets.only(top: height * .12, bottom: height * .05),
+                child: SizedBox(
+                    height: height * .20,
+                    child: SvgPicture.asset(AppAssets.donePop)),
+              ),
             ),
-          ),
-          const Text(
-          'Review Successful!',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        ), 
-        const Padding(
-          padding:  EdgeInsets.symmetric(vertical: 20),
-          child:  Text(
-            'Your review has been successfully\nsubmitted, thank you very much!',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 15,
-              color: AppColor.grey4,
+            const Text(
+              'Review Successful!',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-          ),
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 20),
+              child: Text(
+                'Your review has been successfully\nsubmitted, thank you very much!',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 15,
+                  color: AppColor.grey4,
+                ),
+              ),
+            ),
+            const Spacer(),
+            PrimaryButton(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                label: 'Done'),
+            GlobalVariabels.vertical15,
+          ],
         ),
-        const Spacer(),
-        PrimaryButton(onTap: (){
-          Navigator.pop(context);
-        }, label:'Done'),
-        GlobalVariabels.vertical15,       
-       ],
       ),
     );
   }

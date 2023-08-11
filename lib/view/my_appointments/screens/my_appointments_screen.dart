@@ -7,6 +7,7 @@ import 'package:dobo/view/my_appointments/services/appointment_services.dart';
 import 'package:dobo/view/my_appointments/widgets/cancelled_card.dart';
 import 'package:dobo/view/my_appointments/widgets/completed_card.dart';
 import 'package:dobo/view/my_appointments/widgets/upcoming_card.dart';
+import 'package:dobo/view/review/screens/review_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -135,7 +136,6 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen>
                                                         .id!)));
                                   },
                                   onReschedulePressed: () {
-                            
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
@@ -221,15 +221,15 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen>
                                                     "")));
                                   },
                                   onLeaveAReview: () {
-                                    // Navigator.push(
-                                    //     context,
-                                    //     MaterialPageRoute(
-                                    //         builder: (context) =>
-                                    //             CancellAppointment(
-                                    //                 appointmentId: provider
-                                    //                     .completedAppontments![
-                                    //                         i]
-                                    //                     .id!)));
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const ReviewScreen(
+                                                  doctorId: '',
+                                                  doctorImage: '',
+                                                  doctorNAme: '',
+                                                )));
                                   },
                                   onReschedulePressed: () {},
                                   weekday: provider.completedAppontments![i]
