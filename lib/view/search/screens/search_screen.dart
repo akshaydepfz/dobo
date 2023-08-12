@@ -48,7 +48,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     child: GestureDetector(
                       onTap: () => provider.oncategoryChange(),
                       child: Container(
-                        height: 50,
+                        height: 40,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(6),
                             border: Border.all(
@@ -59,7 +59,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           child: Text(
                             'Doctor',
                             style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 15,
                                 color: provider.searchDoctor
                                     ? AppColor.primary
                                     : AppColor.grey2),
@@ -73,7 +73,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     child: GestureDetector(
                       onTap: () => provider.oncategoryChange(),
                       child: Container(
-                        height: 50,
+                        height: 40,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(6),
                             border: Border.all(
@@ -84,7 +84,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           child: Text(
                             'Clinic',
                             style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 15,
                                 color: provider.searchDoctor
                                     ? AppColor.grey2
                                     : AppColor.primary),
@@ -97,8 +97,8 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
               GlobalVariabels.vertical15,
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                height: 60,
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                height: 50,
                 decoration: BoxDecoration(
                   color: AppColor.grey1,
                   borderRadius: BorderRadius.circular(8),
@@ -118,7 +118,8 @@ class _SearchScreenState extends State<SearchScreen> {
                           }
                         },
                         decoration: InputDecoration(
-                            hintStyle: const TextStyle(color: AppColor.grey3),
+                            hintStyle: const TextStyle(
+                                color: AppColor.grey3, fontSize: 15),
                             border: InputBorder.none,
                             hintText: provider.searchDoctor
                                 ? 'Search doctor'
@@ -130,8 +131,8 @@ class _SearchScreenState extends State<SearchScreen> {
                           ? provider.getDoctorList(controller.text)
                           : provider.getClinicList(controller.text),
                       child: SizedBox(
-                        height: 30,
-                        width: 30,
+                        height: 20,
+                        width: 20,
                         child: Image.asset(AppIcons.search),
                       ),
                     ),

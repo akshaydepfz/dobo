@@ -34,7 +34,7 @@ class DoctorCard extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(8.0),
         ),
-        height: 100,
+        height: 90,
         child: Row(
           children: [
             ClipRRect(
@@ -46,7 +46,7 @@ class DoctorCard extends StatelessWidget {
                 width: 100,
                 height: 100,
                 child: image == ''
-                    ? Image.asset(AppAssets.avatar)
+                    ? Image.asset(AppIcons.doctorAvatar)
                     : Image.network(
                         image,
                         fit: BoxFit.cover,
@@ -62,12 +62,13 @@ class DoctorCard extends StatelessWidget {
                   Text(
                     "Dr. $name",
                     style: const TextStyle(
-                      fontSize: 16,
+                      fontSize: 15,
                     ),
                   ),
                   Text(
                     department,
-                    style: const TextStyle(color: AppColor.primary),
+                    style:
+                        const TextStyle(color: AppColor.primary, fontSize: 13),
                   ),
                   Expanded(
                     child: SizedBox(width: width / 1.8, child: const Divider()),
@@ -76,8 +77,8 @@ class DoctorCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        width: 20,
-                        height: 20,
+                        width: 15,
+                        height: 15,
                         child: SvgPicture.asset(AppIcons.star),
                       ),
                       const SizedBox(
@@ -85,7 +86,7 @@ class DoctorCard extends StatelessWidget {
                       ),
                       const Text(
                         '4.6  (3,362 reviews)',
-                        style: TextStyle(color: AppColor.grey3),
+                        style: TextStyle(color: AppColor.grey3, fontSize: 13),
                       )
                     ],
                   ),

@@ -44,7 +44,7 @@ class ProfileService extends ChangeNotifier {
   }
 
   Future<void> setProfileEdit() async {
-    _nameController.text = userModel!.firstName;
+    _nameController.text = userModel!.fullName;
     _emailController.text = userModel!.email;
     _phoneController.text = userModel!.phone;
   }
@@ -52,9 +52,10 @@ class ProfileService extends ChangeNotifier {
   Future<void> getProfileDetails() async {
     final pref = await SharedPreferences.getInstance();
     String token = pref.getString("accessToken") ?? '';
+    String id = pref.getString('pk') ?? "";
     try {
       final response = await dio.get(
-        ApiEndpoints.profileDetailsGet,
+        "https://dobo.co.in/api/v1/patients/$id/",
         options: Options(headers: {'Authorization': 'Bearer $token'}),
       );
       if (response.statusCode == 200) {

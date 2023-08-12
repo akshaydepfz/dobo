@@ -9,6 +9,7 @@ import 'package:dobo/view/landing_page/services/bottom_nav_service.dart';
 import 'package:dobo/view/landing_page/widgets/bttom_nav_bar.dart';
 import 'package:dobo/view/my_appointments/screens/my_appointments_screen.dart';
 import 'package:dobo/view/profile/screens/profile_screen.dart';
+import 'package:dobo/view/search/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -25,24 +26,24 @@ class LandingScreen extends StatelessWidget {
     },
     {
       'title': 'Booking',
-      'icon': AppIcons.calendar,
+      'icon': AppIcons.addAppointment,
     },
     {
       'title': 'favorites',
       'icon': AppIcons.favorite,
     },
     {
-      'title': 'Profile',
-      'icon': AppIcons.person,
+      'title': 'History',
+      'icon': AppIcons.history,
     },
   ];
 
   List<Widget> pages = [
     const HomeScreen(),
     const CategoryScreen(),
-    const MyAppointmentsScreen(),
+    const SearchScreen(),
     const FavoriteScreen(),
-    const ProfileScreen(),
+    const MyAppointmentsScreen(),
   ];
 
   @override

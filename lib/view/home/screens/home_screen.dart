@@ -97,12 +97,26 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       SizedBox(
                         width: width * .28,
-                        child: Text(
-                          provider.location,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                              fontSize: 15, color: Colors.white),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              provider.location,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                  fontSize: 15, color: Colors.white),
+                            ),
+                            profileProvider.userModel == null
+                                ? SizedBox()
+                                : Text(
+                                    profileProvider.userModel!.fullName,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                        fontSize: 15, color: Colors.white),
+                                  ),
+                          ],
                         ),
                       ),
                       GestureDetector(

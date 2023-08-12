@@ -1,5 +1,6 @@
 import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/core/assets/app_assets.dart';
+import 'package:dobo/core/assets/app_icons.dart';
 import 'package:dobo/core/style/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,7 @@ class CancelldCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Container(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(8),
         margin: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: Colors.white,
@@ -35,12 +36,12 @@ class CancelldCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                    height: 100,
-                    width: 100,
+                    height: 80,
+                    width: 80,
                     child: clinicImage == ''
                         ? Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Image.asset(AppAssets.avatar),
+                            child: Image.asset(AppIcons.clinicAvatar),
                           )
                         : ClipRRect(
                             borderRadius: BorderRadius.circular(8.0),
@@ -56,7 +57,7 @@ class CancelldCard extends StatelessWidget {
                     Text(
                       clinicName,
                       style: const TextStyle(
-                        fontSize: 15,
+                        fontSize: 14,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -79,6 +80,7 @@ class CancelldCard extends StatelessWidget {
                             child: Text(
                               'Cancelled',
                               style: TextStyle(
+                                fontSize: 13,
                                 color: Colors.red,
                               ),
                             ),

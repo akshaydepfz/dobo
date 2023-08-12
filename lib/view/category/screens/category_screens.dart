@@ -37,7 +37,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 15),
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              height: 60,
+              height: 50,
               decoration: BoxDecoration(
                 color: AppColor.grey1,
                 borderRadius: BorderRadius.circular(8),
@@ -46,8 +46,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 children: [
                   GlobalVariabels.horizontal10,
                   SizedBox(
-                    height: 30,
-                    width: 30,
+                    height: 20,
+                    width: 20,
                     child: Image.asset(AppIcons.search),
                   ),
                   GlobalVariabels.horizontal10,
@@ -75,7 +75,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                           const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 3,
                               crossAxisSpacing: 16,
-                              childAspectRatio: 0.7,
+                              childAspectRatio: 0.8,
                               mainAxisSpacing: 10),
                       itemBuilder: (context, i) {
                         return GestureDetector(
@@ -114,9 +114,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
                               child: Column(
                                 children: [
                                   Container(
-                                    height: 80,
-                                    width: 80,
-                                    padding: const EdgeInsets.all(20),
+                                    height: 60,
+                                    width: 60,
+                                    padding: const EdgeInsets.all(15),
                                     decoration: const BoxDecoration(
                                       shape: BoxShape.circle,
                                       color: Color(0xFFEEFCFA),

@@ -22,7 +22,7 @@ class AppointmentButtons extends StatelessWidget {
           margin: const EdgeInsets.all(8.0),
           decoration: BoxDecoration(
               color: buttonColor, borderRadius: BorderRadius.circular(10)),
-          padding: const EdgeInsets.all(13),
+          padding: const EdgeInsets.all(9),
           child: Center(
             child: Text(
               label,

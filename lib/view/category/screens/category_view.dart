@@ -98,7 +98,7 @@ class DoctorCard extends StatelessWidget {
         boxShadow: GlobalVariabels.shadow,
         borderRadius: BorderRadius.circular(8.0),
       ),
-      height: 120,
+      height: 100,
       child: Row(
         children: [
           ClipRRect(
@@ -107,15 +107,12 @@ class DoctorCard extends StatelessWidget {
               bottomLeft: Radius.circular(8),
             ),
             child: SizedBox(
-              width: 100,
+              width: 90,
               height: 100,
               child: image == ""
-                  ? Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Image.asset(
-                        AppAssets.avatar,
-                        fit: BoxFit.cover,
-                      ),
+                  ? Image.asset(
+                      AppIcons.doctorAvatar,
+                      fit: BoxFit.cover,
                     )
                   : Image.network(
                       image,
@@ -132,12 +129,12 @@ class DoctorCard extends StatelessWidget {
                 Text(
                   'Dr. $name',
                   style: const TextStyle(
-                    fontSize: 16,
+                    fontSize: 15,
                   ),
                 ),
                 Text(
                   department,
-                  style: const TextStyle(color: AppColor.primary),
+                  style: const TextStyle(color: AppColor.primary, fontSize: 13),
                 ),
                 Expanded(
                   child: SizedBox(width: width / 1.8, child: const Divider()),
@@ -146,8 +143,8 @@ class DoctorCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      width: 20,
-                      height: 20,
+                      width: 15,
+                      height: 15,
                       child: SvgPicture.asset(AppIcons.star),
                     ),
                     const SizedBox(

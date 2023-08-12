@@ -277,7 +277,7 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                                 problem: provider.description,
                                 doctorID: provider.doctorID,
                                 name: provider.isPatient
-                                    ? userProvider.userModel!.firstName
+                                    ? userProvider.userModel!.fullName
                                     : provider
                                         .relatives![
                                             provider.selectedRelativeIndex]

@@ -33,4 +33,7 @@ class AppIcons {
   static const String gender = 'assets/icons/gender.png';
   static const String whatsapp = 'assets/icons/whatsapp.png';
   static const String clinicAvatar = 'assets/icons/clinic_avtar.png';
+  static const String addAppointment = 'assets/icons/add_appointment.svg';
+  static const String history = 'assets/icons/reschedule.svg';
+  static const String doctorAvatar = 'assets/icons/doctor_avatar.png';
 }

@@ -48,40 +48,45 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                             padding: EdgeInsets.only(top: height * .35),
                             child: const Text('No Favorite Clinics!'),
                           )
-                        : ListView.builder(
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: provider.clinicList!.length,
-                            shrinkWrap: true,
-                            itemBuilder: (context, i) {
-                              return ClinicsCard(
-                                isFavoriteLoad: false,
-                                isFavorite: provider.clinicList![i].isFavorite,
-                                onFavoriteClick: () =>
-                                    provider.addClinicFavorite(
-                                  context,
-                                  provider.clinicList![i].id,
-                                  provider.clinicList![i].isFavorite,
-                                ),
-                                width: width,
-                                avarageRating: provider.clinicList![i].avgRating
-                                    .toString(),
-                                ratingCount: 2.toString(),
-                                name: provider.clinicList![i].clinicName,
-                                category: provider.clinicList![i].subtext,
-                                image: provider.clinicList![i].image ?? "",
-                                onTap: () {
-                                  Navigator.push(
+                        : Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ListView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: provider.clinicList!.length,
+                                shrinkWrap: true,
+                                itemBuilder: (context, i) {
+                                  return ClinicsCard(
+                                    isFavoriteLoad: false,
+                                    isFavorite:
+                                        provider.clinicList![i].isFavorite,
+                                    onFavoriteClick: () =>
+                                        provider.addClinicFavorite(
                                       context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              ClinicViewScreen(
-                                                clinicId:
-                                                    provider.clinicList![i].id,
-                                              )));
-                                  // Navigator.push(context,MaterialPageRoute(builder:(context) =>ClinicViewScreen()));
-                                },
-                              );
-                            })
+                                      provider.clinicList![i].id,
+                                      provider.clinicList![i].isFavorite,
+                                    ),
+                                    width: width,
+                                    avarageRating: provider
+                                        .clinicList![i].avgRating
+                                        .toString(),
+                                    ratingCount: 2.toString(),
+                                    name: provider.clinicList![i].clinicName,
+                                    category: provider.clinicList![i].subtext,
+                                    image: provider.clinicList![i].image ?? "",
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ClinicViewScreen(
+                                                    clinicId: provider
+                                                        .clinicList![i].id,
+                                                  )));
+                                      // Navigator.push(context,MaterialPageRoute(builder:(context) =>ClinicViewScreen()));
+                                    },
+                                  );
+                                }),
+                          )
               ],
             ),
           ),

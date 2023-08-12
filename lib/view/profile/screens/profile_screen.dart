@@ -81,7 +81,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "${provider.userModel!.firstName} ${provider.userModel!.lastName}",
+                                  provider.userModel!.fullName,
                                   style: const TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold),

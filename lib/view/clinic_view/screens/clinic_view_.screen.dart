@@ -59,11 +59,11 @@ class _ClinicViewScreenState extends State<ClinicViewScreen> {
                           Row(
                             children: [
                               Container(
-                                width: 100,
+                                width: 80,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(12),
                                     border: Border.all(color: AppColor.grey2)),
-                                height: 100,
+                                height: 80,
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(12),
                                   child: provider.clinicDetail!.image == ""
@@ -127,7 +127,6 @@ class _ClinicViewScreenState extends State<ClinicViewScreen> {
                                   count: '0'),
                             ],
                           ),
-                          GlobalVariabels.vertical15,
                           const Divider(),
                           GlobalVariabels.vertical15,
                           Visibility(
@@ -159,13 +158,12 @@ class _ClinicViewScreenState extends State<ClinicViewScreen> {
                               ],
                             ),
                           ),
-                          GlobalVariabels.vertical15,
                           const Text(
                             'Our Doctors',
                             style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 17),
+                                fontWeight: FontWeight.bold, fontSize: 15),
                           ),
-                          GlobalVariabels.vertical15,
+                          GlobalVariabels.vertical10,
                           provider.doctorList == null
                               ? const LinearProgressIndicator()
                               : provider.doctorList!.isEmpty
@@ -173,6 +171,7 @@ class _ClinicViewScreenState extends State<ClinicViewScreen> {
                                       child: Text("No Doctors Found!"),
                                     )
                                   : ListView.builder(
+                                      padding: EdgeInsets.zero,
                                       physics:
                                           const NeverScrollableScrollPhysics(),
                                       itemCount: provider.doctorList!.length,
@@ -186,15 +185,15 @@ class _ClinicViewScreenState extends State<ClinicViewScreen> {
                                             : DoctorCard(
                                                 onTap: () {
                                                   Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              DoctorViewScreen(
-                                                                doctorId: provider
-                                                                    .doctorList![
-                                                                        i]
-                                                                    .id,
-                                                              )));
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          DoctorViewScreen(
+                                                        doctorId: provider
+                                                            .doctorList![i].id,
+                                                      ),
+                                                    ),
+                                                  );
                                                 },
                                                 width: width,
                                                 image: provider
@@ -240,8 +239,8 @@ class RateReviewCard extends StatelessWidget {
             color: AppColor.primary.withOpacity(0.2),
           ),
           padding: const EdgeInsets.all(15),
-          height: 60,
-          width: 60,
+          height: 50,
+          width: 50,
           child: SvgPicture.asset(icon),
         ),
         const SizedBox(
@@ -251,7 +250,7 @@ class RateReviewCard extends StatelessWidget {
           count,
           style: const TextStyle(
               color: AppColor.primary,
-              fontSize: 16,
+              fontSize: 15,
               fontWeight: FontWeight.bold),
         ),
         Text(
@@ -276,10 +275,14 @@ class IconTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SizedBox(height: 20, width: 20, child: SvgPicture.asset(icon)),
+        SizedBox(height: 15, width: 15, child: SvgPicture.asset(icon)),
         GlobalVariabels.horizontal10,
         SizedBox(
-            width: MediaQuery.of(context).size.width / 2, child: Text(title)),
+            width: MediaQuery.of(context).size.width / 2,
+            child: Text(
+              title,
+              style: TextStyle(fontSize: 14),
+            )),
       ],
     );
   }

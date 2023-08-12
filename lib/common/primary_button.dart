@@ -2,10 +2,14 @@ import 'package:dobo/core/style/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class PrimaryButton extends StatelessWidget {
-  const PrimaryButton({super.key, required this.onTap, required this.label,  this.isLoading= false});
+  const PrimaryButton(
+      {super.key,
+      required this.onTap,
+      required this.label,
+      this.isLoading = false});
   final Function() onTap;
   final String label;
-final bool isLoading;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -28,17 +32,21 @@ final bool isLoading;
           ],
         ),
         child: Center(
-          child: isLoading? const SizedBox(
-            height: 25,
-            width: 25,
-            child: CircularProgressIndicator(
-              color: Colors.white,
-              strokeWidth: 1,
-            )): Text(
-            label,
-            style: const TextStyle(
-                color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500),
-          ),
+          child: isLoading
+              ? const SizedBox(
+                  height: 25,
+                  width: 25,
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
+                    strokeWidth: 1,
+                  ))
+              : Text(
+                  label,
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500),
+                ),
         ),
       ),
     );

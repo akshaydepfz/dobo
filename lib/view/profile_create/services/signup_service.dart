@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:dobo/api/api_endpoints.dart';
@@ -135,9 +136,10 @@ class ProfileCreateProvider extends ChangeNotifier {
               // 'Content-Type': 'multipart/form-data',
               'Authorization': 'Bearer $token',
             }));
-        print(response.data);
 
         if (response.statusCode == 200 || response.statusCode == 201) {
+          log(response.statusCode.toString());
+          log(response.data.toString());
           _isLoading = false;
           notifyListeners();
           LogController.activityLog("profileCreate", "Signin", "Success");

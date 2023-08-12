@@ -1,5 +1,6 @@
 import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/core/assets/app_assets.dart';
+import 'package:dobo/core/assets/app_icons.dart';
 import 'package:dobo/core/style/app_colors.dart';
 import 'package:dobo/router/app_route_constants.dart';
 import 'package:dobo/view/my_appointments/widgets/appointment_buttons.dart';
@@ -31,7 +32,7 @@ class CompletedCard extends StatelessWidget {
     return GestureDetector(
       onTap: onCardPressed,
       child: Container(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(8),
         margin: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: Colors.white,
@@ -44,12 +45,12 @@ class CompletedCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                    height: 100,
-                    width: 100,
+                    height: 80,
+                    width: 80,
                     child: clinicImage == ''
                         ? Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Image.asset(AppAssets.avatar),
+                            child: Image.asset(AppIcons.doctorAvatar),
                           )
                         : ClipRRect(
                             borderRadius: BorderRadius.circular(8.0),
@@ -65,7 +66,7 @@ class CompletedCard extends StatelessWidget {
                     Text(
                       clinicName,
                       style: const TextStyle(
-                        fontSize: 15,
+                        fontSize: 14,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -77,7 +78,7 @@ class CompletedCard extends StatelessWidget {
                     Row(
                       children: [
                         Container(
-                          padding: const EdgeInsets.all(6.0),
+                          padding: const EdgeInsets.all(4.0),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(6.0),
                             border: Border.all(
@@ -88,6 +89,7 @@ class CompletedCard extends StatelessWidget {
                             child: Text(
                               'Completed',
                               style: TextStyle(
+                                fontSize: 13,
                                 color: Color(0xFF07BD74),
                               ),
                             ),

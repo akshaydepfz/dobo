@@ -43,153 +43,143 @@ class _DoctorViewScreenState extends State<DoctorViewScreen> {
       body: provider.doctorDetail == null
           ? const CommonLoadingWidget()
           : SafeArea(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    // PrimaryAppbar(title: provider.doctorDetail!.fullName),
-                    Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Container(
-                                  width: 100,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12),
-                                      border:
-                                          Border.all(color: AppColor.grey2)),
-                                  height: 100,
-                                  child: provider.doctorDetail!.image == null
-                                      ? Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Image.asset(AppAssets.avatar),
-                                        )
-                                      : ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(12),
-                                          child: Image.network(
-                                            provider.doctorDetail!.image,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        )),
-                              GlobalVariabels.horizontal10,
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const IconTile(
-                                      title: 'Health care clinic',
-                                      icon: AppIcons.hospital),
-                                  GlobalVariabels.vertical10,
-                                  IconTile(
-                                      title: provider
-                                          .doctorDetail!.department.category,
-                                      icon: AppIcons.medal),
-                                  GlobalVariabels.vertical10,
-                                  const IconTile(
-                                      title: '08.00 AM - 04.30 PM',
-                                      icon: AppIcons.time),
-                                ],
-                              ),
-                            ],
-                          ),
-                          GlobalVariabels.vertical15,
-                          GlobalVariabels.vertical15,
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              RateReviewCard(
-                                  label: 'Patients',
-                                  icon: AppIcons.group,
-                                  count: provider.doctorDetail!.patientsServed),
-                              const SizedBox(
-                                height: 60,
-                                child: VerticalDivider(),
-                              ),
-                              RateReviewCard(
-                                  label: 'Rating',
-                                  icon: AppIcons.star,
-                                  count: provider.doctorDetail!.avgRating),
-                              const SizedBox(
-                                height: 60,
-                                child: VerticalDivider(),
-                              ),
-                              RateReviewCard(
-                                  label: 'Reviews',
-                                  icon: AppIcons.chat,
-                                  count: provider.doctorDetail!.reviewsCount),
-                            ],
-                          ),
-                          GlobalVariabels.vertical15,
-                          const Divider(),
-                          GlobalVariabels.vertical15,
-                          Visibility(
-                            visible: provider.doctorDetail!.description == null,
-                            child: Column(
-                              children: const [
-                                Text(
-                                  'About',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 17),
-                                ),
-                                GlobalVariabels.vertical15,
+              child: Column(
+                children: [
+                  // PrimaryAppbar(title: provider.doctorDetail!.fullName),
+                  Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                                width: 80,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12),
+                                    border: Border.all(color: AppColor.grey2)),
+                                height: 80,
+                                child: provider.doctorDetail!.image == null
+                                    ? Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Image.asset(AppAssets.avatar),
+                                      )
+                                    : ClipRRect(
+                                        borderRadius: BorderRadius.circular(12),
+                                        child: Image.network(
+                                          provider.doctorDetail!.image,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      )),
+                            GlobalVariabels.horizontal10,
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const IconTile(
+                                    title: 'Health care clinic',
+                                    icon: AppIcons.hospital),
+                                GlobalVariabels.vertical10,
+                                IconTile(
+                                    title: provider
+                                        .doctorDetail!.department.category,
+                                    icon: AppIcons.medal),
+                                GlobalVariabels.vertical10,
+                                const IconTile(
+                                    title: '08.00 AM - 04.30 PM',
+                                    icon: AppIcons.time),
                               ],
                             ),
-                          ),
-                          Text(
-                            provider.doctorDetail!.description,
-                            style: const TextStyle(fontSize: 15),
-                          ),
-                          GlobalVariabels.vertical15,
-                          const Text(
-                            'Reviews',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 17),
-                          ),
-                          GlobalVariabels.vertical15,
-                          provider.reviews == null
-                              ? const Center(
-                                  child: CircularProgressIndicator(),
-                                )
-                              : provider.reviews!.isEmpty
-                                  ? const Center(
-                                      child: Text('No Reviews Found!'),
-                                    )
-                                  : ListView.builder(
-                                      itemCount: provider.reviews!.length,
-                                      shrinkWrap: true,
-                                      itemBuilder: (context, i) {
-                                        return RatiingCard(
-                                          image:
-                                              provider.reviews![i].patientImage,
-                                          rating: provider.reviews![i].rating,
-                                          review: provider.reviews![i].review,
-                                          name:
-                                              provider.reviews![i].patientName,
-                                        );
-                                      })
-                        ],
-                      ),
-                    ),
-                    PrimaryButton(
-                        onTap: () {
-                          //TODO
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => DateSelectingScreen(
-                                doctorId: provider.doctorDetail!.id,
-                                isRechedule: false,
-                                appointmentId: '',
-                              ),
+                          ],
+                        ),
+                        GlobalVariabels.vertical15,
+                        GlobalVariabels.vertical15,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            RateReviewCard(
+                                label: 'Patients',
+                                icon: AppIcons.group,
+                                count: provider.doctorDetail!.patientsServed),
+                            const SizedBox(
+                              height: 60,
+                              child: VerticalDivider(),
                             ),
-                          );
-                        },
-                        label: 'Book Appointment')
-                  ],
-                ),
+                            RateReviewCard(
+                                label: 'Rating',
+                                icon: AppIcons.star,
+                                count: provider.doctorDetail!.avgRating),
+                            const SizedBox(
+                              height: 60,
+                              child: VerticalDivider(),
+                            ),
+                            RateReviewCard(
+                                label: 'Reviews',
+                                icon: AppIcons.chat,
+                                count: provider.doctorDetail!.reviewsCount),
+                          ],
+                        ),
+                        GlobalVariabels.vertical15,
+                        const Divider(),
+                        Column(
+                          children: const [
+                            Text(
+                              'About',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 15),
+                            ),
+                            GlobalVariabels.vertical15,
+                          ],
+                        ),
+                        Text(
+                          provider.doctorDetail!.description,
+                          style: const TextStyle(fontSize: 14),
+                        ),
+                        GlobalVariabels.vertical15,
+                        const Text(
+                          'Reviews',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 15),
+                        ),
+                        GlobalVariabels.vertical15,
+                        provider.reviews == null
+                            ? const Center(
+                                child: CircularProgressIndicator(),
+                              )
+                            : provider.reviews!.isEmpty
+                                ? const Center(
+                                    child: Text('No Reviews Found!'),
+                                  )
+                                : ListView.builder(
+                                    itemCount: provider.reviews!.length,
+                                    shrinkWrap: true,
+                                    itemBuilder: (context, i) {
+                                      return RatiingCard(
+                                        image:
+                                            provider.reviews![i].patientImage,
+                                        rating: provider.reviews![i].rating,
+                                        review: provider.reviews![i].review,
+                                        name: provider.reviews![i].patientName,
+                                      );
+                                    })
+                      ],
+                    ),
+                  ),
+                  Spacer(),
+                  PrimaryButton(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DateSelectingScreen(
+                              doctorId: provider.doctorDetail!.id,
+                              isRechedule: false,
+                              appointmentId: '',
+                            ),
+                          ),
+                        );
+                      },
+                      label: 'Book Appointment')
+                ],
               ),
             ),
     );
