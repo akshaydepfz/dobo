@@ -28,9 +28,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
     final provider = Provider.of<FavoriteProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: AppColor.primary,
+        foregroundColor: Colors.white,
         elevation: 0,
-        foregroundColor: AppColor.primary,
         title: const Text("Favorites"),
         centerTitle: true,
       ),

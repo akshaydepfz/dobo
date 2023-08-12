@@ -37,9 +37,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final provider = Provider.of<ProfileService>(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: AppColor.primary,
+        foregroundColor: Colors.white,
         elevation: 0,
-        foregroundColor: AppColor.primary,
         title: const Text("Profile"),
         centerTitle: true,
       ),
@@ -96,7 +96,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   GlobalVariabels.vertical10,
                   GlobalVariabels.vertical10,
                   ProfileTile(
-                      title: 'Articles',
+                      title: 'News & Updates',
                       onTap: () {
                         Navigator.pushNamed(
                             context, RouteConstants.articleScreen);

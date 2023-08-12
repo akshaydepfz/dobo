@@ -76,17 +76,16 @@ class _AppointmentViewScreenState extends State<AppointmentViewScreen> {
                           : Row(
                               children: [
                                 Container(
-                                  height: height * .11,
-                                  width: height * .11,
+                                  height: height * .10,
+                                  width: height * .10,
                                   decoration: BoxDecoration(
                                     border: Border.all(color: AppColor.grey3),
-                                    borderRadius: BorderRadius.circular(16),
+                                    borderRadius: BorderRadius.circular(12),
                                   ),
                                   child: provider.clinicDetail!.image == ''
                                       ? Padding(
                                           padding: const EdgeInsets.all(8.0),
-                                          child:
-                                              Image.asset(AppAssets.avatar),
+                                          child: Image.asset(AppAssets.avatar),
                                         )
                                       : ClipRRect(
                                           borderRadius:
@@ -107,18 +106,17 @@ class _AppointmentViewScreenState extends State<AppointmentViewScreen> {
                                           Text(
                                             provider.clinicDetail!.clinicName,
                                             style: const TextStyle(
-                                                fontSize: 16,
+                                                fontSize: 15,
                                                 fontWeight: FontWeight.bold),
                                           ),
                                           GlobalVariabels.vertical10,
                                           IconTextTile(
-                                              name: provider
-                                                  .clinicDetail!.phone,
+                                              name:
+                                                  provider.clinicDetail!.phone,
                                               icon: AppIcons.call),
                                           GlobalVariabels.vertical10,
                                           IconTextTile(
-                                              name:
-                                                  provider.clinicDetail!.city,
+                                              name: provider.clinicDetail!.city,
                                               icon: AppIcons.location),
                                         ],
                                       ),
@@ -140,8 +138,8 @@ class _AppointmentViewScreenState extends State<AppointmentViewScreen> {
                           : Row(
                               children: [
                                 Container(
-                                  height: height * .11,
-                                  width: height * .11,
+                                  height: height * .10,
+                                  width: height * .10,
                                   decoration: BoxDecoration(
                                     border: Border.all(color: AppColor.grey3),
                                     borderRadius: BorderRadius.circular(16),
@@ -149,8 +147,7 @@ class _AppointmentViewScreenState extends State<AppointmentViewScreen> {
                                   child: provider.doctorDetail!.image == null
                                       ? Padding(
                                           padding: const EdgeInsets.all(8.0),
-                                          child:
-                                              Image.asset(AppAssets.avatar),
+                                          child: Image.asset(AppAssets.avatar),
                                         )
                                       : ClipRRect(
                                           borderRadius:
@@ -163,21 +160,19 @@ class _AppointmentViewScreenState extends State<AppointmentViewScreen> {
                                 ),
                                 GlobalVariabels.horizontal10,
                                 Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       'Dr. ${provider.doctorDetail!.fullName}',
                                       style: const TextStyle(
-                                          fontSize: 16,
+                                          fontSize: 15,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     GlobalVariabels.vertical10,
                                     IconTextTile(
                                         name: provider.clinicDetail == null
                                             ? ""
-                                            : provider
-                                                .clinicDetail!.clinicName,
+                                            : provider.clinicDetail!.clinicName,
                                         icon: AppIcons.hospital),
                                     GlobalVariabels.vertical10,
                                     IconTextTile(

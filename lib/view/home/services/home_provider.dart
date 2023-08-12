@@ -25,7 +25,7 @@ class HomeProvider extends ChangeNotifier {
 
   Future<void> getLocation() async {
     final pref = await SharedPreferences.getInstance();
-    _location = pref.getString('location') ?? "Loading... ";
+    _location = pref.getString('location') ?? "Select Location ";
     notifyListeners();
   }
 

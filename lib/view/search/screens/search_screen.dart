@@ -31,8 +31,8 @@ class _SearchScreenState extends State<SearchScreen> {
     final provider = Provider.of<SearchService>(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        foregroundColor: AppColor.primary,
+        backgroundColor: AppColor.primary,
+        foregroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
         title: const Text("Search Doctors and clinics"),

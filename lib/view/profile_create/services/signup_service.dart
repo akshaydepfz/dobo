@@ -30,12 +30,9 @@ class ProfileCreateProvider extends ChangeNotifier {
   }
 
   void launchURL() async {
-    const url = 'https://dobo.co.in/terms-and-conditions/';
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
+    const url = 'https://dobo.co.in/terms-and-conditions';
+
+    await launch(url);
   }
 
   Future pickImage() async {

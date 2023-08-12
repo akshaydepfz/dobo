@@ -29,10 +29,12 @@ class _ArticleScreenState extends State<ArticleScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+          backgroundColor: AppColor.primary,
+        foregroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
-        backgroundColor: Colors.white,
-        title: const Text('Articles'),
+    
+        title: const Text('News & Updates'),
         actions: [
           Image.asset(
             AppIcons.search,
@@ -57,7 +59,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Text(
-                          'Trending',
+                          'Trending News',
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.w600),
                         ),
@@ -107,7 +109,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Text(
-                          'Articles',
+                          'Updates',
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.w600),
                         ),

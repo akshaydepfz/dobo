@@ -34,7 +34,8 @@ class _CategoryViewScreenState extends State<CategoryViewScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.department),
-        backgroundColor: Colors.transparent,
+        backgroundColor: AppColor.primary,
+        foregroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
       ),

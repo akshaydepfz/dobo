@@ -26,7 +26,7 @@ class _HelpCentreScrenState extends State<HelpCentreScren> {
       appBar: AppBar(
         centerTitle: true,
         title: const Text('Help Center'),
-        backgroundColor: AppColor.primary,
+     backgroundColor: AppColor.primary,
         foregroundColor: Colors.white,
       ),
       body: SafeArea(

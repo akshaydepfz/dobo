@@ -26,14 +26,16 @@ class _CategoryScreenState extends State<CategoryScreen> {
     final categoryProvider = Provider.of<CategoryProvider>(context);
     return Scaffold(
       appBar: AppBar(
+          centerTitle: true,
           automaticallyImplyLeading: false,
-          foregroundColor: AppColor.primary,
-          backgroundColor: Colors.transparent,
+          backgroundColor: AppColor.primary,
+          foregroundColor: Colors.white,
           elevation: 0,
           title: const Text("Category")),
       body: SafeArea(
         child: Column(
           children: [
+            GlobalVariabels.vertical15,
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 15),
               padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -140,6 +142,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                               .quaryDepartments[i].name,
                                       maxLines: 2,
                                       textAlign: TextAlign.center,
+                                      style: TextStyle(fontSize: 13),
                                     ),
                                   ),
                                 ],

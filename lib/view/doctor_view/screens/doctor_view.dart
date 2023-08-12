@@ -34,8 +34,9 @@ class _DoctorViewScreenState extends State<DoctorViewScreen> {
     final provider = Provider.of<DoctorDetailService>(context);
     return Scaffold(
       appBar: AppBar(
-          foregroundColor: AppColor.primary,
-          backgroundColor: Colors.transparent,
+          centerTitle: true,
+          backgroundColor: AppColor.primary,
+          foregroundColor: Colors.white,
           elevation: 0,
           title: Text(provider.doctorDetail == null
               ? ""
@@ -62,7 +63,8 @@ class _DoctorViewScreenState extends State<DoctorViewScreen> {
                                 child: provider.doctorDetail!.image == null
                                     ? Padding(
                                         padding: const EdgeInsets.all(8.0),
-                                        child: Image.asset(AppAssets.avatar),
+                                        child:
+                                            Image.asset(AppIcons.doctorAvatar),
                                       )
                                     : ClipRRect(
                                         borderRadius: BorderRadius.circular(12),

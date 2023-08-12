@@ -28,9 +28,9 @@ class _AllDoctorsScreenState extends State<AllDoctorsScreen> {
     final provider = Provider.of<ViewAllService>(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: AppColor.primary,
+        foregroundColor: Colors.white,
         elevation: 0,
-        foregroundColor: Colors.black,
         title: const Text("Doctors"),
         centerTitle: true,
       ),

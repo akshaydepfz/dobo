@@ -1,4 +1,5 @@
 import 'package:dobo/core/assets/app_icons.dart';
+import 'package:dobo/core/style/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
@@ -14,7 +15,8 @@ class ArticleViewScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
-        backgroundColor: Colors.white,
+        backgroundColor: AppColor.primary,
+        foregroundColor: Colors.white,
         actions: [
           Image.asset(
             AppIcons.shareIcon,

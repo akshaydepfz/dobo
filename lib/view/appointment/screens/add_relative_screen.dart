@@ -20,7 +20,8 @@ class AddRelativeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Add Relative'),
         centerTitle: true,
-        backgroundColor: Colors.transparent,
+      backgroundColor: AppColor.primary,
+        foregroundColor: Colors.white,
         elevation: 0,
       ),
       body: SafeArea(

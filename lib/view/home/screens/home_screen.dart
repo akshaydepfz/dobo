@@ -13,6 +13,7 @@ import 'package:dobo/view/home/widgets/clinics_card.dart';
 import 'package:dobo/view/home/widgets/reminder_card.dart';
 import 'package:dobo/view/home/widgets/slider_card.dart';
 import 'package:dobo/view/home/widgets/title_card.dart';
+import 'package:dobo/view/profile/screens/profile_edit.dart';
 import 'package:dobo/view/profile/services/profile_services.dart';
 import 'package:dobo/view/search/screens/search_screen.dart';
 import 'package:flutter/material.dart';
@@ -95,28 +96,75 @@ class _HomeScreenState extends State<HomeScreen> {
                       const SizedBox(
                         width: 10,
                       ),
-                      SizedBox(
-                        width: width * .28,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              provider.location,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                  fontSize: 15, color: Colors.white),
-                            ),
-                            profileProvider.userModel == null
-                                ? SizedBox()
-                                : Text(
-                                    profileProvider.userModel!.fullName,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                        fontSize: 15, color: Colors.white),
-                                  ),
-                          ],
+                      GestureDetector(
+                        onTap: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) => Dialog(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(15.0),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          const Text(
+                                            'Change Your Location Now!',
+                                            style: TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          GlobalVariabels.vertical10,
+                                          const Divider(),
+                                          GlobalVariabels.vertical10,
+                                          PrimaryButton(
+                                              onTap: () {
+                                                Navigator.pushNamed(
+                                                    context,
+                                                    RouteConstants
+                                                        .locationSelect);
+                                              },
+                                              label: 'Change Location'),
+                                          SecondaryButton(
+                                              onTap: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            const ProfileEditScreen()));
+                                              },
+                                              label: 'Edit Profile'),
+                                          SecondaryButton(
+                                              onTap: () {
+                                                Navigator.pop(context);
+                                              },
+                                              label: 'Cancel')
+                                        ],
+                                      ),
+                                    ),
+                                  ));
+                        },
+                        child: SizedBox(
+                          width: width * .28,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                provider.location,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                    fontSize: 15, color: Colors.white),
+                              ),
+                              profileProvider.userModel == null
+                                  ? SizedBox()
+                                  : Text(
+                                      profileProvider.userModel!.fullName,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(
+                                          fontSize: 15, color: Colors.white),
+                                    ),
+                            ],
+                          ),
                         ),
                       ),
                       GestureDetector(
@@ -146,6 +194,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         .locationSelect);
                                               },
                                               label: 'Change Location'),
+                                          SecondaryButton(
+                                              onTap: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            const ProfileEditScreen()));
+                                              },
+                                              label: 'Edit Profile'),
                                           SecondaryButton(
                                               onTap: () {
                                                 Navigator.pop(context);

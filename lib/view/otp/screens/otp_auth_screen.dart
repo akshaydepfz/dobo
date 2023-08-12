@@ -23,9 +23,9 @@ class _OtpAuthScreenState extends State<OtpAuthScreen> {
       appBar: AppBar(
         title: const Text('Verification'),
         centerTitle: true,
-        foregroundColor: Colors.black,
+        backgroundColor: AppColor.primary,
+        foregroundColor: Colors.white,
         elevation: 0,
-        backgroundColor: Colors.transparent,
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -81,9 +81,7 @@ class _OtpAuthScreenState extends State<OtpAuthScreen> {
                     onCompleted: (v) {
                       loginProvider.verifyOTP(context, v);
                     },
-                    onChanged: (value) {
-                 
-                    },
+                    onChanged: (value) {},
                     beforeTextPaste: (text) {
                       //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
                       //but you can show anything you want here, like your pop up saying wrong paste format or etc

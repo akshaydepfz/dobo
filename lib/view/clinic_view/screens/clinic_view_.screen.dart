@@ -37,8 +37,9 @@ class _ClinicViewScreenState extends State<ClinicViewScreen> {
     return Scaffold(
       appBar: provider.clinicDetail != null
           ? AppBar(
-              foregroundColor: AppColor.primary,
-              backgroundColor: Colors.transparent,
+              centerTitle: true,
+              foregroundColor: Colors.white,
+              backgroundColor: AppColor.primary,
               elevation: 0,
               title: Text(provider.clinicDetail != null
                   ? provider.clinicDetail!.clinicName
@@ -69,7 +70,8 @@ class _ClinicViewScreenState extends State<ClinicViewScreen> {
                                   child: provider.clinicDetail!.image == ""
                                       ? Padding(
                                           padding: const EdgeInsets.all(8.0),
-                                          child: Image.asset(AppAssets.avatar),
+                                          child: Image.asset(
+                                              AppIcons.clinicAvatar),
                                         )
                                       : Image.network(
                                           provider.clinicDetail!.image,

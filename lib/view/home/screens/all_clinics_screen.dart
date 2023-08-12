@@ -30,9 +30,9 @@ class _AllClinicsScreenState extends State<AllClinicsScreen> {
     final provider = Provider.of<ViewAllService>(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: AppColor.primary,
+        foregroundColor: Colors.white,
         elevation: 0,
-        foregroundColor: AppColor.primary,
         title: const Text("Clinics"),
         centerTitle: true,
       ),

@@ -40,8 +40,9 @@ class _DateSelectingScreenState extends State<DateSelectingScreen> {
     final provider = Provider.of<BookingService>(context);
     return Scaffold(
       appBar: AppBar(
-        foregroundColor: AppColor.primary,
-        backgroundColor: Colors.transparent,
+        backgroundColor: AppColor.primary,
+        foregroundColor: Colors.white,
+        centerTitle: true,
         elevation: 0,
         title: const Text('Appointment Booking'),
       ),

@@ -1,5 +1,6 @@
 import 'package:dobo/common/common_loading.dart';
 import 'package:dobo/common/primary_appbar.dart';
+import 'package:dobo/core/style/app_colors.dart';
 import 'package:dobo/view/notification/services/notification_service.dart';
 import 'package:dobo/view/notification/widgets/notification_card.dart';
 import 'package:flutter/material.dart';
@@ -24,10 +25,16 @@ class _NotificationScreenState extends State<NotificationScreen> {
     final height = MediaQuery.of(context).size.height;
     final provider = Provider.of<NotificationService>(context);
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Notifications'),
+        centerTitle: true,
+       backgroundColor: AppColor.primary,
+        foregroundColor: Colors.white,
+        elevation: 0,
+      ),
       body: SafeArea(
         child: Column(
           children: [
-            const PrimaryAppbar(title: 'Notifications'),
             provider.notificationList == null
                 ? const CommonLoadingWidget()
                 : provider.notificationList!.isEmpty

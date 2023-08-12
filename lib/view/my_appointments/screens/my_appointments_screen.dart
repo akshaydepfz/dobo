@@ -39,9 +39,9 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen>
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.transparent,
+        backgroundColor: AppColor.primary,
+        foregroundColor: Colors.white,
         elevation: 0,
-        foregroundColor: AppColor.primary,
         title: const Text("My Appointment"),
         centerTitle: true,
       ),

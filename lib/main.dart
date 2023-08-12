@@ -16,6 +16,7 @@ import 'package:dobo/view/notification/services/notification_service.dart';
 import 'package:dobo/view/profile/services/profile_services.dart';
 import 'package:dobo/view/otp/screens/signin_screen.dart';
 import 'package:dobo/view/otp/services/signin_provider.dart';
+import 'package:dobo/view/profile_create/screens/profile_create_screen.dart';
 import 'package:dobo/view/profile_create/services/signup_service.dart';
 import 'package:dobo/view/search/services/search_service.dart';
 import 'package:flutter/material.dart';
@@ -108,6 +109,7 @@ class MyApp extends StatelessWidget {
           textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
           primarySwatch: Colors.cyan,
         ),
+        //  home: ProfileCreateScreen(),
         home: token == "" ? const SignInScreen() : LandingScreen(),
       ),
     );
