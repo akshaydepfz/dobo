@@ -31,7 +31,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
           backgroundColor: AppColor.primary,
           foregroundColor: Colors.white,
           elevation: 0,
-          title: const Text("Category")),
+          title: const Text("Select your Category")),
       body: SafeArea(
         child: Column(
           children: [
@@ -59,7 +59,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       decoration: const InputDecoration(
                           hintStyle: TextStyle(color: AppColor.grey3),
                           border: InputBorder.none,
-                          hintText: "Search"),
+                          hintText: "Search Category"),
                     ),
                   ),
                 ],

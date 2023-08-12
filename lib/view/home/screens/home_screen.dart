@@ -272,7 +272,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             width: 10,
                           ),
                           const Text(
-                            'Search Doctor / Clinic',
+                            'Search Doctor Clinic or Category',
                             style:
                                 TextStyle(fontSize: 15, color: AppColor.grey2),
                           )
@@ -386,7 +386,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => ClinicViewScreen(
-                                 
                                         clinicId: provider.clinicList[i].id,
                                       )));
                         },
@@ -430,7 +429,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               MaterialPageRoute(
                                   builder: (context) => ClinicViewScreen(
                                         clinicId: provider.popularClinics[i].id,
-                                   
                                       )));
                         },
                         address: provider.popularClinics[i].city,

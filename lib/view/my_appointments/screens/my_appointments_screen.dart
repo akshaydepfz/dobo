@@ -42,7 +42,7 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen>
         backgroundColor: AppColor.primary,
         foregroundColor: Colors.white,
         elevation: 0,
-        title: const Text("My Appointment"),
+        title: const Text("Appointment Status"),
         centerTitle: true,
       ),
       body: SafeArea(

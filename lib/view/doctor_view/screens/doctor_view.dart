@@ -133,7 +133,7 @@ class _DoctorViewScreenState extends State<DoctorViewScreen> {
                         Column(
                           children: const [
                             Text(
-                              'About',
+                              'About Doctor',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 15),
                             ),

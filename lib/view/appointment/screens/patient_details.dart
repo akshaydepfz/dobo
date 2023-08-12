@@ -189,7 +189,10 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                                           ],
                                         ),
                                         IconButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            provider.deleteRelative(
+                                                provider.relatives![i].pk);
+                                          },
                                           icon: const Icon(
                                             Icons.close,
                                             color: AppColor.grey3,

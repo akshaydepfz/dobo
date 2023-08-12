@@ -6,7 +6,6 @@ import 'package:dobo/model/doctor_details_model.dart';
 import 'package:dobo/model/relative_model.dart';
 import 'package:dobo/model/slote_model.dart';
 import 'package:dobo/router/app_route_constants.dart';
-import 'package:dobo/view/account_create_pop/screens/account_created.dart';
 import 'package:dobo/view/appointment_animation/screens/bookind_success_pop.dart';
 import 'package:dobo/view/my_appointments/screens/reschedule_succes_pop.dart';
 import 'package:dobo/view/profile_create/services/signup_service.dart';
@@ -120,7 +119,6 @@ class BookingService extends ChangeNotifier {
     final pref = await SharedPreferences.getInstance();
     String token = pref.getString("accessToken") ?? '';
     try {
-      print("${ApiEndpoints.baseUrl}/api/v1/clinics/appointments/$pk/");
       final response = await dio.patch(
           "${ApiEndpoints.baseUrl}/api/v1/clinics/appointments/$pk/",
           data: {
@@ -229,11 +227,34 @@ class BookingService extends ChangeNotifier {
     }
   }
 
+  Future deleteRelative(String relativeId) async {
+    final pref = await SharedPreferences.getInstance();
+    String token = pref.getString("accessToken") ?? '';
+
+    try {
+      final response = await dio.delete(
+        "https://dobo.co.in/api/v1/patients/$relativeId/",
+        options: Options(headers: {
+          'Authorization': 'Bearer $token',
+        }),
+      );
+      if (response.statusCode == 204) {
+        getRelatives();
+        LogController.activityLog(
+            'PatientDetailsProvider', "deleteRelative", "Success");
+      }
+    } on DioError catch (e) {
+      getRelatives();
+
+      LogController.activityLog(
+          'PatientDetailsProvider', "deleteRelative", "Failed  ");
+    }
+  }
+
   Future getRelatives() async {
     final pref = await SharedPreferences.getInstance();
     String token = pref.getString("accessToken") ?? '';
     String id = pref.getString('pk') ?? "";
-
     try {
       final response = await dio.get("${ApiEndpoints.relativeList}$id",
           options: Options(headers: {
@@ -242,10 +263,8 @@ class BookingService extends ChangeNotifier {
 
       if (response.statusCode == 200) {
         List data = response.data;
-
         relatives = data.map((json) => RelativeModel.fromJson(json)).toList();
         notifyListeners();
-
         LogController.activityLog(
             'PatientDetailsProvider', "getRelatives", "Success");
       }
@@ -259,7 +278,6 @@ class BookingService extends ChangeNotifier {
     final pref = await SharedPreferences.getInstance();
     String token = pref.getString("accessToken") ?? '';
     String id = pref.getString('pk') ?? "";
-
     try {
       _isLoading = true;
       notifyListeners();
@@ -273,7 +291,6 @@ class BookingService extends ChangeNotifier {
           options: Options(headers: {
             'Authorization': 'Bearer $token',
           }));
-
       if (response.statusCode == 200 || response.statusCode == 201) {
         _isLoading = false;
         notifyListeners();

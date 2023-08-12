@@ -33,7 +33,7 @@ class _CategoryViewScreenState extends State<CategoryViewScreen> {
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.department),
+        title: Text("${widget.department} Doctors"),
         backgroundColor: AppColor.primary,
         foregroundColor: Colors.white,
         elevation: 0,
