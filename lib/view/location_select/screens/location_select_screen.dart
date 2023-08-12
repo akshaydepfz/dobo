@@ -19,7 +19,7 @@ class _LocationSelectScreenState extends State<LocationSelectScreen> {
   final _mapController = MapController(initMapWithUserPosition: true);
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<LocationSelectService>(context);
+    final provider = Provider.of<LocationSelectService>(context, listen: false);
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
 

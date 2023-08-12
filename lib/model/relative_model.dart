@@ -30,13 +30,13 @@ class RelativeModel {
         fullName: json["full_name"],
         dob: DateTime.parse(json["dob"]),
         gender: json["gender"],
-        whatsappNo: json["whatsapp_no"],
-        address: json["address"],
-        email: json["email"],
-        image: json["image"],
+        whatsappNo: json["whatsapp_no"] ?? "",
+        address: json["address"] ?? "",
+        email: json["email"] ?? "",
+        image: json["image"] ?? "",
         city: json["city"],
-        location: json["location"],
-        age: json["age"],
+        location: json["location"] ?? "",
+        age: json["age"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {

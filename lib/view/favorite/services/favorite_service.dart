@@ -33,6 +33,30 @@ class FavoriteProvider extends ChangeNotifier {
     }
   }
 
+  Future getfavoritedoctors() async {
+    final pref = await SharedPreferences.getInstance();
+    String token = pref.getString("accessToken") ?? '';
+
+    try {
+      final response =
+          await dio.get("https://dobo.co.in/api/v1/clinics/clinics/favorites/",
+              options: Options(headers: {
+                'Authorization': 'Bearer $token',
+              }));
+
+      if (response.statusCode == 200) {
+        List data = response.data;
+        clinicList = data.map((json) => ClinicModel.fromJson(json)).toList();
+        notifyListeners();
+        LogController.activityLog(
+            'FavoriteProvider', "getfavoriteClinics", "Success");
+      }
+    } on DioError catch (_) {
+      LogController.activityLog(
+          'FavoriteProvider', "getfavoriteClinics", "Failed  ");
+    }
+  }
+
   Future addClinicFavorite(
       BuildContext context, String clinicId, bool isFavorite) async {
     final pref = await SharedPreferences.getInstance();
@@ -46,7 +70,6 @@ class FavoriteProvider extends ChangeNotifier {
                 }));
 
         if (response.statusCode == 200) {
-  
           LogController.activityLog(
               'HomeProvider', "addClinicFavorite", "Success");
           getfavoriteClinics();
