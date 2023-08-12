@@ -283,7 +283,7 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen>
                                       .toString()
                                       .substring(0, 5),
                                   clinicImage: provider
-                                      .upcomingAppontments![i].clinicPhoto,
+                                      .cancelleddAppontments![i].clinicPhoto,
                                 );
                               }),
                 ],

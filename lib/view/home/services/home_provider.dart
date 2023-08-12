@@ -125,6 +125,7 @@ class HomeProvider extends ChangeNotifier {
       if (response.statusCode == 200) {
         List data = response.data;
         reminders = data.map((json) => ReminderModel.fromJson(json)).toList();
+        print(" sdd $data");
         notifyListeners();
         LogController.activityLog('HomeProvider', "getReminders", "Sucess");
       }
