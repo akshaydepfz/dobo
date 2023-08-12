@@ -16,7 +16,6 @@ class ClinicDetailsService extends ChangeNotifier {
   ClinicDetailsModel? clinicDetail;
 
   Future<void> getClinicDetails(String id) async {
-    print(id);
     final pref = await SharedPreferences.getInstance();
     String token = pref.getString("accessToken") ?? '';
 
@@ -50,30 +49,32 @@ class ClinicDetailsService extends ChangeNotifier {
       _isFavoriteLoad = true;
       notifyListeners();
       try {
-        final response =
-            await dio.delete("${ApiEndpoints.removeFavClinic}$doctorId",
-                options: Options(headers: {
-                  'Authorization': 'Bearer $token',
-                }));
+        final response = await dio.delete(
+          "https://dobo.co.in/api/v1/doctors/add_favorite/?doctor_id=$doctorId",
+          options: Options(headers: {
+            'Authorization': 'Bearer $token',
+          }),
+        );
 
         if (response.statusCode == 200) {
           _isFavoriteLoad = false;
           notifyListeners();
           LogController.activityLog(
-              'HomeProvider', "addClinicFavorite", "Success");
+              'HomeProvider', "addDoctorFavorite", "Success");
           getDoctorList(clinicId);
         }
       } on DioError catch (_) {
         _isFavoriteLoad = false;
         notifyListeners();
         LogController.activityLog(
-            'HomeProvider', "addClinicFavorite", "Failed");
+            'HomeProvider', "addDoctorFavorite", "Failed");
       }
     } else {
       try {
         _isFavoriteLoad = true;
         notifyListeners();
-        final response = await dio.post("${ApiEndpoints.addFavClinic}$doctorId",
+        final response = await dio.post(
+            "https://dobo.co.in/api/v1/doctors/add_favorite/?doctor_id=$doctorId",
             options: Options(headers: {
               'Authorization': 'Bearer $token',
             }));

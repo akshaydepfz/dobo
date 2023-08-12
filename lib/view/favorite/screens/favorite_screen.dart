@@ -2,10 +2,13 @@ import 'package:dobo/common/common_loading.dart';
 import 'package:dobo/core/style/app_colors.dart';
 
 import 'package:dobo/view/clinic_view/screens/clinic_view_.screen.dart';
+import 'package:dobo/view/doctor_view/screens/doctor_view.dart';
 import 'package:dobo/view/favorite/services/favorite_service.dart';
 import 'package:dobo/view/home/widgets/clinics_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../clinic_view/widgets/doctor_card.dart';
 
 class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({super.key});
@@ -19,6 +22,7 @@ class _FavoriteScreenState extends State<FavoriteScreen>
   @override
   void initState() {
     Provider.of<FavoriteProvider>(context, listen: false).getfavoriteClinics();
+    Provider.of<FavoriteProvider>(context, listen: false).getfavoritedoctors();
     super.initState();
   }
 
@@ -106,7 +110,52 @@ class _FavoriteScreenState extends State<FavoriteScreen>
                                     );
                                   }),
                             ),
-                  Container(),
+                  provider.clinicList == null
+                      ? Padding(
+                          padding: EdgeInsets.only(top: height * .30),
+                          child: const CommonLoadingWidget())
+                      : provider.clinicList!.isEmpty
+                          ? const Center(
+                              child: Text('No Favorite Doctors!'),
+                            )
+                          : Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: ListView.builder(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: provider.doctors!.length,
+                                  shrinkWrap: true,
+                                  itemBuilder: (context, i) {
+                                    return DoctorCard(
+                                      isFavorite:
+                                          provider.doctors![i].isFavorite,
+                                      onFavoriteClick: () {},
+                                      isFavoriteLoad: provider.favorieIndex == i
+                                          ? provider.isFavoriteLoad
+                                          : false,
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                DoctorViewScreen(
+                                              clinicName: '',
+                                              insideClinic: false,
+                                              doctorId: provider.doctors![i].id,
+                                              clinicId: '',
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      width: width,
+                                      image: provider.doctors![i].image,
+                                      name: provider.doctors![i].fullName,
+                                      department:
+                                          provider.doctors![i].department.name,
+                                      ratingCount: 'ratingCount',
+                                      reviews: 'reviews',
+                                    );
+                                  }),
+                            ),
                 ]),
               ),
             ],

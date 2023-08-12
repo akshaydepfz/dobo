@@ -2,12 +2,19 @@ import 'package:dio/dio.dart';
 import 'package:dobo/api/api_endpoints.dart';
 import 'package:dobo/log/log_controller.dart';
 import 'package:dobo/model/clinic_model.dart';
+import 'package:dobo/model/doctor_model.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FavoriteProvider extends ChangeNotifier {
   List<ClinicModel>? clinicList;
+  List<DoctorListModel>? doctors;
   Dio dio = Dio();
+
+  bool _isFavoriteLoad = false;
+  int _favorieIndex = 0;
+  int get favorieIndex => _favorieIndex;
+  bool get isFavoriteLoad => _isFavoriteLoad;
 
   Future getfavoriteClinics() async {
     final pref = await SharedPreferences.getInstance();
@@ -46,14 +53,14 @@ class FavoriteProvider extends ChangeNotifier {
 
       if (response.statusCode == 200) {
         List data = response.data;
-        clinicList = data.map((json) => ClinicModel.fromJson(json)).toList();
+        doctors = data.map((json) => DoctorListModel.fromJson(json)).toList();
         notifyListeners();
         LogController.activityLog(
-            'FavoriteProvider', "getfavoriteClinics", "Success");
+            'FavoriteProvider', "getfavoritedoctors", "Success");
       }
     } on DioError catch (_) {
       LogController.activityLog(
-          'FavoriteProvider', "getfavoriteClinics", "Failed  ");
+          'FavoriteProvider', "getfavoritedoctors", "Failed  ");
     }
   }
 
