@@ -22,7 +22,7 @@ class BottomNavItem extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(
-            height: 30,
+            height: 20,
             child: SvgPicture.asset(
               color: isSelected ? AppColor.primary : AppColor.grey3,
               icon,
@@ -34,7 +34,7 @@ class BottomNavItem extends StatelessWidget {
           Text(
             title,
             style: TextStyle(
-                fontSize: 14,
+                fontSize: 13,
                 color: isSelected ? AppColor.primary : AppColor.grey3),
           ),
         ],

@@ -10,7 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeProvider extends ChangeNotifier {
   final dio = Dio();
-  String _location = 'Loading...';
+  String _location = 'Select location';
   String get location => _location;
 
   bool _isFavoriteLoad = false;

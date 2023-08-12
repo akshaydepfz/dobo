@@ -34,10 +34,13 @@ class ClinicsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      decoration: BoxDecoration(
+          border: Border.all(width: 1, color: AppColor.grey2),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8.0)),
       padding: const EdgeInsets.all(10),
-      margin: const EdgeInsets.all(10),
-      height: 120,
+      margin: const EdgeInsets.all(5),
+      height: 100,
       width: width,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,19 +54,27 @@ class ClinicsCard extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(6.0),
                   child: SizedBox(
-                    width: 90,
-                    height: 90,
+                    width: 80,
+                    height: 80,
                     child: image == ""
                         ? Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Image.asset(
-                              AppAssets.avatar,
-                              fit: BoxFit.cover,
+                            child: SizedBox(
+                              width: 80,
+                              height: 80,
+                              child: Image.asset(
+                                AppIcons.clinicAvatar,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           )
-                        : Image.network(
-                            image,
-                            fit: BoxFit.cover,
+                        : SizedBox(
+                            width: 80,
+                            height: 80,
+                            child: Image.network(
+                              image,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                   ),
                 ),
@@ -76,7 +87,7 @@ class ClinicsCard extends StatelessWidget {
                       child: Text(
                         name,
                         style: const TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.bold),
+                            fontSize: 14, fontWeight: FontWeight.bold),
                       ),
                     ),
                     Text(

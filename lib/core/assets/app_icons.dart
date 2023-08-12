@@ -32,4 +32,5 @@ class AppIcons {
   static const String locationPng = 'assets/icons/location.png';
   static const String gender = 'assets/icons/gender.png';
   static const String whatsapp = 'assets/icons/whatsapp.png';
+  static const String clinicAvatar = 'assets/icons/clinic_avtar.png';
 }

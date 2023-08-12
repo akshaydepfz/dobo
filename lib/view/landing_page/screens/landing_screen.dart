@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:dobo/core/assets/app_icons.dart';
+import 'package:dobo/core/style/app_colors.dart';
 import 'package:dobo/view/category/screens/category_screens.dart';
 import 'package:dobo/view/favorite/screens/favorite_screen.dart';
 import 'package:dobo/view/home/screens/home_screen.dart';
@@ -51,8 +52,12 @@ class LandingScreen extends StatelessWidget {
       body: pages[bottomNavProvider.selectedIndex],
       bottomNavigationBar: Container(
         padding: const EdgeInsets.all(15),
-        height: 100,
-        color: Colors.white,
+        height: 80,
+        decoration: BoxDecoration(
+            color: Colors.white,
+            border: Border.all(
+              color: AppColor.grey2,
+            )),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: List.generate(

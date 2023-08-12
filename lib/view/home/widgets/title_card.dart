@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class TitleCard extends StatelessWidget {
@@ -17,13 +16,13 @@ class TitleCard extends StatelessWidget {
       children: [
         Text(
           title,
-          style: const TextStyle(color: Colors.black, fontSize: 16),
+          style: const TextStyle(color: Colors.black, fontSize: 15),
         ),
         TextButton(
           onPressed: onTap,
           child: const Text(
             'See All',
-            style: TextStyle(fontSize: 16),
+            style: TextStyle(fontSize: 15),
           ),
         ),
       ],

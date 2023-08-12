@@ -128,9 +128,11 @@ class ProfileCreateScreen extends StatelessWidget {
                   ),
                 ),
                 DropDownTextField(
-                  items: const ["Male", "Female"],
+                  items: const ["Male", "Female", "Others"],
                   selectedValue: 'Male',
-                  onChanged: (v) {},
+                  onChanged: (v) {
+                    provider.onGenderChange(v!);
+                  },
                   hint: 'Male',
                 ),
                 PrimaryTextField(
@@ -170,7 +172,19 @@ class ProfileCreateScreen extends StatelessWidget {
                         provider.checkBoxClick();
                       },
                     ),
-                    const Text('I accept all the terms and conditions')
+                    Row(
+                      children: [
+                        const Text('I accept all the'),
+                        TextButton(
+                            onPressed: () {
+                              provider.launchURL();
+                            },
+                            child: const Text(
+                              'terms and conditions',
+                              style: TextStyle(color: AppColor.primary),
+                            ))
+                      ],
+                    )
                   ],
                 ),
                 GlobalVariabels.vertical15,

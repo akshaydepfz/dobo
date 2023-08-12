@@ -6,6 +6,7 @@ import 'package:dobo/router/app_route_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProfileCreateProvider extends ChangeNotifier {
   bool _acceptTC = false;
@@ -21,6 +22,20 @@ class ProfileCreateProvider extends ChangeNotifier {
 
   File? image;
   final picker = ImagePicker();
+
+  void onGenderChange(String v) {
+    gender = v;
+    notifyListeners();
+  }
+
+  void launchURL() async {
+    const url = 'https://dobo.co.in/terms-and-conditions/';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   Future pickImage() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);

@@ -92,7 +92,7 @@ class SignInScreen extends StatelessWidget {
                     onTap: () {
                       loginProvider.getOTP(context);
                     },
-                    label: 'Send Message'),
+                    label: 'Signin / Signup'),
               ],
             ),
           ),
