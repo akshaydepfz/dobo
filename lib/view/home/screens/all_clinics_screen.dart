@@ -102,7 +102,7 @@ class _AllClinicsScreenState extends State<AllClinicsScreen> {
                               provider.clinicList![i].avgRating.toString(),
                           ratingCount: 2.toString(),
                           name: data.clinicName,
-                          category: provider.clinicList![i].subtext,
+                          phone: provider.clinicList![i].phone,
                           image: provider.clinicList![i].image ?? "",
                           onTap: () {
                             Navigator.push(
@@ -112,6 +112,7 @@ class _AllClinicsScreenState extends State<AllClinicsScreen> {
                                           clinicId: provider.clinicList![i].id,
                                         )));
                           },
+                          address: provider.clinicList![i].address,
                         );
                       }),
                 ),

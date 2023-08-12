@@ -9,7 +9,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ClinicDetailsService extends ChangeNotifier {
   final dio = Dio();
   List<DoctorListModel>? doctorList;
-
+  bool _isFavoriteLoad = false;
+  int _favorieIndex = 0;
+  int get favorieIndex => _favorieIndex;
+  bool get isFavoriteLoad => _isFavoriteLoad;
   ClinicDetailsModel? clinicDetail;
 
   Future<void> getClinicDetails(String id) async {
@@ -34,6 +37,60 @@ class ClinicDetailsService extends ChangeNotifier {
       print(e.response!.data);
       LogController.activityLog(
           'ClinicDetailsService', "getClinicDetails", 'Failed');
+    }
+  }
+
+  Future addDoctorFavorite(BuildContext context, String doctorId,
+      bool isFavorite, int index, String clinicId) async {
+    final pref = await SharedPreferences.getInstance();
+    String token = pref.getString("accessToken") ?? '';
+    _favorieIndex = index;
+    notifyListeners();
+    if (isFavorite) {
+      _isFavoriteLoad = true;
+      notifyListeners();
+      try {
+        final response =
+            await dio.delete("${ApiEndpoints.removeFavClinic}$doctorId",
+                options: Options(headers: {
+                  'Authorization': 'Bearer $token',
+                }));
+
+        if (response.statusCode == 200) {
+          _isFavoriteLoad = false;
+          notifyListeners();
+          LogController.activityLog(
+              'HomeProvider', "addClinicFavorite", "Success");
+          getDoctorList(clinicId);
+        }
+      } on DioError catch (_) {
+        _isFavoriteLoad = false;
+        notifyListeners();
+        LogController.activityLog(
+            'HomeProvider', "addClinicFavorite", "Failed");
+      }
+    } else {
+      try {
+        _isFavoriteLoad = true;
+        notifyListeners();
+        final response = await dio.post("${ApiEndpoints.addFavClinic}$doctorId",
+            options: Options(headers: {
+              'Authorization': 'Bearer $token',
+            }));
+
+        if (response.statusCode == 200) {
+          _isFavoriteLoad = false;
+          notifyListeners();
+          LogController.activityLog(
+              'HomeProvider', "addClinicFavorite", "Success");
+          getDoctorList(clinicId);
+        }
+      } on DioError catch (_) {
+        _isFavoriteLoad = false;
+        notifyListeners();
+        LogController.activityLog(
+            'HomeProvider', "addClinicFavorite", "Failed");
+      }
     }
   }
 

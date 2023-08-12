@@ -7,16 +7,28 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SearchService extends ChangeNotifier {
-  bool _searchDoctor = true;
-  bool get searchDoctor => _searchDoctor;
   Dio dio = Dio();
   List<DoctorListModel>? doctorList;
   List<ClinicModel>? clinicList;
   String _quary = '';
   String get quary => _quary;
-  void oncategoryChange() {
-    _searchDoctor = !_searchDoctor;
+  int pageIndex = 0;
+
+  void oncategoryChange(int index) {
+    pageIndex = index;
     notifyListeners();
+  }
+
+  void onDoctorQuaryChanged(String v) {
+    if (v != '') {
+      doctorList = doctorList!
+          .where((department) =>
+              (department.fullName.toLowerCase().contains(v.toLowerCase())))
+          .toList();
+      notifyListeners();
+    } else {
+      getDoctorList('');
+    }
   }
 
   Future getDoctorList(String quary) async {
@@ -27,7 +39,6 @@ class SearchService extends ChangeNotifier {
           options: Options(headers: {
             'Authorization': 'Bearer $token',
           }));
-
       if (response.statusCode == 200) {
         List data = response.data;
         doctorList =
@@ -97,20 +108,6 @@ class SearchService extends ChangeNotifier {
         LogController.activityLog(
             'HomeProvider', "addClinicFavorite", "Failed");
       }
-    }
-  }
-
-  void onDoctorQuaryChanged(String v) {
-    if (v != '') {
-      _quary = v;
-      doctorList = doctorList!
-          .where((doctorList) =>
-              (doctorList.fullName.toLowerCase().contains(v.toLowerCase())))
-          .toList();
-
-      notifyListeners();
-    } else {
-      getDoctorList(quary);
     }
   }
 

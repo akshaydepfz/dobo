@@ -32,10 +32,12 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     Provider.of<ProfileService>(context, listen: false).getProfileDetails();
     Provider.of<HomeProvider>(context, listen: false).getLocation();
+    Provider.of<HomeProvider>(context, listen: false).getCurrentLocation();
     Provider.of<HomeProvider>(context, listen: false).getNearestClinics();
     Provider.of<HomeProvider>(context, listen: false).getReminders();
     Provider.of<HomeProvider>(context, listen: false).getSliders();
     Provider.of<HomeProvider>(context, listen: false).getDoctorList();
+    Provider.of<HomeProvider>(context, listen: false).getPopularClinics();
     super.initState();
   }
 
@@ -44,7 +46,6 @@ class _HomeScreenState extends State<HomeScreen> {
     final provider = Provider.of<HomeProvider>(context);
     final profileProvider = Provider.of<ProfileService>(context);
     final width = MediaQuery.of(context).size.width;
-
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -155,7 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     fontSize: 15, color: Colors.white),
                               ),
                               profileProvider.userModel == null
-                                  ? SizedBox()
+                                  ? const SizedBox()
                                   : Text(
                                       profileProvider.userModel!.fullName,
                                       maxLines: 1,
@@ -170,48 +171,47 @@ class _HomeScreenState extends State<HomeScreen> {
                       GestureDetector(
                         onTap: () {
                           showDialog(
-                              context: context,
-                              builder: (context) => Dialog(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(15.0),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          const Text(
-                                            'Change Your Location Now!',
-                                            style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          GlobalVariabels.vertical10,
-                                          const Divider(),
-                                          GlobalVariabels.vertical10,
-                                          PrimaryButton(
-                                              onTap: () {
-                                                Navigator.pushNamed(
-                                                    context,
-                                                    RouteConstants
-                                                        .locationSelect);
-                                              },
-                                              label: 'Change Location'),
-                                          SecondaryButton(
-                                              onTap: () {
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            const ProfileEditScreen()));
-                                              },
-                                              label: 'Edit Profile'),
-                                          SecondaryButton(
-                                              onTap: () {
-                                                Navigator.pop(context);
-                                              },
-                                              label: 'Cancel')
-                                        ],
-                                      ),
+                            context: context,
+                            builder: (context) => Dialog(
+                              child: Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    const Text(
+                                      'Change Your Location Now!',
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
                                     ),
-                                  ));
+                                    GlobalVariabels.vertical10,
+                                    const Divider(),
+                                    GlobalVariabels.vertical10,
+                                    PrimaryButton(
+                                        onTap: () {
+                                          Navigator.pushNamed(context,
+                                              RouteConstants.locationSelect);
+                                        },
+                                        label: 'Change Location'),
+                                    SecondaryButton(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const ProfileEditScreen()));
+                                        },
+                                        label: 'Edit Profile'),
+                                    SecondaryButton(
+                                        onTap: () {
+                                          Navigator.pop(context);
+                                        },
+                                        label: 'Cancel')
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
                         },
                         child: const Icon(
                           Icons.expand_more_outlined,
@@ -350,7 +350,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   TitleCard(
-                      title: 'Popular Clinics',
+                      title: 'Clinics Near You',
                       onTap: () => Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -358,7 +358,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ListView.builder(
                     padding: EdgeInsets.zero,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: provider.clinicList.length,
+                    itemCount: provider.clinicList.length > 5
+                        ? 5
+                        : provider.clinicList.length,
                     shrinkWrap: true,
                     itemBuilder: (context, i) {
                       return ClinicsCard(
@@ -377,7 +379,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             provider.clinicList[i].avgRating.toString(),
                         ratingCount: 2.toString(),
                         name: provider.clinicList[i].clinicName,
-                        category: provider.clinicList[i].subtext,
+                        phone: provider.clinicList[i].phone,
                         image: provider.clinicList[i].image ?? "",
                         onTap: () {
                           Navigator.push(
@@ -387,6 +389,49 @@ class _HomeScreenState extends State<HomeScreen> {
                                         clinicId: provider.clinicList[i].id,
                                       )));
                         },
+                        address: provider.clinicList[i].city,
+                      );
+                    },
+                  ),
+                  TitleCard(
+                      title: 'Popular Clinics',
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const AllClinicsScreen()))),
+                  ListView.builder(
+                    padding: EdgeInsets.zero,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: provider.popularClinics.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, i) {
+                      return ClinicsCard(
+                        isFavoriteLoad: provider.favorieIndex == i
+                            ? provider.isFavoriteLoad
+                            : false,
+                        isFavorite: provider.popularClinics[i].isFavorite,
+                        onFavoriteClick: () => provider.addClinicFavorite(
+                          context,
+                          provider.popularClinics[i].id,
+                          provider.popularClinics[i].isFavorite,
+                          i,
+                        ),
+                        width: width,
+                        avarageRating:
+                            provider.popularClinics[i].avgRating.toString(),
+                        ratingCount: 2.toString(),
+                        name: provider.popularClinics[i].clinicName,
+                        phone: provider.popularClinics[i].phone,
+                        image: provider.popularClinics[i].image ?? "",
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ClinicViewScreen(
+                                        clinicId: provider.popularClinics[i].id,
+                                      )));
+                        },
+                        address: provider.popularClinics[i].city,
                       );
                     },
                   ),

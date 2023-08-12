@@ -76,7 +76,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 3,
-                              crossAxisSpacing: 16,
+                              crossAxisSpacing: 10,
                               childAspectRatio: 0.8,
                               mainAxisSpacing: 10),
                       itemBuilder: (context, i) {
@@ -131,7 +131,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                                 .quaryDepartments[i].image)),
                                   ),
                                   const SizedBox(
-                                    height: 5,
+                                    height: 10,
                                   ),
                                   SizedBox(
                                     child: Text(
@@ -142,7 +142,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                               .quaryDepartments[i].name,
                                       maxLines: 2,
                                       textAlign: TextAlign.center,
-                                      style: TextStyle(fontSize: 13),
+                                      style: TextStyle(fontSize: 12),
                                     ),
                                   ),
                                 ],

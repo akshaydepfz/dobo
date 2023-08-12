@@ -6,19 +6,19 @@ import 'package:dobo/model/doctor_model.dart';
 import 'package:dobo/model/reminder_model.dart';
 import 'package:dobo/model/slider_model.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeProvider extends ChangeNotifier {
   final dio = Dio();
   String _location = 'Select location';
   String get location => _location;
-
   bool _isFavoriteLoad = false;
   int _favorieIndex = 0;
   int get favorieIndex => _favorieIndex;
   bool get isFavoriteLoad => _isFavoriteLoad;
-
   List<ClinicModel> clinicList = [];
+  List<ClinicModel> popularClinics = [];
   List<SliderModel> sliders = [];
   List<ReminderModel> reminders = [];
   List<DoctorListModel>? doctorList;
@@ -29,13 +29,28 @@ class HomeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  String _latitude = '0';
+  String _longitude = '0';
+
+  Future<void> getCurrentLocation() async {
+    try {
+      Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+      _latitude = '${position.latitude}';
+      _longitude = '${position.longitude}';
+      notifyListeners();
+    } catch (e) {
+      print(e);
+    }
+  }
+
   Future getNearestClinics() async {
     final pref = await SharedPreferences.getInstance();
     String token = pref.getString("accessToken") ?? '';
 
     try {
       final response = await dio.get(
-          "https://dobo.co.in/api/v1/clinics/clinics/nearest/?location=10.54,76.58",
+          "https://dobo.co.in/api/v1/clinics/clinics/nearest/?location=$_latitude,$_longitude",
           options: Options(headers: {
             'Authorization': 'Bearer $token',
           }));
@@ -50,6 +65,31 @@ class HomeProvider extends ChangeNotifier {
     } on DioError catch (_) {
       LogController.activityLog(
           'HomeProvider', "getNearestClinics", "Failed  ");
+    }
+  }
+
+  Future getPopularClinics() async {
+    final pref = await SharedPreferences.getInstance();
+    String token = pref.getString("accessToken") ?? '';
+
+    try {
+      final response =
+          await dio.get("https://dobo.co.in/api/v1/clinics/clinics/popular/",
+              options: Options(headers: {
+                'Authorization': 'Bearer $token',
+              }));
+
+      if (response.statusCode == 200) {
+        List data = response.data;
+        popularClinics =
+            data.map((json) => ClinicModel.fromJson(json)).toList();
+        notifyListeners();
+        LogController.activityLog(
+            'HomeProvider', "getPopularClinics", "Success");
+      }
+    } on DioError catch (_) {
+      LogController.activityLog(
+          'HomeProvider', "getPopularClinics", "Failed  ");
     }
   }
 

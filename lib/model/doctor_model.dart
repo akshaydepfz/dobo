@@ -16,48 +16,49 @@ class DoctorListModel {
   String description;
   dynamic creator;
   Department department;
+  bool isFavorite;
 
-  DoctorListModel({
-    required this.id,
-    required this.profileId,
-    required this.created,
-    required this.updated,
-    required this.isActive,
-    required this.fullName,
-    required this.gender,
-    required this.phone,
-    required this.designation,
-    required this.qualification,
-    required this.experience,
-    this.image,
-    required this.joiningDate,
-    required this.address,
-    required this.description,
-    this.creator,
-    required this.department,
-  });
+  DoctorListModel(
+      {required this.id,
+      required this.profileId,
+      required this.created,
+      required this.updated,
+      required this.isActive,
+      required this.fullName,
+      required this.gender,
+      required this.phone,
+      required this.designation,
+      required this.qualification,
+      required this.experience,
+      this.image,
+      required this.joiningDate,
+      required this.address,
+      required this.description,
+      this.creator,
+      required this.department,
+      required this.isFavorite});
 
   factory DoctorListModel.fromJson(Map<String, dynamic> json) =>
       DoctorListModel(
-        id: json["id"],
-        profileId: json["profile_id"],
-        created: DateTime.parse(json["created"]),
-        updated: DateTime.parse(json["updated"]),
-        isActive: json["is_active"],
-        fullName: json["full_name"],
-        gender: json["gender"] ?? "",
-        phone: json["phone"] ?? "",
-        designation: json["designation"] ?? "",
-        qualification: json["qualification"] ?? "",
-        experience: json["experience"] ?? '',
-        image: json["image"] ?? "",
-        joiningDate: DateTime.parse(
-            json["joining_date"] ?? '2023-07-13 02:45:27.983267'),
-        address: json["address"] ?? "",
-        description: json["description"] ?? "",
-        creator: json["creator"],
-        department: Department.fromJson(json["department_data"]),
-      );
+          id: json["id"],
+          profileId: json["profile_id"],
+          created: DateTime.parse(json["created"]),
+          updated: DateTime.parse(json["updated"]),
+          isActive: json["is_active"],
+          fullName: json["full_name"],
+          gender: json["gender"] ?? "",
+          phone: json["phone"] ?? "",
+          designation: json["designation"] ?? "",
+          qualification: json["qualification"] ?? "",
+          experience: json["experience"] ?? '',
+          image: json["image"] ?? "",
+          joiningDate: DateTime.parse(
+              json["joining_date"] ?? '2023-07-13 02:45:27.983267'),
+          address: json["address"] ?? "",
+          description: json["description"] ?? "",
+          creator: json["creator"],
+          department: Department.fromJson(json["department_data"]),
+          isFavorite: json['is_favorite'] ?? false);
 
   Map<String, dynamic> toJson() => {
         "id": id,

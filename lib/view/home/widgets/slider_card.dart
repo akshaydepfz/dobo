@@ -15,7 +15,6 @@ class SliderCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(right: 10),
       padding: const EdgeInsets.all(15),
       width: width,
       decoration: BoxDecoration(

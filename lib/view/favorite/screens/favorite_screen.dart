@@ -71,7 +71,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                         .toString(),
                                     ratingCount: 2.toString(),
                                     name: provider.clinicList![i].clinicName,
-                                    category: provider.clinicList![i].subtext,
+                                    phone: provider.clinicList![i].phone,
                                     image: provider.clinicList![i].image ?? "",
                                     onTap: () {
                                       Navigator.push(
@@ -84,6 +84,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                                   )));
                                       // Navigator.push(context,MaterialPageRoute(builder:(context) =>ClinicViewScreen()));
                                     },
+                                    address: provider.clinicList![i].address,
                                   );
                                 }),
                           )

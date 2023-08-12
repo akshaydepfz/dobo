@@ -10,7 +10,7 @@ class ClinicsCard extends StatelessWidget {
     Key? key,
     required this.width,
     required this.name,
-    required this.category,
+    required this.phone,
     required this.image,
     required this.onTap,
     required this.ratingCount,
@@ -18,11 +18,13 @@ class ClinicsCard extends StatelessWidget {
     required this.onFavoriteClick,
     required this.isFavorite,
     required this.isFavoriteLoad,
+    required this.address,
   }) : super(key: key);
 
   final double width;
   final String name;
-  final String category;
+  final String address;
+  final String phone;
   final String image;
   final String ratingCount;
   final String avarageRating;
@@ -39,8 +41,8 @@ class ClinicsCard extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(8.0)),
       padding: const EdgeInsets.all(10),
-      margin: const EdgeInsets.all(5),
-      height: 100,
+      margin: const EdgeInsets.symmetric(vertical: 5),
+      height: 120,
       width: width,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,8 +56,8 @@ class ClinicsCard extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(6.0),
                   child: SizedBox(
-                    width: 80,
-                    height: 80,
+                    width: 90,
+                    height: 100,
                     child: image == ""
                         ? Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -90,22 +92,46 @@ class ClinicsCard extends StatelessWidget {
                             fontSize: 14, fontWeight: FontWeight.bold),
                       ),
                     ),
-                    Text(
-                      category,
-                      style: const TextStyle(
-                        color: AppColor.primary,
-                      ),
+                    Row(
+                      children: [
+                        SvgPicture.asset(AppIcons.call),
+                        GlobalVariabels.horizontal10,
+                        Text(
+                          phone,
+                          style: const TextStyle(
+                            color: AppColor.primary,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        SvgPicture.asset(AppIcons.hospital),
+                        GlobalVariabels.horizontal10,
+                        Text(
+                          address,
+                          style: const TextStyle(
+                            color: AppColor.primary,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 5,
                     ),
                     Expanded(
                       child: SizedBox(
-                          height: 10, width: width / 2, child: const Divider()),
+                          height: 10, width: width * .50, child: Divider()),
+                    ),
+                    SizedBox(
+                      height: 5,
                     ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          width: 20,
-                          height: 20,
+                          width: 15,
+                          height: 15,
                           child: SvgPicture.asset(AppIcons.star),
                         ),
                         const SizedBox(
@@ -142,7 +168,7 @@ class ClinicsCard extends StatelessWidget {
                           AppIcons.favOutline,
                         ),
             ),
-          )
+          ),
         ],
       ),
     );

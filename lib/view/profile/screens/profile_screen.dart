@@ -27,14 +27,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Future<void> _launchUrl() async {
-    if (!await launchUrl(Uri.parse('https://dobo.co.in/privacy-policy/'))) {
-      throw Exception('Could not launch url launcher');
-    }
+    const url = 'https://dobo.co.in/privacy-policy/';
+    await launch(url);
   }
 
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ProfileService>(context);
+    final width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColor.primary,
@@ -80,14 +81,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  provider.userModel!.fullName,
-                                  style: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
+                                SizedBox(
+                                  width: width * .60,
+                                  child: Text(
+                                    provider.userModel!.fullName,
+                                    style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 ),
-                                Text(
-                                  provider.userModel!.email,
+                                SizedBox(
+                                  width: width * .60,
+                                  child: Text(
+                                    provider.userModel!.email,
+                                  ),
                                 ),
                               ],
                             ),

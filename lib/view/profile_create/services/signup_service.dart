@@ -31,7 +31,6 @@ class ProfileCreateProvider extends ChangeNotifier {
 
   void launchURL() async {
     const url = 'https://dobo.co.in/terms-and-conditions';
-
     await launch(url);
   }
 
