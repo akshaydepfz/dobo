@@ -39,7 +39,7 @@ class FavoriteProvider extends ChangeNotifier {
 
     try {
       final response =
-          await dio.get("https://dobo.co.in/api/v1/clinics/clinics/favorites/",
+          await dio.get("https://dobo.co.in/api/v1/doctors/favorites/",
               options: Options(headers: {
                 'Authorization': 'Bearer $token',
               }));
