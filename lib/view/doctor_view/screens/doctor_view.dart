@@ -12,8 +12,16 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 
 class DoctorViewScreen extends StatefulWidget {
-  const DoctorViewScreen({super.key, required this.doctorId});
+  const DoctorViewScreen(
+      {super.key,
+      required this.doctorId,
+      required this.clinicName,
+      required this.insideClinic,
+      required this.clinicId});
   final String doctorId;
+  final String clinicName;
+  final bool insideClinic;
+  final String clinicId;
 
   @override
   State<DoctorViewScreen> createState() => _DoctorViewScreenState();
@@ -77,8 +85,8 @@ class _DoctorViewScreenState extends State<DoctorViewScreen> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const IconTile(
-                                    title: 'Health care clinic',
+                                IconTile(
+                                    title: widget.clinicName,
                                     icon: AppIcons.hospital),
                                 GlobalVariabels.vertical10,
                                 IconTile(
@@ -173,6 +181,8 @@ class _DoctorViewScreenState extends State<DoctorViewScreen> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => DateSelectingScreen(
+                              clinicID: widget.clinicId,
+                              isInsideClinic: widget.insideClinic,
                               doctorId: provider.doctorDetail!.id,
                               isRechedule: false,
                               appointmentId: '',

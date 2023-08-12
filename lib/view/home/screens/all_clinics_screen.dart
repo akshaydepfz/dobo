@@ -109,6 +109,8 @@ class _AllClinicsScreenState extends State<AllClinicsScreen> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => ClinicViewScreen(
+                                        
+                                             
                                           clinicId: provider.clinicList![i].id,
                                         )));
                           },

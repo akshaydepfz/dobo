@@ -86,6 +86,10 @@ class _AllDoctorsScreenState extends State<AllDoctorsScreen> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => DoctorViewScreen(
+                                          clinicId: '',
+                                              clinicName: provider
+                                                  .doctorList![i].fullName,
+                                              insideClinic: false,
                                               doctorId:
                                                   provider.doctorList![i].id,
                                             )));

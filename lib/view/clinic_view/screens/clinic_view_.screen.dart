@@ -14,8 +14,12 @@ import 'package:shimmer/shimmer.dart';
 import '../widgets/doctor_card.dart';
 
 class ClinicViewScreen extends StatefulWidget {
-  const ClinicViewScreen({super.key, required this.clinicId});
+  const ClinicViewScreen({
+    super.key,
+    required this.clinicId,
+  });
   final String clinicId;
+
   @override
   State<ClinicViewScreen> createState() => _ClinicViewScreenState();
 }
@@ -220,9 +224,15 @@ class _ClinicViewScreenState extends State<ClinicViewScreen> {
                                                       MaterialPageRoute(
                                                         builder: (context) =>
                                                             DoctorViewScreen(
+                                                          clinicName: provider
+                                                              .clinicDetail!
+                                                              .clinicName,
+                                                          insideClinic: true,
                                                           doctorId: provider
                                                               .doctorList![i]
                                                               .id,
+                                                          clinicId: provider
+                                                              .clinicDetail!.id,
                                                         ),
                                                       ),
                                                     );
@@ -235,9 +245,10 @@ class _ClinicViewScreenState extends State<ClinicViewScreen> {
                                                   department: provider
                                                       .doctorList![i]
                                                       .department
-                                                      .category,
+                                                      .name,
                                                   ratingCount: 'ratingCount',
-                                                  reviews: 'reviews');
+                                                  reviews: 'reviews',
+                                                );
                                         })
                           ],
                         ),

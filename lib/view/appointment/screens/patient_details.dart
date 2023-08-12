@@ -106,7 +106,7 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                             child: Container(
                               height: 50,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(25),
+                                borderRadius: BorderRadius.circular(8.0),
                                 color: provider.isPatient
                                     ? AppColor.primary
                                     : AppColor.primary.withOpacity(0.2),
@@ -132,7 +132,7 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                             child: Container(
                               height: 50,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(25),
+                                borderRadius: BorderRadius.circular(8.0),
                                 color: provider.isPatient
                                     ? AppColor.primary.withOpacity(0.2)
                                     : AppColor.primary,
@@ -282,7 +282,12 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                                         .relatives![
                                             provider.selectedRelativeIndex]
                                         .fullName,
-                                gender: 'Male',
+                                gender: provider.isPatient
+                                    ? userProvider.userModel!.gender
+                                    : provider
+                                        .relatives![
+                                            provider.selectedRelativeIndex]
+                                        .gender,
                                 age: '18')));
                   },
                   label: 'Next')

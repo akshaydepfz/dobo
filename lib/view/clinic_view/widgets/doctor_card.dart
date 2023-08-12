@@ -18,6 +18,7 @@ class DoctorCard extends StatelessWidget {
     required this.onFavoriteClick,
     required this.isFavorite,
     required this.isFavoriteLoad,
+    
   });
   final String image;
   final String name;
@@ -27,9 +28,9 @@ class DoctorCard extends StatelessWidget {
   final Function() onTap;
   final double width;
   final Function() onFavoriteClick;
-
   final bool isFavorite;
   final bool isFavoriteLoad;
+
 
   @override
   Widget build(BuildContext context) {

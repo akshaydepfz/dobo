@@ -64,29 +64,13 @@ class AppRoute {
       case RouteConstants.profileScreen:
         return MaterialPageRoute(builder: (context) => const ProfileScreen());
 
-      case RouteConstants.clinicViewScreen:
-        return MaterialPageRoute(
-            builder: (context) => const ClinicViewScreen(
-                  clinicId: '',
-                ));
       case RouteConstants.categoryview:
         return MaterialPageRoute(
             builder: (context) => const CategoryViewScreen(
                   departmentId: '',
                   department: '',
                 ));
-      case RouteConstants.doctorViewScreen:
-        return MaterialPageRoute(
-            builder: (context) => const DoctorViewScreen(
-                  doctorId: '',
-                ));
-      case RouteConstants.dateSelectScreen:
-        return MaterialPageRoute(
-            builder: (context) => const DateSelectingScreen(
-                  doctorId: '',
-                  isRechedule: false,
-                  appointmentId: '',
-                ));
+
       case RouteConstants.patientScreen:
         return MaterialPageRoute(
             builder: (context) => const PatientDetailsScreen());

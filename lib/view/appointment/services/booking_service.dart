@@ -45,11 +45,15 @@ class BookingService extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onDateChanged(DateTime date) {
+  void onDateChanged(
+    DateTime date,
+    bool insideClinic,
+    String clinicId,
+  ) {
     selectdappointmentDate = date;
     slotes = null;
     notifyListeners();
-    getSlotes(_docID);
+    getSlotes(_docID, insideClinic, clinicId);
   }
 
   void onSlotChange(int i, String id) {
@@ -61,6 +65,7 @@ class BookingService extends ChangeNotifier {
   Future<void> getDoctorDetails(String id) async {
     final pref = await SharedPreferences.getInstance();
     String token = pref.getString("accessToken") ?? '';
+
     try {
       final response = await dio.get("${ApiEndpoints.doctorDetails}$id",
           options: Options(headers: {
@@ -78,11 +83,18 @@ class BookingService extends ChangeNotifier {
     }
   }
 
-  Future<void> getSlotes(String doctorId) async {
+  Future<void> getSlotes(
+    String doctorId,
+    bool insideClinic,
+    String clinicId,
+  ) async {
     final pref = await SharedPreferences.getInstance();
     String token = pref.getString("accessToken") ?? '';
+    String endpoint = insideClinic
+        ? "${ApiEndpoints.slotes}$doctorId&clinic_id=$clinicId"
+        : "${ApiEndpoints.slotes}$doctorId";
     try {
-      final response = await dio.get("${ApiEndpoints.slotes}$doctorId",
+      final response = await dio.get(endpoint,
           queryParameters: {
             "date":
                 '${selectdappointmentDate.year}-${selectdappointmentDate.month}-${selectdappointmentDate.day}'

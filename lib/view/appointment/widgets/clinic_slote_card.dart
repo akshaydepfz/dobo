@@ -47,7 +47,7 @@ class ClinicSloteCard extends StatelessWidget {
               ),
               child: SizedBox(
                 width: 100,
-                height: 100,
+                height: 120,
                 child: image == ""
                     ? Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -89,8 +89,9 @@ class ClinicSloteCard extends StatelessWidget {
                         height: 20,
                         child: SvgPicture.asset(AppIcons.location),
                       ),
+                      GlobalVariabels.horizontal10,
                       SizedBox(
-                        width: width / 1.9,
+                        width: width / 2,
                         child: Text(
                           location,
                         ),

@@ -9,9 +9,10 @@ import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class RescheduleAppointment extends StatelessWidget {
-  RescheduleAppointment({super.key, required this.doctorId, required this.appointmentId});
+  RescheduleAppointment(
+      {super.key, required this.doctorId, required this.appointmentId});
   final String doctorId;
-final String appointmentId;
+  final String appointmentId;
 
   List<Map> reasons = [
     {'reason': 'I’m having a schedule clash'},
@@ -71,6 +72,8 @@ final String appointmentId;
                     context,
                     MaterialPageRoute(
                         builder: (context) => DateSelectingScreen(
+                              isInsideClinic: false,
+                              clinicID: '',
                               doctorId: doctorId,
                               isRechedule: true,
                               appointmentId: appointmentId,

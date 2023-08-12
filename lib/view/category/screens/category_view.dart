@@ -56,6 +56,10 @@ class _CategoryViewScreenState extends State<CategoryViewScreen> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => DoctorViewScreen(
+                                        clinicId: '',
+                                        clinicName:
+                                            provider.doctors![i].fullName,
+                                        insideClinic: false,
                                         doctorId: provider.doctors![i].id,
                                       )));
                         },

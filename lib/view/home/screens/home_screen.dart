@@ -386,6 +386,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => ClinicViewScreen(
+                                 
                                         clinicId: provider.clinicList[i].id,
                                       )));
                         },
@@ -429,6 +430,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               MaterialPageRoute(
                                   builder: (context) => ClinicViewScreen(
                                         clinicId: provider.popularClinics[i].id,
+                                   
                                       )));
                         },
                         address: provider.popularClinics[i].city,

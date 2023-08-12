@@ -241,6 +241,8 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen>
                                           doctorId: provider.doctorDetail!.id,
                                           isRechedule: false,
                                           appointmentId: '',
+                                          clinicID: '',
+                                          isInsideClinic: false,
                                         ),
                                       ),
                                     );

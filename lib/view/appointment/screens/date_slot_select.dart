@@ -1,4 +1,3 @@
-import 'package:dobo/common/primary_appbar.dart';
 import 'package:dobo/common/primary_button.dart';
 import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/core/style/app_colors.dart';
@@ -13,13 +12,17 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 class DateSelectingScreen extends StatefulWidget {
   final String doctorId;
   final String appointmentId;
-
+  final String clinicID;
   final bool isRechedule;
+  final bool isInsideClinic;
+
   const DateSelectingScreen(
       {super.key,
       required this.doctorId,
       required this.isRechedule,
-      required this.appointmentId});
+      required this.appointmentId,
+      required this.clinicID,
+      required this.isInsideClinic});
 
   @override
   State<DateSelectingScreen> createState() => _DateSelectingScreenState();
@@ -29,7 +32,7 @@ class _DateSelectingScreenState extends State<DateSelectingScreen> {
   @override
   void initState() {
     Provider.of<BookingService>(context, listen: false)
-        .getSlotes(widget.doctorId);
+        .getSlotes(widget.doctorId, widget.isInsideClinic, widget.clinicID);
     super.initState();
   }
 
@@ -80,7 +83,8 @@ class _DateSelectingScreenState extends State<DateSelectingScreen> {
                       ),
                       child: SfCalendar(
                         onTap: (v) {
-                          provider.onDateChanged(v.date!);
+                          provider.onDateChanged(
+                              v.date!, widget.isInsideClinic, widget.clinicID);
                         },
                         initialDisplayDate: provider.selectdappointmentDate,
                         cellBorderColor: Colors.transparent,
@@ -173,8 +177,7 @@ class _DateSelectingScreenState extends State<DateSelectingScreen> {
                                       provider.onSlotChange(
                                           i, provider.slotes![i].id);
                                     },
-                                    location:
-                                        provider.slotes![i].clinic.ownerAddress,
+                                    location: provider.slotes![i].clinic.city,
                                     width: width,
                                     image: provider.slotes![i].clinic.image,
                                     name: provider.slotes![i].clinic.clinicName,

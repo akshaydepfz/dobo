@@ -86,6 +86,7 @@ class _SearchClinicListState extends State<SearchClinicList> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => ClinicViewScreen(
+                                       
                                           clinicId: provider.clinicList![i].id,
                                         )));
                           },
