@@ -21,7 +21,6 @@ class ReminderCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(right: 10),
       padding: const EdgeInsets.all(12.0),
       height: 100,
       width: width,
