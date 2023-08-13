@@ -1,7 +1,5 @@
 import 'package:dobo/common/common_loading.dart';
-import 'package:dobo/common/primary_appbar.dart';
 import 'package:dobo/constants/global_variables.dart';
-import 'package:dobo/core/assets/app_assets.dart';
 import 'package:dobo/core/assets/app_icons.dart';
 import 'package:dobo/core/style/app_colors.dart';
 import 'package:dobo/view/clinic_view/services/clinic_view_service.dart';
@@ -9,8 +7,6 @@ import 'package:dobo/view/doctor_view/screens/doctor_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:shimmer/shimmer.dart';
-
 import '../widgets/doctor_card.dart';
 
 class ClinicViewScreen extends StatefulWidget {
@@ -315,7 +311,7 @@ class IconTile extends StatelessWidget {
             width: MediaQuery.of(context).size.width / 2,
             child: Text(
               title,
-              style: TextStyle(fontSize: 14),
+              style: const TextStyle(fontSize: 14),
             )),
       ],
     );

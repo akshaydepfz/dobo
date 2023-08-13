@@ -1,5 +1,4 @@
 import 'package:dobo/constants/global_variables.dart';
-import 'package:dobo/core/assets/app_assets.dart';
 import 'package:dobo/core/assets/app_icons.dart';
 import 'package:dobo/core/style/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +17,6 @@ class DoctorCard extends StatelessWidget {
     required this.onFavoriteClick,
     required this.isFavorite,
     required this.isFavoriteLoad,
-    
   });
   final String image;
   final String name;
@@ -30,7 +28,6 @@ class DoctorCard extends StatelessWidget {
   final Function() onFavoriteClick;
   final bool isFavorite;
   final bool isFavoriteLoad;
-
 
   @override
   Widget build(BuildContext context) {

@@ -1,12 +1,6 @@
-import 'package:dobo/common/common_loading.dart';
 import 'package:dobo/constants/global_variables.dart';
-import 'package:dobo/core/assets/app_icons.dart';
 import 'package:dobo/core/style/app_colors.dart';
-import 'package:dobo/view/category/screens/category_screens.dart';
 import 'package:dobo/view/category/services/category_service.dart';
-import 'package:dobo/view/clinic_view/screens/clinic_view_.screen.dart';
-import 'package:dobo/view/doctor_view/screens/doctor_view.dart';
-import 'package:dobo/view/home/widgets/clinics_card.dart';
 import 'package:dobo/view/search/screens/search_category_screen.dart';
 import 'package:dobo/view/search/screens/search_clinic_screen.dart';
 import 'package:dobo/view/search/screens/search_doctors_screen.dart';
@@ -14,7 +8,6 @@ import 'package:dobo/view/search/services/search_service.dart';
 import 'package:dobo/view/search/services/tab_bar_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../category/screens/category_view.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -27,7 +20,6 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   void initState() {
     Provider.of<CategoryProvider>(context, listen: false).getDepartments();
-
     super.initState();
   }
 

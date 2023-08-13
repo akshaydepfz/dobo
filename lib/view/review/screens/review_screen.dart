@@ -75,7 +75,7 @@ class ReviewScreen extends StatelessWidget {
                   ),
                   GlobalVariabels.vertical15,
                   Container(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: AppColor.grey1,
@@ -93,7 +93,7 @@ class ReviewScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Spacer(),
+            const Spacer(),
             PrimaryButton(
                 onTap: () {
                   Navigator.pushReplacementNamed(

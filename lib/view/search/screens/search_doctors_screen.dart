@@ -2,13 +2,10 @@ import 'package:dobo/common/common_loading.dart';
 import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/core/assets/app_icons.dart';
 import 'package:dobo/core/style/app_colors.dart';
-
 import 'package:dobo/view/doctor_view/screens/doctor_view.dart';
 import 'package:dobo/view/search/services/search_service.dart';
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
-
 import '../../category/screens/category_view.dart';
 
 class SearchDoctorsScreen extends StatefulWidget {

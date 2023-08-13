@@ -1,4 +1,3 @@
-import 'package:dobo/core/style/app_colors.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -17,7 +16,7 @@ class ProfileTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: onTap,
-      trailing: Icon(Icons.arrow_forward_ios_outlined),
+      trailing: const Icon(Icons.arrow_forward_ios_outlined),
       title: Text(
         title,
         style:

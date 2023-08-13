@@ -67,7 +67,6 @@ class RescheduleAppointment extends StatelessWidget {
             ),
             PrimaryButton(
               onTap: () {
-                //TODO
                 Navigator.push(
                     context,
                     MaterialPageRoute(

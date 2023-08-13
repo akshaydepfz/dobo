@@ -174,7 +174,7 @@ class _DoctorViewScreenState extends State<DoctorViewScreen> {
                       ],
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   PrimaryButton(
                       onTap: () {
                         Navigator.push(

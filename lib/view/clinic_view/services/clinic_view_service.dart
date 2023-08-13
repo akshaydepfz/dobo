@@ -32,8 +32,7 @@ class ClinicDetailsService extends ChangeNotifier {
         LogController.activityLog(
             'ClinicDetailsService', "getClinicDetails", 'Success');
       }
-    } on DioError catch (e) {
-      print(e.response!.data);
+    } on DioError catch (_) {
       LogController.activityLog(
           'ClinicDetailsService', "getClinicDetails", 'Failed');
     }

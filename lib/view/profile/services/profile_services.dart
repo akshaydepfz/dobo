@@ -54,7 +54,6 @@ class ProfileService extends ChangeNotifier {
     String token = pref.getString("accessToken") ?? '';
     String id = pref.getString('pk') ?? "";
     try {
-      print(id);
       final response = await dio.get(
         "https://dobo.co.in/api/v1/patients/$id/",
         options: Options(headers: {'Authorization': 'Bearer $token'}),

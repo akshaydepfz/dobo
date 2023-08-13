@@ -243,7 +243,7 @@ class BookingService extends ChangeNotifier {
         LogController.activityLog(
             'PatientDetailsProvider', "deleteRelative", "Success");
       }
-    } on DioError catch (e) {
+    } on DioError catch (_) {
       getRelatives();
 
       LogController.activityLog(
