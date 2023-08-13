@@ -183,7 +183,10 @@ class _ReviewSummaryScreenState extends State<ReviewSummaryScreen> {
                       const Divider(),
                       TextTile(title: 'Gender', value: widget.gender),
                       const Divider(),
-                      TextTile(title: 'Age', value: widget.age),
+                      TextTile(
+                          title: 'Age',
+                          value:
+                              "${DateTime.now().year - int.parse(widget.age)}"),
                       const Divider(),
                       GlobalVariabels.vertical10,
                       const Text(

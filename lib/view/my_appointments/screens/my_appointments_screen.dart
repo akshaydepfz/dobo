@@ -80,6 +80,8 @@ class _MyAppointmentsScreenState extends State<MyAppointmentsScreen>
                               shrinkWrap: true,
                               itemBuilder: (context, i) {
                                 return UpComingCard(
+                                  date:
+                                      "${provider.upcomingAppontments![i].schedule!.created!.day}-${provider.upcomingAppontments![i].schedule!.created!.month}-${provider.upcomingAppontments![i].schedule!.created!.year}",
                                   onCardPressed: () {
                                     Navigator.push(
                                         context,

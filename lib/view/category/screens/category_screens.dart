@@ -142,7 +142,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                               .quaryDepartments[i].name,
                                       maxLines: 2,
                                       textAlign: TextAlign.center,
-                                      style: TextStyle(fontSize: 12),
+                                      style: TextStyle(fontSize: 11),
                                     ),
                                   ),
                                 ],

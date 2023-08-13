@@ -90,8 +90,8 @@ class _DoctorViewScreenState extends State<DoctorViewScreen> {
                                     icon: AppIcons.hospital),
                                 GlobalVariabels.vertical10,
                                 IconTile(
-                                    title: provider
-                                        .doctorDetail!.department.category,
+                                    title:
+                                        provider.doctorDetail!.department.name,
                                     icon: AppIcons.medal),
                                 GlobalVariabels.vertical10,
                                 const IconTile(

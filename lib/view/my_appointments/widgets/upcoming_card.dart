@@ -17,6 +17,7 @@ class UpComingCard extends StatelessWidget {
     required this.onCancellPressed,
     required this.onReschedulePressed,
     required this.onCardPressed,
+    required this.date,
   }) : super(key: key);
   final String clinicName;
   final String doctorName;
@@ -26,6 +27,7 @@ class UpComingCard extends StatelessWidget {
   final Function() onCancellPressed;
   final Function() onReschedulePressed;
   final Function() onCardPressed;
+  final String date;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -72,6 +74,10 @@ class UpComingCard extends StatelessWidget {
                     Text(
                       'Dr. $doctorName',
                       style: const TextStyle(color: AppColor.grey4),
+                    ),
+                    Text(
+                      "Date : $date",
+                      style: const TextStyle(fontSize: 14),
                     ),
                     GlobalVariabels.vertical10,
                     Row(

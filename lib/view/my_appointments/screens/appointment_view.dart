@@ -202,9 +202,9 @@ class _AppointmentViewScreenState extends State<AppointmentViewScreen> {
                               GlobalVariabels.vertical10,
                               Row(
                                 children: [
-                                  const Text(
-                                    'July 15, 2023',
-                                    style: TextStyle(
+                                  Text(
+                                    "${widget.date.day}-${widget.date.month}-${widget.date.year}",
+                                    style: const TextStyle(
                                       fontSize: 15,
                                     ),
                                   ),

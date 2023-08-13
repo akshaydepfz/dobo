@@ -106,7 +106,7 @@ class _FavoriteScreenState extends State<FavoriteScreen>
                                                     )));
                                         // Navigator.push(context,MaterialPageRoute(builder:(context) =>ClinicViewScreen()));
                                       },
-                                      address: provider.clinicList![i].address,
+                                      address: provider.clinicList![i].city,
                                     );
                                   }),
                             ),

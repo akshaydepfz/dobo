@@ -160,6 +160,7 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                           Visibility(
                             visible: provider.relatives != null,
                             child: ListView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
                                 itemCount: provider.relatives!.length,
                                 itemBuilder: (context, i) {
@@ -272,26 +273,35 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => ReviewSummaryScreen(
-                                time: provider
-                                    .slotes![provider.selectedSlotIndex]
-                                    .startTime,
-                                date:
-                                    "${provider.selectdappointmentDate.day}-${provider.selectdappointmentDate.month}-${provider.selectdappointmentDate.year}",
-                                problem: provider.description,
-                                doctorID: provider.doctorID,
-                                name: provider.isPatient
-                                    ? userProvider.userModel!.fullName
-                                    : provider
-                                        .relatives![
-                                            provider.selectedRelativeIndex]
-                                        .fullName,
-                                gender: provider.isPatient
-                                    ? userProvider.userModel!.gender
-                                    : provider
-                                        .relatives![
-                                            provider.selectedRelativeIndex]
-                                        .gender,
-                                age: '18')));
+                                  time: provider
+                                      .slotes![provider.selectedSlotIndex]
+                                      .startTime,
+                                  date:
+                                      "${provider.selectdappointmentDate.day}-${provider.selectdappointmentDate.month}-${provider.selectdappointmentDate.year}",
+                                  problem: provider.description,
+                                  doctorID: provider.doctorID,
+                                  name: provider.isPatient
+                                      ? userProvider.userModel!.fullName
+                                      : provider
+                                          .relatives![
+                                              provider.selectedRelativeIndex]
+                                          .fullName,
+                                  gender: provider.isPatient
+                                      ? userProvider.userModel!.gender
+                                      : provider
+                                          .relatives![
+                                              provider.selectedRelativeIndex]
+                                          .gender,
+                                  age: provider.isPatient
+                                      ? userProvider.userModel!.dob.year
+                                          .toString()
+                                      : provider
+                                          .relatives![
+                                              provider.selectedRelativeIndex]
+                                          .dob
+                                          .year
+                                          .toString(),
+                                )));
                   },
                   label: 'Next')
             ],
