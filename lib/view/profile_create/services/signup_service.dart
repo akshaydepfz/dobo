@@ -99,8 +99,7 @@ class ProfileCreateProvider extends ChangeNotifier {
       dio.options.headers["Content-Type"] = "multipart/form-data";
       formData = FormData.fromMap({
         "full_name": username,
-        "dob":
-            "${selectedDate!.year}-${selectedDate!.month}-${selectedDate!.day}",
+        "dob": "${selectedDate.year}-${selectedDate.month}-${selectedDate.day}",
         "gender": gender,
         "address": address,
         "email": email,
