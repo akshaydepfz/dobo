@@ -77,7 +77,7 @@ class _FavoriteScreenState extends State<FavoriteScreen>
                                   shrinkWrap: true,
                                   itemBuilder: (context, i) {
                                     return ClinicsCard(
-                                      isFavoriteLoad: false,
+                                      isFavoriteLoad: provider.isFavoriteLoad,
                                       isFavorite:
                                           provider.clinicList![i].isFavorite,
                                       onFavoriteClick: () =>

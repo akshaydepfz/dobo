@@ -13,6 +13,7 @@ import 'package:dobo/view/home/widgets/clinics_card.dart';
 import 'package:dobo/view/home/widgets/reminder_card.dart';
 import 'package:dobo/view/home/widgets/slider_card.dart';
 import 'package:dobo/view/home/widgets/title_card.dart';
+import 'package:dobo/view/my_appointments/services/appointment_services.dart';
 import 'package:dobo/view/profile/screens/profile_edit.dart';
 import 'package:dobo/view/profile/services/profile_services.dart';
 import 'package:dobo/view/search/screens/search_screen.dart';
@@ -38,6 +39,8 @@ class _HomeScreenState extends State<HomeScreen> {
     Provider.of<HomeProvider>(context, listen: false).getSliders();
     Provider.of<HomeProvider>(context, listen: false).getDoctorList();
     Provider.of<HomeProvider>(context, listen: false).getPopularClinics();
+    Provider.of<AppointmentService>(context, listen: false)
+        .getUpcomingAppointments();
     super.initState();
   }
 
@@ -45,6 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final provider = Provider.of<HomeProvider>(context);
     final profileProvider = Provider.of<ProfileService>(context);
+    final upcomingProvider = Provider.of<AppointmentService>(context);
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SingleChildScrollView(
@@ -329,15 +333,22 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: 10,
                         ),
                         CarouselSlider.builder(
-                            itemCount: provider.reminders.length,
+                            itemCount:
+                                upcomingProvider.upcomingAppontments!.length,
                             itemBuilder: (context, i, intex) {
                               return ReminderCard(
                                 width: width,
-                                doctor: provider.reminders[i].title,
-                                dateTime: provider.reminders[i].time,
-                                token: provider.reminders[i].token,
-                                clinic: provider.reminders[i].clinic,
-                                department: provider.reminders[i].department,
+                                doctor: upcomingProvider
+                                    .upcomingAppontments![i].doctorName!,
+                                dateTime: upcomingProvider
+                                    .upcomingAppontments![i].clinicName!,
+                                token: upcomingProvider
+                                    .upcomingAppontments![i].tokenNumber
+                                    .toString(),
+                                clinic: upcomingProvider
+                                    .upcomingAppontments![i].schedule!.weekday!,
+                                department:
+                                    "${upcomingProvider.upcomingAppontments![i].schedule!.created!.day}-${upcomingProvider.upcomingAppontments![i].schedule!.created!.month}-${upcomingProvider.upcomingAppontments![i].schedule!.created!.year}",
                               );
                             },
                             options: CarouselOptions(
@@ -402,7 +413,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ListView.builder(
                     padding: EdgeInsets.zero,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: provider.popularClinics.length,
+                    itemCount: provider.clinicList.length > 5
+                        ? 5
+                        : provider.clinicList.length,
                     shrinkWrap: true,
                     itemBuilder: (context, i) {
                       return ClinicsCard(

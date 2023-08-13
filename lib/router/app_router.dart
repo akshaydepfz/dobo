@@ -1,7 +1,6 @@
 import 'package:dobo/router/app_route_constants.dart';
 import 'package:dobo/view/account_create_pop/screens/account_created.dart';
 import 'package:dobo/view/appointment/screens/cancell_appointment.dart';
-import 'package:dobo/view/appointment/screens/date_slot_select.dart';
 import 'package:dobo/view/appointment/screens/patient_details.dart';
 import 'package:dobo/view/appointment/screens/reschedule_appointment.dart';
 import 'package:dobo/view/appointment_animation/screens/bookind_success_pop.dart';
@@ -12,8 +11,6 @@ import 'package:dobo/view/booking_animation/screens/appointment_cancel_pop.dart'
 import 'package:dobo/view/booking_animation/screens/reschedule_pop.dart';
 import 'package:dobo/view/category/screens/category_screens.dart';
 import 'package:dobo/view/category/screens/category_view.dart';
-import 'package:dobo/view/clinic_view/screens/clinic_view_.screen.dart';
-import 'package:dobo/view/doctor_view/screens/doctor_view.dart';
 import 'package:dobo/view/enable_location/screens/enable_location_screen.dart';
 import 'package:dobo/view/favorite/screens/favorite_screen.dart';
 import 'package:dobo/view/forgot_password/screens/forgot_password_screen.dart';

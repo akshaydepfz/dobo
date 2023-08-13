@@ -58,6 +58,8 @@ class HomeProvider extends ChangeNotifier {
       if (response.statusCode == 200) {
         List data = response.data;
         clinicList = data.map((json) => ClinicModel.fromJson(json)).toList();
+        _isFavoriteLoad = false;
+
         notifyListeners();
         LogController.activityLog(
             'HomeProvider', "getNearestClinics", "Success");
@@ -83,6 +85,8 @@ class HomeProvider extends ChangeNotifier {
         List data = response.data;
         popularClinics =
             data.map((json) => ClinicModel.fromJson(json)).toList();
+        _isFavoriteLoad = false;
+
         notifyListeners();
         LogController.activityLog(
             'HomeProvider', "getPopularClinics", "Success");
@@ -172,15 +176,11 @@ class HomeProvider extends ChangeNotifier {
                 }));
 
         if (response.statusCode == 200) {
-          _isFavoriteLoad = false;
-          notifyListeners();
           LogController.activityLog(
               'HomeProvider', "addClinicFavorite", "Success");
           getNearestClinics();
         }
       } on DioError catch (_) {
-        _isFavoriteLoad = false;
-        notifyListeners();
         LogController.activityLog(
             'HomeProvider', "addClinicFavorite", "Failed");
       }
@@ -194,8 +194,6 @@ class HomeProvider extends ChangeNotifier {
             }));
 
         if (response.statusCode == 200) {
-          _isFavoriteLoad = false;
-          notifyListeners();
           LogController.activityLog(
               'HomeProvider', "addClinicFavorite", "Success");
           getNearestClinics();

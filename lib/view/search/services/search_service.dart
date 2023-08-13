@@ -13,7 +13,10 @@ class SearchService extends ChangeNotifier {
   String _quary = '';
   String get quary => _quary;
   int pageIndex = 0;
-
+  int _favorieIndex = 0;
+  int get favorieIndex => _favorieIndex;
+  bool _isFavoriteLoad = false;
+  bool get isFavorite => _isFavoriteLoad;
   void oncategoryChange(int index) {
     pageIndex = index;
     notifyListeners();
@@ -64,6 +67,7 @@ class SearchService extends ChangeNotifier {
       if (response.statusCode == 200) {
         List data = response.data;
         clinicList = data.map((json) => ClinicModel.fromJson(json)).toList();
+        _isFavoriteLoad = false;
         notifyListeners();
         LogController.activityLog('HomeProvider', "getClinicList", "Sucess");
       }
@@ -73,10 +77,14 @@ class SearchService extends ChangeNotifier {
   }
 
   Future addClinicFavorite(BuildContext context, String clinicId,
-      bool isFavorite, String quary) async {
+      bool isFavorite, String quary, int index) async {
     final pref = await SharedPreferences.getInstance();
     String token = pref.getString("accessToken") ?? '';
+    _favorieIndex = index;
+    notifyListeners();
     if (isFavorite) {
+      _isFavoriteLoad = true;
+      notifyListeners();
       try {
         final response =
             await dio.delete("${ApiEndpoints.removeFavClinic}$clinicId",
@@ -85,6 +93,8 @@ class SearchService extends ChangeNotifier {
                 }));
 
         if (response.statusCode == 200) {
+          getClinicList('');
+
           LogController.activityLog(
               'HomeProvider', "addClinicFavorite", "Success");
         }
@@ -94,12 +104,15 @@ class SearchService extends ChangeNotifier {
       }
     } else {
       try {
+        _isFavoriteLoad = true;
+        notifyListeners();
         final response = await dio.post("${ApiEndpoints.addFavClinic}$clinicId",
             options: Options(headers: {
               'Authorization': 'Bearer $token',
             }));
 
         if (response.statusCode == 200) {
+          getClinicList('');
           LogController.activityLog(
               'HomeProvider', "addClinicFavorite", "Success");
           getClinicList(quary);

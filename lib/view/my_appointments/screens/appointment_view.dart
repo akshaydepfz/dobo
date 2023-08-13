@@ -258,7 +258,10 @@ class _AppointmentViewScreenState extends State<AppointmentViewScreen> {
                       const Divider(),
                       TextTile(title: 'Gender', value: widget.gender),
                       const Divider(),
-                      const TextTile(title: 'Age', value: '24'),
+                      TextTile(
+                          title: 'Age',
+                          value:
+                              "${DateTime.now().year - int.parse(widget.age.year.toString())}"),
                       const Divider(),
                       GlobalVariabels.vertical10,
                       const Text(

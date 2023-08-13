@@ -50,6 +50,11 @@ class _ClinicViewScreenState extends State<ClinicViewScreen> {
                 foregroundColor: Colors.white,
                 backgroundColor: AppColor.primary,
                 elevation: 0,
+                leading: IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(Icons.close)),
                 title: Text(provider.clinicDetail != null
                     ? provider.clinicDetail!.clinicName
                     : ''),

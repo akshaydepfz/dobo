@@ -33,6 +33,11 @@ class _CategoryViewScreenState extends State<CategoryViewScreen> {
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.close)),
         title: Text(
           "${widget.department} Doctors",
           style: const TextStyle(fontSize: 15),

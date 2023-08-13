@@ -196,22 +196,27 @@ class _DateSelectingScreenState extends State<DateSelectingScreen> {
                     ],
                   ),
                 ),
-                PrimaryButton(
-                    onTap: () {
-                      if (provider.selectdappointmentDate == null) {
-                        showSnackBarWrong(context, 'Please select date');
-                      } else if (provider.selectedSlotId == '') {
-                        showSnackBarWrong(context, 'Please select slote');
-                      } else if (!widget.isRechedule) {
-                        provider.doctorIDStore(widget.doctorId);
-                        Navigator.pushNamed(
-                            context, RouteConstants.patientScreen);
-                      } else {
-                        provider.rescheduleAppointment(
-                            context, widget.appointmentId);
-                      }
-                    },
-                    label: 'Next')
+                Visibility(
+                  visible: provider.slotes == null
+                      ? true
+                      : provider.slotes!.isNotEmpty,
+                  child: PrimaryButton(
+                      onTap: () {
+                        if (provider.selectdappointmentDate == null) {
+                          showSnackBarWrong(context, 'Please select date');
+                        } else if (provider.selectedSlotId == '') {
+                          showSnackBarWrong(context, 'Please select slote');
+                        } else if (!widget.isRechedule) {
+                          provider.doctorIDStore(widget.doctorId);
+                          Navigator.pushNamed(
+                              context, RouteConstants.patientScreen);
+                        } else {
+                          provider.rescheduleAppointment(
+                              context, widget.appointmentId);
+                        }
+                      },
+                      label: 'Next'),
+                )
               ],
             ),
           ),

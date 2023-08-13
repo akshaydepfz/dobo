@@ -6,6 +6,7 @@ import 'package:dobo/core/assets/app_icons.dart';
 import 'package:dobo/core/style/app_colors.dart';
 import 'package:dobo/view/profile/services/profile_services.dart';
 import 'package:dobo/view/profile/widgets/editable_text_field.dart';
+import 'package:dobo/view/profile_create/widgets/drop_down_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
@@ -105,6 +106,15 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                       hint: 'Email',
                       controller: provider.emailController,
                       onChanged: (value) {},
+                    ),
+                    GlobalVariabels.vertical10,
+                    DropDownTextField(
+                      items: const ["Male", "Female", "Others"],
+                      selectedValue: 'Male',
+                      onChanged: (v) {
+                        // provider.onGenderChange(v!);
+                      },
+                      hint: 'Male',
                     ),
                   ],
                 ),

@@ -38,6 +38,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.close)),
         backgroundColor: AppColor.primary,
         foregroundColor: Colors.white,
         elevation: 0,

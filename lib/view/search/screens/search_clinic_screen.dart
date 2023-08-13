@@ -67,13 +67,16 @@ class _SearchClinicListState extends State<SearchClinicList> {
                       itemCount: provider.clinicList!.length,
                       itemBuilder: (context, i) {
                         return ClinicsCard(
-                          isFavoriteLoad: false,
+                          isFavoriteLoad: provider.favorieIndex == i
+                              ? provider.isFavorite
+                              : false,
                           isFavorite: provider.clinicList![i].isFavorite,
                           onFavoriteClick: () => provider.addClinicFavorite(
                               context,
                               provider.clinicList![i].id,
                               provider.clinicList![i].isFavorite,
-                              controller.text),
+                              controller.text,
+                              i),
                           width: MediaQuery.of(context).size.width,
                           avarageRating:
                               provider.clinicList![i].avgRating.toString(),
@@ -86,7 +89,6 @@ class _SearchClinicListState extends State<SearchClinicList> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => ClinicViewScreen(
-                                       
                                           clinicId: provider.clinicList![i].id,
                                         )));
                           },
