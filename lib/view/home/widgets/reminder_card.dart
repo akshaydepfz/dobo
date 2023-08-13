@@ -58,7 +58,7 @@ class ReminderCard extends StatelessWidget {
                     const TextStyle(fontSize: 15.0, color: Color(0xFF1B988D)),
               ),
               Text(
-                token,
+                "Token No : $token",
                 style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16.0,

@@ -104,48 +104,47 @@ class _HomeScreenState extends State<HomeScreen> {
                       GestureDetector(
                         onTap: () {
                           showDialog(
-                              context: context,
-                              builder: (context) => Dialog(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(15.0),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          const Text(
-                                            'Change Your Location Now!',
-                                            style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          GlobalVariabels.vertical10,
-                                          const Divider(),
-                                          GlobalVariabels.vertical10,
-                                          PrimaryButton(
-                                              onTap: () {
-                                                Navigator.pushNamed(
-                                                    context,
-                                                    RouteConstants
-                                                        .locationSelect);
-                                              },
-                                              label: 'Change Location'),
-                                          SecondaryButton(
-                                              onTap: () {
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            const ProfileEditScreen()));
-                                              },
-                                              label: 'Edit Profile'),
-                                          SecondaryButton(
-                                              onTap: () {
-                                                Navigator.pop(context);
-                                              },
-                                              label: 'Cancel')
-                                        ],
-                                      ),
+                            context: context,
+                            builder: (context) => Dialog(
+                              child: Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    const Text(
+                                      'Change Your Location Now!',
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
                                     ),
-                                  ));
+                                    GlobalVariabels.vertical10,
+                                    const Divider(),
+                                    GlobalVariabels.vertical10,
+                                    PrimaryButton(
+                                        onTap: () {
+                                          Navigator.pushNamed(context,
+                                              RouteConstants.locationSelect);
+                                        },
+                                        label: 'Change Location'),
+                                    SecondaryButton(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const ProfileEditScreen()));
+                                        },
+                                        label: 'Edit Profile'),
+                                    SecondaryButton(
+                                        onTap: () {
+                                          Navigator.pop(context);
+                                        },
+                                        label: 'Cancel')
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
                         },
                         child: SizedBox(
                           width: width * .28,
@@ -321,12 +320,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 20,
                   ),
                   Visibility(
-                    visible: provider.reminders.isNotEmpty,
+                    visible: upcomingProvider.upcomingAppontments != null,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
-                          'Today Bookings',
+                          'My Bookings',
                           style: TextStyle(color: Colors.black, fontSize: 16),
                         ),
                         const SizedBox(

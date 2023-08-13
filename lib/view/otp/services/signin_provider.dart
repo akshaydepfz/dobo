@@ -11,11 +11,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SigninProvider extends ChangeNotifier {
   bool _isLoading = false;
   bool created = false;
-//lat long
   bool get isLoading => _isLoading;
   bool _obsureText = false;
   String mobile = "";
-
   bool get obsureText => _obsureText;
   final dio = Dio();
 
@@ -77,7 +75,6 @@ class SigninProvider extends ChangeNotifier {
 
         _isLoading = true;
         notifyListeners();
-        print(response.data);
         if (response.statusCode == 200) {
           _isLoading = false;
           notifyListeners();
@@ -115,14 +112,14 @@ class SigninProvider extends ChangeNotifier {
             }
           } else {
             // ignore: use_build_context_synchronously
-            showSnackBarWrong(context, 'You are already register as a $userType');
+            showSnackBarWrong(
+                context, 'You are already register as a $userType');
           }
         }
       } on DioError catch (e) {
         _isLoading = false;
         notifyListeners();
         LogController.activityLog("SigninProvider", "verifyOTP", "failed");
-
         showSnackBarWrong(context, e.response!.data.toString());
       }
     }

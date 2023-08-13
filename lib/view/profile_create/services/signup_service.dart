@@ -44,18 +44,21 @@ class ProfileCreateProvider extends ChangeNotifier {
 
   FormData formData = FormData.fromMap({});
 
-  DateTime? selectedDate;
+  DateTime selectedDate = DateTime(2023);
 
   Future<void> selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
         context: context,
-        initialDate: DateTime(2005),
+        initialDate: selectedDate,
         firstDate: DateTime(1980, 8),
         lastDate: DateTime(2101));
     if (picked != null && picked != selectedDate) {
-      selectedDate = picked;
+      selectedDate = picked; // Update the selected date
+
       notifyListeners();
     }
+
+    print(picked);
   }
 
   final dio = Dio();
@@ -109,8 +112,7 @@ class ProfileCreateProvider extends ChangeNotifier {
     } else {
       formData = FormData.fromMap({
         "full_name": username,
-        "dob":
-            "${selectedDate!.year}-${selectedDate!.month}-${selectedDate!.day}",
+        "dob": "${selectedDate.year}-${selectedDate.month}-${selectedDate.day}",
         "gender": gender,
         "address": address,
         "email": email,

@@ -4,6 +4,7 @@ import 'package:dobo/core/assets/app_assets.dart';
 import 'package:dobo/core/style/app_colors.dart';
 import 'package:dobo/view/otp/services/signin_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
@@ -74,11 +75,16 @@ class SignInScreen extends StatelessWidget {
                           )),
                       Expanded(
                         child: TextField(
+                          maxLength: 10,
+                          maxLines: 1,
                           onChanged: (v) =>
                               loginProvider.onUserNameChanged(v.trim()),
                           keyboardType: TextInputType.phone,
-                          decoration:
-                              const InputDecoration(border: InputBorder.none),
+                          decoration: const InputDecoration(
+                            counterText: '',
+                            border: InputBorder.none,
+                            alignLabelWithHint: false,
+                          ),
                         ),
                       ),
                     ],
@@ -92,7 +98,7 @@ class SignInScreen extends StatelessWidget {
                     onTap: () {
                       loginProvider.getOTP(context);
                     },
-                    label: 'Signin / Signup'),
+                    label: 'Sign in / Sign up'),
               ],
             ),
           ),

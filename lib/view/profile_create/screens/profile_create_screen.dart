@@ -121,9 +121,9 @@ class ProfileCreateScreen extends StatelessWidget {
                           height: 50,
                           child: Center(
                             child: Text(
-                              provider.selectedDate == null
+                              provider.selectedDate.year == 2023
                                   ? 'Date Of Birth'
-                                  : "${provider.selectedDate!.day}-${provider.selectedDate!.month}-${provider.selectedDate!.year}",
+                                  : "${provider.selectedDate.day}-${provider.selectedDate.month}-${provider.selectedDate.year}",
                               style: const TextStyle(color: AppColor.grey4),
                             ),
                           ),
