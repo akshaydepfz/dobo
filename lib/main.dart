@@ -29,9 +29,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final pref = await SharedPreferences.getInstance();
   String token = pref.getString('accessToken') ?? "";
-  runApp(
-    MyApp(token: token),
-  );
+  runApp(MyApp(token: token));
 }
 
 class MyApp extends StatelessWidget {

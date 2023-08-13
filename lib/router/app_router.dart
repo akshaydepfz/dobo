@@ -24,7 +24,6 @@ import 'package:dobo/view/notification/screens/notification_screen.dart';
 import 'package:dobo/view/onBoarding/screens/on_boarding_screen.dart';
 import 'package:dobo/view/profile/screens/profile_edit.dart';
 import 'package:dobo/view/profile/screens/profile_screen.dart';
-import 'package:dobo/view/review/screens/review_screen.dart';
 import 'package:dobo/view/review_animation/screen/review_pop.dart';
 import 'package:dobo/view/review_animation/screen/session_end_pop.dart';
 import 'package:dobo/view/otp/screens/signin_screen.dart';
