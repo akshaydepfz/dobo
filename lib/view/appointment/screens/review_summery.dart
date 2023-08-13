@@ -134,13 +134,14 @@ class _ReviewSummaryScreenState extends State<ReviewSummaryScreen> {
                                           fontWeight: FontWeight.bold),
                                     ),
                                     GlobalVariabels.vertical10,
-                                    const IconTextTile(
-                                        name: 'The family care',
+                                    IconTextTile(
+                                        name:
+                                            provider.doctorDetail!.designation,
                                         icon: AppIcons.hospital),
                                     GlobalVariabels.vertical10,
                                     IconTextTile(
                                       name: provider
-                                          .doctorDetail!.department.category,
+                                          .doctorDetail!.department.name,
                                       icon: AppIcons.medal,
                                     ),
                                   ],
