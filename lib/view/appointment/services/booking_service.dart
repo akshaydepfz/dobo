@@ -130,6 +130,7 @@ class BookingService extends ChangeNotifier {
           options: Options(headers: {
             'Authorization': 'Bearer $token',
           }));
+      print(response.data);
 
       if (response.statusCode == 200) {
         // ignore: use_build_context_synchronously

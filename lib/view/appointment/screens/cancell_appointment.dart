@@ -70,7 +70,7 @@ class CancellAppointment extends StatelessWidget {
               // Navigator.pushReplacementNamed(
               //     context, RouteConstants.appointmentcancelPop);
 
-              label: 'Next',
+              label: 'Cancel Appointment',
             )
           ],
         ),

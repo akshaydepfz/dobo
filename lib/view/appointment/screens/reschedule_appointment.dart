@@ -78,7 +78,7 @@ class RescheduleAppointment extends StatelessWidget {
                               appointmentId: appointmentId,
                             )));
               },
-              label: 'Next',
+              label: 'Reschedule',
             )
           ],
         ),
