@@ -9,6 +9,7 @@ class ReminderCard extends StatelessWidget {
     required this.token,
     required this.clinic,
     required this.department,
+    required this.onTap,
   });
 
   final double width;
@@ -17,56 +18,60 @@ class ReminderCard extends StatelessWidget {
   final String token;
   final String clinic;
   final String department;
+  final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(12.0),
-      height: 100,
-      width: width,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8.0),
-        border: Border.all(color: const Color(0xFF1B988D)),
-        color: const Color(0xFFEEFCFA),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Text(
-                doctor,
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                    color: Color(0xFF1B988D)),
-              ),
-              const SizedBox(
-                width: 5,
-              ),
-              Text("- $department")
-            ],
-          ),
-          Text(clinic),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                dateTime,
-                style:
-                    const TextStyle(fontSize: 15.0, color: Color(0xFF1B988D)),
-              ),
-              Text(
-                "Token No : $token",
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16.0,
-                    color: Color(0xFF1B988D)),
-              ),
-            ],
-          )
-        ],
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(12.0),
+        height: 100,
+        width: width,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8.0),
+          border: Border.all(color: const Color(0xFF1B988D)),
+          color: const Color(0xFFEEFCFA),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Text(
+                  doctor,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: Color(0xFF1B988D)),
+                ),
+                const SizedBox(
+                  width: 5,
+                ),
+                Text("- $department")
+              ],
+            ),
+            Text(clinic),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  dateTime,
+                  style:
+                      const TextStyle(fontSize: 15.0, color: Color(0xFF1B988D)),
+                ),
+                Text(
+                  "Token No : $token",
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.0,
+                      color: Color(0xFF1B988D)),
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

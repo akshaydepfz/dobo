@@ -3,6 +3,8 @@ import 'package:dobo/common/secondary_button.dart';
 import 'package:dobo/constants/global_variables.dart';
 import 'package:dobo/core/assets/app_assets.dart';
 import 'package:dobo/core/style/app_colors.dart';
+import 'package:dobo/model/appointment_list_model.dart';
+import 'package:dobo/view/appointment/screens/appointment_success_view.dart';
 import 'package:dobo/view/landing_page/screens/landing_screen.dart';
 import 'package:dobo/view/landing_page/services/bottom_nav_service.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +13,11 @@ import 'package:provider/provider.dart';
 
 class BookingSuccessPop extends StatelessWidget {
   final String tokenNo;
+  final AppointmentListModel model;
 
-  const BookingSuccessPop({Key? key, required this.tokenNo}) : super(key: key);
+  const BookingSuccessPop(
+      {Key? key, required this.tokenNo, required this.model})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -64,9 +69,19 @@ class BookingSuccessPop extends StatelessWidget {
             const Spacer(),
             PrimaryButton(
                 onTap: () {
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => LandingScreen()));
-                  bottomNavProvider.onTabClicked(4);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AppointmentSuccessView(
+                              doctorId: model.schedule!.doctor,
+                              clinicId: model.schedule!.clinic!,
+                              date: model.schedule!.created!,
+                              time: model.schedule!.startTime!,
+                              tokenNo: model.tokenNumber!.toString(),
+                              name: model.patient!.fullName!,
+                              gender: model.patient!.gender!,
+                              age: model.patient!.dob!,
+                              problem: model.reason ?? "")));
                 },
                 label: 'View Appointment'),
             SecondaryButton(

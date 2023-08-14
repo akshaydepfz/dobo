@@ -2,11 +2,13 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:dobo/api/api_endpoints.dart';
 import 'package:dobo/log/log_controller.dart';
+import 'package:dobo/model/appointment_list_model.dart';
 import 'package:dobo/model/doctor_details_model.dart';
 import 'package:dobo/model/relative_model.dart';
 import 'package:dobo/model/slote_model.dart';
 import 'package:dobo/router/app_route_constants.dart';
 import 'package:dobo/view/appointment_animation/screens/bookind_success_pop.dart';
+import 'package:dobo/view/my_appointments/screens/appointment_view.dart';
 import 'package:dobo/view/my_appointments/screens/reschedule_succes_pop.dart';
 import 'package:dobo/view/profile_create/services/signup_service.dart';
 import 'package:flutter/material.dart';
@@ -293,8 +295,24 @@ class BookingService extends ChangeNotifier {
           }));
       if (response.statusCode == 200 || response.statusCode == 201) {
         _isLoading = false;
+        final data = response.data;
         notifyListeners();
-        log(response.data.toString());
+
+        // ignore: use_build_context_synchronously
+        // Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //         builder: (context) => AppointmentViewScreen(
+        //             doctorId: data['schedule']['doctor'],
+        //             clinicId: data['schedule']['clinic'],
+        //             date: DateTime.parse(data['schedule']['created']),
+        //             time: data['schedule']['start_time'],
+        //             tokenNo: data['token_number'].toString(),
+        //             name: data['patient']['full_name'],
+        //             gender: data['patient']['gender'],
+        //             age: DateTime.parse(data['patient']['dob']),
+        //             problem: data['reason'] ?? "")));
+
         int tokenNo = await response.data['token_number'];
         // ignore: use_build_context_synchronously
 
@@ -302,8 +320,10 @@ class BookingService extends ChangeNotifier {
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) =>
-                    BookingSuccessPop(tokenNo: tokenNo.toString())));
+                builder: (context) => BookingSuccessPop(
+                      tokenNo: tokenNo.toString(),
+                      model: AppointmentListModel.fromJson(response.data),
+                    )));
 
         LogController.activityLog(
             'PatientDetailsProvider', "addAppointment", "Success");

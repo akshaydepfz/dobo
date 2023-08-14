@@ -27,6 +27,20 @@ class ProfileService extends ChangeNotifier {
 
   File? image;
   final picker = ImagePicker();
+  DateTime selectedDate = DateTime(2023);
+
+  Future<void> selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(1980, 8),
+        lastDate: DateTime(2101));
+    if (picked != null && picked != selectedDate) {
+      selectedDate = picked; // Update the selected date
+
+      notifyListeners();
+    }
+  }
 
   Future pickImage() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
@@ -125,6 +139,8 @@ class ProfileService extends ChangeNotifier {
           "phone": _phoneController.text,
           "email": _emailController.text,
           "full_name": _nameController.text,
+          "dob":
+              "${selectedDate.year}-${selectedDate.month}-${selectedDate.day}",
         });
         notifyListeners();
       }

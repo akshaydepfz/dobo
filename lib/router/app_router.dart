@@ -71,11 +71,6 @@ class AppRoute {
         return MaterialPageRoute(
             builder: (context) => const PatientDetailsScreen());
 
-      case RouteConstants.bookingDonePop:
-        return MaterialPageRoute(
-            builder: (context) => const BookingSuccessPop(
-                  tokenNo: '',
-                ));
       case RouteConstants.bookingFailPop:
         return MaterialPageRoute(builder: (context) => const BookingFailPop());
 

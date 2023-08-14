@@ -19,7 +19,10 @@ import 'package:dobo/view/profile/services/profile_services.dart';
 import 'package:dobo/view/search/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
+
+import '../../my_appointments/screens/appointment_view.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -135,6 +138,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       const ProfileEditScreen()));
                                         },
                                         label: 'Edit Profile'),
+                                    SecondaryButton(
+                                        onTap: () async {
+                                          final pref = await SharedPreferences
+                                              .getInstance();
+                                          pref.clear();
+
+                                          // ignore: use_build_context_synchronously
+                                          Navigator.pushReplacementNamed(
+                                              context,
+                                              RouteConstants.signInScreen);
+                                        },
+                                        label: 'Logout'),
                                     SecondaryButton(
                                         onTap: () {
                                           Navigator.pop(context);
@@ -275,7 +290,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             width: 10,
                           ),
                           const Text(
-                            'Search Doctor Clinic or Category',
+                            'Search Doctor, Clinic or Category',
                             style:
                                 TextStyle(fontSize: 15, color: AppColor.grey2),
                           )
@@ -320,7 +335,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 20,
                   ),
                   Visibility(
-                    visible: upcomingProvider.upcomingAppontments != null,
+                    visible: upcomingProvider.upcomingAppontments == null ||
+                        upcomingProvider.upcomingAppontments!.isEmpty,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -331,31 +347,80 @@ class _HomeScreenState extends State<HomeScreen> {
                         const SizedBox(
                           height: 10,
                         ),
-                        CarouselSlider.builder(
-                            itemCount:
-                                upcomingProvider.upcomingAppontments!.length,
-                            itemBuilder: (context, i, intex) {
-                              return ReminderCard(
-                                width: width,
-                                doctor: upcomingProvider
-                                    .upcomingAppontments![i].doctorName!,
-                                dateTime: upcomingProvider
-                                    .upcomingAppontments![i].clinicName!,
-                                token: upcomingProvider
-                                    .upcomingAppontments![i].tokenNumber
-                                    .toString(),
-                                clinic: upcomingProvider
-                                    .upcomingAppontments![i].schedule!.weekday!,
-                                department:
-                                    "${upcomingProvider.upcomingAppontments![i].schedule!.created!.day}-${upcomingProvider.upcomingAppontments![i].schedule!.created!.month}-${upcomingProvider.upcomingAppontments![i].schedule!.created!.year}",
-                              );
-                            },
-                            options: CarouselOptions(
-                                height: 100,
-                                scrollPhysics: const BouncingScrollPhysics(),
-                                autoPlay: true,
-                                initialPage: 0,
-                                viewportFraction: 1.0)),
+                        upcomingProvider.upcomingAppontments == null ||
+                                upcomingProvider.upcomingAppontments!.isEmpty
+                            ? const SizedBox()
+                            : CarouselSlider.builder(
+                                itemCount: upcomingProvider
+                                    .upcomingAppontments!.length,
+                                itemBuilder: (context, i, intex) {
+                                  return ReminderCard(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => AppointmentViewScreen(
+                                                  doctorId: upcomingProvider
+                                                      .upcomingAppontments![i]
+                                                      .schedule!
+                                                      .doctor,
+                                                  clinicId: upcomingProvider
+                                                      .upcomingAppontments![i]
+                                                      .schedule!
+                                                      .clinic!,
+                                                  date: upcomingProvider
+                                                      .upcomingAppontments![i]
+                                                      .schedule!
+                                                      .created!,
+                                                  time: upcomingProvider
+                                                      .upcomingAppontments![i]
+                                                      .schedule!
+                                                      .startTime!,
+                                                  tokenNo: upcomingProvider
+                                                      .upcomingAppontments![i]
+                                                      .tokenNumber!
+                                                      .toString(),
+                                                  name: upcomingProvider
+                                                      .upcomingAppontments![i]
+                                                      .patient!
+                                                      .fullName!,
+                                                  gender: upcomingProvider
+                                                      .upcomingAppontments![i]
+                                                      .patient!
+                                                      .gender!,
+                                                  age: upcomingProvider
+                                                      .upcomingAppontments![i]
+                                                      .patient!
+                                                      .dob!,
+                                                  problem: upcomingProvider
+                                                          .upcomingAppontments![
+                                                              i]
+                                                          .reason ??
+                                                      "")));
+                                    },
+                                    width: width,
+                                    doctor: upcomingProvider
+                                        .upcomingAppontments![i].doctorName!,
+                                    dateTime: upcomingProvider
+                                        .upcomingAppontments![i].clinicName!,
+                                    token: upcomingProvider
+                                        .upcomingAppontments![i].tokenNumber
+                                        .toString(),
+                                    clinic: upcomingProvider
+                                        .upcomingAppontments![i]
+                                        .schedule!
+                                        .weekday!,
+                                    department:
+                                        "${upcomingProvider.upcomingAppontments![i].schedule!.created!.day}-${upcomingProvider.upcomingAppontments![i].schedule!.created!.month}-${upcomingProvider.upcomingAppontments![i].schedule!.created!.year}",
+                                  );
+                                },
+                                options: CarouselOptions(
+                                    height: 100,
+                                    scrollPhysics:
+                                        const BouncingScrollPhysics(),
+                                    autoPlay: true,
+                                    initialPage: 0,
+                                    viewportFraction: 1.0)),
                       ],
                     ),
                   ),
@@ -409,44 +474,48 @@ class _HomeScreenState extends State<HomeScreen> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => const AllClinicsScreen()))),
-                  ListView.builder(
-                    padding: EdgeInsets.zero,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: provider.clinicList.length > 5
-                        ? 5
-                        : provider.clinicList.length,
-                    shrinkWrap: true,
-                    itemBuilder: (context, i) {
-                      return ClinicsCard(
-                        isFavoriteLoad: provider.favorieIndex == i
-                            ? provider.isFavoriteLoad
-                            : false,
-                        isFavorite: provider.popularClinics[i].isFavorite,
-                        onFavoriteClick: () => provider.addClinicFavorite(
-                          context,
-                          provider.popularClinics[i].id,
-                          provider.popularClinics[i].isFavorite,
-                          i,
+                  provider.popularClinics.isEmpty
+                      ? Text('No Clinics Found')
+                      : ListView.builder(
+                          padding: EdgeInsets.zero,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: provider.clinicList.length > 5
+                              ? 5
+                              : provider.clinicList.length,
+                          shrinkWrap: true,
+                          itemBuilder: (context, i) {
+                            return ClinicsCard(
+                              isFavoriteLoad: provider.favorieIndex == i
+                                  ? provider.isFavoriteLoad
+                                  : false,
+                              isFavorite: provider.popularClinics[i].isFavorite,
+                              onFavoriteClick: () => provider.addClinicFavorite(
+                                context,
+                                provider.popularClinics[i].id,
+                                provider.popularClinics[i].isFavorite,
+                                i,
+                              ),
+                              width: width,
+                              avarageRating: provider
+                                  .popularClinics[i].avgRating
+                                  .toString(),
+                              ratingCount: 2.toString(),
+                              name: provider.popularClinics[i].clinicName,
+                              phone: provider.popularClinics[i].phone,
+                              image: provider.popularClinics[i].image ?? "",
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ClinicViewScreen(
+                                              clinicId:
+                                                  provider.popularClinics[i].id,
+                                            )));
+                              },
+                              address: provider.popularClinics[i].city,
+                            );
+                          },
                         ),
-                        width: width,
-                        avarageRating:
-                            provider.popularClinics[i].avgRating.toString(),
-                        ratingCount: 2.toString(),
-                        name: provider.popularClinics[i].clinicName,
-                        phone: provider.popularClinics[i].phone,
-                        image: provider.popularClinics[i].image ?? "",
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ClinicViewScreen(
-                                        clinicId: provider.popularClinics[i].id,
-                                      )));
-                        },
-                        address: provider.popularClinics[i].city,
-                      );
-                    },
-                  ),
                 ],
               ),
             ),

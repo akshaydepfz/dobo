@@ -25,11 +25,11 @@ class LandingScreen extends StatelessWidget {
       'icon': AppIcons.category,
     },
     {
-      'title': 'Booking',
+      'title': 'Book Now',
       'icon': AppIcons.addAppointment,
     },
     {
-      'title': 'favorites',
+      'title': 'Favorites',
       'icon': AppIcons.favorite,
     },
     {

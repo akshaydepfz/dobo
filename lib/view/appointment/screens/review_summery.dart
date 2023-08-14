@@ -278,9 +278,6 @@ class EditableTile extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        EditButton(
-          onTap: onTap,
-        ),
       ],
     );
   }

@@ -27,6 +27,8 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+
     final provider = Provider.of<ProfileService>(context);
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -107,15 +109,47 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                       controller: provider.emailController,
                       onChanged: (value) {},
                     ),
-                    GlobalVariabels.vertical10,
-                    DropDownTextField(
-                      items: const ["Male", "Female", "Others"],
-                      selectedValue: 'Male',
-                      onChanged: (v) {
-                        // provider.onGenderChange(v!);
-                      },
-                      hint: 'Male',
+                    GestureDetector(
+                      onTap: () => provider.selectDate(context),
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(vertical: 10),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 5.0),
+                        width: width,
+                        decoration: BoxDecoration(
+                            color: AppColor.grey1,
+                            borderRadius: BorderRadius.circular(12)),
+                        child: Row(
+                          children: [
+                            SizedBox(
+                                height: 20,
+                                width: 20,
+                                child: Image.asset(AppIcons.calenderPng)),
+                            GlobalVariabels.horizontal10,
+                            SizedBox(
+                              height: 50,
+                              child: Center(
+                                child: Text(
+                                  provider.selectedDate.year == 2023
+                                      ? 'Date Of Birth'
+                                      : "${provider.selectedDate.day}-${provider.selectedDate.month}-${provider.selectedDate.year}",
+                                  style: const TextStyle(color: AppColor.grey4),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
+                    GlobalVariabels.vertical10,
+                    // DropDownTextField(
+                    //   items: const ["Male", "Female", "Others"],
+                    //   selectedValue: 'Male',
+                    //   onChanged: (v) {
+                    //     // provider.onGenderChange(v!);
+                    //   },
+                    //   hint: 'Male',
+                    // ),
                   ],
                 ),
               ),

@@ -57,8 +57,6 @@ class ProfileCreateProvider extends ChangeNotifier {
 
       notifyListeners();
     }
-
-    print(picked);
   }
 
   final dio = Dio();

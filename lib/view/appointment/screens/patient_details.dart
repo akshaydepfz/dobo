@@ -231,17 +231,15 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                       ),
                     GlobalVariabels.vertical15,
                     const Text(
-                      'Write Your Problem',
+                      'Describe your condition',
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        GlobalVariabels.vertical15,
-                        const Text('Description'),
                         GlobalVariabels.vertical10,
                         Container(
                           padding: const EdgeInsets.all(10),
